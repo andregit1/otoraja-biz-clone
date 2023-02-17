@@ -1,0 +1,167 @@
+<div class="main-content">
+  <%= form_with(model: @maintenance_log, url: edit_maintenance_log_path, local: true, html:{novalidate: true}, id: 'maintenance-log-form') do |f| %>
+<input type="hidden" id="order_readonly" value="true">
+<%= f.hidden_field :id, :value=>@maintenance_log.id, id: 'maintenance_log_id' %>
+<%= f.hidden_field :number_plate_area, :value=>@maintenance_log.number_plate_area %>
+<%= f.hidden_field :number_plate_number, :value=>@maintenance_log.number_plate_number %>
+<%= f.hidden_field :number_plate_pref, :value=>@maintenance_log.number_plate_pref %>
+<%= f.hidden_field :expiration_month, :value=>@maintenance_log.expiration_month %>
+<%= f.hidden_field :expiration_year, :value=>@maintenance_log.expiration_year %>
+<%= f.hidden_field :maker, :value=>@maintenance_log.maker %>
+<%= f.hidden_field :model, :value=>@maintenance_log.model %>
+<%= f.hidden_field :color, :value=>@maintenance_log.color %>
+<%= f.hidden_field :name, :value=>@maintenance_log.name %>
+<%= f.hidden_field :maintained_staff_id, :value=>@maintenance_log.maintained_staff_id %>
+<%= f.hidden_field :total_price, :value=>@maintenance_log.total_price %>
+
+<%= fields model: Checkin do |checkin| %>
+  <%= checkin.hidden_field :datetime, :value => @maintenance_log.checkin&.datetime %>
+  <%= checkin.hidden_field :checkout_datetime, :value => @maintenance_log.checkin&.checkout_datetime %>
+<% end %>
+<!-- Customer&Bike Information -->
+<%= fields model: Customer do |customer| %>
+  
+<%= customer.hidden_field :id, :value => @maintenance_log&.checkin&.customer&.id %>
+<%= customer.hidden_field :name, :value => @maintenance_log&.checkin&.customer&.name %>
+<%= customer.hidden_field :tel, :value => @maintenance_log&.checkin&.customer&.tel %>
+<%= customer.hidden_field :send_dm, :value => @maintenance_log&.checkin&.customer&.send_dm %>
+<%= customer.hidden_field :terms_agreed_at, :value => @maintenance_log&.checkin&.customer&.terms_agreed_at %>
+
+<%= hidden_field_tag :completed_customer_suggest, (true if @maintenance_log&.checkin&.customer&.terms_agreed_at.present?), :id => 'completed_customer_suggest' %>
+<%= hidden_field_tag :refrect_customer_info, (true if @maintenance_log&.checkin&.customer&.terms_agreed_at.present?), :id => 'refrect_customer_info' %>
+<%= hidden_field_tag :temp_tel_national, @maintenance_log&.checkin&.customer&.tel_national, :id => 'temp_tel_national' %>
+<%= hidden_field_tag :temp_tel_country_code, @maintenance_log&.checkin&.customer&.tel_country_code || '62', :id => 'temp_tel_country_code' %>
+<input id="selected-main-mechanic-name" type="hidden" value="<%= @maintenance_log.maintained_staff&.name %>">
+<input id="selected-main-mechanic-id" type="hidden" value="<%= @maintenance_log.maintained_staff_id %>">
+<input id="selected-bike-target-id" type="hidden" value="">
+
+<div class="customer-info row">
+  <div class="col-6">
+    <p id="customer-infoNumberPlate" class="customer-info__numberplate d-inline-block <%= '-text-blank -display' unless @maintenance_log.has_number_plate %>"><%= @maintenance_log.formated_number_plate('-') if @maintenance_log.has_number_plate %></p>
+    <div class="customer-info__select-bike d-inline-block">
+
+    </div>
+    <div class="customer-info__body">
+      <p id="customer-infoExpiration" class="<%= '-text-blank' unless @maintenance_log.has_expiration %> -display">
+        <%= @maintenance_log.formated_expiration if @maintenance_log.has_expiration %>
+      </p>
+      <p id="customer-infoMakeModelColor" class="customer-edit-button <%= '-text-blank' unless @maintenance_log.has_maker_or_model || @maintenance_log.color.present? %> -display">
+        <span id="customer-infoMakeModel" class="mr-2">
+          <%= @maintenance_log.formated_maker_model if @maintenance_log.has_maker_or_model %>
+        </span>
+        <span id="customer-infoColor">
+          <% if @maintenance_log.color.present? %>
+          <span class="artifact ml-1" style="background: var(--bike-<%= @maintenance_log.color %>);"></span><%= @maintenance_log.color.upcase %>
+          <% end %>
+        </span>
+      </p>
+    </div>
+  </div>
+  <div class="col-6 border-left">
+    <div class="d-flex justify-content-between">
+      <p id="display-customer-name" class="customer-info__name <%= '-text-blank -display' unless @maintenance_log.name.present? %>"><%= @maintenance_log.name %></p>
+      <div class="customer-info__tools">
+        <div id="customer-info-buttons" style="<%= 'display: none;' unless @maintenance_log&.checkin&.customer&.terms_agreed_at.present? %>">
+          <%= link_to new_maintenance_log_path(copy_maintenance_log_id: @maintenance_log&.id), class: "btn-circle-default" do %>
+            <i class="fa fa-copy"></i>
+          <% end %>
+          <%= button_tag :type => "button", id: "history-button", class: "btn-circle-default js-modal-open", data: {"target" => "#checkinHistoryModal"} do %>
+            <i class="icon icon-History"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="customer-info__body">
+      <p id="display-customer-tel" class="<%= '-text-blank -display' unless @maintenance_log&.checkin&.customer&.tel.present? %>"><%= @maintenance_log.checkin.customer.tel_national_hyphen if @maintenance_log&.checkin&.customer&.tel.present? %></p>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<!-- OrderList -->
+<div class="order-box">
+  <div class="order-box-body">
+    <ul id="main-order-list" class="order-list">
+      <%= f.fields :maintenance_log_details do |ml| %>
+        <%= render 'maintenance_log_detail_fields', f: ml, readonly: true %>
+      <% end %>
+    </ul>
+  </div>
+  <div class="order-box-footer">
+    
+    <table class="table-order-info">
+      <thead>
+        <tr>
+          <th><%= t 'slip.main_mechanic' %></th>
+          <th><%= t 'slip.checkin' %> - <%= t 'slip.checkout' %></th>
+          <th><%= t 'slip.total_price' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= button_tag :type => "button", id:"selectMainMechanic", class: "btn btn-main_mechanic ", data: {"target" => "#selectMainMechanicModal"} do %>
+              <% if @maintenance_log.maintained_staff.present? %>
+              <%= @maintenance_log.maintained_staff.name %>
+              <% else %>
+              -----
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <%= button_tag :type => "button", id:"checkinCheckoutTime", class: "btn btn-time pl-0", data: {"target" => "#checkinDateModal"} do %>
+              <div>
+                <div id="checkinDate"><%= @maintenance_log&.checkin&.datetime.nil? ? t("slip.current") : formatedCheckinDateTz(@maintenance_log&.checkin&.datetime, 'Jakarta') %></div>
+                <div id="checkinTime" class="text-left"><%= @maintenance_log&.checkin&.datetime.nil? ? t("slip.time") : formatedTime(@maintenance_log&.checkin&.datetime, 'Jakarta') %></div>
+              </div>
+              <span> - </span>
+              <div>
+                <div id="checkoutDate"><%= @maintenance_log&.checkin&.checkout_datetime.nil? ? t("slip.current") : formatedCheckinDateTz(@maintenance_log&.checkin&.checkout_datetime, 'Jakarta') %></div>
+                <div id="checkoutTime" class="text-left"><%= @maintenance_log&.checkin&.checkout_datetime.nil? ? t("slip.time") : formatedTime(@maintenance_log&.checkin&.checkout_datetime, 'Jakarta') %></div>
+              </div>
+            <% end %>
+          </td>
+          <td class="text-right">
+            <%= button_tag :type => "button", id:"totalPrices", class: "btn btn-total_price", data: {"target" => "#numberPadModal"} do %>
+              <span class="text-rp text-price-color">Rp.&nbsp;</span>
+              <span id="totalPrice" class="text-price-color">
+                <% if @maintenance_log.total_price.present? %><%= formatedDecimalPoint(@maintenance_log.total_price) %><% else %>0<% end %>
+              </span>
+            <% end %>
+            <span id="priceDifference" class="text-difference-adjestment">
+              (Rp. <% if @maintenance_log.total_price.present? %><%= formatedDecimalPoint(@maintenance_log.adjust_price) %><% else %>0<% end %>)
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="row">
+      <div class="col-2 pr-0">
+        <%= button_tag :type => "button", :class =>"btn-base -under -normal js-modal-open", id: 'note-open', data: {"target" => "#inputNoteModal"} do %>
+          <%= f.hidden_field :remarks, :value=>@maintenance_log.remarks %>
+            <span id="maintenance_log_remarks_badge" class="badge badge-pill badge-red <%= @maintenance_log.remarks.blank? ? 'hide' : 'show' %>">&nbsp;</span>
+          <i class="icon icon-Note"></i>
+          <div class="btn-base_under-text">
+            <%= t 'slip.note' %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-4">
+        <%= button_tag type: "button", class: "btn-base -basic -normal disabled", id: "saveForm", disabled: true do %>
+          <%= t 'slip.save' %>
+        <% end %>
+      </div>
+      <div class="col-6 pl-0">
+        <%= link_to 'Receipt', pdf_viewer_path(path: receipt_output_for_stores_path(@maintenance_log.checkin)), id: "receipt-button", class: "btn-base -basic -primary #{'disabled' unless current_user.shops.first.shop_config.use_receipt}" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'modal_input_note', f: f, readonly: true %>
+<%= render 'modal_checkin_history', f: f %>
+<%= render 'footer', readonly: true %>
+
+  <% end %>
+</div>

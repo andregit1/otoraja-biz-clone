@@ -1,0 +1,7 @@
+<% flash.each do |name, msg| %>
+<% unless name == 'alert' || name == 'notice' %>
+<div class="callout callout-<%= name %>">
+  <%= msg.html_safe %>
+</div>
+<% end %>
+<% end %>

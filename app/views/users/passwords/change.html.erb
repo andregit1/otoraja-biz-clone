@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-center align-items-center h-100">
+  <div class="login-box">
+    <div class="login-logo mt-3">
+      <h1><%= image_tag  "logo.svg", width: '200' %></h1>
+    </div>
+  
+    <div class="card">
+      <div class="card-body">
+        <h1 class="text-page-title font-weight-bold mb-4"><%= t 'register.password.congrats' %></h1>
+        <p class="text-normal"><%= t 'register.password.header' %></p>
+        <%= render "layouts/error_messages", resource: @user %>
+        <%= form_with(model: @user, url: users_password_update_without_token_path, local: true) do |f| %>
+
+          <div class="form-group">
+             <%= f.password_field :current_password, autocomplete: "current-password", placeholder: I18n.t('register.password.old_password'), :class => "form-control" %>
+           </div>
+
+          <div class="form-group">
+            <%= f.password_field :password, autocomplete: "new-password", placeholder: I18n.t('register.password.new_password'), :class => "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: I18n.t('register.password.confirm_password'), :class=>"form-control" %>
+          </div>
+
+          <%= f.hidden_field :id %>
+
+          
+          <div class="d-flex justify-content-between">
+            <div>
+              <%= f.submit t('register.password.change_and_login'), :class => "btn button-active text-normal" %>
+            </div>
+            <div>
+              <% unless current_user.password_updated_at.nil? %>
+                <% if current_user.staff? %>
+                  <%= link_to t('admin.common.back'), new_maintenance_log_path, class: 'btn btn-default'%>
+                <% else %>
+                  <%= link_to t('admin.common.back'), admin_dashboard_index_path, class: 'btn btn-default'%>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

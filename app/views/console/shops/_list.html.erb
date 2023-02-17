@@ -1,0 +1,53 @@
+<tbody>
+  <% unless @shops.empty? %>
+    <% @shops.each do | shop | last_subscription ||= shop.subscriptions.last%>
+    <% period = last_subscription&.period && Subscription.periods[last_subscription&.period] > 1 ? Subscription.periods[last_subscription&.period] : "" %>
+      <%
+      
+        if params[:q].present?
+          next if params[:q][:subscriptions_period_eq].present? && params[:q][:subscriptions_period_eq].to_i!=Subscription.periods[last_subscription.period]
+          next if params[:q][:subscriptions_va_code_area_va_code_eq].present? && params[:q][:subscriptions_va_code_area_va_code_eq].to_i!=last_subscription&.va_code_area&.va_code
+          next if params[:q][:subscriptions_sales_name_cont].present? && params[:q][:subscriptions_sales_name_cont]!=last_subscription&.sales_name
+        end
+      
+      %>
+      
+      <tr>
+        <td></td>
+        <td><input type="checkbox" class="select-subscription checkbox" data-id="<%= shop.id %>"></td>
+        <td><%=shop.bengkel_id%></td>
+        <td><%=shop.name%></td>
+        <td>
+          <% unless shop.nil? %>
+            <% if shop.non_subscriber? %>
+              <span class="badge bg-danger"><%= Shop.human_attribute_name('subscriber_type.non_subscriber') %></span>
+            <% elsif shop.subscriber? %>
+              <span class="badge bg-warning"><%= Shop.human_attribute_name('subscriber_type.subscriber') %></span>
+            <% elsif shop.paid_subscriber? %>
+              <span class="badge bg-success"><%= Shop.human_attribute_name('subscriber_type.paid_subscriber') %></span>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%=last_subscription&.va_code_area&.va_code%></td>
+        <td>
+          <%if period.present?%>
+            <%=t("console.shop.package", period: period)%>
+          <%end%>
+        </td>
+        <td><%=last_subscription&.order_ids%></td>
+        <td><%=shop.virtual_bank_no%></td>
+        <td><%=last_subscription&.sales_name%></td>
+        <td><%=shop.created_at.strftime("%d-%m-%Y")%></td>
+        <td><%=shop.expiration_date&.strftime("%d-%m-%Y")%></td>
+        <td><%=shop.is_reactivated? ? "Ext" : "New"%></td>
+        <td><%= link_to t('console.shop.detail'), console_shop_path(shop), class: 'btn btn-primary'%></td>
+        <td></td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="2"></td>
+      <td colspan="13">Tidak dapat menemukan data.</td>
+    </tr>
+  <% end %>
+</tbody>

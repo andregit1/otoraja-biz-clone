@@ -1,0 +1,42 @@
+<% content_for(:title, 'Export Data Masking') %>
+
+<div>
+<%= @export_pattern.name %>
+</div>
+<div>
+<%= @export_layout.name %>
+</div>
+
+<%= form_with(model: @export_pattern, url:console_export_masking_update_path, local: true) do |f| %>
+  <%= render 'error_messages', m: @export_pattern %>
+  <div class="form-group">
+    <div class="mb-2">
+      <table class="table table-border">
+        <thead>
+          <tr>
+            <th>Column</th>
+            <th>Use Masking</th>
+            <th>Top No Masking Digits</th>
+            <th>Last No Masking Digits</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= f.fields_for :export_masking_rules do |masking_field| %>
+            <% if masking_field.object.export_column_id.in?(@export_layout.export_column_ids) %>
+              <%= masking_field.hidden_field :export_column_id %>
+              <tr>
+                <th><%= masking_field.object.export_column.name %></th>
+                <td><%= masking_field.check_box :use_masking %></td>
+                <td><%= masking_field.number_field :top_no_masking_digits, :class=>'form-control', autocomplete: 'off' %></td>
+                <td><%= masking_field.number_field :last_no_masking_digits, :class=>'form-control', autocomplete: 'off' %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <%= f.submit 'Update', :class=>'btn btn-primary' %>
+  
+<% end %>

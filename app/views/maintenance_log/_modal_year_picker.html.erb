@@ -1,0 +1,23 @@
+<!-- Year Picker Sheet Modal -->
+<div id="yearPickerModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#yearPickerModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-down js-modal-close" data-target="#yearPickerModal">
+      <i class="icon icon-Arrow-down"></i>
+    </div>
+    <div id="year-select">
+      <div class="modal-caption">
+        <%= t 'vehicle.select_month_year' %>
+      </div>
+      <div id="yearPicker" class="modal-body">
+        
+      </div>
+    </div>
+    <div class="pl-5 pr-5 mt-6">
+      <%= button_tag :type => "button",id: "expiration-confirm-button", class: "btn-base -basic -primary js-modal-close", data: {"target" => "#yearPickerModal"} do %>
+        <%= t 'ok' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- Year Picker Sheet Modal -->

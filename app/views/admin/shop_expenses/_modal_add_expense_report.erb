@@ -1,0 +1,30 @@
+<div id="addNewExpenseModal" class="modal px-2 fade" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content bg-light">
+      <div class="modal-body pb-0">
+          <label class="text-small"><%= t 'admin.expenses_report.modal_add_supplier_title' %></label>
+          <div>
+            <label class="text-small space-top"><%= t 'admin.expenses_report.name' %></label>
+            <%= f.text_field :name, class: 'form-field ml-auto form-control', value: '', autofocus: true, autocomplete: 'off' %>
+          </div>
+          <div>
+            <label class="text-small space-top"><%= t 'admin.expenses_report.tel' %></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">+62</div>
+                </div>
+                <%= f.text_field :tel, class: 'form-field ml-auto form-control', value: '', type: 'number', autofocus: true, autocomplete: 'off' %>
+            </div>
+          </div>
+          <div> 
+            <label class="text-small space-top"><%= t 'admin.expenses_report.address' %></label>
+            <%= f.text_field :address, class: 'form-field ml-auto form-control', value: '', autofocus: true, autocomplete: 'off' %>
+          </div>
+      </div>
+      <div class="modal-footer border-0 justify-content-center flex-nowrap">
+        <button id="cancelChangeProduct" type="button" class="text-large btn-base -thin -normal" data-dismiss="modal"><%= t 'admin.expenses_report.cancel' %></button>
+        <%= f.submit t('admin.expenses_report.save'), :class=>'text-large btn-base -thin -primary', :id=>'add-supplier-save-btn' %>
+      </div>
+    </div>
+  </div>
+</div>

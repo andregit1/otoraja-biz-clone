@@ -1,0 +1,48 @@
+en:
+  message:
+    register:
+      thanks:
+        subject: "Thank you for your application OTORAJA-BIZ."
+        body: |
+          Regards OTORAJA!
+          
+          Dear %{name}, Thank you for your registration at OTORAJA BIZ. The following is a temporary password to validate your account.
+          Please use the link below within 24 hours to to sign in with your temporary password to validate your account.
+  
+          Temporary password: %{password}
+          
+          URL: %{url}
+          
+          PT. OTORAJA NETWORK INDONESIA
+          https://www.otoraja.co.id/
+    sms_purchase_reminder: |
+        Beep beep! It's time to check your motorcycle %{category_name}.
+        Let's go back to %{shop}.
+
+  
+        Message sent by OTORAJA
+    sms_customer_reminder: |
+        Your motor already feels heavy? It's time for service at %{shop} so that the motor will run again...
+
+        Message sent by OTORAJA
+    sms_receipt_checkout: |
+        Thank you for doing vehicle maintenance today. The following is proof of your transaction on %{today} :
+        
+        %{transaction_id}
+        
+        Total Cost : %{total_price}
+        Items : %{product};
+        
+        More details you can download at : %{url}
+        
+        We hope you will visit %{shop} again!
+        
+        
+        Message sent by OTORAJA
+    sms_questionairre: | 
+        Have a suggestion or comment for %{shop} so that we can serve better?
+        Submit via this link: %{url}
+        
+        
+        Message sent by OTORAJA
+    

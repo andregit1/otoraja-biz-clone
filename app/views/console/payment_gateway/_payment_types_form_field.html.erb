@@ -1,0 +1,19 @@
+<div class="d-flex align-items-center">
+  <%= f.hidden_field :id, value: f.object.id %>
+  <%= f.check_box :is_active, {class: 'checkbox-md', :checked=> f.object.is_active } %>
+  <%= f.label :is_active, f.object.title, {class: 'font-weight-normal text-normal col-form-label ml-3'} %>
+</div>
+
+<div class="ml-4 row is_use_all_list" data-is_use_all="<%= f.object.is_use_all %>">
+  <div class="form-check mr-3 d-flex align-items-center col-12 col-md-7 col-lg-8">
+    <%= f.radio_button :is_use_all, false, {class: 'form-check-input radiobutton-md mr-3 radio-button-false'} %>
+    <div class="col-12">
+      <%= f.select :shop_list, {}, {}, {id: f.object.id,  class: 'form-control select2 shop_list ', multiple: true, style:'width:100%', data: {shop_list: f.object.shop_list, id_name_shops:  PaymentGateway.id_name_shops(f.object.shop_list) }}%>
+    </div>
+  </div>
+
+  <div class="form-check d-flex align-items-center col-12 col-md-4 col-lg-3">
+    <%= f.radio_button :is_use_all, true, {class: 'form-check-input radiobutton-md mr-3 radio-button-true'} %>
+    <%= f.label :is_use_all, t('console.payment_gateway.allow_all_shop'), {class: 'form-check-label ml-2 d-flex align-items-center'} %>
+  </div>
+</div>

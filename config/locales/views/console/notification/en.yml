@@ -1,0 +1,21 @@
+en:
+  console:
+    notification:
+      button:
+        add: "Add notification"
+        edit: "Edit notification"
+      index:
+        title: "Notifications"
+      new:
+        title: "Add notification"
+      edit:
+        title: "Edit notification"
+      form:
+        subject: "subject"
+        body: "body"
+        status: "status"
+        published_from: "published_from"
+        published_to: "published_to"
+        display_shops: "Select a shops to display"
+    
+    

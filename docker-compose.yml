@@ -1,0 +1,70 @@
+version: "3"
+services: 
+  web: 
+    build: 
+      context: ./ 
+      dockerfile: ./container/web/Dockerfile 
+    ports: 
+      - "80:80" 
+    depends_on: 
+      - app 
+  app: 
+    build: . 
+    ports: 
+      - "3000:3000" 
+    volumes: 
+      - .:/app 
+      - /app/tmp
+      - /app/log
+      - /app/.git
+    stdin_open: true 
+    tty: true 
+    environment: 
+      AWS_DEFAULT_REGION: ap-northeast-1 
+      RAILS_MASTER_KEY: b240729b7786c1ecff418e0861f15c81
+      TWO_FACTOR_ENCRYPTION_KEY: 80537D65D479A2F986A78E859CC2BCAAF6A62F6DF7A6BA2C5DD192CFCB2FF790
+      COGNITO_USER_POOL: ap-southeast-1_f6b8Gz2gs
+      COGNITO_CLIENT_ID: 2as0aqr1c8f71idj21s0b261pd
+      DAMCORP_API_TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiIiwiYWRkcmVzcyI6IiIsInBpYyI6IiIsImlzX2RlbGV0ZSI6ZmFsc2UsImRhdGVfY3JlYXRlZCI6IjIwMjAtMDUtMjhUMDc6NDQ6NTYuMDUwWiIsIl9pZCI6IjVlY2Y2YmY4OTBjZjU5NTlhMTNkZTc5MSJ9.F360dNJetZUOE2XeNElqWDPbAhxr8mai7Nfg-aa2nHU
+      SALES_EMAIL: sales@otoraja.co.id
+      PRODUCT_EMAIL: product@otoraja.co.id
+      FINANCE_EMAIL: finance@otoraja.co.id
+      PAYMENT_PERIOD: 5
+      RECAPTCHA_SITE_KEY: 6LdVyuAZAAAAADVGfLrDqh04IohNuC_Q9bTCBNDs
+      RECAPTCHA_SECRET_KEY: 6LdVyuAZAAAAAGIhsxinDzamzOo_0BEb8-MyG1yi
+      
+    depends_on: 
+      - es 
+      - db 
+  db: 
+    image: mysql:5.7 
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci 
+    ports: 
+      - "3306:3306" 
+    environment: 
+      MYSQL_ROOT_PASSWORD: password 
+      MYSQL_DATABASE: otoraja 
+      MYSQL_USER: otoraja 
+      MYSQL_PASSWORD: password 
+  es: 
+    image: elasticsearch:6.8.2 
+    ports: 
+      - "9200:9200" 
+      - "9300:9300" 
+    environment: 
+      - cluster.name=otoraja-biz-cluster 
+      - bootstrap.memory_lock=true 
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" 
+      - discovery.type=single-node 
+    ulimits: 
+      memlock: 
+        soft: -1 
+        hard: -1 
+  kibana: 
+    image: kibana:6.8.2 
+    ports: 
+      - "5601:5601" 
+    environment: 
+      - ELASTICSEARCH_URL=http://es:9200 
+    depends_on: 
+      - es 

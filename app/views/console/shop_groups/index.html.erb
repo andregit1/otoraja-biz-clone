@@ -1,0 +1,54 @@
+<% content_for(:title, t('console.shop_group.index.title')) %>
+<%= render 'search' %>
+
+<div class="d-flex justify-content-end">
+  <%= paginate @shop_groups %>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= ShopGroup.human_attribute_name(:group_no) %></th>
+          <th><%= ShopGroup.human_attribute_name(:name) %></th>
+          <th><%= ShopGroup.human_attribute_name(:owner_name) %></th>
+          <th><%= ShopGroup.human_attribute_name(:owner_tel) %></th>
+          <th><%= ShopGroup.human_attribute_name(:owner_email) %></th>
+          <th>Application Date</th>
+          <th>Bengkel</th>
+          <th>User</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @shop_groups.each do |shop_group| %>
+          <tr>
+            <td><%= shop_group.group_no %></td>
+            <td><%= shop_group.name %></td>
+            <td><%= shop_group.owner_name %></td>
+            <td>
+              <span class="d-block"><%= shop_group.owner_tel %></span>
+              <span class="d-block"><%= shop_group.owner_tel2 %></span>
+            </td>
+            <td><%= shop_group.owner_email %></td>
+            <td><%= formatedDateTz(shop_group.created_at, 'Jakarta') %></td>
+            <td class="text-right"><%= shop_group.shops.count %></td>
+            <td class="text-right"><%= ShopGroup.number_of_registered_accounts(shop_group.id) %></td>
+            <td class="text-right">
+              <%= link_to console_shop_group_path(shop_group), :class => 'btn btn-secondary' do %>
+                <%= t 'console.shop.detail' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= link_to new_console_shop_group_path, class: 'btn footer-btn mb-0', style: 'width: auto;' do %>
+      <i class="fas fa-plus"></i> <%= t 'console.shop_group.button.add'%>
+    <% end %>
+  </div>
+</div>

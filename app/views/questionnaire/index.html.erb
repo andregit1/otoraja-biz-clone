@@ -1,0 +1,160 @@
+<div class="questionnaire-container">
+  <div class="card card-questionnaire">
+    <div class="card-header">
+      <h3>Angket</h3>
+    </div>
+    <div class="card-body answer-block">
+
+      <%= form_with model: @answer, url: questionnaire_create_path(@uuid), class: "questionnaire-form" do |f| %>
+        <div id="stars">
+          <div><h4><%= "#{t 'title'} #{@shop_name}" %><h4></div>
+          <div class="raty m-2 mb-3"></div>
+        </div>
+        
+        <%= f.hidden_field :rate, id: :rate %>
+        <div class="positive custom-checkbox d-flex-me align-items-center" style="display: none;"> Apa hal yang baik menurut Anda </div>
+        <div class="negative custom-checkbox d-flex-me align-items-center" style="display: none;"> Berikan masukan anda </div>
+
+        <div class="positive border-bottom" style="display: none;">
+          <%= f.collection_check_boxes :review, @positive_choice, :export_id, :choice, include_hidden: false do |choice| %>
+            <div class="form-check mb-3">
+              <%= choice.check_box class: "form-check-input" %>
+              <%= choice.label class: "form-check-label ml-3" %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="negative border-bottom" style="display: none;">
+          <%= f.collection_check_boxes :review, @negative_choice, :export_id, :choice, include_hidden: false do |choice| %>
+           <div class="form-check mb-3">
+              <%= choice.check_box class: "form-check-input" %>
+              <%= choice.label class: "form-check-label ml-3" %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="border-bottom py-3 mb-3">
+          <%= f.label :reasons, t('reason'), class: "h5" %>
+          <%= f.select :reasons, VisitingReason.all.pluck(:name), {include_blank: t('choose_one')}, :class => "form-control" %> 
+        </div>
+
+        <div id="comment-form" style="display: none;">
+          <%= f.label :comment, t('comment'), class: "h5" %>
+          <%= f.text_area :comment, id: 'comment', class: "form-control", placeholder: "Opsional", maxlength: 500 %>
+          <p class="text-info"><%= t 'max_chars' %></p>
+        </div>
+        <%= f.submit 'Kirim', id: 'submit-answer', class: "btn btn-questionnaire btn-block mt-2", disabled: "disabled"%>
+      <% end %>
+    </div>
+
+    <div class="end-block card-body" style="display: none;"> Terima kasih atas jawaban Anda </div>
+  </div>
+</div>
+<i class="fas fa-angle-double-down scroll-hint"></i>
+<script>
+$('.raty').raty({
+  starType: 'img',
+  starOff: "<%= image_path('star-off.png') %>",
+  starOn: "<%= image_path('star-on.png') %>",
+  hints: ['Terrible', 'Poor', 'OK', 'Near Perfect', 'Perfect'],
+  click: function(score, e) {
+    $('#submit-answer').prop("disabled", false)
+    $('#rate').val(score)
+    $('#comment-form').fadeIn()
+    $('[name="answer[review][]"]').prop('checked', false)
+    $('input[type="text"]').val('')
+    if(score == 5) {
+      $('.positive').fadeIn()
+      $('.negative').hide()
+      $('.positive.d-flex-me').addClass("d-flex")
+      $('.negative.d-flex-me').removeClass("d-flex")
+    } else {
+      $('.positive').hide()
+      $('.negative').fadeIn()
+      $('.negative.d-flex-me').addClass("d-flex")
+      $('.positive.d-flex-me').removeClass("d-flex")
+    }
+    save()
+    judge_show_scroll_hint()
+  }
+})
+$('.raty').children().off('mouseover')
+
+$(':checkbox').each(function() {
+  $(this).click(function() {
+    save()
+  })
+})
+
+$('#comment').focusout(function() {
+  save()
+})
+
+let jqxhr = null
+let exist_not_saved = false
+
+$('#submit-answer').click(function() {
+  exist_not_saved = false
+  $('.end-block').fadeIn()
+  $('.answer-block').fadeOut()
+})
+
+$(window).scroll(function(){
+  judge_show_scroll_hint()
+})
+
+function save() {
+  if(jqxhr) {
+    exist_not_saved = true
+    return
+  }
+  let uuid = "<%= @uuid %>"
+  let questionnaire_id = "<%= @questionnaire.id %>"
+  let rate = $('#rate').val()
+  let comment = $('#comment').val()
+  let review  = []
+  let reasons = []
+  $("[name='answer[review][]']:checked").each(function() {
+    review.push( $(this).val() )
+  })
+
+  $("[name='answer[reasons][]']:checked").each(function() {
+    reasons.push( $(this).val() )
+  })
+
+  jqxhr = $.ajax({
+    type: 'POST',
+    url: `/questionnaire/${uuid}/save`,
+    timeout: 10000,
+    data: {
+      answer: {
+        rate: rate,
+        review: review,
+        comment: comment,
+        reasons: reasons,
+      },
+      questionnaire: {
+        id: questionnaire_id
+      }
+    },
+    dataType: 'json'
+  })
+  .done(function (data) {
+    jqxhr = null
+    if(exist_not_saved) {
+      save()
+      exist_not_saved = false
+    }
+  });
+}
+
+function judge_show_scroll_hint() {
+  let submit_top = $('#submit-answer').offset().top;
+  let threshold = submit_top - $(window).height();
+  if($(window).scrollTop() > threshold) {
+    $('.scroll-hint').fadeOut();
+  } else {
+    $('.scroll-hint').fadeIn();
+  }
+}
+</script>

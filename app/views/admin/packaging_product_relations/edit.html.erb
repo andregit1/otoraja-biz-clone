@@ -1,0 +1,7 @@
+<% content_for(:title, t('admin.packaging_product.edit_packaging_product')) %>
+
+<div class="card">
+  <%= form_with(model: @shop_product, url: admin_packaging_product_relation_path, local: true) do |form| %>
+  <%= render 'form', {shop_product: @shop_product, f: form} %>
+  <% end %>
+</div>

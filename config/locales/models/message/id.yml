@@ -1,0 +1,13 @@
+id:
+  message:
+    body:
+      sms_purchase_reminder: |
+          Beep beep! Sudah tiba waktunya untuk memeriksa %{category_name} motor Anda. 
+          Mari mampir kembali ke %{shop}. 
+
+          
+          Pesan dikirim oleh OTORAJA
+      sms_customer_reminder: |
+          Motor Anda sudah terasa berat? Waktunya servis di %{shop} supaya motor kembali ngaciiirrr…
+
+          Pesan dikirim oleh OTORAJA

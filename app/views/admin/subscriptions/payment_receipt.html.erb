@@ -1,0 +1,49 @@
+<h1 class="text-page-title font-weight-bold"><%= t 'admin.common.receipt' %></h1>
+
+<div class="card">
+  <div class="card-body">
+    <p><%= t 'admin.subscription.receipt_info' %></p>
+    <dl class="row m-0">
+      <dd class="col-6 col-md-3 col-lg-2 text-normal"><%= t 'admin.common.status' %></dd>
+      <dt class="col-6 text-normal text-success text-uppercase"><%= t 'admin.common.moons' %></dt>
+    </dl>
+    <dl class="row m-0">
+      <dd class="col-6 col-md-3 col-lg-2 text-normal"><%= t 'admin.subscription.subscription_date' %></dd>
+      <dt class="col-6 text-normal"><%= formatedDateUseDash(@subscription.created_at) %></dt>
+    </dl>    
+    <dl class="row m-0">
+      <dd class="col-6 col-md-3 col-lg-2 text-normal"><%= t 'admin.subscription.payment_date' %></dd>
+      <dt class="col-6 text-normal"><%= formatedDateUseDash(@subscription.payment_date)%></dt>
+    </dl>
+    <hr>
+    <dl class="row m-0">
+      <dd class="col-6 col-md-3 col-lg-2 text-normal"><%= t 'admin.common.shop' %></dd>
+      <dt class="col-6 text-normal"><%= @subscription.shop.name %></dt>
+    </dl>
+    <dl class="row m-0">
+      <dd class="col-6 col-md-3 col-lg-2 text-normal"><%= t 'admin.subscription.package_name' %></dd>
+      <dt class="col-6 text-normal">Paket Bulanan</dt>
+    </dl>
+    <dl class="row m-0">
+      <dd class="col-6 col-md-3 col-lg-2 text-normal"><%= t 'admin.subscription.until' %></dd>
+      <dt class="col-6 text-normal"><%= formatedDateUseDash(@subscription.shop.expiration_date) %></dt>
+    </dl>
+    <dl class="row m-0">
+      <dd class="col-6 col-md-3 col-lg-2 text-normal"><%= t 'admin.subscription.fee' %></dd>
+      <dt class="col-6 text-normal">Rp. <%= @subscription.fee %></dt>
+    </dl>
+    <dl class="row m-0">
+      <dd class="col-6 col-md-3 col-lg-2 text-normal"><%= t 'admin.subscription.payment_method' %></dd>
+      <dt class="col-6 text-normal"><%= @subscription.payment_type.title %></dt>
+    </dl>
+    <hr>
+    <p><%= t 'admin.subscription.download_receipt_info' %></p>
+  </div>
+</div>
+
+<%= link_to admin_subscriptions_path, class: "btn button-secondary-active text-large mb-5" do %>
+  <%= t 'admin.common.back' %></a>
+<% end %>
+<%= link_to admin_subscriptions_show_path(@subscription.id),:class => "btn button-active text-large mb-5" do %>
+  <i class="fas fa-download"></i>  <%= t 'admin.common.download' %>
+<% end %>

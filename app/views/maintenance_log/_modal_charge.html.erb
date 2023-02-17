@@ -1,0 +1,62 @@
+<div id="chargeModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#chargeModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-down js-modal-close" data-target="#chargeModal">
+      <i class="icon icon-Arrow-down"></i>
+    </div>
+    <div id="payment-method-select">
+      <div class="modal-caption">
+        <%= t 'payment.question.payment' %>
+      </div>
+      <div class="modal-body">
+        <% @payment_methods.each_with_index do |payment_method, index| %>
+          <div class="radio-circle mb-5">
+            <%= radio_button_tag :payment_method_id, payment_method.id %>
+            <%= label_tag "payment_method_id_#{payment_method.id}", payment_method.name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div id="receipt-actions" <%= "style=display:none;" unless current_user.shops.first.shop_config.use_receipt %>>
+      <div class="modal-caption">
+        <%= t 'payment.question.receipt' %>
+      </div>
+      <div class="modal-body">
+        <div class="check-square mb-5">
+          <%= check_box_tag :receipt_output_method_paper, 'paper' %>
+          <%= label_tag "receipt_output_method_paper", 'Paper' %>
+        </div>
+        <div class="check-square mb-5">
+          <%= check_box_tag :receipt_output_method_sms, 'sms' %>
+          <%= label_tag "receipt_output_method_sms", 'SMS' %>
+        </div>
+        <div class="check-square mb-5">
+          <% if current_user.shops.first.shop_config.use_receipt %>
+            <%= check_box_tag :receipt_output_method_no, 'no' %>
+          <% else %>
+            <%= check_box_tag :receipt_output_method_no, 'no', true %>
+          <% end %>
+          <%= label_tag "receipt_output_method_no", 'No' %>
+        </div>
+      </div>
+    </div>
+    <div class="pl-5 pr-5">
+      <%# SMS送信する場合、telの確認がいるのでJSでsubmit %>
+      <%= button_tag :type => "submit", id: "checkout-button-default", class: "btn-base -basic -primary js-charge-complete js-modal-close", data: {"target" => "#chargeModal"}, disabled: true do %>
+        <%= t 'checked_out' %>
+      <% end %>
+      <%= button_tag :type => "button", id: "checkout-button-both", class: "btn-base -basic -primary js-charge-complete hidden js-modal-close", data: {"target" => "#chargeModal"}, disabled: true do %>
+        <%= t 'slip.print' %> & <%= t 'slip.send' %>
+      <% end %>
+      <%= button_tag :type => "submit", id: "checkout-button-print", class: "btn-base -basic -primary js-charge-complete hidden js-modal-close", data: {"target" => "#chargeModal"}, disabled: true do %>
+        <%= t 'slip.print' %>
+      <% end %>
+      <%= button_tag :type => "button", id: "checkout-button-send", class: "btn-base -basic -primary js-charge-complete hidden js-modal-close", data: {"target" => "#chargeModal"}, disabled: true do %>
+        <%= t 'slip.send' %>
+      <% end %>
+      <%= button_tag :type => "button", id: "open-checkout-complete-modal", class: "btn-base -basic -primary js-modal-open js-charge-complete d-none", data: {"target" => "#checkoutCompleteModal"}, disabled: true %>
+      <%= button_tag :type => "button", id: "open-sms-receipt-modal", class: "btn-base -basic -primary js-modal-open js-charge-complete d-none", data: {"target" => "#smsReceiptModal"}, disabled: true %>
+      <%= button_tag :type => "button", id: "open-calculator-modal", class: "btn-base -basic -primary js-modal-open js-charge-complete d-none", data: {"target" => "#calculatorModal"}, disabled: true %>
+    </div>
+  </div>
+</div>

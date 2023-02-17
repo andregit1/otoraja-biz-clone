@@ -1,0 +1,14 @@
+id:
+  activerecord:
+    models:
+      notification: 'Notification'
+    attributes:
+      notification:
+        id: "ID"
+        subject: "Subyek"
+        body: "Isi"
+        status: "Status"
+        published_from: "Tanggal Mulai Pemberitahuan"
+        published_to: "Tanggal Berakhir Publikasi"
+        tags: "Tags"
+

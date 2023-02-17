@@ -1,0 +1,24 @@
+<div class="receipt-preview">
+  <div class="p-5 d-flex justify-content-between">
+    <% if @back.nil? %>
+      <%= link_to :back, class: 'btn-base -basic -normal mr-5' do %>
+        Close
+      <% end %>
+    <% else %>
+      <%= link_to @back, class: 'btn-base -basic -normal mr-5' do %>
+        Close
+      <% end %>
+    <% end %>
+    <%= link_to @path, class: 'btn-base -basic -normal ml-5', download: '' do %>
+      <%= t 'payment.download' %>
+    <% end %>
+  </div>
+  <div style="height:calc(100vh - 106px);">
+    <iframe
+      height="100%"
+      width="100%"
+      frameborder="0" style="border:0"
+      src="<%= @path %>" allowfullscreen>
+    </iframe>
+  </div>
+</div>

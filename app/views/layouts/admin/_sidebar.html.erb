@@ -1,0 +1,158 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <%= link_to admin_dashboard_index_path, class: 'brand-link' do%>
+    <%= image_tag  "admin_logo.svg", width: '33', height: '33', class: 'brand-image' %>
+    <span class="brand-text font-weight-light">Biz Otoraja</span>
+  <% end %>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item text-label ">
+          <%= link_to admin_dashboard_index_path, class: 'nav-link' do%>
+            <i class="fas fa-th"></i> <p><%= t 'admin.dashboard.dashboard' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_sales_details_index_path, class: 'nav-link' do%>
+            <i class="fas fa-chart-line"></i> <p><%= t 'admin.sidebar.sales_details' %></p>
+          <% end %>
+        </li>
+        
+        <li class="nav-item text-label">
+          <%= link_to admin_checkin_list_path(mode: 'all'), class: 'nav-link' do%>
+            <i class="fas fa-clipboard"></i> <p><%= t 'admin.sidebar.transaction_list' %></p>
+          <% end %>
+        </li>
+        
+        <li class="nav-item text-label">
+          <%= link_to admin_notifications_path, class: 'nav-link' do%>
+            <i class="fas fa-bell"></i> <p><%= t 'admin.notification.index.title' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_customer_list_path, class: 'nav-link' do%>
+            <i class="fa fa-address-card"></i> <p><%= t 'admin.customer.customer_list' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_answers_path, class: 'nav-link' do%>
+            <i class="far fa-comment-dots"></i> <p><%= t 'admin.answer.answers' %></p>
+          <% end %>
+        </li>
+        
+        <!-- Warehouse Management-->
+        <li class="nav-header text-small text-uppercase">-- <%= t 'admin.sidebar.warehouse_management' %> --</li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_shop_products_path, class: 'nav-link' do%>
+            <i class="fas fa-cubes"></i> <p><%= t 'admin.sidebar.product_inventory' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_admin_products_path, class: 'nav-link' do%>
+            <i class="fas fa-file-import"></i> <p><%= t 'admin.sidebar.import_product' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_shop_invoices_path(:mode => ShopPurchase.modes[:invoice]), class: 'nav-link' do%>
+            <i class="fas fa-file-invoice"></i> <p><%= t 'admin.sidebar.invoice' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_low_stock_report_path, class: 'nav-link' do%>
+            <i class="fas fa-file-invoice"></i> <p>Stok Tipis</p>
+          <% end %>
+        </li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_shop_invoices_path(:mode => ShopPurchase.modes[:inventory]), class: 'nav-link' do%>
+            <i class="fas fa-clipboard"></i> <p><%= t 'admin.sidebar.inventory_taking' %></p>
+          <% end %>
+        </li>
+        
+        <li class="nav-item text-label">
+          <%= link_to admin_stock_book_report_path, class: 'nav-link' do%>
+            <i class="fas fa-clipboard"></i> <p><%= t 'admin.sidebar.stock_book_report' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_packaging_product_relations_path, class: 'nav-link' do%>
+            <i class="fas fa-cubes"></i> <p><%= t 'admin.sidebar.packaging_product_relation' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_suppliers_path, class: 'nav-link' do%>
+            <i class="fas fa-truck"></i> <p><%= t 'admin.supplier.supplier_list' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_product_non_active_path, class: 'nav-link' do%>
+            <i class="fas fa-trash-restore-alt"></i> <p><%= t 'admin.sidebar.product_non_active' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_shop_expenses_path, class: 'nav-link' do%>
+            <i class="fas fa-chart-line"></i> <p><%= t 'admin.sidebar.expense_report' %></p>
+          <% end %>
+        </li>
+
+        <!-- Shop Management -->
+        <li class="nav-header text-small text-uppercase">-- <%= t 'admin.sidebar.shop_management' %> --</li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_shop_setting_path, class: 'nav-link' do%>
+            <i class="fa fa-cog"></i> <p><%= t 'admin.shop_setting.shop_setting' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item text-label">
+          <%= link_to admin_shop_staffs_path, class: 'nav-link' do%>
+            <i class="fa fa-user"></i> <p><%= t 'admin.common.staff' %></p>
+          <% end %>
+        </li>
+
+        <% if current_user.owner? %>
+        <li class="nav-item text-label">
+          <%= link_to admin_users_path, class: 'nav-link' do%>
+            <i class="fa fa-id-badge"></i> <p><%= t 'admin.shop.accounts' %></p>
+          <% end %>
+        </li>
+        <% end %>
+
+        <li class="nav-header"></li>
+
+        <% if Rails.env.development? || Rails.env.staging? %>
+        <li class="nav-item text-label">
+          <%= link_to admin_style_guideline_path, class: 'nav-link' do%>
+            <i class="fa fa-info"></i> <p><%= t 'admin.style_guideline' %></p>
+          <% end %>
+        </li>
+        <% end %>
+     
+        <li class="nav-header"></li><!-- 余白調整用 -->
+        <li class="nav-item text-small ">
+          <p class="nav-link "> Version:<%= render 'layouts/current_version' %></p>
+        </li>
+        <li class="nav-item text-small ">
+          <span class="nav-link">Copyright &copy; 2021 Biz OTORAJA</> All rights reserved.</p>
+        </li>    
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

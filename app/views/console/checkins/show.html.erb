@@ -1,0 +1,116 @@
+<% content_for(:title, t('admin.transaction.data_title')) %>
+<div class="card card-widget">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+    <table class="table mb-0">
+      <td class="text-color-blue"><%= t('admin.transaction.status') %></td>
+      <td class="text-right text-color-blue font-weight-bold">
+        <%= @mode %>
+      </td>
+    </table>
+    </div>
+  </div>
+</div>
+<div class="card card-widget">
+  <div class="card-header color-text-table-header">
+    <h3 class="card-title font-weight-bold"><%= t 'admin.transaction.customer' %></h3>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tbody class="text-label">
+          <tr class="d-flex">
+            <td class="col-5 p-2 pl-3">
+              <span><%= t('admin.transaction.plate_number') %></span>
+              <br/><br/>
+              <span><%= t('admin.transaction.maker') %></span>
+              <br/><br/>
+              <span><%= t('admin.transaction.model_color') %></span>      
+              <br/><br/>
+              <span><%= t('admin.transaction.odometer') %></span>
+            </td>
+            <td class="col-7 p-2 pl-1">
+              <span><%= "#{@checkin.maintenance_log.number_plate_area} #{@checkin.maintenance_log.number_plate_number} #{@checkin.maintenance_log.number_plate_pref}" %></span>
+              <br/><br/>
+              <span><%= @checkin.maintenance_log.maker %></span>
+              <br/><br/>
+              <span><%= "#{@checkin.maintenance_log.model} / #{@checkin.maintenance_log.color }" %></span>
+              <br/><br/>
+              <span><%= @checkin.maintenance_log.odometer %></span>
+            </td>
+          </tr>
+          <tr class="d-flex">
+            <td class="col-5 p-2 pl-3">
+              <span><%= t 'admin.common.name' %></span>
+              <br/><br/>
+              <span><%= t 'admin.transaction.phone_number' %></span>
+              <br/><br/>
+              <span><%= t 'admin.transaction.customer_created_at' %></span>
+            </td>
+            <td class="col-7 p-2 pl-1">
+              <span><%= @checkin.customer.name %></span>
+              <br/><br/>
+              <span><%= formatedPhoneNumber(@checkin.customer.tel) %></span>
+              <br/><br/>
+              <span><%= formatedDateTz(@checkin.customer.created_at, 'Jakarta') %></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="card card-widget">
+  <div class="card-header color-text-table-header">
+    <div class="row row-invoice-header">
+      <h3 class="col-4 card-title font-weight-bold"><%= t 'admin.customer.product_service' %></h3>
+      <h3 class="col-4 card-title text-center font-weight-bold"><%= t 'admin.common.quantity' %></h3>
+      <h3 class="col-4 card-title text-right font-weight-bold"><%= t 'admin.customer.subtotal' %> (Rp.)</h3>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <div class="products-box-admin invoice-list">
+      <div class="scroll-area">
+        <ul class="list list-item mb-0">
+          <% @checkin.maintenance_log.maintenance_log_details.each do |detail| %>
+            <li class="row px-4">
+              <div class="col-4">
+                <div>
+                  <p class="text-label"><%= detail.name %></p>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="text-center">
+                  <p class="text-small"><%= detail.quantity.to_i || 0 %></p>
+                </div>
+              </div>
+              <div class="text-label col-4 text-right">
+                <%= "#{detail.subtotal.to_i.to_s(:delimited, delimiter: '.')}" unless detail.subtotal.nil? %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="scroll-area">
+      <ul class="list list-item mb-0">
+        <li class="row px-4">
+          <div class="col-md-10 col-8">
+            <div>
+              <p class="text-label font-weight-bold"><%= t 'admin.common.total' %> (Rp)</p>
+              <p class="text-label">Uang Muka (Rp)</p>
+              <p class="text-label">Sisa Pembayaran (Rp)</p>
+            </div>
+          </div>
+          <div class="col-md-2 col-4">
+            <div class="text-right">
+              <p class="text-label font-weight-bold"><%= @checkin.maintenance_log.total_price.to_i.to_s(:delimited, delimiter: '.') %></p>
+              <p class="text-label"><%= @checkin.maintenance_log.total_down_payment_amount.to_i.to_s(:delimited, delimiter: '.') %></p>
+              <p class="text-label"><%= (@checkin.maintenance_log.total_price.to_i - @checkin.maintenance_log.total_down_payment_amount.to_i).to_s(:delimited, delimiter: '.') %></p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

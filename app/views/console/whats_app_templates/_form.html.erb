@@ -1,0 +1,40 @@
+<div class="card-body">
+
+  <% if template.errors.any? %>
+  <div class="callout callout-danger">
+    <h2><%= pluralize(template.errors.count, "error") %> prohibited this item from being saved:</h2>
+    <ul>
+      <% template.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <% unless @shop_id.nil? %>
+  <%= f.hidden_field :shop_id, :value => @shop_id %>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :services, t('console.whatsapp.service') %>
+    <%= f.select :whats_app_service_id, WhatsAppService.all.pluck(:name, :id), {:include_blank => true}, {:class=>'form-control select2'} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :template_name, t('console.whatsapp.template') %>
+    <%= f.text_field :template_name, :class=>'form-control', autofocus: true, autocomplete: 'off' %>
+  </div>
+
+</div>
+
+<div class="card-footer">
+  <div class="row">
+    <div class="col text-right">
+      <%= link_to t('console.common.back'), console_whats_app_templates_path, class: 'btn btn-default' %>
+      <% if controller.action_name.in?(['new', 'create']) %>
+        <%= f.submit t('console.common.regist'), class: 'btn btn-primary' %>
+      <% else %>
+        <%= f.submit t('console.common.update'), class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

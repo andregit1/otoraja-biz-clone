@@ -1,0 +1,15 @@
+<div id="confirmDeleteExpense" class="modal px-2 fade" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content bg-light">
+      <div class="modal-body pb-0">
+        <p class="text-center font-weight-bold text-large"><%= t 'admin.expenses_report.modal_confirm_delete' %></p>
+      </div>
+      <div class="modal-footer border-0 justify-content-center flex-nowrap">
+        <button id="cancelChangeProduct" type="button" class="btn button-secondary-active text-large btn-expenses-minwidth" data-dismiss="modal"><%= t 'admin.expenses_report.confirm_no' %></button>
+        <%= link_to admin_shop_expense_path(@shop_expense.id), method: :delete, :class => 'btn btn-primary text-large btn-expenses-minwidth' do %>
+          <%= t 'admin.expenses_report.confirm_yes' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

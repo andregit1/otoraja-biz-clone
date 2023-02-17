@@ -1,0 +1,196 @@
+<%# render 'search' %>
+<h2><%= t 'console.subscription.subscriptions' %></h2>
+<div class="card" id="subscription_list_filter">
+  <div class="card-body list">
+      <div class="head-filter p-4">
+        <div class="selected-item text-normal px-2 d-inline-flex">
+          <span class="pr-1">0</span> item dipilih
+        </div>
+
+        <%= submit_tag ("Terapkan Filter"), id: 'set-filter', class: 'btn button-secondary-active text-normal'%>
+        <%= link_to console_subscriptions_invoice_path, class: 'pl-2' do %>
+          <span class="text-normal">Reset filter</span>
+        <% end %>
+        <%= link_to console_subscriptions_invoice_report_path(format: :csv), id: "download-invoice", class: "btn c-blue float-right" do %>
+          <i class="fa fa-cloud-download-alt"></i><span class="text-normal"> Download</span>
+        <% end %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-sticky">
+          <thead>
+              <tr>
+                <%= search_form_for @q, url: console_subscriptions_invoice_path, id: 'console-subs-search' do |f| %>
+                  <th></th>
+                  <th>
+                    <input type="checkbox" id="select-all-subscription" class="checkbox" data-total="<%= @subscriptions.total_count %>">
+                    <%= f.hidden_field :page, :value => params[:page].present? ? params[:page] : '1' %>
+                    <%= f.hidden_field :checkbox, :value => '' %>
+                    <%= f.hidden_field :checkbox_ids, :value => '' %>
+                  </th>
+                  <th>
+                    <%= t 'console.subscription.table.head.invoice_number' %>
+                    <div class="search-field">
+                      <%= f.text_field :invoice_number_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+                    </div>
+                  </th>
+                  <th>
+                    <%= t 'console.subscription.table.head.shop_name' %>
+                    <div class="search-field">
+                      <%= f.text_field :shop_name_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+                    </div>
+                  </th>
+                  <th>
+                    <%= t 'console.subscription.table.head.bengkel_id' %>
+                    <div class="search-field">
+                      <%= f.text_field :shop_bengkel_id_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+                    </div>
+                  </th>
+                  <th>
+                    <%= t 'console.subscription.table.head.invoice_date' %>
+                    <div class="search-field">
+                      <%# f.text_field :created_at_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+                      <%= f.hidden_field :created_at_gteq, :value => params[:q].present? ? params[:q][:created_at_gteq] : '' %>
+                      <%= f.hidden_field :created_at_lteq, :value => params[:q].present? ? params[:q][:created_at_lteq] : '' %>
+                      <button type="button" class="pull-down-btn text-left text-small" id="invoice-btn">
+                      <div>
+                        <i class="far fa-calendar-alt mr-1"></i>
+                        <span>
+                          <%= t 'console.subscription.today' %>
+                        </span>
+                    </div>
+                  </th>
+                  <th>
+                    <%= t 'console.subscription.table.head.due_date' %>
+                    <div class="search-field">
+                      <%# f.text_field :_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+                      <%= f.hidden_field :payment_expired_gteq, :value => params[:q].present? ? params[:q][:payment_expired_gteq] : '' %>
+                      <%= f.hidden_field :payment_expired_lteq, :value => params[:q].present? ? params[:q][:payment_expired_lteq] : '' %>
+                      <button type="button" class="pull-down-btn text-left text-small" id="expired-btn">
+                      <div>
+                        <i class="far fa-calendar-alt mr-1"></i>
+                        <span>
+                          <%= t 'console.subscription.today' %>
+                        </span>
+                    </div>
+                  </th>
+                  <th>
+                    <%= t 'console.subscription.table.head.fee' %> (Rp.)
+                    <div class="search-field">
+                      <%= f.text_field :fee_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+                    </div>
+                  </th>
+                  <th>
+                    <%= t 'console.subscription.table.head.item' %>
+                    <div class="search-field">
+                      <%# f.text_field :shop_name_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+                      <%= f.select :period_eq, options_for_select([
+                        [t("console.subscription.item.one"), 1],
+                        [t("console.subscription.item.three"), 3],
+                        [t("console.subscription.item.six"), 6],
+                        [t("console.subscription.item.twelve"), 12]
+                        ], selected: params[:q].present? ? params[:q][:period_eq] : nil), {include_blank: true}, { class: "text-small selection" } %>
+                    </div>
+                  </th>
+                  <th>
+                    <%= t 'console.subscription.table.head.order_id' %>
+                    <div class="search-field">
+                      <%= f.text_field :order_ids_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+                    </div>
+                  </th>
+                  <th>
+                    <%= t 'console.subscription.table.head.payment_method' %>
+                    <div class="search-field">
+                      <%# f.text_field :payment_type_id_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+                      <%= f.select :payment_type_id_eq, options_from_collection_for_select(PaymentType.all, :id, :name), {include_blank: true}, { class: "text-small selection" } %>
+                    </div>
+                  </th>
+                  <th>
+                    <%= t 'console.subscription.table.head.va_number' %>
+                    <div class="search-field">
+                      <%= f.text_field :shop_virtual_bank_no_or_payment_gateway_va_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+                    </div>
+                  </th>
+                  <th>
+                    <%= t 'console.subscription.table.head.sales' %>
+                    <div class="search-field">
+                      <%= f.text_field :sales_name_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+                    </div>
+                  </th>
+                  <th>
+                    <%= t 'console.subscription.table.head.payment_date' %>
+                    <div class="search-field">
+                      <%# f.text_field :shop_name_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+                      <%= f.hidden_field :payment_date_gteq, :value => params[:q].present? ? params[:q][:payment_date_gteq] : '' %>
+                      <%= f.hidden_field :payment_date_lteq, :value => params[:q].present? ? params[:q][:payment_date_lteq] : '' %>
+                      <button type="button" class="pull-down-btn text-left text-small" id="payment-btn">
+                      <div>
+                        <i class="far fa-calendar-alt mr-1"></i>
+                        <span>
+                          <%= t 'console.subscription.today' %>
+                        </span>
+                      </div>
+                    </button>
+                    </div>
+                  </th>
+                  <!--<th>
+                    <%= t 'console.subscription.table.head.status' %>
+                    <div class="search-field">
+                      <%= f.text_field :shop_name_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+                    </div>
+                  </th>-->
+                  <th></th>
+                  <th></th>
+                <% end %>
+              </tr>
+          </thead>
+          <tbody>
+          <% unless @subscriptions.empty? %>
+            <% @subscriptions.each do | subscription | %>
+              <tr>
+                <td></td>
+                <td><input type="checkbox" class="select-subscription checkbox" data-id="<%= subscription.id %>"></td>
+                <td><%= subscription.invoice_number %></td>
+                <td><%= subscription.shop&.name %></td>
+                <td><%= subscription.shop&.bengkel_id %></td>
+                <td><%= formatedDateUseDash(subscription.created_at) %></td>
+                <td>
+                  <% if subscription.days_remaining >= 0 && subscription.end_date.present? %>
+                    <%= formatedDateUseDash(subscription.payment_expired) if subscription.payment_expired.present? %>
+                  <% end %>
+                </td>
+                <td><%= formatedRupiah(subscription.fee) %></td>
+                <td><%= Subscription.periods_i18n[subscription.period] %></td>
+                <td><%= subscription.order_ids %></td>
+                <td>
+                  <%= subscription.payment_method %>
+                </td>
+                <td><%= subscription.payment_type_id.nil? ? subscription.shop&.virtual_bank_no : subscription.payment_gateway_va %></td>
+                <td><%= subscription.sales_name %></td>
+                <td><%= formatedDateUseDash(subscription.payment_date) if ! subscription.payment_date.nil? %></td>
+                <!--<td><%= Subscription.statuses_i18n[subscription.status] %></td>-->
+                <td>
+                  <%# link_to (t 'console.common.detail'), edit_console_subscription_path(subscription.id), :class => 'btn btn-primary' %>
+                  <% if subscription.invoice_number.present? %>
+                    <%= link_to pdf_viewer_path(path: receipt_output_for_subscriptions_path(subscription), back: 'console_subscriptions_invoice_path'),:class => "btn btn-primary", :target => '_blank' do %>
+                      <i class="fas fa-receipt"></i></a>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="2"></td>
+              <td colspan="13">Tidak dapat menemukan data.</td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>
+<% unless @subscriptions.empty? %>
+<div class="d-flex justify-content-center" data-turbolinks="false"><%= paginate @subscriptions %></div>
+<% end %>
+<%= render "modal_confirmation" %>

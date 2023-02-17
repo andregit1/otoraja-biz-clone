@@ -1,0 +1,7 @@
+id:
+  supplier:
+    notice:
+      successful_supplier_created: 'Supplier/Vendor berhasil dibuat!'
+      successful_supplier_updated: 'Supplier/Vendor berhasil diubah!'
+      successful_supplier_destroyed: 'Supplier/Vendor berhasil dihapus!'
+      unsuccessful_supplier_created: 'Supplier/Vendor sudah pernah dibuat!'

@@ -1,0 +1,18 @@
+<% content_for(:title, t('admin.shop_config.shop_config')) %>
+
+<% @shop_configs.each do |config| %>
+  <div class="card card-secondary">
+  
+    <div class="card-header">
+      <span style="line-height: 31px;">
+        <%= config.shop.name %>
+      <span>
+      <span class="float-right">
+        <%= link_to edit_admin_shop_config_path(config), :class => 'btn btn-dark btn-sm' do %>
+          <i class="fas fa-edit"></i> <%= t 'admin.common.edit' %>
+        <% end %>
+      </span>
+    </div>
+    <%= render 'list_body', {config: config} %>
+  </div>
+  <% end %>

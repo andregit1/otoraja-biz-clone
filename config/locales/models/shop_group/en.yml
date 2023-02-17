@@ -1,0 +1,23 @@
+en:
+  activerecord:
+    models:
+      shop_group: 'Contractor'
+    attributes:
+      shop_group:
+        id: "ID"
+        name: "Name"
+        group_no: "ID Account"
+        owner_name: "Owner"
+        owner_gender: "Gender"
+        owner_tel: "Tel"
+        owner_tel2: "Tel2"
+        owner_email: "Email"
+        founding_year: "Founding year"
+        is_chain_shop: "Is Chain Shop"
+        subscriber_type: "Status"
+        owner_wa_tel: "Whats App Tel"
+        virtual_bank_no: "Virtual Bank No."
+      shop_group/subscriber_type:
+        non_subscriber: "Non Subscriber"
+        subscriber: "Subscriber"
+        paid_subscriber: "Paid Subscriber"

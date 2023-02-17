@@ -1,0 +1,594 @@
+id:
+  enums:
+    subscription:
+      plan:
+        no_plan: "No Plan"
+        lite: "Lite"
+        super: "Super"
+        ultimate: "Ultimate"
+      status:
+        processing: "Processing"
+        creating_bank_account: "Creating Bank Account"
+        payment_pending: "Payment Pending"
+        payment_confirmed: "Payment Confirmed"
+        finalized: "Finalized"
+        cancelled: "Cancelled"
+        expire: "Expired"
+      period:
+        one: "1 Month"
+        two: "2 Months"
+        three: "3 Months"
+        four: "4 Months"
+        five: "5 Months"
+        six: "6 Months"
+        seven: "7 Months"
+        eight: "8 Months"
+        nine: "9 Months"
+        ten: "10 Months"
+        eleven: "11 Months"
+        twelve: "1 Year"
+      payment_type_id:
+        sinarmas_va: "Sinarmar VA"
+        gopay: "GoPay"
+        qris_gopay: "QRIS"
+        qris_shopee: "QRIS"
+        bca_va: "BCA VA"
+        bri_va: "BRI VA"
+        bni_va: "BNI VA"
+        mandiri_bill: "Mandiri VA"
+  subscription:
+    double_subscription: 'Permintaan Anda sebelumnya masih diproses.'
+    error_subscription: 'Gagal membuat subscription'
+    cancelled: "Paket langganan anda berhasil di batalkan"
+    cancell_error: "Paket langganan anda gagal di batalkan"
+    payment_method_nonactive: 'Pembayaran menggunakan metode ini sedang tidak aktif, silahkan menggunakan pembayaran meode lainnya'
+    payment_gateway_expired: 'Waktu pembayaran telah habis, silahkan tekan tombol pilih pembayaran kemudian pilih metode pembayaran kembali'
+    email:
+      subject:
+        stg_ops_application_received: "[STAGING] Langganan Baru %{shop_name}"
+        ops_application_received: "Langganan Baru %{shop_name}"
+        stg_ops_returning_application_received: "[STAGING] Perpanjangan Langganan %{shop_name}"
+        ops_returning_application_received: "Perpanjangan Langganan %{shop_name}"
+        stg_ops_pending_payment_received: "[STAGING] Pending Payment %{shop_name}"
+        ops_pending_payment_received: "Pending Payment %{shop_name}"
+        ops_subscription_expiration: "Subscription Expirations"
+        subscription_expiration: "Your Subscription has Expired"
+        renewal_notification: "Paket Langganan Anda akan Kadaluarsa"
+        application_processing: "Langganan Otoraja Biz - %{id}"
+        bank_account_created: "Re: Langganan Otoraja Biz - %{id}"
+        payment_received: "Re: Langganan Otoraja Biz - %{id}"
+        processing_complete: "Your Account is Ready"
+        cancelled: "Langganan Otoraja Biz Dibatalkan - %{id}"
+        ops_payment_pending: "Re: New Subs %{id}"
+        payment_pending: "Re: Langganan Otoraja Biz - %{id}"
+        expired: "Langganan Otoraja Biz Telah Kadaluarsa - %{id}"
+      body:
+        ops_application_received: |
+          Halo!
+
+          Kami memiliki permintaan berlangganan baru. Berikut adalah rincian Bengkel
+          
+          Order ID : %{id}
+          Nama Owner : %{owner_name}
+          Nama Bengkel : %{shop_name}
+          Alamat email : %{email}
+          Nama paket : %{plan} 
+          Periode berlangganan : %{period} Bulan
+          Jumlah Pembayaran yang Diperlukan : %{pay_amount}
+          Alamat : %{shop_address}
+          ID Produk : Otoraja Biz - 00
+          Kode area : %{area_name} - %{area_code}
+          ID Bengkel : %{shop_id}
+          Akun virtual : %{shop_virtual_account}
+          Kode Referensi / Nama Sales : %{sales_name}
+          
+          Catatan: Struktur virtual account:81620-[2 digit kode produk]-[2 digit kode area] -[6 digit ID Bengkel]
+
+          Silahkan ikuti permintaan tersebut dengan mengklik tombol di bawah ini.
+          
+          %{link}
+        ops_returning_application_received: |
+          Halo!
+
+          Kami memiliki permintaan perpanjangan langganan. Berikut adalah rincian Bengkel
+          
+          Order ID : %{id}
+          Nama Owner : %{owner_name}
+          Nama Bengkel : %{shop_name}
+          Alamat email : %{email}
+          Nama paket : %{plan} 
+          Periode berlangganan : %{period} Bulan
+          Jumlah Pembayaran yang Diperlukan : %{pay_amount}
+          Alamat : %{shop_address}
+          ID Produk : Otoraja Biz - 00
+          Kode area : %{area_name} - %{area_code}
+          ID Bengkel : %{shop_id}
+          Akun virtual : %{shop_virtual_account}
+          Kode Referensi / Nama Sales : %{sales_name}
+          
+          Catatan: Struktur virtual account:81620-[2 digit kode produk]-[2 digit kode area] -[6 digit ID Bengkel]
+
+          Silahkan ikuti permintaan tersebut dengan mengklik tombol di bawah ini.
+          
+          %{link}
+        ops_pending_payment_received: |
+          Hello!
+
+          We have a PENDING PAYMENT for the following order.
+          
+          - Order ID
+            %{id}
+          
+          - Application Date
+            %{date}
+          
+          - Bengkel Name
+            %{shop_name}
+          
+          - Package Name
+            %{plan}
+
+          - Virtual Account
+            %{shop_virtual_account}
+
+          - Email
+           %{email}
+          
+          
+          Please follow up with the owner in order for the bengkel to make the payment.
+          %{link}
+        ops_subscription_expiration: "Account and date of expiration"
+        subscription_expiration: "Please renew your subscription"
+        renewal_notification: "Your subscription will expire in %{days}"
+        application_processing: | 
+          Yth. %{shop_name},
+
+          Terima kasih atas ketersediaannya untuk bergabung dengan layanan Otoraja Biz.
+
+          Permintaan langganan Otoraja Biz paket %{plan} yang Anda ajukan sedang kami proses. Berikut adalah detil pengajuan Anda:
+
+          • Order ID
+            %{id}
+
+          • Tanggal Pengajuan
+            %{date}
+
+          • Nama Bengkel
+            %{shop_name}
+
+          • Nama Paket Langganan 
+            %{plan}
+
+          Kami akan menghubungi Anda kembali melalui email atau WhatsApp dengan informasi pembayaran.
+
+          Selamat bergabung dan semoga sukses!
+
+
+          Salam,
+          Tim Finance Otoraja
+        bengkel_expired: |
+          Yth. %{shop_name},
+
+          Akun %{status}Otoraja Biz anda akan expired pada tanggal %{date}. 
+          
+          Silahkan melakukan pemesanan paket Otoraja Biz melalui %{link} untuk tetap mendapatkan manfaat layanan Otoraja Biz.
+
+          Salam.
+          Tim Finance Otoraja
+        bank_account_created: |
+          Yth. %{shop_name},
+
+          Selamat! Satu langkah lagi menuju aktivasi paket layanan Otoraja Biz %{plan} Anda.
+
+          Kami mau mengingatkan untuk mentransfer biaya berlangganan Anda sebesar Rp %{fee}.
+
+          Pembayaran dapat Anda lakukan dengan cara transfer bank ke nomor rekening Virtual Account yang telah kami sediakan khusus bengkel Anda.
+          
+          Nama Bank                 : PT. Bank Sinarmas TBK
+          Nomor Rekening        : %{bank_no}
+          Nama Akun                 : ONI QQ %{shop_name}
+
+          Silakan lakukan pembayaran sesuai dengan petunjuk terlampir, meliputi pembayaran melalui:
+          1. ATM
+          2. M-Banking
+          3. OVO
+          4. GOPAY
+
+          Setelah melakukan pembayaran, harap lampirkan bukti transfer ke WA tim Otoraja dan email ke finance@otoraja.id
+
+          Selamat bergabung dan semoga sukses!
+
+          Salam,
+          Tim Finance Otoraja
+
+          # TATA CARA PEMBAYARAN BIAYA BERLANGGANAN OTORAJA BIZ
+
+          Pembayaran Melalui Virtual Account dengan ATM. Contoh pembayaran melalui ATM bank BCA :
+          1.	Masukkan kartu ATM kemudian masukkan nomor PIN Anda
+          2.	Pilih "Transaksi lainnya", kemudian pilih "Transfer Antar Bank". Masukan Kode Bank “153”
+          3.	Silahkan masukkan no. Virtual Account (contoh : 8162XXXXXXXXXXXX), lalu tekan "Benar"
+          4.	Periksa kembali data transaksi kemudian tekan "Benar"
+          5.	Simpan struk Anda sebagai bukti pembayaran. Penjual akan menerima notifikasi pembayaran.
+
+          Pembayaran Melalui Virtual Account dengan Mobile Banking. Contoh pembayaran melalui M-BCA :
+          1.	Login pada aplikasi M-BCA, masukkan PIN M-BCA
+          2.	Pilih "m-Transfer", pilih di bagian “Daftar Transfer” lalu klik "Antar Bank"
+          3.	Klik "No Rek Tujuan", lalu masukkan no. Virtual Account Anda (contoh : 8162XXXXXXXXX)
+          4.	Pilih bank “Sinarmas” Klik "Send"
+          5.	Kemudian kembali ke menu “m-Transfer” di bagian “Transfer klik “Antar Bank”
+          6.	Pilih Bank “153 Sinarmas”, Rekening Tujuan adalah Virtual Account Anda, masukan Jumlah Uang sesuai nominal pembayaran, kemudian klik “Send” dan masukkan PIN M-BCA Anda
+
+          Pembayaran dengan OVO :
+          1.	Pastikan OVO anda sudah berstatus OVO Premier
+          2.	Login pada applikasi OVO, pilih menu “transfer”
+          3.	Klik “ke rekening bank”
+          4.	Pilih bank “Bank SInarmas”
+          5.	Masukan no rekening virtual dan nominal tagihan
+          6.	Pilih “lanjutkan”, kemudian“transfer”
+
+          Pembayaran dengan GOPAY :
+          1.	Klik “bayar” pada menu GoPay
+          2.	Lalu pilih “Ke rekening bank” untuk transfer saldo GoPay
+          3.	Pilih “transfer instan ke rek baru”
+          4.	Pilih bank tujuan yang diinginkan
+          5.	Masukkan nomor rekening baru
+          6.	Pilih nama pemilik rekening dan klik “lanjut”
+          7.	Masukkan jumlah nominal uang yang akan dikirimkan
+          8.	Pastikan jumlah transfer atau pengiriman saldo sudah benar. Klik Konfirmasi untuk melanjutkan dan masukkan PIN Anda.
+        
+        gopay_instruction: |
+          Yth. %{shop_name},
+
+          Selamat! Satu langkah lagi menuju aktivasi paket layanan Otoraja Biz %{plan} Anda.
+
+          Kami mau mengingatkan untuk mentransfer biaya berlangganan Anda sebesar Rp %{fee}.
+
+          Silakan lakukan pembayaran sesuai dengan petunjuk terlampir
+
+          Setelah melakukan pembayaran, harap lampirkan bukti transfer ke WA tim Otoraja dan email ke finance@otoraja.id
+
+          Selamat bergabung dan semoga sukses!
+
+          Salam,
+          Tim Finance Otoraja
+
+          # TATA CARA PEMBAYARAN BIAYA BERLANGGANAN OTORAJA BIZ
+
+          Pembayaran dengan GOPAY :
+          1. Buka aplikasi Gojek atau aplikasi e-wallet lainnya.
+          2. Pindai kode QR yang tertera di monitor.
+          3. Jika menggunakan satu perangkat, unduh kode QR terlebih dahulu ke perangkat Anda.
+          4. Di aplikasi Gojek, pilih Pay / Bayar, lalu pilih icon foto di atas kanan layar pemindaian. Pilih foto kode QR yang telah Anda unduh.
+          5. Periksa informasi pembayaran di aplikasi. Jika sudah benar, ketuk Pay / Bayar.
+          6. Masukkan PIN Anda.
+          7. Transaksi Anda sudah selesai.
+
+        qris_gopay_instruction: |
+          Yth. %{shop_name},
+
+          Selamat! Satu langkah lagi menuju aktivasi paket layanan Otoraja Biz %{plan} Anda.
+
+          Kami mau mengingatkan untuk mentransfer biaya berlangganan Anda sebesar Rp %{fee}.
+
+          Silakan lakukan pembayaran sesuai dengan petunjuk terlampir
+
+          Setelah melakukan pembayaran, harap lampirkan bukti transfer ke WA tim Otoraja dan email ke finance@otoraja.id
+
+          Selamat bergabung dan semoga sukses!
+
+          Salam,
+          Tim Finance Otoraja
+
+          # TATA CARA PEMBAYARAN BIAYA BERLANGGANAN OTORAJA BIZ
+
+          Pembayaran dengan QRIS :
+          1. Buka aplikasi e-wallet yang mendukung pembayaran via QRIS.
+          2. Pindai kode QR yang tertera di monitor.
+          3. Jika menggunakan satu perangkat, unduh kode QR terlebih dahulu ke perangkat Anda.
+          4. Di aplikasi e-wallet, ketuk icon Pindai, lalu pilih icon foto dan pilih foto kode QR yang telah Anda unduh.
+          5. Periksa informasi pembayaran di aplikasi. Jika sudah benar, ketuk Pay / Bayar.
+          6. Masukkan PIN Anda.
+          7. Transaksi Anda sudah selesai.
+
+        qris_shopee_instruction: |
+          Yth. %{shop_name},
+
+          Selamat! Satu langkah lagi menuju aktivasi paket layanan Otoraja Biz %{plan} Anda.
+
+          Kami mau mengingatkan untuk mentransfer biaya berlangganan Anda sebesar Rp %{fee}.
+
+          Silakan lakukan pembayaran sesuai dengan petunjuk terlampir
+
+          Setelah melakukan pembayaran, harap lampirkan bukti transfer ke WA tim Otoraja dan email ke finance@otoraja.id
+
+          Selamat bergabung dan semoga sukses!
+
+          Salam,
+          Tim Finance Otoraja
+
+          # TATA CARA PEMBAYARAN BIAYA BERLANGGANAN OTORAJA BIZ
+
+          Pembayaran dengan QRIS :
+          1. Buka aplikasi e-wallet yang mendukung pembayaran via QRIS.
+          2. Pindai kode QR yang tertera di monitor.
+          3. Jika menggunakan satu perangkat, unduh kode QR terlebih dahulu ke perangkat Anda.
+          4. Di aplikasi e-wallet, ketuk icon Pindai, lalu pilih icon foto dan pilih foto kode QR yang telah Anda unduh.
+          5. Periksa informasi pembayaran di aplikasi. Jika sudah benar, ketuk Pay / Bayar.
+          6. Masukkan PIN Anda.
+          7. Transaksi Anda sudah selesai.
+        
+        bca_va_instruction: |
+          Yth. %{shop_name},
+
+          Selamat! Satu langkah lagi menuju aktivasi paket layanan Otoraja Biz %{plan} Anda.
+
+          Kami mau mengingatkan untuk mentransfer biaya berlangganan Anda sebesar Rp %{fee}.
+
+          Silakan lakukan pembayaran sesuai dengan petunjuk terlampir
+
+          Setelah melakukan pembayaran, harap lampirkan bukti transfer ke WA tim Otoraja dan email ke finance@otoraja.id
+
+          Selamat bergabung dan semoga sukses!
+
+          Salam,
+          Tim Finance Otoraja
+
+          # TATA CARA PEMBAYARAN BIAYA BERLANGGANAN OTORAJA BIZ
+
+          Pembayaran dengan m-BCA :
+          1. Masuk ke aplikasi BCA Mobile.
+          2. Pilih m-BCA, lalu masukkan kode akses m-BCA Anda.
+          3. Pilih m-Transfer, lalu pilih BCA Virtual Account.
+          4. Masukkan Nomor Virtual Account atau pilih dari Daftar Transfer.
+          5. Isi jumlah yang harus dibayarkan.
+          6. Masukkan pin m-BCA Anda.
+          7. Pembayaran sudah selesai. Simpan resinya sebagai bukti pembayaran Anda.
+
+          Pembayaran dengan ATM BCA :
+          1. Masuk ke aplikasi BCA Mobile.
+          2. Pilih m-BCA, lalu masukkan kode akses m-BCA Anda.
+          3. Pilih m-Transfer, lalu pilih BCA Virtual Account.
+          4. Masukkan Nomor Virtual Account atau pilih dari Daftar Transfer.
+          5. Isi jumlah yang harus dibayarkan.
+          6. Masukkan pin m-BCA Anda.
+          7. Pembayaran sudah selesai. Simpan resinya sebagai bukti pembayaran Anda.
+
+          Pembayaran dengan Klik BCA :
+          1. Pilih menu Transfer.
+          2. Pilih Transfer ke BCA Virtual Account.
+          3. Masukkan nomor Virtual Account atau pilih dari daftar Transfer, lalu klik Berikutnya.
+          4. Jumlah yang harus dibayar, nomor rekening dan nama rekening tujuan akan ditampilkan di laman konfirmasi pembayaran. Jika semua informasinya sudah benar, klik Berikutnya.
+          5. Gunakan Token BCA Anda dan masukkan KEYBCA Response APPLI1, lalu klik OK.
+
+        bri_va_instruction: |
+          Yth. %{shop_name},
+
+          Selamat! Satu langkah lagi menuju aktivasi paket layanan Otoraja Biz %{plan} Anda.
+
+          Kami mau mengingatkan untuk mentransfer biaya berlangganan Anda sebesar Rp %{fee}.
+
+          Silakan lakukan pembayaran sesuai dengan petunjuk terlampir
+
+          Setelah melakukan pembayaran, harap lampirkan bukti transfer ke WA tim Otoraja dan email ke finance@otoraja.id
+
+          Selamat bergabung dan semoga sukses!
+
+          Salam,
+          Tim Finance Otoraja
+
+          # TATA CARA PEMBAYARAN BIAYA BERLANGGANAN OTORAJA BIZ
+
+          Pembayaran dengan BRImo :
+          1. Login ke aplikasi BRI Mobile, lalu pilih Mobile Banking BRI.
+          2. Pilih Pembayaran, lalu pilih BRIVA.
+          3. Masukkan Nomor BRIVA.
+          4. Jumlah yang harus dibayar, kode pembayaran, dan nama penerima akan muncul di laman konfirmasi pembayaran. Jika informasinya sudah benar, pilih Lanjutkan.
+          5. Masukkan PIN Mobile Banking BRI Anda, lalu pilih OK.
+
+          Pembayaran dengan ATM BRI :
+          1. Di menu utama, pilih Transaksi Lain.
+          2. Pilih Pembayaran.
+          3. Pilih Lainnya.
+          4. Pilih BRIVA.
+          5. Masukkan Nomor BRIVA dan tekan Benar.
+          6. Jumlah yang harus dibayar, kode pembayaran, dan nama penerima akan muncul di laman konfirmasi pembayaran. Jika informasinya sudah benar, tekan Ya.
+          7. Pembayaran selesai. Simpan bukti pembayaran Anda.
+
+          Pembayaran dengan IB BRI :
+          1. Login ke Internet Banking BRI.
+          2. Pilih Pembayaran & Pembelian.
+          3. Pilih sub menu BRIVA.
+          4. Masukkan Nomor BRIVA.
+          5. Jumlah yang harus dibayar, kode pembayaran, dan nama penerima akan muncul di laman konfirmasi pembayaran. Jika informasinya sudah benar, pilih Kirim.
+          6. Masukkan password dan mToken, lalu pilih Kirim.
+          7. Pembayaran selesai. Pilih Print untuk mendapatkan bukti pembayaran Anda.
+        
+        bni_va_instruction: |
+          Yth. %{shop_name},
+
+          Selamat! Satu langkah lagi menuju aktivasi paket layanan Otoraja Biz %{plan} Anda.
+
+          Kami mau mengingatkan untuk mentransfer biaya berlangganan Anda sebesar Rp %{fee}.
+
+          Silakan lakukan pembayaran sesuai dengan petunjuk terlampir
+
+          Setelah melakukan pembayaran, harap lampirkan bukti transfer ke WA tim Otoraja dan email ke finance@otoraja.id
+
+          Selamat bergabung dan semoga sukses!
+
+          Salam,
+          Tim Finance Otoraja
+
+          # TATA CARA PEMBAYARAN BIAYA BERLANGGANAN OTORAJA BIZ
+
+          Pembayaran dengan Mobile Banking :
+          1. Buka aplikasi BNI Mobile Banking dan login.
+          2. Pilih menu Transfer.
+          3. Pilih menu Tagihan Virtual Account.
+          4. Pilih rekening bank yang akan Anda gunakan.
+          5. Masukkan 16 digit nomor virtual account.
+          6. Informasi tagihan akan muncul di laman validasi pembayaran.
+          7. Jika semua informasi sudah benar, masukkan password Anda untuk melakukan pembayaran.
+          8. Transaksi Anda akan diproses.
+
+          Pembayaran dengan ATM BNI :
+          1. Dari menu utama, pilih Lainnya.
+          2. Pilih Transfer.
+          3. Pilih Rekening Simpanan.
+          4. Pilih ke Rekening BNI.
+          5. Masukkan nomor rekening pembayaran lalu tekan Ya.
+          6. Masukkan jumlah yang harus dibayarkan. Jika jumlah yang dimasukkan tidak sama dengan jumlah tagihan, transaksi akan ditolak.
+          7. Jumlah pembayaran, nomor rekening, dan nama rekening tujuan akan muncul di laman konfirmasi pembayaran. Jika semua informasinya sudah benar, tekan Ya.
+          8. Pembayaran selesai.
+
+          Pembayaran dengan Internet Banking :
+          1. Masuk ke https://ibank.bni.co.id dan klik Login.
+          2. Lanjutkan masuk menggunakan User ID dan Password Anda.
+          3. Klik Transfer, kemudian pilih Tambah Rekening Favorit, lalu klik Lanjutkan.
+          4. Masukkan nama rekening, nomor rekening, dan email, lalu klik Lanjutkan.
+          5. Masukkan Kode Otentikasi dari token Anda, lalu klik Lanjutkan.
+          6. Kembali ke menu utama dan pilih Transfer, lalu pilih Transfer Antar Rekening BNI.
+          7. Pilih rekening yang baru saja Anda daftarkan sebagai Rekening Tujuan, kemudian lengkapi form isiannya sebelum klik Lanjutkan.
+          8. Cek dan pastikan bahwa informasi yang Anda isikan sudah benar. Jika sudah, masukkan Kode Otentikasi dan klik Lanjutkan untuk menyelesaikan transaksi.
+
+        mandiri_bill_instruction: |
+          Yth. %{shop_name},
+
+          Selamat! Satu langkah lagi menuju aktivasi paket layanan Otoraja Biz %{plan} Anda.
+
+          Kami mau mengingatkan untuk mentransfer biaya berlangganan Anda sebesar Rp %{fee}.
+
+          Silakan lakukan pembayaran sesuai dengan petunjuk terlampir
+
+          Setelah melakukan pembayaran, harap lampirkan bukti transfer ke WA tim Otoraja dan email ke finance@otoraja.id
+
+          Selamat bergabung dan semoga sukses!
+
+          Salam,
+          Tim Finance Otoraja
+
+          # TATA CARA PEMBAYARAN BIAYA BERLANGGANAN OTORAJA BIZ
+
+          Pembayaran dengan Internet Banking  :
+          1. Masuk ke Mandiri Internet Banking (https://ibank.mandiri.co.id).
+          2. Dari menu utama, pilih Pembayaran, lalu pilih Multi Payment.
+          3. Pilih rekening Anda di kolom Dari Rekening, lalu di Nama Billing pilih Midtrans.
+          4. Masukkan Kode Pembayaran dan Anda akan menerima informasi detil pembayarannya.
+          5. Konfirmasi pembayaran Anda menggunakan Token Mandiri.
+
+          Pembayaran dengan ATM Mandiri  :
+          1. Dari menu utama, pilih Bayar / Beli.
+          2. Pilih Lainnya.
+          3. Pilih Multi Payment.
+          4. Masukkan 70012 (kode Midtrans), lalu tekan Benar.
+          5. Masukkan Kode Pembayaran lalu tekan Benar.
+          6. Detil pembayaran Anda akan ditampilkan di laman konfirmasi. Jika semua informasinya sudah benar, tekan Ya.
+
+        reminder_renewal_subscription: |
+          Yth. %{shop_name},
+
+          Anda memiliki tagihan pembayaran untuk berlangganan Otoraja Biz %{plan}. Mohon untuk melakukan transfer pembayaran sebesar Rp %{fee} agar segera lunas.
+
+          Pembayaran dapat Anda lakukan dengan cara transfer bank ke nomor rekening Virtual Account yang telah kami sediakan khusus bengkel Anda.
+
+          Nama Bank                 : PT. Bank Sinarmas TBK
+          Nomor Rekening        : %{bank_no}
+          Nama Akun                 : ONI QQ %{shop_name}
+
+          Silakan lakukan pembayaran sesuai dengan petunjuk terlampir,  meliputi pembayaran melalui:
+          1. ATM
+          2. M-Banking
+          3. OVO
+          4. GOPAY
+
+          "Saya sudah melakukan transfer pembayaran"
+          Jangan lupa untuk mengirimkan bukti transfernya kepada kami atau kepada representatif kami yang menangani Anda.
+
+          "Saya mengalami kendala dalam pembayaran"
+          Mohon hubungi representatif kami yang menangani Anda
+
+          Salam,
+          Tim Finance Otoraja
+        payment_received: |
+          Yth. %{shop_name},
+
+          Terima kasih atas pembayaran Anda. Status langganan Otoraja Biz %{plan} Anda sudah aktif.
+
+          Silahkan unduh tanda bukti lunas pembayaran Anda disini: 
+          %{link_invoice}
+          
+          Link bukti lunas di atas dapat diakses selama 30 hari ke depan. 
+          Jika terlewat, Anda tetap bisa mengaksesnya melalui menu Langganan di Menu Manajemen disini 
+          %{link_subscription}
+
+          Selamat menggunakan aplikasi Otoraja Biz dan semoga sukses!
+
+          Salam,
+          Tim Finance Otoraja
+        processing_complete: "Your Account is Ready"
+        cancelled: |
+          Yth. %{shop_name},
+
+          Status langganan Otoraja Biz %{plan} Anda telah dibatalkan.
+          
+          Untuk kembali menggunakan layanan Otoraja Biz, silakan menghubungi representatif kami yang menangani Anda.
+          
+          
+          Salam,
+          Tim Finance Otoraja
+        expired: |
+          Yth. %{shop_name},
+
+          Status langganan Otoraja Biz %{plan} Anda telah kadarluarsa.
+          
+          Untuk kembali menggunakan layanan Otoraja Biz, silakan menghubungi representatif kami yang menangani Anda.
+          
+          Salam,
+          Tim Finance Otoraja
+        days: "Days"
+        ops_payment_pending: |
+          Hello!
+
+          We have a PENDING PAYMENT for the following order.
+          
+          
+          - Order ID
+            %{id}
+          
+          - Application Date
+            %{date}
+          
+          - Bengkel Name
+            %{shop_name}
+          
+          - Package Name
+            %{plan}
+          
+          
+          Please follow up with the owner in order for the bengkel to make the payment.
+        payment_pending: |
+          Yth. %{shop_name},
+
+          Anda memiliki tagihan pembayaran untuk berlangganan Otoraja Biz %{plan}. Mohon untuk melakukan transfer pembayaran sebesar Rp %{fee} agar segera lunas.
+
+          Pembayaran dapat Anda lakukan dengan cara transfer bank ke nomor rekening Virtual Account yang telah kami sediakan khusus bengkel Anda.
+
+          Nama Bank           : PT. Bank Sinarmas TBK
+          Nomor Rekening  : %{bank_no}
+          Nama Akun           : ONI QQ %{shop_name}
+
+          Silakan lakukan pembayaran sesuai dengan petunjuk terlampir, meliputi pembayaran melalui:
+          1. ATM
+          2. M-Banking
+          3. OVO
+          4. GOPAY
+
+          "Saya sudah melakukan transfer pembayaran"
+          Jangan lupa untuk mengirimkan bukti transfernya kepada kami atau kepada representatif kami yang menangani Anda.
+
+          "Saya mengalami kendala dalam pembayaran"
+          Mohon hubungi representatif kami yang menangani Anda.
+
+          Salam,
+          Tim Finance Otoraja
+        

@@ -1,0 +1,7 @@
+<% content_for(:title, t('console.bike_model.add_model')) %>
+
+<div class="card">
+  <%= form_with(model: @bike_model, url: console_bike_models_path, local: true) do |form| %>
+  <%= render 'form', {bike_model: @bike_model, f: form} %>
+  <% end %>
+</div>

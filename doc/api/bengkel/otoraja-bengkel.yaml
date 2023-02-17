@@ -1,0 +1,274 @@
+openapi: "3.0.1"
+info:
+  title: "otoraja-bengkel #RAILS_ENV#"
+  version: "1.0"
+  description: "OTORAJA Bengkel API #RAILS_ENV#"
+servers:
+- url: "https://api.otoraja.id/{basePath}"
+  variables:
+    basePath:
+      default: "bengkel"
+paths:
+  /shop/list:
+    get:
+      parameters:
+        - name: "province_id"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  shops:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/Shop"
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/bengkel/shop/list"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /shop/province_list:
+    get:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  provinces:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/Province"
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/bengkel/shop/province_list"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        type: "http"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /shop/{bengkel_id}:
+    get:
+      parameters:
+      - name: "bengkel_id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  shop:
+                    $ref: "#/components/schemas/ShopDetail"
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/bengkel/shop/{bengkel_id}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.path.bengkel_id: "method.request.path.bengkel_id"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        cacheNamespace: "2rfo47"
+        cacheKeyParameters:
+        - "method.request.path.bengkel_id"
+        type: "http_proxy"
+    options:
+      parameters:
+      - name: "bengkel_id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+components:
+  schemas:
+    Empty:
+      title: "Empty Schema"
+      type: "object"
+    Province:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        name:
+          type: "string"
+    Shop:
+      type: "object"
+      properties:
+        bengkel_id:
+          type: "string"
+        name:
+          type: "string"
+        tel:
+          type: "string"
+        address:
+          type: "string"
+        longitude:
+          type: "number"
+          format: "float"
+        latitude:
+          type: "number"
+          format: "float"
+    ShopDetail:
+      allOf:
+        - $ref: "#/components/schemas/Shop"
+      properties:
+        shop_business_hours:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ShopBusinessHour"
+    ShopBusinessHour:
+      type: "object"
+      properties:
+        day_of_week:
+          type: "string"
+          enum: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+        is_holiday:
+          type: "boolean"
+        open_time:
+          type: "string"
+          example: "9:00"
+        close_time:
+          type: "string"
+          example: "20:00"
+  securitySchemes:
+    api_key:
+      type: "apiKey"
+      name: "x-api-key"
+      in: "header"

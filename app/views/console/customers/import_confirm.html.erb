@@ -1,0 +1,8 @@
+<% content_for(:title, 'Customer Import') %>
+
+<%= form_with model: @customer_collection, url: console_customers_import_execution_path, multipart: true, local: true do |form| %>
+  <div class="card content-datatable">
+    <%= render 'form_import', {f: form} %>
+  </div>
+<% end %>
+

@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-center">
+  <div class="mx-3 mb-5">
+    <div class="login-logo mt-3">
+      <h1><%= image_tag  "logo.svg", width: '200' %></h1>
+    </div>
+    <div class="card px-3 px-md-5 pb-5">
+      <div class="card-body">
+        <h1 class="text-page-title mb-4"><%= t 'register.thank_you.thank_you' %></h1>
+        <p class="text-normal"><%= t 'register.thank_you.header_html' %></p>
+        <p class="text-normal"><%= t 'register.thank_you.sub_header' %></p>
+        <a href="https://play.google.com/store/apps/details?id=id.co.otoraja.otoraja_biz_front_app&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"  target="_blank">
+          <%= image_tag 'https://play.google.com/intl/en_us/badges/static/images/badges/id_badge_web_generic.png', height: '100', class: 'img-responsive', alt: 'Temukan di Google Play' %>
+        </a>
+        <p class="text-label"><%= t 'register.thank_you.help_html' %></p>
+      </div>
+      <div class="card-footer bg-white">
+        <%= link_to new_user_session_path, class: 'btn button-active btn-lg px-5' do %>
+          <span class="text-normal text-white">Login</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%# adding event if any data hash uuid present %>
+<% if flash[:info] == 'success' && flash[:hash].present? %>
+  <% google_id =  Rails.env.production? ? 'G-VMG85DV3BN' : 'G-NL4PHFQFQX' %>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= google_id %>"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '<%= google_id %>', {'page_title': 'Biz OTORAJA - Register Thank You'});
+    gtag('event', 'registration_success_page', { 'x-application': 'SMC', 'register': 'ERP-R', 'uuid': '<%= flash[:hash] %>' });
+  </script>
+<% end %>

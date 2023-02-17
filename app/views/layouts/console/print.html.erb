@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Biz OTORAJA</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= stylesheet_link_tag    'admin', media: 'all' %>
+  <%= javascript_include_tag 'admin' %>
+  <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <script>
+    window.print();
+  </script>
+</head>
+
+<body id="<%= sprintf("%s_%s",controller_name,action_name) %>" class="sidebar-mini" data-controller="<%= controller_name %>" data-action="<%= action_name %>">
+  <div class="row p-2">
+    <div class="col-12">
+      <h1><%= yield :title %></h1>
+      <%= yield %>
+    </div>
+  </div>
+</body>
+
+</html>

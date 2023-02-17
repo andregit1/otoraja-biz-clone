@@ -1,0 +1,124 @@
+<% content_for(:title, t('admin.customer.cuntomer_basic')) %>
+<%= render 'nav' %>
+<div class="card">
+  <div class="d-flex text-normal card-header color-text-table-header">
+    <%= t 'admin.customer.basic_information' %>
+    <div class="d-flex justify-content-end w-100">
+      <%= link_to admin_customer_edit_basic_info_path(@customer), :class => 'btn btn-primary' do %>
+        <i class="fas fa-edit"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tbody class="text-label">
+          <tr>
+            <th class="w-25"><%= t 'admin.common.customer_id' %></th>
+            <td class="w-100"><%= @customer.id %></td>
+          </tr>
+          <tr>
+            <th><%= t 'admin.common.name' %></th>
+            <td><%= @customer.name %></td>
+          </tr>
+          <tr>
+            <th><%= t 'admin.common.tel' %></th>
+            <td><%= formatedPhoneNumber(@customer.tel) %></td>
+          </tr>
+           <% if @customer.tmp_tel.present? %>
+           <tr id="tmp_tel">
+            <th><%= t 'admin.common.tel_baru' %></th>
+            <td class="d-flex px-0 py-3">
+              <div class="row w-100">
+                <div class="col-xl-3 col-lg-5 col-md-10 col-sm-12 ml-4">
+                  <input id="id" type="hidden" value="<%=@customer.id%>">
+                  <%= formatedPhoneNumber(@customer.tmp_tel)%>
+                  <%=link_to tag.i(nil, class: "fa fa-trash ml-3"), admin_customer_remove_temp_tel_path, id: "remove_tmp_tel" %>
+                </div>
+
+                <div class="col-xl-8 col-lg-6 col-md-3 col-sm-12 ml-sm-4 mt-xs-3">
+                  <% if @customer.token_locked_at.blank?%>
+                  <div class="request_token">
+                    <a href="<%=admin_customer_request_token_path%>" id="request_token">
+                      Kirim Verifikasi (<span id="token_request_count"><%=@customer.token_request_count%></span>/<span><%=@max_token_request%></span>)
+                      <i class="fa fa-spinner fa-spin ml-3 d-none"></i>
+                    </a>
+                    <span id="countdown" class="text-blue"></span>
+                  </div>
+                  <% end%>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr id="max_request_alert" class="<%=@customer.token_locked_at && (DateTime.now.in_time_zone('Jakarta') - @customer.token_locked_at) < @locked_time ? "":"d-none"%>">
+            <td colspan=2>
+              <div class="alert alert-danger mt-3" role="alert">
+                <span class="d-none" id= "locked_time"></span>
+                <span class="w-50" id= "alert_message">
+                  <% if @customer.token_locked_at && (DateTime.now.in_time_zone('Jakarta') - @customer.token_locked_at) < @locked_time %>
+                    <%=tag.span t('admin.customer.request_token_locked_message', locked_time: (@customer.token_locked_at.in_time_zone("Jakarta") + @locked_time).strftime("%H:%M"))%> 
+                  <% end%>
+                </span>
+              </div>
+            </td>
+          </tr>
+          <% end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="text-normal card-header color-text-table-header"><%= t 'admin.customer.owned_bikes' %></div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="text-label">
+          <tr>
+            <th><%= t 'admin.common.maker' %></th>
+            <th><%= t 'admin.common.model' %></th>
+            <th><%= t 'admin.common.number' %></th>
+            <th><%= t 'admin.customer.expilation_date' %></th>
+            <th><%= t 'admin.customer.odometer' %></th>
+          </tr>
+        </thead>
+        <tbody class="text-label">
+          <% @customer.owned_bikes.each do |bike| %>
+            <tr>
+              <td><%= bike.maker unless bike.maker.nil? %></td>
+              <td><%= bike.model unless bike.model.nil? %></td>
+              <td><%= bike.formated_number_plate%></td>
+              <td><%= formatedExpirationDate(bike) %></td>
+              <td><%= formatedDecimalPoint(bike.odometer) if bike.odometer.present? %></td>
+              <td>
+                <%= link_to admin_bike_edit_path(bike),:class => "btn btn-primary" do %>
+                  <i class="fas fa-edit"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<% if current_user.admin_roles? && @customer.terms_agreed_at.present? %>
+  <div class="card card-secondary">
+    <div class="text-normal card-header">
+      <span><%= t 'admin.common.config' %></span>
+      <%= link_to admin_customer_edit_path, class: 'nav-link float-right p-0' do%>
+        <i class="fa fa-cog"></i>
+      <% end %>
+    </div>
+    <div class="card-body p-0">
+      <table class="text-label table">
+        <tbody>
+          <tr>
+            <th><%= t 'admin.customer.send_dm' %></th>
+            <td><%= @customer.send_dm %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,10 @@
+en:
+  member:
+    token:
+      sms_body: "This is the URL for changing phone numbers. Please change in 24 hours. "
+      change_mail:
+        mail_subject: "Notice of mail address change"
+        mail_body: "Accessing the URL will direct you to a display where you can update your email. This URL is valid for 24 hours. Please do not respond to this email. "
+      change_tel:
+        mail_subject: "Notification of phone number change procedure"
+        mail_body: "Accessing the URL will direct you to a display where you can change your phone number. This URL is valid for 24 hours. Please do not respond to this email. "

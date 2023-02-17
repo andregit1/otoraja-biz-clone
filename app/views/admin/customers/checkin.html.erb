@@ -1,0 +1,74 @@
+
+<% content_for(:title, t('admin.customer.maintenance_log')) %>
+<div class="card card-secondary">
+  <div class="text-normal card-header"><%= t 'admin.customer.registration_information' %></div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table text-label">
+        <tr>
+          <th style="width:20%"><%= t 'admin.customer.registration_number' %></th>
+          <td><%= formatedNumberPlate(@maintenance_log) %></td>
+        </tr>
+        <tr>
+          <th><%= t 'admin.customer.expilation_date' %></th>
+          <td><%= formatedExpirationDate(@maintenance_log) %></td>
+        </tr>
+        <tr>
+          <th><%= t 'admin.customer.odometer' %></th>
+          <td><%= formatedDecimalPoint(@maintenance_log.odometer) if @maintenance_log.odometer.present? %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="card card-secondary">
+  <div class="text-normal card-header"><%= t 'admin.customer.vehicle_information' %></div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table text-label">
+        <tr>
+          <th style="width:20%"><%= t 'admin.common.maker' %></th>
+          <td><%= @maintenance_log.maker %></td>
+        </tr>
+        <tr>
+          <th><%= t 'admin.common.model' %></th>
+          <td><%= @maintenance_log.model %></td>
+        </tr>
+        <tr>
+          <th><%= t 'admin.common.color' %></th>
+          <td><%= @maintenance_log.color %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="card card-secondary">
+  <div class="text-normal card-header"><%= t 'admin.common.order' %></div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="maintenance_log_details-box table text-label">
+        <thead>
+          <th><%= t 'admin.customer.product_service' %></th>
+          <th class="text-center"><%= t 'admin.common.quantity' %></th>
+          <th class="text-center text-nowrap"><%= t 'admin.customer.subtotal' %> (Rp.)</th>
+        </thead>
+        <tbody>
+        <% @maintenance_log.maintenance_log_details.each do |detail| %>
+          <tr class="nested-fields">
+            <td>
+              <%= detail.name %>
+            </td>
+            <td class="text-center"><%= detail.quantity.to_i || 0 %></td>
+            <td class="text-center"><%= "#{detail.subtotal.to_i.to_s(:delimited, delimiter: '.')}" unless detail.subtotal.nil? %></td>
+          </tr>
+        <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4" class="text-right mt-auto"><%= t 'admin.common.total' %>： Rp. <%= @maintenance_log.total_price.to_i.to_s(:delimited, delimiter: '.') %></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

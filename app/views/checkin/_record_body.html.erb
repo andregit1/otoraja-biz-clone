@@ -1,0 +1,44 @@
+  <div class="row">
+    <div class="col-4 font-weight-bold -text-18">
+      <%= formatedNumberPlate(checkin.maintenance_log) %>
+    </div>
+    <div class="col-3 -text-18">
+      <%= checkin&.maintenance_log&.name %>
+    </div>
+    <div class="col-4 text-right -text-red">
+    <% unless checkin&.maintenance_log&.adjustment.nil? %>
+      Rp.<%= formatedDecimalPoint(checkin&.maintenance_log&.total_price + checkin&.maintenance_log&.adjustment) %>
+    <% else %>
+      Rp.<%= formatedDecimalPoint(checkin&.maintenance_log&.total_price) %>
+    <% end %>
+    </div>
+    <div class="col float-right">
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <%= formatedPhoneNumber(checkin&.customer&.tel, false) %>
+    </div>
+    <div class="col-8">
+      <%= formatedBikeInfo(checkin.maintenance_log) unless checkin.maintenance_log.nil? %>
+    </div>
+  </div>
+  <div class="row -text-14">
+    <div class="col-7 pr-0">
+      <span class="text-checkin-gray"><%= formatedCheckinDateTime(checkin.datetime, 'Jakarta') %></span>
+      <span class="px-1">-</span>
+      <% if checkin.checkout_datetime.nil? %>
+      <span class="-text-red">
+        <i class="icon icon-Attention-circle"></i> <%= t 'slip_list.unchecked_out' %>
+      </span>
+      <% else %>
+      <span class="text-checkin-gray">
+        <%= formatedCheckinDateTime(checkin.checkout_datetime, 'Jakarta') %>
+      </span>
+      <% end %>
+    </div>
+    <div class="col-5 text-right pl-0">
+      <%= checkin.checkin_no %>
+    </div>
+  </div>

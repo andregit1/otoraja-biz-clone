@@ -1,0 +1,46 @@
+<div class="modal fade" id="modalCheckout" tabindex="-1" role="dialog" aria-labelledby="modalCheckoutLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="modalCheckoutLabel">Konfirmasikan penyelesaian</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <p class="h4 text-dark">Apakah Anda ingin Selesai?</p>
+          </div>
+        </div>
+        <%= hidden_field_tag :send_sms, nil, {value: false, id: 'send_sms_hidden'} %>
+        <%# if @maintenance_log.checkin.is_sendable_receipt_sms %>
+        <div class="row">
+          <div class="col">
+            <%= check_box_tag :send_sms, true, false, {:class => 'form-input', :checked => 'checked'} %>
+            <%= label_tag :send_sms, t('send_sms') %>
+          </div>
+        </div>
+        <%# end %>
+        <div class="row">
+          <div class="col">
+            <p class="h4 text-dark">Tolong beri tahu saya cara membayar.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="btn-group btn-group-toggle nested-fields btn-group-payment_method" data-toggle="buttons">
+            <%# @maintenance_log.available_payment_methods.each do |payment_method| %>
+              <label class="btn btn-outline-secondary"><%#= radio_button_tag :payment_method_id, payment_method.id %><%#= payment_method.name %></label>
+            <%# end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Membatalkan</button>
+        <%= button_tag :type => "submit", :class =>"btn btn-primary btn-submit", :value => "charge" do %><%= t 'charge' %> Rp. <strong id="charge_dialog"></strong><% end %>
+      </div>
+    </div>
+  </div>
+</div>

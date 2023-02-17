@@ -1,0 +1,120 @@
+<!-- Drawer Modal -->
+<div id="findProductModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#findProductModal"></div>
+  <div class="modal_content -drawer">
+    <div class="modal-header mt-2 ml-2">
+      <div class="modal-title col-12 p-0 product_edit_modal_title">
+        <h3 class="text-large text-uppercase">
+          <% if @is_invoice %>
+          <%= t 'admin.shop_product.add_new_product_invoice' %>
+          <% end %>
+          <% if @is_inventory %>
+          <%= t 'admin.shop_product.add_new_product_stock_opname' %>
+          <% end %>
+        </h3>
+      </div>
+    </div>
+    <div class="modal-body px-0">
+      <div class="list-view-wrapper">
+        <section id="list-search-section">
+          <div class="px-4">
+            <input type="hidden" id="shop_product_search_current_page" value="1">
+            <input type="hidden" id="shop_product_search_no_more_result" value="true">
+            <div class="form-group d-flex justify-content-between">
+              <div class="w-50 mr-2">
+                <label class="text-label font-weight-bold"><%= t('admin.common.category')%></label>
+                <div>
+                  <%= select_tag 'select_category', options_from_collection_for_select(ProductCategory.all.order(id: :asc), :id, :name), prompt: 'All Category',class: 'form-control form-control-sm' %>
+                </div>
+              </div>
+              <div class="w-25 mx-2">
+                <label class="text-label font-weight-bold"><%= t('admin.shop_product.is_use') %></label>
+                <div>
+                  <%= select_tag 'select_use', options_for_select(ShopProduct.uses_i18n.invert), prompt: 'All', class: 'form-control form-control-sm' %>
+                </div>
+              </div>
+              <div class="w-25 ml-2">
+                <label class="text-label font-weight-bold"><%= t('admin.shop_product.sort') %></label>
+                <div>
+                  <%= select_tag 'select_sort', options_for_select(ShopProduct.sorts_i18n.invert), class: 'form-control form-control-sm' %>
+                </div>
+              </div>
+            </div>
+            <div class="form-group search-field">
+              <%= text_field_tag 'shop-product-search', '', class:'form-control w-100', autocomplete: 'off', placeholder: t('admin.common.keyword')  %>
+              <i id="shop-product-search-clear-btn" class="icon icon-Cross search-with-clear clear"></i>
+              <i id="shop-product-search-btn" class="icon icon-Search search-with-clear"></i>
+            </div>
+          </div>
+          <div id="product-list-header">
+            <div class="d-flex justify-content-between align-items-center color-text-table-header px-4 py-3">
+             <p class="text-label font-weight-bold m-0">Daftar Produk</p>
+              <div id="select-all-products" class="text-normal mr-4 pr-2">
+                <i id="check-box-icon" class="far fa-square"></i>
+              </div> 
+            </div>
+          </div>
+        </section>
+        <section id="list-search-body-section">
+          <div class="products-box-admin px-4">
+            <div class="scroll-area">
+              <ul id="product_list" class="list">
+                <%# inject items here %>
+              </ul>
+              <div class="no_search_result hide">
+                <p><%= t "select_product.no_search_result" %></p>
+              </div>
+              <div class="text-small text-muted text-center end_of_list pt-2 hide">
+                <p class="m-0"><%= t "admin.common.end_of_list" %></p>
+              </div>
+            </div>
+            <div class="loading p-2 hide">
+              <div class="text-center">
+                <i class="fas fa-spinner fa-spin"></i>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="admin-control-footer row">
+      <div class="col-6">
+        <%= button_tag :type => "button", id: "cancel-add-product-button", class: "btn-base text-large -thin -normal js-modal-close", data: {"target" => "#findProductModal"} do %>
+        <%= t 'cancel' %>
+        <% end %>
+      </div>
+      <div class="col-6">
+        <%= button_tag :type => "button", id: "confirm-add-products-button", class: "btn-base text-large -thin -primary js-modal-close", data: {"target" => "#findProductModal"}, disabled: true do %>
+        <%= t 'admin.shop_product.save' %>
+        <% end %>
+      </div>
+    </div>
+    <%= render "admin/shop_purchases/modal_select_add_products" %>
+  </div>
+</div>
+<!-- Drawer Modal -->
+<div id="add-product-item-clone" class="hide">
+  <li class="row list-item">
+    <input type="hidden" name="shop_product_id" class="shop__product__id">
+    <div class="item col-10">
+      <div class="item__title">
+        <p class="item__name text-normal font-weight-bold">
+        </p>
+      </div>
+      <div class="d-flex justify-content-around align-items-center">
+        <p class="text-small item__price mb-0 ml-5 text-dark"></p>
+        <p class="text-small item__attribute mb-0 ml-4"><%= t 'admin.shop_product.stock_min' %></p>
+        <p class="text-small mr-4 mb-0">
+          <span class="text-small item__current__quantity mb-0"></span>
+          <span class="text-small mb-0">/</span>
+          <span class="text-small item__min__quantity mb-0"></span>
+        </p>
+      </div>
+    </div>
+    <div class="col-2 d-flex align-items-right justify-content-end">
+      <button name="button" type="button" class="btn item__add">
+        <i class="p-3 color-graph-gray text-light rounded-circle btn-add fas fa-plus"></i>
+      </button>
+    </div>
+  </li>
+</div>

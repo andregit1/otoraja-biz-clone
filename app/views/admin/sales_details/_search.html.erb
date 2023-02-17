@@ -1,0 +1,26 @@
+<div class="card card-widget">
+  <div class="card-header" data-card-widget="collapse">
+    <h3 class="card-title">
+      <i class="fas fa-chevron-down"></i>
+      <i class="fas fa-chevron-up"></i>
+      <%= t 'admin.sales_details.display_conditions' %>
+    </h3>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label class="text-label"><%= t 'admin.sales_details.display_period' %></label>
+        <button type="button" class="pull-down-btn unavailable-btn form-control text-left text-normal" id="daterange-btn">
+          <div>
+            <i class="far fa-calendar-alt mr-1"></i>
+            <span>
+              <%= t 'admin.dashboard.today' %>
+            </span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- /.card-body -->
+</div>

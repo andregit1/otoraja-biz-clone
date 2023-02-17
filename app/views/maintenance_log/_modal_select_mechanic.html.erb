@@ -1,0 +1,27 @@
+<!-- Select Mechanic Modal -->
+<div id="selectMechanicModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#selectMechanicModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-swipe-bar js-modal-close" data-target="#chargeModal"></div>
+    
+    <div class="modal-body">
+      <p><%= t 'slip.select_staff' %></p>
+      <div class="mb-5">
+        <% @mechanics.each do |mechanic| %>
+        <span class="badge badge-pill badge-grey">
+          <span class="mechanic_name">
+            <%= mechanic.name %></span>
+          </span>
+        <% end %>
+      </div>
+
+      <div class="pl-5 pr-5">
+        <%= button_tag :type => "button", class: "btn-base -basic -primary js-modal-close", data: {"target" => "#selectMechanicModal"} do %>
+          <%= t 'ok' %>
+        <% end %>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- Select Mechanic Modal -->

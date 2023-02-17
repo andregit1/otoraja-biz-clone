@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      facility: 'Facility'
+    attributes:
+      facility:
+        id: "ID"
+        name: "Facility Name"
+

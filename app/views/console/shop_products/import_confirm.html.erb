@@ -1,0 +1,13 @@
+<% content_for(:title, 'Shop Product Import') %>
+
+<%= form_with model: @shop_product_collection, url: console_shop_products_import_execution_path, multipart: true, local: true, id: :execute_import do |form| %>
+  <div class="card content-datatable">
+    <%= render 'form_import', {f: form} %>
+  </div>
+<% end %>
+
+<% if @shop_products_with_error.present? %>
+  <div class="card content-datatable">
+    <%= render 'form_import_with_error' %>
+  </div>
+<% end %>

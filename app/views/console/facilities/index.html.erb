@@ -1,0 +1,33 @@
+<% content_for(:title, t('console.facility.index.title')) %>
+
+
+<div class="mb-3 text-right">
+  <%= link_to new_console_facility_path,:class => 'btn btn-success mb-0' do %>
+    <i class="fas fa-plus"></i> <%= t 'console.facility.button.add' %>
+  <% end %>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= Facility.human_attribute_name(:name) %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @facilities.each do |facility| %>
+        <tr>
+          <td><%= facility.name %></td>
+          <td class="text-right">
+            <%= link_to edit_console_facility_path(facility), :class => 'btn btn-primary' do %>
+              <i class="fas fa-edit"></i> <%= t 'console.facility.button.edit' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

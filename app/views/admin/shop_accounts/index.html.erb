@@ -1,0 +1,89 @@
+<h2><%= t 'admin.subscription.current_plan' %></h2>
+<div class="card">
+  <div class="card-body list p-4">
+    <% unless @active_subscription.nil? %>
+      <%= form_with(model: @subscription, url: admin_subscriptions_path, local: true) do |form| %>
+        <%= form.hidden_field :plan, :value=>@active_subscription.id %>
+        <ul>
+          <li>
+            <label><%= t 'admin.subscription.plan' %></label>
+            <p><%= Subscription.plans_i18n[@active_subscription.plan] %><p>
+          </li>
+          <li>
+            <label><%= t 'admin.subscription.status' %></label>
+            <p><%= Subscription.statuses_i18n[@active_subscription.status] %><p>
+          </li>
+          <li>
+            <label><%= t 'admin.subscription.period' %></label>
+            <p><%= Subscription.periods_i18n[@active_subscription.period] %><p>
+          </li>
+          <li>
+            <label><%= t 'admin.subscription.fee' %></label>
+            <p>Rp. <%= formatedRupiah(@active_subscription.fee) %><p>
+          </li>
+          <li>
+            <label><%= t 'admin.subscription.expires_in' %></label>
+            <p><%= @days_remaining %> Days&nbsp;
+              <% if @show_notice %>
+                <%= link_to "Renew Now", admin_subscriptions_path, :class => 'btn btn-primary' %>
+              <% end %>
+            <p> 
+          </li>
+        </ul>
+        <div>
+          <% if @active_subscription.processing? || @active_subscription.creating_bank_account? %>
+            <%= link_to "Cancel", admin_subscription_path(@active_subscription), :method => :delete, :class => 'btn btn-danger' %>
+          <% end %>
+          <% if @active_subscription.finalized? %>
+            <%= link_to admin_subscriptions_show_path(@active_subscription),:class => "btn btn-primary" do %>
+              <i class="fas fa-receipt"></i></a>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <p><%= t 'admin.subscription.no_active_msg' %></p>
+      <%= link_to "Start your subscription now", admin_subscriptions_path, :class => 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+<h2><%= t 'admin.subscription.expired_plans' %></h2>
+<div class="card">
+  <div class="card-body list p-4">
+    <% unless @expired_subscriptions.empty? %>
+      <div class="d-flex justify-content-center"><%= paginate @expired_subscriptions %></div>
+      <div class="table-responsive">
+        <table class="table table-hover table-sticky">
+          <thead>
+            <tr>
+              <th><%= t 'console.subscription.plan' %></th>
+              <th><%= t 'console.subscription.status' %></th>
+              <th><%= t 'console.subscription.period' %></th>
+              <th><%= t 'console.subscription.fee' %> (Rp.)</th>
+              <th><%= t 'console.subscription.exp_date' %></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @expired_subscriptions.each do | subscription | %>
+            <tr>
+              <td><%= Subscription.plans_i18n[subscription.plan] %></td>
+              <td><%= Subscription.statuses_i18n[subscription.status] %></td>
+              <td><%= Subscription.periods_i18n[subscription.period] %></td>
+              <td><%= formatedRupiah(subscription.fee) %></td>
+              <td><%= subscription.end_date.strftime("%Y-%m-%d")%></td>
+              <td>
+                <%= link_to admin_subscriptions_show_path(subscription),:class => "btn btn-primary" do %>
+                  <i class="fas fa-receipt"></i></a>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p><%= t 'admin.subscription.no_expired_msg' %></p>
+    <% end %>
+  </div>
+</div>

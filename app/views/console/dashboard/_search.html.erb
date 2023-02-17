@@ -1,0 +1,30 @@
+<div class="card card-widget">
+  <div class="card-header" data-card-widget="collapse">
+    <h3 class="card-title">
+      <i class="fas fa-chevron-down"></i>
+      <i class="fas fa-chevron-up"></i>
+      <%= t 'console.dashboard.display_conditions' %>
+    </h3>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <div class="d-flex">
+      <div class="form-group mr-3 w-25">
+        <label><%= t 'common.shop' %></label>
+        <div>
+          <%= collection_select :dashboard_shop, :id, current_user.managed_shops, :id, :name, {prompt: false}, class: 'form-control form-control-sm' %>
+        </div>
+      </div>
+      <div>
+        <label><%= t 'console.dashboard.display_period' %></label>
+        <button type="button" class="pull-down-btn unavailable-btn d-block" id="daterange-btn">
+          <i class="far fa-calendar-alt mr-1"></i>
+          <span>
+            Today
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- /.card-body -->
+</div>

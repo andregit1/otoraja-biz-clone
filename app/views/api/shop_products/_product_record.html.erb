@@ -1,0 +1,96 @@
+<% if product.has_inclusion_product? %>
+<li
+  class="product-list-item shop-product-<%= product.id %>"
+  data-id="<%= product.id %>"
+  data-product-no="<%= product.display_product_no %>"
+  data-product-name="<%= product.product_name %>"
+  data-product-category-name="<%= product.product_category.name %>"
+  data-stock="<%= product.stock_quantity || '--' %>"
+  data-sales-unit-price="<%= product.sales_unit_price || 0 %>"
+  >
+  <div class="product">
+    <div class="d-flex justify-content-between">
+      <div class="product__title">
+        <p class="product__name">
+          <%= product.product_name %>
+          <%= sprintf('[%s]',product.display_product_no) if product.display_product_no.present? %>
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="row">
+        <div class="col-6 product__title">
+        </div>
+        <div class="col-2 text-right">
+          <p class="product__attribute">quantity</p>
+        </div>
+        <div class="col-2 text-right">
+          <p class="product__attribute">stock</p>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+      <% product.packaging_product_relations_packaging.each do |inclusion_product| %>
+      <div class="row inclusion_product"
+        data-id="<%= inclusion_product.inclusion_product.id %>"
+        data-product-no="<%= inclusion_product.inclusion_product.display_product_no %>"
+        data-item-name="<%= inclusion_product.inclusion_product.shop_alias_name %>"
+        data-category-name="<%= inclusion_product.inclusion_product.product_category.name %>"
+        data-item-detail="<%= inclusion_product.inclusion_product.item_detail %>"
+        data-quantity="<%= inclusion_product.quantity %>"
+      >
+        <div class="col-6 product__title">
+          <p class="product__inclusion-product-name pl-4">
+            <%= inclusion_product.inclusion_product.product_name %>
+            <%= sprintf('[%s]',inclusion_product.inclusion_product.display_product_no) if inclusion_product.inclusion_product.display_product_no.present? %>
+          </p>
+        </div>
+        <div class="col-2 text-right">
+          <p class="product__inclusion-product-quantity"><%= 'x ' unless inclusion_product.quantity.nil? %><%= inclusion_product.quantity || '--' %></p>
+        </div>
+        <div class="col-2 text-right">
+          <p class="product__inclusion-product-quantity"><%= inclusion_product.inclusion_product&.stock&.quantity || '--' %></p>
+        </div>
+        <div class="col-2">
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <div class="d-flex justify-content-end align-items-end">
+      <div class="ml-4 text-right">
+        <p class="product__attribute mb-0">Price</p>
+        <p class="mb-0"><span class="product__price"><%= formatedRupiah(product.sales_unit_price.to_i) || '--' %></span></p>
+      </div>
+      <div class="ml-5">
+        <a href="#" class="btn btn-add_product">Add</a>
+      </div>
+    </div>
+  </div>
+</li>
+<% else %>
+<li class="product-list-item shop-product-<%= product.id %>" data-id="<%= product.id %>" data-product-no="<%= product.display_product_no %>" data-product-name="<%= product.product_name %>" data-product-category-name="<%= product.product_category.name %>" data-stock="<%= product.stock_quantity || '--' %>" data-sales-unit-price="<%= product.sales_unit_price || 0 %>">
+  <div class="product">
+    <div class="d-flex justify-content-between">
+      <div class="product__title">
+        <p class="product__name">
+          <%= product.product_name %>
+          <%= sprintf('[%s]',product.display_product_no) if product.display_product_no.present? %>
+        </p>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end align-items-end">
+      <div class="text-right ">
+        <p class="product__attribute mb-0">Stock</p>
+        <p class="mb-0"><span class="stock_quantity"><%= product.stock_quantity || '--' %></span></p>
+      </div>
+      <div class="ml-4 text-right">
+        <p class="product__attribute mb-0">Price</p>
+        <p class="mb-0"><span class="product__price"><%= formatedRupiah(product.sales_unit_price.to_i) || '--' %></span></p>
+      </div>
+      <div class="ml-5">
+        <a href="#" class="btn btn-add_product">Add</a>
+      </div>
+    </div>
+  </div>
+</li>
+<% end %>

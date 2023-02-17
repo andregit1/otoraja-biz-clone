@@ -1,0 +1,7 @@
+<% content_for(:title, 'Edit Product Category') %>
+
+<div class="card">
+  <%= form_with(model: @product_category, url: admin_product_category_path, local: true) do |form| %>
+  <%= render 'form', {product_category: @product_category, f: form} %>
+  <% end %>
+</div>

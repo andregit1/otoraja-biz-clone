@@ -1,0 +1,13 @@
+en:
+  message:
+    body:
+      sms_purchase_reminder: |
+          Beep beep! It's time to check your motorcycle %{category_name}.
+          Let's go back to %{shop}.
+
+    
+          Message sent by OTORAJA
+      sms_customer_reminder: |
+          Your motor already feels heavy? It's time for service at %{shop} so that the motor will run again...
+
+          Message sent by OTORAJA

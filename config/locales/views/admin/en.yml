@@ -1,0 +1,1192 @@
+en:
+  admin:
+    admin_product:
+      created_date: "Created date"
+      deselect_all: "Deselect All"
+      import: "Import"
+      imported: "Imported"
+      insert_to: "Insert to"
+      brand: "Brand"
+      variant: "Variant"
+      tech_spec: "Tech Spec"
+      designated_motorcycle: "Designated Motorcycle (need to discuss)"
+    bike:
+      color: "Color"
+      expiration: "Expiration"
+      number: "Number"
+      owner: "Owner"
+      maker: "Maker"
+      model: "Model"
+      number_plat: "Number Plat"
+      month: "Month"
+      year: "Year"
+      number_plat_alert_html: "Number plat <span class='text-danger'>%{vehicle_number}</span> already saved"
+      confirmation: "Do you want to record as a new vehicle?"
+      bike: "Motorcycle"
+      odometer: "Odometer"
+      km: "km"
+    common:
+      are_you_sure: "Are you sure?"
+      address: "Address"
+      address_tel: 'Address & Telephone'
+      admin_product: "AdminProduct"
+      available_name: "Available Shop"
+      active_until: 'Active until'
+      back: "Back"
+      category: "Category"
+      checkin_date: "Checkin Date"
+      enter: "Enter"
+      close: "Close"
+      comment: "Comment"
+      config: "Config"
+      customer_id: "Customer ID"
+      date_abbreviated: 'Tgl.'
+      edit: "Edit"
+      export_patterns: "Export Patterns"
+      filter: "Filter"
+      item_detail: "ItemDetail"
+      keyword: "Keyword"
+      maker: "Maker"
+      mechanic: "Mechanic"
+      model: "Model"
+      name: "Name"
+      new: "New"
+      no_review: "No review"
+      number: "No."
+      order: "Order"
+      proof: 'Proof'
+      quantity: "Quantity"
+      rate: "Rate"
+      receipt: "Receipt"
+      regist: "Regist"
+      remind_interval_day: "RemindIntervalDay"
+      shop: "Shop"
+      shop_name: 'Name Shop'
+      workshop: 'Shop'
+      shop_alias_name: "ShopAliasName"
+      workshop: 'Workshop'
+      workshop_list: 'Shop List'
+      show: "Show"
+      staff: "Staff"
+      stock: "Stock"
+      min: 'min'
+      stock_minimum: "StockMinimum"
+      tel: "Tel"
+      total: "TOTAL"
+      update: "Update"
+      sort: "Sort"
+      search: "Search"
+      color: "Color"
+      detail: "Detail"
+      date: "Tanggal"
+      date_abbreviated: 'Tgl.'
+      payment_date: 'Payment Date'
+      description: "Deskripsi"
+      total_money: "Total (USD.)"
+      action: "Action"
+      request_date: "Request date"
+      terms_condition: "Terms & Condition"
+      download: "Download"
+      proof: 'proof'
+      name_of_product: 'Name of Product'
+      yes_label: "Yes"
+      no_label: "No"
+      period: "Period"
+      show_also: "Show also"
+      end_of_list: "End of list"
+      days: "days"
+      tel_baru: "New Phone Number"
+      network_problem: 'Network problem occurs'
+      try_again: 'Try again'
+    transaction:
+      title: "Transaction"
+      all: "All"
+      processed: "Processed"
+      done: "Finish"
+      void: "Void"
+      void_uppercase: "VOID"
+      data_title: "Data Transaction"
+      customer: "Customer"
+      no_trx: "No. Trx"
+      start: "Start"
+      total: "Total (Rp)"
+      status: "Status: "
+      plate_number: "Police Number"
+      maker: "Maker"
+      model_color: "Model / Colour"
+      odometer: "Odometer"
+      customer_created_at: "Registered"
+      phone_number: "Phone Number"
+    customer:
+      import_success: "Success Import"
+      basic: "Basic"
+      basic_information: "Basic Information"
+      checkins: "Checkins"
+      checkout_date: "Checkout Date"
+      cuntomer_basic: "Customers - Basic"
+      customers: "Customers"
+      customer_list: 'Customers List'
+      date: "Date"
+      edit: "Customers - Edit"
+      edit_customer_basic: "Customers - Edit Basic"
+      email: "Email"
+      expilation_date: "Expiration Date"
+      gender: "Gender"
+      maintenance_log: "MaintenanceLog"
+      mileage: "Mileage"
+      owned_bikes: "Owned Bikes"
+      phone_number: "Phone number"
+      product_service: "Product / Service"
+      registration_information: "Registration information"
+      registration_number: "Registration Number"
+      reviews: "Reviews"
+      save: "Save"
+      send_dm: "Send DM"
+      subtotal: "Subtotal"
+      vehicle_information: "Vehicle information"
+      last_visit_date: "Last Service"
+      odometer: "ODOMETER"
+      month: "month"
+      number_plat: "Number Plate"
+      customer_id: "ID"
+      customer_checkbox_name: "Hide data without customer name"
+      customer_checkbox_tel: "Hide data without phone number"
+      customer_checkbox_plat: "Hide data without customer number plates"
+      search_title: "Search"
+      search_title_desc: "(Name/PhoneNumb/NumberPlate)"
+      edit_bike: "Edit Bike"
+      request_token_locked_message: "Your request have been reach maximum 3 times, please wait until %{locked_time}, then refresh your page to make a request"
+      phone_number_is_same: Phone number is same
+      phone_number_is_used: Phone number that already registered in other account
+      phone_number_invalid: phone number invalid
+    dashboard:
+      attendance_details: "ATTENDENCE DETAILS"
+      checkins_amount: "CHECKINS AMOUNT"
+      checkin_summary: "CHECKIN SUMMARY"
+      dashboard: "Dashboard"
+      days_worked: "Days Worked"
+      discount: "Discount"
+      display_conditions: "Display conditions"
+      display_period: "Display period"
+      mechanic_attendance: "MECHANIC ATTENDENCE"
+      payment_type: "PAYMENT TYPE"
+      product_category: "Product Category"
+      product_summary: "PRODUCT SUMMARY"
+      profit_uppercase: "PROFIT"
+      profit_by_product: "Profit By Product"
+      revenue: "REVENUE"
+      sales: "SALES"
+      sales_amount: "SALES AMOUNT"
+      sales_details: "SALES DETAILS"
+      sales_mechanic: "SALES BY MECHANIC"
+      sales_payment_type: "SALES BY PAYMENT TYPE"
+      sales_percentage: "PERCENTAGE OF SALES"
+      sales_summary: "SALES SUMMARY"
+      sold: "Sold"
+      top_sales: "TOP SALES"
+      total_checkins: "TOTAL CHECKINS"
+      total_sales_breakdown: "Total Sales Breakdown"
+      total_cash_on_hand: "Total Cash on Hand"
+      down_payment: "Down Payment"
+      total_sales_lowercase: "Total Sales"
+      total_sales_uppercase: "TOTAL SALES"
+      total_transactions: "Total Transactions"
+      transactions: "Transactions"
+      transactions_uppercase: "TRANSACTIONS"
+      cogs: "COGS"
+      profit: "Profit"
+      product: "Product"
+      product_uppercase: "PRODUCT"
+      show_all: "Show all"
+      today: "Today"
+      setup_shop: 'SHOP SETUP'
+      done: 'DONE'
+      not_yet: 'NOT YET'
+      close_info: 'Thankyou. You can close this area'
+      initial_shop: 'Complite shop Setting.'
+      initial_shop_link: 'Bring me to shop setting'
+      initial_staff: 'Create list staff.'
+      initial_staff_link: 'Bring me to staff setting'
+      initial_user: 'Create login Staff'
+      initial_user_link: 'Bring me to account menu'
+      initial_info: |
+        A little more you can use Otoraja Biz!
+        Complete the steps above and don't forget to install the application
+        on your smartphone/tablet.
+    style_guideline: "Style Guideline"
+    export_layout:
+      answer_data_export: "Answer Data Export"
+      column: "Column"
+      custmer_data_export: "Customer Data Export"
+      downloading: "Downloading"
+      example: "Example"
+      export_layout: "Export Layout"
+      export_layout_edit: "Export Layout Edit"
+      last_digits_without_masking: "Last Digits Without Masking"
+      no_setting: "No setting"
+      top_digits_without_masking: "Top Digits Without Masking"
+      type: "Type"
+    product_category:
+      use_masking: "Use Masking"
+      add_category: "Add Category"
+      add_product_category: "Add Product Category"
+      campaign_code: "Campaign Code"
+      edit_product_category: "Edit Product Category"
+      product_category: "Product Category"
+      product_class: "Product Class"
+      remind_category: "Remind by category"
+      use_reminder: "Use Reminder"
+      available_payment_methods: "Available Payment Methods"
+      close_stock_time: "Close Stock Time"
+      custome_reminder: "Customer Reminder"
+      days: "days"
+      everyday: "everyday"
+      front: "Front"
+      front_priority_display: "Front Priority Display"
+      message_send_time: "Message send time"
+      payment_method: "PaymentMethod"
+      public_receipt_url: "Expiration days of public receipt URL"
+      questionnaire: "Questionnaire"
+      questionnaire_url: "Expiration days of questionnaire URL"
+      recipt_layout: "Receipt Layout"
+      remind_interval_days: "Customer Remind Interval Days"
+    sales_details:
+      attendance_details: "ATTENDENCE DETAILS"
+      checkins_amount: "CHECKINS AMOUNT"
+      dashboard: "Dashboard"
+      days_worked: "Days Worked"
+      display_conditions: "Display conditions"
+      display_period: "Display period"
+      mechanic_attendance: "MECHANIC ATTENDENCE"
+      payment_type: "PAYMENT TYPE"
+      product_category: "Product Category"
+      product_summary: "PRODUCT SUMMARY"
+      sales_amount: "SALES AMOUNT"
+      sales_details: "SALES DETAILS"
+      sales_mechanic: "SALES BY MECHANIC"
+      sales_payment_type: "SALES BY PAYMENT TYPE"
+      sales_percentage: "PERCENTAGE OF SALES"
+      sales_summary: "SALES SUMMARY"
+      sold: "Sold"
+      top_sales: "TOP SALES"
+      total_checkins: "TOTAL CHECKINS"
+      total_sales_lowercase: "Total Sales"
+      total_sales_uppercase: "TOTAL SALES"
+      cogs: "COGS"
+      profit: "Profit"
+      product: "Product"
+    shop_config:
+      shop_config: "Shop Config"
+      stock_management: "Stock Management"
+      stock_notification_destination: "Stock Notification Destination"
+      use_customer_remind: "Use Customer Remind"
+      use_recipt: "Use Receipt"
+      use_record_stock: "Use Record Stock"
+      use_stock_notification: "Use Stock Notification"
+      rounding: "Rounding"
+      rounding_direction: "Rounding Direction"
+      round_to: "Round To"
+      num_of_custom_list: "Num of Custom List"
+      num_of_products_in_custom_list: "Num of Products in Custom List"
+    shop_staff:
+      active: "Active"
+      inactive: "Inactive"
+      yes: "Yes"
+      no: "No"
+      add_shop_staff: "Add Shop Staff"
+      edit_shop_staff: "Edit Shop Staff"
+      add_staff: "New"
+      front_staff: "Staff"
+      mechanic_grade: "Mechanic Grade"
+      position: "Position"
+      shop_staff: "Staff"
+      staff_name: "Staff Name"
+      shop: "Shop*"
+      form_requirement_notes: "Those marked with * are mandatory"
+    shop:
+      accounts: "Accounts"
+      add_manager_user: "Add Manager User"
+      add_shop_manager_user: "Add ShopManager User"
+      add_staff_user: "Add Staff User"
+      all_bengkel: "All Bengkel"
+      bengkel_id: "Bengkel ID"
+      detail: "Detail"
+      managed_bengkel: "Managed Bengkel"
+      shop_information: "Shop Information"
+      shop_list: 'Shop List'
+      status: "Status"
+    sidebar:
+      administrator: "Administrator functions"
+      bikes: "Bikes"
+      csv_export: "CSV Export"
+      transaction_list: "Transaction List"
+      export_config: "Export Config"
+      logout: "Logout"
+      product: "Product"
+      import_product: 'Import Product'
+      product_inventory: 'Product Inventory'
+      admin_product: "Admin Product"
+      packaging_product_relation: "Sales Package"
+      release_note: "Release note"
+      shop_management: "Shop management"
+      users: "Users"
+      warehouse_management: "Warehouse Management"
+      checkin_list: "Checkin List"
+      invoice: "Invoices"
+      purchase: "Purchases"
+      sales_details: "SALES DETAILS"
+      product_non_active: 'Product Non-active'
+      inventory: "Inventory"
+      inventory_list: "Inventory List"
+      inventory_taking: 'Inventory'
+      stock_book_report: "Stock Book Report"
+      expense_report: "Expense Report"
+    stock:
+      action: "Action"
+      daily_history: "Daily History"
+      history: "History"
+      payment: "Payment"
+      price: "Price"
+      purchase_price: "Purchase Price"
+      purchase_unit_price: "Purchase Unit Price"
+      edit_stock_control: "Edit"
+      stock_history: "Stock History"
+      supplier: "Supplier"
+      profit: "Profit"
+    subscription:
+      until : 'until'
+      subcripstion_lable : 'SUB'
+      owner: "Owner"
+      plan: "Plan"
+      status: "Status"
+      period: "Period"
+      fee: "Fee"
+      history_description: "subscription "
+      expiration_date: "Expiration Date"
+      exp_date: "Exp. Date"
+      expires_in: "Expires in"
+      cancel_reason: "Reason for Cancellation"
+      days_remaining: "Days"
+      cancel: "Cancel"
+      payment: 'Payment'
+      subscription: "Subscription"
+      subscriptions: "Subscriptions"
+      select_packet: "Select Packet"
+      bank_account_no: "Bank Account No."
+      no_active_msg: "No active subscriptions"
+      no_expired_msg: "No expired subscriptions"
+      no_subscriptions_msg: "No subscriptions"
+      current_plan: "Current Plan"
+      expired_plans: "Expired_Plans"
+      finalized: "Finalized"
+      cancelled: "Cancelled"
+      new_subscription: "Select a Service Plan"
+      select: "select this"
+      plan_one: "Lite"
+      plan_two: "Super"
+      plan_three: "Ultimate"
+      history: "Plan History"
+      change_plan: "Change Plan"
+      subscription_packet: "Subscription Packet"
+      subscription_plan_packet: 'Select Subscription Packet'
+      subscription_confirmation: "You choose subscribes the following packages"
+      agree_statement_first: "I have read and agree with"
+      agree_statement_last: "subscribes otoraja biz"
+      payment_statement_html: "Please make a payment to the following Virtual Account number: <h5> %{virtual_account} </h5> Please make a payment <b> later than %{payment_periods} days</b> or date <b>%{date_remaining}</b> maximum <b> 14.00 hours </b>"
+      payment_method_inactive: 'Sorry, payment with this method cannot be proccess, please choose another payment method.'
+      processing_subs_info: 'Your request in processing.'
+      processing_request_info: 'Processing request'
+      subscription_status:
+        demo: "DEMO"
+        paid: "PAID"
+        suspend: "SUSPENDED"
+        date_left: "DATE LEFT"
+        process: "PROCESSING"
+        free_trial: "FREE TRIAL"
+        payment_pending: "PAYMENT PENDING"
+        payment_expired: 'Payment expired'
+      no_plan: 'No Plan'
+      subscription_desk: "If you want to reactivate Otoraja Biz for this workshop, please contact the Authorities staff who handle you"
+      subscription_desk_final: "Subscription package is final"
+      subscription_expired_alert: "%{shop_name} Subscription period has %{days_remaining} days left"
+      extension_history: 'Extension History'
+      extension: 'EXTENSION'
+      terms_condition_content: |
+        <strong align='center'> PRELIMINARY </strong>
+        <br>
+        <b>These terms and conditions</b> are made to explain our obligations as a Product and Service Provider and your
+        obligations as a Customer.
+        <br><br>
+        Otoraja Biz Application Service is Otoraja Application Service owned by PT Otoraja Network Indonesia as a Service
+        Provider which aims to assist Workshop Owners in carrying out their workshop operations to be able to compete in the
+        automotive industry in Indonesia. With the Otoraja Biz Application Service, the shop owner can make transactions
+        quickly, monitor the amount of stock and get direct sales reports.
+        <br><br>
+
+        These terms are binding and applicable to you when connected to the Otoraja Biz Application Service.
+        <br><br>
+
+        Otoraja Biz Application Service may change from time to time according to company policy by considering input from users
+        or others that are deemed useful to improve our products and service systems.These terms and conditions are not intended
+        to answer every question or indicate any problems that may arise from using the Otoraja Biz Application services.
+        <br><br>
+
+        PT Otoraja Network Indonesia as the Otoraja Biz Application service provider has the right to change these Terms and
+        Conditions at any time, and will take effect when the new Terms and Conditions have been informedto the user / customer,
+        either directly (as proven by a circular), or in person. not directly through the website platform, social media or
+        chat.
+        <br><br>
+
+
+        PT Otoraja Network Indonesia will endeavor to announce the changes to you via email, notification via the website, or
+        otherwise. Because it is quite possible that these Terms and Conditions will change from time to time, it is your
+        obligation to ensure that you have read, understood and agreed to the latest Terms and Conditions available on our
+        website.
+        <br><br>
+        What is meant in these Terms and Conditions is the emphasis on <b>Access</b> and <b> Use of </b> Otoraja Biz Application
+        Services.
+        <br><br>
+
+        By registering yourself in the Otoraja Biz Application Service , you certify that you have read and understood these
+        Terms and Conditions and are deemed to have Otoraja to act on behalf of yourself, represent a person or group of people,
+        represent an organization, or represent other entities registered to use our service.
+        <br><br>
+
+        <b>A. Definition</b>
+        <br>
+        <ol align='justify'>
+          <li><b>Terms and Conditions </b> – means these Terms and Conditions;
+          </li>
+          <li>
+          <b>Access Fee</b> – means the Fee that is billed based on thechoice of a certain period or time (including tax)
+          that you must pay based on the Price List or Fees posted on Otoraja website (PT Otoraja Network Indonesia
+          reserves the right to change from time to time with your knowledge) ;
+          </li>
+          <li>
+          <b>Confidential Information </b> – includes all information that is shared between the parties in these terms
+          and conditions, whether in writing, electronically or orally, and includes this service, but does not include
+          information that has become or will be made public / public, except for those already disclosed and unauthorized
+          or unauthorized by the user or others;
+          </li>
+          <li><b>Data</b> – means any data that you enter or enter with your authority on the website;</li>
+          <li>
+          <b>Intellectual Property Rights</b> – means patents, trademarks, service or service marks, copyrights, rights to
+          designs, knowledge, or intellectual property rights or otherwise, registered or unregistered;
+          </li>
+          <li>
+          <b>Services</b> – means application services including providing
+          a recording / accounting system , operational assistance and other services provided (and can be changed or
+          updated from timeto time) through the website;
+          </li>
+          <li><b>Website</b> – means the internet site at the <a href='www.otoraja.com'>www.otoraja.com</a> domain; <a
+            href='biz.otoraja.id'> biz.otoraja.id</a> or other internet sites managed by Otoraja Application or PT
+          Otoraja Network Indonesia;</li>
+          <li><b>Otoraja</b> – means PT Otoraja Network Indonesia registered in the Republic of Indonesia;</li>
+          <li><b> User Invited</b> – means any person or entity, other than the Customer, who uses the service from timeto
+          time with the permission of the Customer;</li>
+          <li><b>Customer</b> – means a person, or on behalf of another person, organization or entity, who registers to use
+          the Service;</li>
+          <li><b>You</b> - meanstheCustomerorUserInvited.</li>
+          <li><b>Subscription </b> is recurring payment paid in advance to use the Otoraja Biz Application Services provided
+          by Otoraja;</li>
+        </ol>
+        <b>B. Use of Software</b>
+        <ol type=1>
+          <li>
+          Otoraja give you the right to access and utilize Otoraja Biz Application Services through our website with the
+          usage roles that have been assigned to you, based on the type of service you choose. This right is non-
+          exclusive, non-transferable, and limited by and subject to these terms and conditions. You acknowledge and
+          agree, depending on any applicable written agreement between the Customer and the Invited User, or other
+          applicable laws:
+          <ul>
+            <li>Users / Customers are responsible for determining who has access as an Invited User and the types of
+            roles and rights they have to access the types of data you have;
+            </li>
+            <li>The User / Customer is responsible for all use of the Service by the Invited User;</li>
+            <li>
+            The User / Customer is responsible for controlling each level of access for the Invited User to the
+            respective organizations and services at any time, and can withdraw or change the Access or Access level
+            of the Invited User at any time for any reason in any case;
+            </li>
+            <li>
+            If there is a dispute between the User / Customer and the Invited User regarding access to any
+            organization or service, the Customer must make decisions and regulate the access or level of access to
+            the data or service that the Invited User will obtain if any.
+          </ul>
+          </li>
+          <li>
+          <ol type='a'>
+            <li>
+            Otoraja irresponsible and you agree to indemnify Otoraja on responsibility for any damage or loss
+            (including the Parent Company , direction , employees and all personnel within the company ) resulting
+            directly or indirectly from the provision of goods entered through the app by you, for items that are
+            prohibited / restricted according to applicable legal provisions.
+            </li>
+            <li>
+            The following is a list of types of goods that are prohibited and / or restricted for trading by the
+            Seller on the Otoraja Biz Application service :
+            <ul>
+              <li>
+              All types of drugs and other substances that are prohibited or restricted in accordance with
+              applicable legal provisions, including but not limited to the provisions of the Narcotics Law,
+              the Psychotropics Law, and the Health Law. This provision also includes hard drugs, drugs that
+              require a doctor's prescription, anesthetics and the like, or drugs that do not have a
+              distribution license from the Food and Drug Supervisory Agency (BPOM).
+              </li>
+              <li>
+              Cosmetics and food and beverages that endanger the safety of their users, or that do not have a
+              distribution permit from the Food and Drug Supervisory Agency (BPOM).
+              </li>
+              <li>Materials classified as hazardous materials according to applicable laws / regulations.</li>
+              <li>
+              Other items whose ownership or distribution violate the provisions of applicable laws in
+              Indonesia.
+              </li>
+              <li>Items that harass certain people / race or can demean others.</li>
+              <li> Items that violate Intellectual Property Rights
+              </li>
+              <li>Other items that violate legal provisions in force in Indonesia.</li>
+            </ul>
+            </li>
+            <li>
+            You understand and agree that Otoraja have the right to immediately remove any Items that violate one of
+            the provisions that have been previously mentioned in the List of Types of Goods that are prohibited and
+            / or restricted for trading and Otoraja is also not responsible for provide compensation for any loss
+            related to Items that are removed in connection with violations committed by you.
+            </li>
+          </ol>
+          </li>
+        </ol>
+        <b>C. Your obligations</b>
+        <ol>
+          <li>
+          <b>General Obligations</b>
+          <ol>
+            <li>
+            You must follow these terms and conditions, as well as other forms and / or documents related to Otoraja
+            Application Services which are an integral part of these Terms and Conditions.
+            </li>
+            <li>
+            You must ensure that you only use the Services and the Website for your internal business purposes
+            properly and legally, with the Terms and Conditions and notices announced by Otoraja or the conditions
+            listed on the website.You may use the Service and the Website on behalf of another person or entity, or
+            to provide a service to them, but you have to make sure that you have Otoraja to do so, and all those
+            who receive services through you meet and agree to all the terms in the Terms and Conditions of this
+            that applies to you;
+            </li>
+          </ol>
+          </li>
+          <li>
+          <b>Access Terms</b>
+          <ol>
+            <li>
+            You must ensure that all usernames and passwords required to access Otoraja Application Services are
+            stored securely and confidentially. You must immediately notify Otoraja about the use of your password
+            by an unauthorized party, or other security breaches, and Otoraja will re-establish your password, and
+            you must take all other actions deemed necessary by Otoraja Application to maintain or enhance the
+            security of computer systems and Otoraja Application networks, and your access to our Services.
+            </li>
+            <li>
+            As a condition of these Terms, when accessing and using Otoraja Application Services, you are
+            <b>prohibited from</b> :
+            <ul>
+              <li>Attempt to compromise the security or integrity of Otoraja Application computer systems or
+              networks, or if the Services are hosted by a third party, such third party computer systems or
+              networks;
+              </li>
+              <li>
+              Use or misuse Otoraja Application Services in any way that may interfere with the ability of
+              other users to use the Services or the Website;
+              </li>
+              <li>
+              Try to gain unauthorized access to any material other than those expressly stated that you have
+              obtained permission to access it, or to access our computer systems on which the Service is
+              hosted;
+              </li>
+              <li>
+              Sending, or submitting to the Website:
+              any files that can damage other people's computer or software, materials or data that violate
+              any law (including Data or other materials protected by copyright or trade secrets where you do
+              not have the right to use them) );
+              </li>
+              <li>
+              Attempt to modify, copy, imitate, disassemble, or reverse engineer any computer program used to
+              provide Otoraja Application Services, or to use the Website outside of its necessary and
+              intended use.
+              </li>
+            </ul>
+            </li>
+          </ol>
+          </li>
+          <li>
+          <b>Usage Limits</b>
+          <br>
+          Use of Otoraja Application Services may be limited to, but not limited to, the number of monthly transactions
+          and the number of calls you are permitted to use by calling Otoraja Application application programming
+          interface . If any, these limitations will be determined and posted on the relevant Service.
+          </li>
+          <li>
+          <b>Communication Terms</b>
+          <br>
+          <ol>
+            <li>
+            As a condition of these Terms, if you use any communication tools available through the Website(such as
+            any forum orchat/chat room), you agree to use these communication devices only for legitimate purposes.
+            You are not permitted to use these communication devices to post or distribute any material that is not
+            related to the use of the Service, including (but not limited to): offering goods and services for sale,
+            commercial e-mails that are not requested or desired, files that can damage other people's computer
+            devices or software , materials that may be offensive to users of the Service or other Web sites , or
+            materials that violate any laws (including material protected by copyright or trade secrets where you
+            are not have the right to wear it).
+            </li>
+            <li>
+            When you make a communication in any form on the Website, you guarantee that you are justified in making
+            such communication. Otoraja Application has no obligation to ensure that communications on the Website
+            are legitimate and correct, or that they are related only to the use of the Service. Otoraja Application
+            reserves the right to delete any communication at any time in its sole discretion.
+            </li>
+          </ol>
+          </li>
+          <li>
+          <b>Liability for Indemnity</b>
+          </br>
+          You release Otoraja Application from all: claims, lawsuits, costs of losses, damages and losses arising as a
+          result of your violation of the Terms and Conditions stated in these Terms and Conditions, or any obligations
+          you may have to the Authorities, including (but is not limited to) any costs related to the acquisition of any
+          Access Fees that are due but you have not paid.
+          </li>
+        </ol>
+        <b>D. Otoraja Biz Application Subscription Conditions</b>
+        <br>
+        <ol>
+          <li>
+          <b>Subscription Policy</b>
+          <ol type='a'>
+            <li>Otoraja provide Otoraja Biz Application Services</li>
+            <li>
+            Customers are willing to subscribe to the Otoraja Biz Application according to the chosen and available
+            package.
+            </li>
+            <li>
+            In the event that Otoraja lends a device in the form of a Tablet and Printer ("Tool") to the Customer /
+            User is invited to be used in performing the Services set out in these Terms and Conditions and keeps
+            the tool in good condition and can function (not damaged) and will return the tools and goods are in
+            good condition when the package subscription to the Service has ended. If during the use of the tool it
+            is damaged, the Customer / User is invited to inform Otoraja within 24 hours to be followed up by
+            Otoraja
+            </li>
+            <li>
+            The provisions for borrowing tools apply for a maximum period of 6 (six) months of use or if the
+            Application Service collaboration has ended, depending on which event occurred first.
+            </li>
+            <li>
+            Use of the Tool will only be used by the Customer / User Invited for the purposes of the Service related
+            to the Workshop's business activities with the Authorities and will not be used for personal needs and
+            other purposes not related to business activities between the Customer / User Invited by Otoraja.
+            Otoraja has the right to evaluate the use of the tool and if there is a violation, Otoraja has the right
+            to terminate it as stipulated in these Terms and Conditions.
+            </li>
+            <li>
+            Subscription period on Otoraja Biz Application Services is during the selected Plan registered and paid
+            by you.
+            </li>
+            <li>
+            The subscription package for Otoraja Biz Application Services is declared active on 1 day after
+            receiving payment by Otoraja from you according to the package price list selected.
+            </li>
+            <li>
+            You can change the subscription package options during the period the Subscription is still active by
+            notifying Otoraja and complying with the applicable conditions.
+            </li>
+            <li>
+            If you make a change to the package subscription as mentioned above, after the payment has been made
+            related to the package change, Otoraja will automatically terminate the subscription to the last
+            package, and Otoraja will not provide a refund for the remaining period of the Package Subscription.
+            </li>
+            <li>
+            In the event of a disruption to the Otoraja Biz Application Service , you can report the matter to
+            Otoraja Customer Service at 021-521- 4077 with operating hours every calendar day from 09.00-17.00
+            </li>
+            <li>
+            If the report is received by Otoraja outside the operational hours as stated above, the report will be
+            followed
+            up on the next working day and hour.
+            </li>
+            <li>
+            Otoraja will provide updates regarding the progress of the resolution process for disturbance reports
+            within 24 hours
+            </li>
+          </ol>
+          <li>
+          <b>Subscription period:</b>
+          <ol type='a'>
+            <li>
+            The subscription period legally ends in accordance with the subscription period for the selected package
+            registered and paid for by the Customer.
+            </li>
+            <li>
+            Otoraja will notify the maturity of subscription not later than 5 working days before the end date of
+            the package subscription.
+            </li>
+            <li>
+            With respect to the notification as referred to in paragraph 2 above, the Customer is required to
+            provide confirmation regarding the extension of the number of the Agreement period at least 2 working
+            days before the end of the subscription period.
+
+            </li>
+            <li>
+            If there are no price changes and package changes, the Subscription Package will be automatically
+            renewed by Otoraja, and this is sufficient to be proven by proof of payment transfer to a virtual
+            account under the Customer name for next period payment (Virtual Account will be notified after the
+            first payment).
+            </li>
+            <li>
+            If the provisions of paragraph 4 above are not fulfilled by the Customer, Otoraja have the right to cut
+            off the Customer's access to the Otoraja Biz Application.
+            </li>
+            <li>
+            Reactivation of Customer Access in Otoraja Biz Application can be done by Otoraja if the Customer has
+            paid all Payment obligations.
+            </li>
+            <li>
+            If at the time this Subscription service ends or it is decided that there are obligations that have not
+            been resolved by the Parties, then the provisions inthisSubscriptionservicewill remain in effect until
+            the completion of the rights and obligations of the Parties.
+            </li>
+            <li>
+            In terms of customer decides to terminate the Plan unilaterally before the term of the subscription
+            expires, the remaining period of the subscription fee based on the services that have not been followed,
+            will be lost or forfeited.
+            </li>
+          </ol>
+          </li>
+          </li>
+          <li>
+          <b>Payment obligations</b>
+          <ol type='a'>
+            <li>
+            The bill for the access fee will be made for the value as appropriate in Package Price List which has
+            been chosen by you,and payable up front every time before the activated period of the subscription / use
+            her for Otoraja Biz Service Applications. All invoices will consist of the Access Fee for the service
+            period according to the package you choose. Otoraja will automatically continue to bill you after the
+            use of the current period ends to continue to the next period of use as long as the use of this Service
+            and / or your subscription option package has not changed and will end based on theTerms and
+            Conditionsthat have been determined.
+            </li>
+            <li>
+            All invoices from Otoraja Application service will be notified / sent to you or to the billing contact
+            that you have provided via email. You must make a payment for all the values stated on your bill before
+            the deadline date is determined according to thebillbefore the activation can start / be activated, you
+            have the responsibility to pay all taxes and duties that are added to the Access Fee. You are also asked
+            to save proof of the transaction. If the service has stopped before payment is made, we will activate
+            the service within 2 (two) working days.
+            </li>
+          </ol>
+          </li>
+        </ol>
+        <b>E. Confidentiality and Privacy</b>
+        <ol>
+          <li>
+          Confidentiality of information and your privacy is very important and the main thing for us at Authorities. To
+          better protect your rights we have provided Otoraja Privacy Policy to explain our privacy practices in detail.
+          Please read our Privacy Policy to understand how Otoraja collect and use information relating to your Account
+          and / or use of the Service by you.
+          </li>
+          <li> You must agree to the applicable Otoraja Privacy Policy, including but not limited to the use of personal data.
+          </li>
+        </ol>
+        <b>F. Ownership of Intellectual Property Rights</b>
+        <ol>
+          <li>
+          Ownership and all Intellectual Property Rights obtained from the service, website, and any documentation related
+          to the service remains the property of Otoraja.
+          </li>
+          <li>
+          Ownership and all Intellectual Property Rights contained in the data remains your property. However, access to
+          your data is dependent on the settlement of Otoraja Application Access Fee when the bill is due. You give
+          permission to Otoraja to use, copy, send, store and back up your information and data for the purpose of
+          providing you with access to and using Otoraja Application services, or for other purposes related to providing
+          our services to you.
+          </li>
+        </ol>
+        <b>G.Guarantee and Recognition</b>
+        <ol>
+          <li>
+          You warrant that, if you register to use the service on behalf of another person, you have Otoraja to agree to
+          these terms on behalf of that person, and agree that by registering to use Otoraja Application service, you are
+          binding the person you are on behalf of, or with the intention to, make action on their behalf to any
+          obligations that you have agreed to in these Terms, without limiting your own obligations to the terms.
+          </li>
+          <li>
+          You acknowledge that:
+          <ol type='a'>
+            <li>
+            You have Otoraja to use the services and the website, and to access information and data that you enter
+            on the website, including any information or data entered on the website by anyone you have authorized
+            to use Otoraja Application services. You are also authorized to access processed information and data
+            provided to you through your use of our website and services (as well as your own or other people's
+            information and data).
+            </li>
+            <li>
+            Otoraja application is not responsible to anyone other than you, and there is no purpose whatsoever in
+            these Terms and Conditions to benefit anyone other than you.If you use the service or access the website
+            on behalf of or for the benefit of someone other than you (or an organization that is incorporated or
+            not, or otherwise), you agree that:
+            <ul>
+              <li>You are responsible for ensuring that you have the right to do so;</li>
+              <li>
+              You are responsible for giving authority to anyone you give access to information or data, and
+              you agree that Otoraja have no responsibility to provide anyone with access to such information
+              or data without your authorization, and may indicate any request to obtain information to you
+              for served;
+              </li>
+              <li>
+              You release Otoraja Application from any claim or loss related to: Refusal of Otoraja
+              Application to provide anyone with access to your information or data in accordance with these
+              provisions; The provision of information or data by Otoraja Applications to anyone based on your
+              authorization.
+              </li>
+            </ul>
+            </li>
+            <li>
+            The provision of, access to, and use of Otoraja Application services is available as is and at your own
+            risk.
+            </li>
+            <li>
+            Otoraja Application does not guarantee that the use of the service will be uninterrupted or error free.
+            Among other things, the operation and availability of the systems used to access services, including
+            publicly accessed telephone services, computer networks and the internet, can be difficult to predict
+            and may from timeto time interfere with or prevent access to services. Otoraja Application however is
+            not responsible for such interference, or prevention of access to the use of the service.
+            </li>
+            <li>
+            It is your sole responsibility to determine that our services meet your business needs and can be used
+            for the intended purpose.
+            </li>
+            <li>
+            You still have the responsibility to comply with all applicable laws or regulations. It is your
+            responsibility to check that the storage of and access to your data through the service and the website
+            is in compliance with the laws that apply to you (including any laws that require you to keep records).
+            </li>
+          </ol>
+          </li>
+          <li>
+          Otoraja Application makes no guarantees for its service. Without neglecting the foregoing, Otoraja Application
+          does not guarantee that our services will meet all of your needs, or that it will be suitable for the purpose
+          you
+          intended. For the avoidance of doubt, all interpretable terms or warranties are excluded to the extent permitted
+          by law, including (without limitation) warranties of sale, fitness for purpose and non-infringement.
+          </li>
+          <li>
+          You warrant and demonstrate that you are obtaining the right to access and use the services for business
+          purposes and that, to the maximum extent permitted by law, consumer guarantees under law or statute intended to
+          protect non- business consumers in any jurisdiction do not applies to the provision of these services, websites
+          or terms.
+          </li>
+          <li>
+          You acknowledge that you are responsible for the products you sell, so that Otoraja is released from all
+          obligations and lawsuits if you sell products that are not permitted by the applicable legal provisions,
+          including without limitation the List of Prohibited and / or Restricted Types of Goods traded by the Seller on
+          Otoraja application as stated in letter B number 3 Terms and Conditions of Otoraja Biz Application Service.
+          </li>
+          <li>
+          You guarantee that the tool sand goods borrowed by Otoraja as regulated in these Terms and Conditions will be
+          properly maintained, so that when the cooperative use of the Service as stipulated in these Terms and Conditions
+          ends you will return the tools and goods that Otoraja lent in good condition.
+          </li>
+        </ol>
+        <b>H. Limitation of Liability :</b>
+        <ol>
+          <li>
+          To the maximum extent permitted by law, Otoraja exclude all liability and responsibility to You (or any other
+          person) in the contract, tort (including negligence), or otherwise, for any loss (including loss of information,
+          data and storage) or damage resulting, directly or indirectly, from any use of, or reliance on, services or the
+          website.
+          </li>
+          <li>
+          If you experience any loss or damage due to the negligence or failure of Otoraja Application to comply with
+          these conditions, any claim from you to Otoraja Application arising from the negligence or failure of Otoraja
+          Application will be limited to one event or series of events connected to the Access Fee that you have already
+          paid in full within the previous 12 (twelve) months.
+          </li>
+          <li>
+          If you are not satisfied with our service, your sole and exclusive solution is to terminate this provision under
+          the clause of letter H.
+          </li>
+        </ol>
+        <b>I. Provisions for the trial period:</b>
+        <ol>
+          <li>
+          Trial Period Policy:
+          <ol typo='a'>
+            <li>
+            The Trial Period is meant to last for 30 (thirty) days after Your registration has been activated by
+            this service. If the trial period is determined otherwise, the information about the change in the
+            probation period will be based on the agreement of both parties.
+            </li>
+            <li>
+            When you first register and/or activate the service, you can evaluate our service with the conditions
+            for a predetermined trial period, without any obligation to continue using the service. If you choose to
+            continue using the service after the trial period is over, you can choose a paid service type from
+            Otoraja Partnership Program. After that you will be invoiced according to the rate at which you entered
+            the information for your billing according to the service you selected, or you can process a service
+            extension request.If you choose to stop using our services, you can delete your membership or not
+            process a service renewal request.
+            </li>
+          </ol>
+          </li>
+          <li>
+          Offense
+          <ol type='a'>
+            <li>
+            If you violate these Terms and Conditions (including, but not limited to, not paying any Access Fees)
+            and do not resolve the violation problem within 14 (fourteen) days after receiving the notification of
+            the violation if the violation problem can be resolved;
+            </li>
+            <li>
+            If you violate these Terms and Conditions and the violation cannot be resolved (including, but not
+            limited to) any violation of the provisions of Letter C.4 or failure to pay the Access Fee which has
+            passed the due date of more than 30 (thirty) days ;
+            </li>
+            <li>
+            If you or your business goes bankrupt, orisin the process of ending the organization's existence,
+            Otoraja can take any or all of the following actions:
+            <ul>
+              <li>Suspend or terminate your access to all data or any data;</li>
+              <li>Suspend your access to Otoraja Applicationservices and websitesfor an indefinite period of time;
+              </li>
+            </ul>
+            </li>
+            <li>
+            Termination of use of the Service based on these Terms and Conditions does not reduce the rights and
+            obligations of the parties which are accrued up to the date of termination. Upon terminating your use of
+            the Service under these Terms and Conditions you will continue to bear any accrued fees and amounts due
+            for payment before or after termination, and stop using our services and website immediately.
+            </li>
+          </ol>
+          </li>
+        </ol>
+        <b>J. Other General Provisions</b>
+        <ol>
+          <li>
+          These Terms and Conditions, together with Otoraja Application Privacy Policy and the terms of the notices or
+          instructions given to you under these Terms and Conditions supersede and delete all previous agreements,
+          representations (both oral and written), and understandings, and constitute the entire agreement between You and
+          Otoraja relating to services and other matters discussed in these Terms.
+          </li>
+          <li>
+          If either party releases a claim for any violation of these Terms and Conditions, it will not release them from
+          the claim for another violation. Waiver of prosecution is not effective unless it is made in writing.
+          </li>
+          <li>
+          The parties shall not be responsible for any delay or failure to fulfill their obligations under these Terms if
+          the delay or failure is due to any cause beyond their control. Paragraph of this provision does not apply to any
+          ongoing payment obligations.
+          </li>
+          <li>You cannot transfer or transfer rights to other people without the written consent of Otoraja, or other
+          mechanisms established by Otoraja.
+          </li>
+          <li>
+          If there is a dispute between the two parties, it will try to be resolved by deliberation first to reach a
+          consensus. If no agreement is reached in this way, then both parties agree to resolve the problem through legal
+          procedures by selecting the legal position of the Republic of Indonesia at the South Jakarta District Court
+          Office.
+          </li>
+          <li>
+          Any notification given based on these Terms and Conditions by one party to another must be made in writing via
+          email and will be deemed given at the time of delivery. Notices to Otoraja must be sent to sales@otoraja.co.id
+          or to another email address notified to you by Otoraja. Notifications to you will be sent to the email address
+          you provided when you accessed our services.
+          </li>
+          <li>
+          After the Subscription is activated or can be used, you can cancel at any time without additional costs except
+          those already paid (non- refundable). If requested, tfaohen the application service will be disconnected /
+          deactivated after being processed by Otoraja team.
+          </li>
+        </ol>
+    supplier:
+      add_supplier: "Add Supplier/Vendor"
+      add_btn: "New"
+      edit_supplier: "Edit Supplier/Vendor"
+      delete: "Delete"
+      supplier: "Supplier/Vendor"
+      supplier_name: "Supplier/Vendor Name"
+      address_and_tel: "Address & Telephone"
+    user:
+      add_admin_operator_user: "Add Admin Operator User"
+      add_owner_user: "Add Owner User"
+      add_shop: "Add Shop"
+      shop_users: "Shop Users"
+      brief: "Enter your ID and password to access your Management Panel."
+      notification_unidentified: "User or password mismatch."
+      available_shops: "Available Shops"
+      disabled: "Disabled"
+      edit_user: "Edit User"
+      enabled: "Enabled"
+      role: "Role"
+      user_id: "User ID"
+    invoice:
+      invoice_information : "Information"
+      invoice_product : "Product"
+      invoices: "Invoices"
+      purchase_unit_price: "Purchase Price"
+      quantity: "Incoming Stock"
+      stock: "Current Stock"
+      invoice_no: "Invoice No."
+      invoice_total: "Total (Rp)"
+      invoice_unit_price: "Unit Purchase Price (Capital)"
+      label_find_product: "Item On Invoice"
+      supplier: "Supplier"
+      payment_method: "Payed By"
+      arrival_date: "Arrival Date"
+      product_addition: "Add Product"
+      find_product: "Find Product"
+      add_product: "New Product"
+      edit_invoice: "Edit Invoice"
+      edit_inventory: "Edit Inventory"
+      filter: "Filter"
+      sort: "Sort"
+      status: "Finalization"
+      status_text: "Closed & Lock Stock Opname"
+      name: "Name"
+      difference: "Diff"
+      inventory: "Inventory List"
+      inventory_stock: "Current Stock"
+      inventory_actual: "Actual"
+      inventory_now: "Stock Now."
+      notes: "Notes"
+      average_price: "Average Price"
+      invoice_checkbox_label: "Check after completing the form."
+    purchase:
+      nav_link: "Purchases"
+      purchases: "Add Invoice"
+      inventory: "Add Inventory"
+      close: "Close"
+      items_selected: "items selected"
+      view_more: "View More"
+      delete_question: "Do you really want to delete this?"
+      delete_confirm: "Confirm Deletion"
+      empty_product_info: 'No items selected'
+      inventory_subinfo: 'of products in this stock opname.'
+      mandatory_label: 'Those marked * are mandatory.'
+      modal_btn_cancel: 'Back'
+      modal_btn_confirm: 'Confirmation'
+      modal_sub_label: 'Want to continue ?'
+      modal_label: 'Count stock enabled for'
+      modal_label_next: 'product if you save the form.'
+      is_stock_confirm_lbl: 'Want to activate stock calculations?'
+      is_stock_confirm: 'OK'
+      is_stock_cancel: 'Later'
+      is_stock_notif_final: 'The stock of this product is not counting. Change in Product inventory'
+      is_stock_active_lbl: 'Stock counting will be activated'
+      is_stock_cancel_lbl: 'We will remind you again.'
+    disable_menu:
+      alert_info: "Sorry, this menu is not accessible."
+      transaction_list_and_order_info_html: "Now the Transaction and Order List can only be accessed through the <b>Otoraja Biz</b> application on the Android gadget."
+    product_non_active:
+      product_non_active: 'Product Non-Active'
+      multiple_select_product_info: 'product selected'
+      select_all_product_bellow: 'select all product bellow'
+      confirmation_restore_product: 'Product selected will activate in product list'
+      confirmation: 'Continue this process?'
+      product_not_found_info: 'Product not found'
+      change_filter_disclaimer: 'change filter will be empty the product selected'
+      remaining-product-label_html: 'Select <span id="total-product-unselected"></span> product'
+      start_delete_product: 'Start restore product'
+      restore: 'Restore'
+    notification:
+      see_all_messages: "See All Messages"
+    stock_book_report:
+      stock_book_report: "Stock Book Report"
+      last_stock_zero: "Last stock zero"
+      no_stock_movement: "No stock movement"
+      not_available: "Product not available in workshop"
+      name: "Product Name/Part Number"
+      first_stock: "First Stock"
+      stock_in: "Stock In"
+      stock_out: "Stock Out"
+      last_stock: "Last Stock"
+      stock_value: "Stock Value"
+      product_name: "Product name"
+      avg_price: "Average Price"
+    shop_setting: 
+      add_shop: 'Add Shop'
+      address: 'Addresss'
+      area: 'Area'
+      branch_name: 'Branch Name'
+      cancle: 'Cancle'
+      change_password: 'Ganti Password'
+      city: 'City'
+      closing_hours: 'Closing Hours'
+      email: 'Email'
+      empty_branch_info: 'There is no registered shop in this group.'
+      empty_facility: 'Facility not exist'
+      empty_service: 'Service not exist'
+      facility: 'Facility'
+      group_name: 'Group Name'
+      have_branch: 'Have Branch'
+      id_user: 'User ID'
+      keyword_search: 'Keyword Search'
+      name: 'Name'
+      new_password: 'New pass.'
+      old_password: 'Old Pass.'
+      open_day: 'Open Day'
+      opening_hours: 'Opening Hours'
+      other_Tel: 'Other Tel'
+      other_phone_number: 'Other Phone Number'
+      owner: 'Owner'
+      owner_data: 'Owner Data'
+      phone_number: 'Phone Number'
+      primary_Tel: 'Primary Tel'
+      province: 'province'
+      require_info: '(* = required)'
+      retype_new_password: 'Retype new Pass.'
+      save: 'Save'
+      schedule_and_facility: 'Schedule & Facility'
+      service: 'Service'
+      shop_branch: 'Shop Branch'
+      shop_data: 'Shop Data'
+      shop_group: 'Shop Group'
+      shop_id: 'Shop ID'
+      shop_info: 'Shop Info'
+      shop_name: 'Shop Name'
+      shop_setting: 'Shop Setting'
+      status: 'Status'
+      tel_in_receipt: 'Tel in Receipt'
+      user_group: 'User (Shop Group)'
+      verification_email_info: 'Check your email for verification.'
+      year_of_register: 'Year Of Register'
+      guide_html: | 
+        <ul>
+          <li>
+            Key search tag purpose to insert keyword quickly while search some product
+          </li>
+          <li>
+            Use arrow keys to sort order for auxiliary words
+          </li>
+        </ul>
+      close_info: 'Tap outside the box to close this pop up.'
+      bengkel_id_info: 'Register shop branch first'
+      shop_add_info: 'Fill your information shop branch.' 
+    expenses_report:
+      side_bar_title: "Expense Report"
+      expenses_report_title: "Expenses"
+      periode: "Periode"
+      download: "Download"
+      expenses_create_new_title: "Expenses Data"
+      value: "Value (Rp)"
+      date: "Date"
+      add_new: "Add"
+      paid_to: "Paid To"
+      no_ref: "No. Reference (optional)"
+      desc: "Description (optional)"
+      cancel: "Cance"
+      save: Save
+      info_desc: " / 50 Character"
+      modal_add_supplier_title: "Please fill in the payee data"
+      name: "Name (Required to fill)"
+      tel: "Phone Number"
+      address: "Address"
+      modal_confirm_delete: "Are you sure you want to delete this expense data?"
+      confirm_no: "No"
+      confirm_yes: "Yes"

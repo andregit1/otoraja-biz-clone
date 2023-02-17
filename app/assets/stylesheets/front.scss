@@ -1,0 +1,19 @@
+/*
+ *= require_self
+ *= require raty-js/lib/jquery.raty.css
+ *= require jquery-ui/core
+ *= require jquery-ui/theme
+ */
+@import 'bootstrap/dist/css/bootstrap.min';
+@import 'bootstrap4-toggle/css/bootstrap4-toggle.min';
+@import 'select2/dist/css/select2.min';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+@import 'variables';
+@import 'front/layout';
+@import 'front/components';
+@import 'front/utilities';
+@import 'front/print';
+@import 'icomoon/style';
+
+// @import 'admin-lte/dist/css/adminlte.min';

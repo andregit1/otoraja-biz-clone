@@ -1,0 +1,22 @@
+<div id="confirmationModalMultipleDeleteProduct" class="modal fade mt-5" tabindex="-1">
+  <div class="modal-dialog mt-5">
+    <div class="modal-content bg-light">
+      <div class="loading-delete-product p-5 hide">
+        <div class="text-center">
+          <p class="text-center font-weight-bold text-large"><%= t 'admin.shop_product.start_delete_product'%></p>
+          <i class="fas fa-spinner fa-spin text-large"></i>
+        </div>
+      </div>
+      <div class="confirmation-content">
+        <div class="modal-body pb-0">
+          <p class="text-center font-weight-bold text-normal"><%= t 'admin.shop_product.confirmation_message_multiple_delete_product' %></p>
+          <p class="text-center text-normal"><%= t 'admin.shop_product.confirmation' %></p>
+        </div>
+        <div class="modal-footer border-0 justify-content-center flex-nowrap">
+          <button type="button" class="text-large btn-base -thin -normal" data-dismiss="modal"><%= t 'admin.shop_product.cancel' %></button>
+          <button id="confirmChangeProductMultipleDeleteProduct" type="button" class="text-large btn-base -thin -primary"><%= t 'admin.shop_product.confirm' %></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

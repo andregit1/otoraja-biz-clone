@@ -1,0 +1,11 @@
+id:
+  enums:
+    shop_invoice:
+      status:
+        all: "Semua"
+        open: "Terbuka"
+        closed: "Final"
+      sort:
+        latest: 'Terbaru'
+        oldest: 'Terlama'
+  

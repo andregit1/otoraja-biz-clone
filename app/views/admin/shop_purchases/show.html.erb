@@ -1,0 +1,6 @@
+<%= render "form" %>
+<section class="row">
+  <div class="col-12">
+    <%= link_to t('admin.common.back'), admin_shop_invoices_path(mode: @shop_invoice.is_inventory ? 1 : 0), class: 'btn-base -thin -primary m-btom-32' %>
+  </div>
+</section>

@@ -1,0 +1,71 @@
+<!-- Checkin / Checkout Date Modal -->
+<div id="checkinDateModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#checkinDateModal"></div>
+  <div class="modal_content -fullscreen">
+    <div class="modal-header">
+      <button class="close col-1 js-modal-close" data-target="#checkinDateModal">
+        <i class="icon icon-Arrow-left"></i>
+      </button>
+      <div class="modal-title col-10 text-center"><%= t 'select_product.infomation' %></div>
+      <div class="col-1"></div>
+    </div>
+    <div class="modal-body customer-info-body">
+      <div class="row border-bottom m-0">
+        <div class="col-2 customer-info-body_label"><%= t 'slip.checkin' %></div>
+        <div class="col-10">
+          <div class="row pt-4 pb-4">
+            <%= button_tag :type=>"button", id:'customer-checkin', :data=>{'target'=>'#calendarModal'}, :class=> 'js-modal-open -text-16 col-4 bg-white border-0' do%>
+            --.--.----
+            <% end %>
+            <input type="number" name="hour" autocomplete="off" id="checkin_hour" class="-text-16 col-3 border-0 text-center" oninput="if(value.length>2)value=value.slice(0,2)" placeholder="00">
+            <span class="col-1">:</span>
+            <input type="number" name="minute" autocomplete="off" id="checkin_minute" class="-text-16 col-3 border-0 text-center", oninput="if(value.length>2)value=value.slice(0,2)", placeholder="00">
+            <%= button_tag :type=>"button", id:'clear-checkin-date', class: 'col-1 bg-white border-0' do%>
+              <i class="icon icon-Cross-circle"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="row border-bottom m-0">
+        <div class="col-2 customer-info-body_label"><%= t 'slip.checkout' %></div>
+        <div class="col-10">
+          <div class="row pt-4 pb-4">
+            <%= button_tag :type=>"button", id:'customer-checkout', :data=>{'target'=>'#calendarModal'}, :class=> 'js-modal-open -text-16 col-4 bg-white border-0' do%>
+            --.--.----
+            <% end %>
+            <input type="number" name="hour" autocomplete="off" id="checkout_hour" class="-text-16 col-3 border-0 text-center" oninput="if(value.length>2)value=value.slice(0,2)" placeholder="00">
+            <span class="col-1">:</span>
+            <input type="number" name="minute" autocomplete="off" id="checkout_minute" class="-text-16 col-3 border-0 text-center", oninput="if(value.length>2)value=value.slice(0,2)", placeholder="00">
+            <%= button_tag :type=>"button", id:'clear-checkout-date', class: 'col-1 bg-white border-0' do%>
+              <i class="icon icon-Cross-circle"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div id="calendar-error" class="col-12 pt-4 mt-6 d-flex justify-content-center text-danger display-none">
+        <%= t 'warning.checkout' %>
+      </div>
+      <div id="checkin-required-error" class="col-12 pt-4 mt-6 text-danger text-center", style="display: none;">
+      <%= t 'warning.checkin.required' %>
+      </div>
+      <div class="col-12 pt-4 mt-6 d-flex justify-content-center">
+        <%= button_tag :type => "button", id: 'checkin-date-confirm', :class =>"btn-base -basic -primary w-75 js-modal-close", data: {"target" => "#checkinDateModal"} do %>
+          <%= t 'ok' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <input id="selected-checkin-date" type="hidden" value="">
+  <input id="selected-checkout-date" type="hidden" value="">
+  <datalist id="hour-list">
+    <% hoursArray().each do |hour| %>
+      <option value=<%= hour %>>
+    <% end %>
+  </datalist>
+  <datalist id="minutes-list">
+    <% minsArray(15).each do |min| %>
+      <option value=<%= min %>>
+    <% end %>
+  </datalist>
+</div>
+<!-- Checkin / Checkout Date Modal -->

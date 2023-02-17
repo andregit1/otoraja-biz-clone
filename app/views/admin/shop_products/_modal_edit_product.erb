@@ -1,0 +1,148 @@
+<!-- Drawer Modal -->
+<div id="editProductModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#editProductModal"></div>
+  <div class="modal_content -drawer">
+    <div class="modal-header d-flex align-items-center">
+      <div class="modal-title text-large text-uppercase"><%= t 'admin.shop_product.edit_product' %></div>
+      <div class="col-1">
+        <i class="far fa-trash-alt text-danger text-large" id="delete-product"></i> 
+      </div>
+    </div>
+    <div class="modal-body product-info-body">
+    <p class="text-small text-color-highlight"><%= t 'admin.shop_product.form_requirement_notes' %></p>
+      <form id="update-product-form">
+        <input name="shop_product_id" type="hidden" value="">
+        <input id="admin_product_id" name="admin_product_id" class="ml-auto product_item_id" type="hidden" >
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label class="text-label"><%= t 'admin.shop_product.product_alias' %>*</label>
+            <input id="shop_alias_name" name="shop_alias_name" type="text" class="text-normal form-control">
+          </div>
+            <div class="form-group col-6">
+            <label class="text-label"><%= t 'admin.common.category' %>*</label>
+            <div>
+              <%= select_tag 'edit_product_category_id', options_for_select(@product_categories.map {|pc| [pc.name, pc.id, {'data-reminder': pc.use_reminder}]}), class: 'form-control product_category_edit' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-6 col-md-6">
+            <label class="text-label"><%= t 'admin.shop_product.store_product_no' %></label>
+            <input id="product_no" name="product_no" type="text" class="text-normal form-control">
+          </div>
+          <div class="form-group col-3 col-md-2">
+            <label class="text-label"><%= t 'admin.shop_product.availability' %></label>
+            <input id="is_use" type="checkbox" name="availability" data-on="<span class='text-normal text-color-active'><%= t 'admin.shop_product.active' %></span>" data-off="<span class='text-normal'><%= t 'admin.shop_product.inactive' %></span>" data-toggle="toggle">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-12">
+            <label class="text-label"><%= t 'admin.shop_product.product_name' %></label>
+            <select id="edit-admin-product_id" name="admin_product_id" class="form-control">
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row border-bottom mb-4 pb-2">
+          <div class="col-6">
+            <label class="text-label"><%= t 'admin.shop_product.unit_price' %>*</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Rp</div>
+              </div>
+              <input id="sales_unit_price" name="sales_unit_price" type="number" class="form-control text-normal text-right">
+            </div>
+          </div>
+          <div class="form-group col-6">
+            <label class="text-label"><%= t 'admin.shop_product.item_details' %></label>
+            <input id="item_detail" name="item_detail" type="text" class="text-normal form-control">
+          </div>
+          <div id="edit_purchase_reminder" class="form-group">
+            <label class="text-label"><%= t 'admin.shop_product.customer_reminder' %></label>
+            <div class="d-flex align-items-center">
+              <span class="text-label"><%= t 'admin.shop_product.purchase_reminder' %></span>
+              <div class="col-3 col-md-2">
+                <input id="remind_interval_day" name="remind_interval_day" type="text" class="text-normal form-control">
+              </div>
+              <span class="text-label"><%= t 'admin.common.days' %>.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Stock Section -->
+
+        <div class="text-large text-uppercase mb-3"><%= t 'admin.shop_product.stock_product' %></div>
+
+        <div class="form-group row">
+           <label class="font-weight-normal text-normal col-6 col-form-label"><%= t 'admin.shop_product.stock_count' %></label>
+           <div class="col-3 col-md-2">
+             <input id="is_stock_control" type="checkbox" name="is_stock_control" data-on="<span class='text-normal text-color-active'><%= t 'admin.shop_product.active' %></span>" data-off="<span class='text-normal'><%= t 'admin.shop_product.inactive' %></span>" data-toggle="toggle">
+           </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="font-weight-normal text-normal col-6 col-form-label"><%= t 'admin.shop_product.remind_min_stock' %></label>
+          <div class="col-3 col-md-2">
+              <input name="stock_minimum" id="stock_minimum_product" type="number" min="0" class="text-normal form-control text-right text-color-disabled" disabled>
+          </div>
+          <p class="font-weight-normal text-normal align-self-center mb-0 pr-2">pcs</p>
+          <p id="stock_minimum_status" class="text-small text-color-highlight font-weight-normal font-italic align-self-center mb-0">(aktif)</p>
+        </div>
+        
+        <div class="form-group row d-flex align-items-center">
+          <label class="text-normal col-md-6 col-6 font-weight-normal"><%= t 'admin.shop_product.stock_history' %></label>
+          <div class="form-group col-4">
+            <input type="hidden" id="start_date">
+            <input type="hidden" id="end_date">
+            <button type="button" class="pull-down-btn form-control text-normal" id="daterange-btn">
+              <div>
+                <i class="far fa-calendar-alt mr-1"></i>
+                <span>
+                 Hari ini
+                </span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </form>
+      <table class="table table-hover mt-3">
+        <thead>
+          <tr class="text-label">
+            <th class="border-top-0"><%= t 'admin.shop_product.date' %></th>
+            <th class="border-top-0 text-right"><%= t 'admin.shop_product.added' %></th>
+            <th class="border-top-0 text-right"><%= t 'admin.shop_product.stock' %></th>
+            <th class="border-top-0 text-center"><%= t 'admin.shop_product.notes' %></th>
+          </tr>
+        </thead>
+        <tbody id="purchase_history">
+        </tbody>
+      </table>
+      <div id="loading_purchase_history" class="loading p-3 hide">
+        <div class="text-center">
+          <i class="fas fa-spinner fa-spin"></i>
+        </div>
+      </div>
+      <div id="empty_data_info" class="hide">
+        <p class="text-color-disabled text-normal text-center">Belum ada data</p>
+      </div>
+    </div>
+    <div class="footer row fixed">
+      <div class="col-6">
+        <%= button_tag :type => "button", id: "cancel-update-product-button", class: "text-large btn button-secondary-active js-modal-close w-100", data: {"target" => "#editProductModal"} do %>
+          <%= t 'cancel' %>
+        <% end %>
+      </div>
+      <div class="col-6">
+        <%= button_tag :type => "button", id: "confirm-update-product-button", class: "text-large btn button-active js-modal-close w-100", data: {"target" => "#editProductModal"} do %>
+          <%= t 'admin.shop_product.save' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render "modal_confirmation" %>
+<%= render "modal_confirmation_delete_product" %>
+
+<!-- Drawer Modal -->

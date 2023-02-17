@@ -1,0 +1,2 @@
+class ShopInvoicePolicy < ApplicationPolicy
+end

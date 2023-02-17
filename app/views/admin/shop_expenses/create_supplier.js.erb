@@ -1,0 +1,5 @@
+$('#addNewExpenseModal').modal("hide");
+console.log(<%= @supplier.id %>);
+$('#shop_expense_supplier_id').append( '<option value="<%= @supplier.id %>"><%= @supplier.name %> </option>' )
+$("#shop_expense_supplier_id").val(<%= @supplier.id %>);
+$("#shop_expense_supplier_id").trigger('change');

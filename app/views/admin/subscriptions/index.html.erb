@@ -1,0 +1,236 @@
+  <h1 class="text-page-title font-weight-bold"><%= t 'admin.subscription.subscription' %></h1>
+
+  <%# SUBSCRIPTION ALERT SECTION %>
+  <% if @selected_shop.will_run_out? %>
+    <div class="alert alert-warning alert-dismissible fade show text-label" role="alert">
+      <%= t 'admin.subscription.subscription_expired_alert_html', shop_name: @selected_shop.name, days_remaining: @selected_shop.days_remaining %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <%end %>
+
+  <%# SUBSCRIPTION SECTION %>
+  <div class="card">
+    <div class="card-body p-3">
+      <div class="row text-normal">
+        <div class="col-5 col-md-3 pb-2"><%= t 'admin.common.workshop' %></div>
+        <div class="col-7 col-md-9 font-weight-bold"><%= @selected_shop.name %></div>
+        <div class="col-5 col-md-3 pb-2"><%= t 'admin.subscription.your_package' %></div>
+        <% if  @selected_shop.active_subscription.present? && @selected_shop.active_subscription.demo_period? %>
+          <div class="col-7 col-md-9 font-weight-bold"><%= t 'admin.subscription.demo_package_name' %></div>
+        <% else %>
+          <div class="col-7 col-md-9 font-weight-bold"><%= t 'admin.subscription.monthly_package', period: @selected_shop.subscription_period != 1 ? @selected_shop.subscription_period : "" %></div>
+        <% end %>
+        <div class="col-5 col-md-3 pb-2"><%= t 'admin.subscription.until' %></div>
+        <div class="col-7 col-md-9 font-weight-bold"><%= formatedDateUseDash(@selected_shop.expiration_date) if @selected_shop.expiration_date.present? %></div>
+        <div class="col-5 col-md-3"><%= t 'admin.subscription.status' %></div>
+        <div class="col-7 col-md-9 font-weight-bold">
+
+        <% if @selected_shop.have_active_plan? %>
+          
+          <%# NON SUBSCRIBE / SUSPEND %>
+          <% if @selected_shop.non_subscriber? %>
+            <% if @selected_shop.status_processing? %>
+              <span class="badge badge-warning badge-pill p-1 d-inline-block"></span>
+              <%= t 'admin.subscription.subscription_status.process' %>
+            <% elsif @selected_shop.payment_pending? && !@selected_shop.payment_expired? %>
+              <span class="badge badge-purple badge-pill p-1 d-inline-block"></span>
+              <%=  t 'admin.subscription.subscription_status.payment_pending' %>
+            <% elsif @selected_shop.payment_gateway_expired? %>
+              <p class="font-weight-normal m-0 text-danger d-flex align-items-center">
+                <span class="badge badge-danger badge-pill mr-1 p-1 d-inline-block"></span>
+                <%= t 'admin.subscription.subscription_status.payment_expired' %>
+              </p>
+            <% else %>
+              <span class="badge badge-danger badge-pill p-1 d-inline-block"></span>
+               <%= t 'admin.subscription.subscription_status.suspend' %>
+            <% end %>
+          <% end %>
+        
+          <%# SUBSCRIBE / DEMO %>
+          <% if @selected_shop.subscriber? %>
+            <% if @selected_shop.status_processing? %>
+              <span class="badge badge-warning badge-pill p-1 d-inline-block"></span>
+              <%= t 'admin.subscription.subscription_status.process' %>
+            <% elsif @selected_shop.payment_pending? %>
+              <span class="badge badge-purple badge-pill p-1 d-inline-block"></span>
+              <%=  t 'admin.subscription.subscription_status.payment_pending' %>
+            <% elsif @selected_shop.payment_gateway_expired?  %>
+              <p class="font-weight-normal m-0 text-danger d-flex align-items-center">
+                <span class="badge badge-danger badge-pill mr-1 p-1 d-inline-block"></span>
+                <%= t 'admin.subscription.subscription_status.payment_expired' %>
+              </p>
+            <% elsif @selected_shop.in_grace_period? && !@selected_shop.cancelled? %>
+              <span class="badge badge-warning badge-pill p-1 d-inline-block"></span>
+              <%= t 'admin.subscription.subscription_status.date_left' %>
+            <% elsif @selected_shop.demo_period? %>
+              <span class="badge badge-success badge-pill p-1 d-inline-block"></span>
+              <%= t 'admin.subscription.subscription_status.active' %>
+            <% end %>
+          <% end %>
+        
+          <%# SUBSCRIBE / ACTIVE %>
+          <% if @selected_shop.paid_subscriber? %>
+            <% if @selected_shop.status_processing? %>
+              <span class="badge badge-warning badge-pill p-1 d-inline-block"></span>
+              <%= t 'admin.subscription.subscription_status.process' %>
+            <% elsif @selected_shop.payment_pending? || @selected_shop.payment_gateway_renewal? %>
+              <span class="badge badge-purple badge-pill p-1 d-inline-block"></span>
+              <%=  t 'admin.subscription.subscription_status.payment_pending' %>
+            <% elsif @selected_shop.payment_gateway_expired? %>
+              <p class="font-weight-normal m-0 text-danger d-flex align-items-center">
+                <span class="badge badge-danger badge-pill mr-1 p-1 d-inline-block"></span>
+                <%= t 'admin.subscription.subscription_status.payment_expired' %>
+              </p>
+            <% elsif @selected_shop.in_grace_period? && !@selected_shop.cancelled? %>
+              <span class="badge badge-warning badge-pill p-1 d-inline-block"></span>
+              <%= t 'admin.subscription.subscription_status.date_left' %>
+            <% elsif @selected_shop.finalized? %>
+              <span class="badge badge-success badge-pill p-1 d-inline-block"></span>
+              <%= t 'admin.subscription.subscription_status.active' %>
+            <% end %>
+          <% end %>
+
+        <% end %>
+
+        </div>
+      </div>
+
+      <%# RECEIPT UPLOAD %>
+      <% if @selected_shop.receipt_upload_active? %>
+        <div class="text-label border-top mt-3 pt-3">
+          <% if @selected_shop.active_subscription.payment_receipt.attached? %>
+            <div class="row">
+              <div class="col-5 col-md-3"><%= t 'admin.subscription.payment_proof' %></div>
+              <div class="col-7 col-md-9 font-weight-bold">
+                <span class="font-weight-bold"><%= @selected_shop.active_subscription.payment_receipt.filename %></span>
+                <%= link_to admin_subscriptions_payment_proof_path(@selected_shop.active_plan) do %>
+                  <u><%= t 'admin.subscription.change' %></u>
+                <% end %>
+              </div>
+            </div>
+          <% else %>
+            <span class="font-weight-bold pl-2"><%= t 'admin.subscription.already_paid' %></span>
+            <%= link_to admin_subscriptions_payment_proof_path(@selected_shop.active_plan) do %>
+              <u><%= t 'admin.subscription.upload_receipt' %></u>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+
+  <div class="row px-2">
+
+    <%# DETAIL BUTTON %>
+    <% if @selected_shop.have_active_plan? && !@selected_shop.demo_period? %>      
+      <% if @selected_shop.payment_gateway_expired? || @selected_shop.payment_gateway_renewal? %>
+        <%= form_with model: @selected_shop.active_subscription, url: admin_subscription_plan_continue_payment_path, method: :post, local: true do |form| %>
+          <%= form.hidden_field :shop_id, value: @selected_shop.active_subscription&.shop_id %>
+          <%= form.hidden_field :plan, value: Subscription.plans[@selected_shop.active_subscription&.plan] %>
+          <%= form.hidden_field :fee, value: @selected_shop.active_subscription&.fee.to_i %>
+          <%= form.hidden_field :period, value: Subscription.periods[@selected_shop.active_subscription&.period] %>
+          <%= form.submit t('admin.subscription.payment'), class: "btn button-active text-normal mr-2" %>
+        <% end %>
+      <% else %>
+          <%= link_to admin_subscriptions_details_path, class: "btn button-secondary-active text-normal mr-2" do %>
+            <%= t 'admin.subscription.detail' %>
+          <% end %>
+      <% end %>
+    <% end %>
+
+    <%# SUBSCRIPTION START %>
+    <% if @selected_shop.start_subscribing? %>
+      <%= link_to admin_subscription_plan_new_path(@selected_shop.id), class: "btn button-active text-normal mr-2" do %>
+        <%= t 'admin.subscription.select_packet' %>
+      <% end %>
+    <% end %>
+
+    <%# CHANGE PLAN SUBSCRIPTION %>
+    <% if @selected_shop.active_subscription.present? %>
+      <% if @selected_shop.change_plan_time? %>
+        <%= link_to admin_subscription_change_plan_path(@selected_shop.id), class: "btn button-secondary-active text-normal" do %>
+          <%= t 'admin.subscription.change_plan' %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+  </div>
+
+  <%# SUBSCRIPTION HISTORY SECTION %>
+  <h1 class="text-page-title font-weight-bold mt-3"><%= t 'admin.subscription.history' %></h1>
+  <div class="card">
+    <div class="card-body table-responsive p-0">
+      <table class="table text-small table-content-fit">
+        <thead>
+          <tr>
+            <th><%= t 'admin.common.payment_date' %></th>
+            <th><%= t 'admin.common.description' %></th>
+            <th class="text-nowrap"><%= t 'admin.common.total_money' %></th>
+            <th><%= t 'admin.common.proof' %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @subscription_history.each do | plan_shop | %>
+          <tr>
+            <td>
+              <%= formatedDateUseDash(plan_shop.payment_date) if plan_shop.payment_date.present? %>
+            </td>
+            <td>
+              <%= "#{plan_shop.shop.name} Otoraja Biz" %><br>
+              <% if plan_shop.demo_period? %>
+                <%= t 'admin.subscription.subscription_status.demo' %>
+              <% else %>
+                <%= t 'admin.subscription.history_description' %> 
+              <% end %>
+              <%= Subscription.periods[plan_shop.period] %> 
+              <%= t 'admin.common.month' %> <br>
+              <%= "#{formatedDateUseDash(plan_shop.start_date)} s.d #{formatedDateUseDash(plan_shop.end_date - 1.day)}" if plan_shop.start_date.present? %> 
+            </td>
+            <td>
+              <%= formatedRupiah(plan_shop.fee) %>
+            </td>
+            <td>
+              <% unless plan_shop.demo_period? %>
+                <%= link_to admin_subscriptions_show_path(plan_shop.id),:class => "btn btn-primary" do %>
+                  <i class="fas fa-receipt"></i></a>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <%# SUBSCRIPTION EXTENSION SECTION %>
+  <h1 class="text-page-title font-weight-bold"><%= t 'admin.subscription.extension_history' %></h1>
+  <div class="card mb-5">
+    <div class="card-body table-responsive p-0">
+      <table class="table text-small table-content-fit">
+        <thead>
+          <tr>
+            <th><%= t 'admin.common.payment_date' %></th>
+            <th><%= t 'admin.common.description' %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @extension_history.each do | extension | %>
+          <tr>
+            <td>
+              <%= formatedDateUseDash(extension.created_at)%>
+            </td>
+            <td>
+              <p class="m-0"><%= t 'admin.subscription.extension' %></p>
+              <%= extension.shop.name %><br>
+              <%= "#{formatedDateUseDash(extension.start_date)} s.d #{formatedDateUseDash(extension.end_date)}" if extension.start_date.present? %> 
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

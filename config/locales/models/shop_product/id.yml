@@ -1,0 +1,21 @@
+id:
+  enums:
+    shop_product:
+      sort:
+        latest: 'Terbaru'
+        oldest: 'Terlama'
+        alphabet: 'A-Z'
+        back_alphabet: 'Z-A'
+        stock_high: 'Stok Tertinggi'
+        stock_low: 'Stok Terendah'
+        price_high: 'Harga Tertinggi'
+        price_low: 'Harga Terendah'
+        stock_ratio_high: 'Stok Aman'
+        stock_ratio_low: 'Stok Menipis'
+      use:
+        'yes': 'Iya'
+        'no': 'Tidak'
+        'all': 'Semua'
+  activerecord:
+    models:
+      shop_product: 'ShopProduct'

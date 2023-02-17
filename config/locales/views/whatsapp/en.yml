@@ -1,0 +1,8 @@
+en:
+  whatsapp:
+    text:
+      short_product: |
+        Hello %{shop_name}, 
+        here is a report on the low stock in your workshop from OTORAJA Biz services.
+        %{line_break}
+        

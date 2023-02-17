@@ -1,0 +1,33 @@
+<% content_for(:title, t('console.customer.reviews')) %>
+<%= render 'nav' %>
+<% unless @answers.empty? %>
+  <%= paginate @answers %>
+  <div class="card card-secondary">
+    <div class="card-body p-0">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th><%= t 'console.common.shop' %></th>
+            <th><%= t 'console.common.rate' %></th>
+            <th><%= t 'console.common.comment' %></th>
+            <th><%= t 'console.customer.date' %></th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @answers.each do |answer| %>
+        <tr>
+          <td><%= answer.questionnaire.checkin.shop.name %></td>
+          <td><div class='star-<%= answer.rate %> answer-raty'></div></td>
+          <td><%= answer.comment.gsub(/\n/, ' ').truncate(30) %></td>
+          <td><%= formatedDateTime(answer.answered_at, 'Jakarta') %></td>
+          <td>
+          <%= link_to console_answer_path(answer), :class => 'btn btn-primary' do %><i class="fas fa-eye"></i> <%= t 'console.common.show' %></a><% end %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<% else %>
+<div class='m-3'><%= t 'console.common.no_review' %></div>
+<% end %>

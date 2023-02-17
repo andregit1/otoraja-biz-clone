@@ -1,0 +1,44 @@
+
+<div class="card card-widget">
+  <div class="card-header" data-card-widget="collapse">
+    <h3 class="card-title">
+      <i class="fas fa-chevron-down"></i>
+      <i class="fas fa-chevron-up"></i>
+      <%= t('console.common.filter') %>
+    </h3>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <%= search_form_for @q, url:console_subscriptions_path, class: 'd-flex align-items-end search-form' do |f| %>
+      <%= hidden_field_tag :sort %>
+      <div class="form-group mr-3 w-25">
+        <%= label_tag :select_shop_group, "Owner", id: 'lbl_shop_group' %>
+        <div>
+          <%= select_tag "shop_group_id_eq", options_from_collection_for_select(@shop_groups, :id, :name, selected: @select_shop_group), include_blank: true, class: 'form-control form-control-sm' %>
+        </div>
+      </div>
+      <div class="form-group mr-3 w-25">
+        <%= label_tag :select_status, "Status", id: 'lbl_shop' %>
+        <div>
+          <%= select_tag "status_eq", options_for_select(@statuses, selected: @select_status), include_blank: true, class: 'form-control form-control-sm' %>
+        </div>
+      </div>
+      <div class="form-group mr-3 w-25">
+        <%= label_tag :select_plan, "Plan", id: 'lbl_shop' %>
+        <div>
+          <%= select_tag "plan_eq", options_from_collection_for_select(@plans, :id, :name, selected: @select_plan), include_blank: true, class: 'form-control form-control-sm' %>
+        </div>
+      </div>
+      <div class="form-group mr-3 w-25">
+        <%= label_tag :select_period, "Period", id: 'lbl_shop' %>
+        <div>
+          <%= select_tag "period_eq", options_from_collection_for_select(@periods, :period, :label, selected: @select_period), include_blank: true, class: 'form-control form-control-sm' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Search" , class: 'btn btn-primary'%>
+      </div> 
+    <% end %>
+  </div>
+  <!-- /.card-body -->
+</div>

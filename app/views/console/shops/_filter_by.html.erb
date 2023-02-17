@@ -1,0 +1,25 @@
+<div class="card-header">
+  <div class="d-flex">
+    <%= search_form_for @q, url:console_shops_path, class: 'd-flex align-items-end' do |f| %>
+    <div class="form-group mr-3">
+      <%= f.label :status %>
+      <div>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-outline-primary">
+            <%= f.radio_button :subscriber_type, :null, id: 'subscriber_all_filter', class: '', autocomplete: 'off' %> Semua
+          </label>
+          <label class="btn btn-outline-primary">
+            <%= f.radio_button :subscriber_type, :subscriber, id: 'subscriber_filter', class: '', autocomplete: 'off' %> <%= Shop.human_attribute_name('subscriber_type.subscriber') %>
+          </label>
+          <label class="btn btn-outline-primary">
+            <%= f.radio_button :subscriber_type, :non_subscriber, id: 'paid_subscriber_filter', class: '', autocomplete: 'off' %> <%= Shop.human_attribute_name('subscriber_type.paid_subscriber') %>
+          </label>
+          <label class="btn btn-outline-primary">
+            <%= f.radio_button :subscriber_type, :subscriber, id: 'non_subscriber_filter', class: '', autocomplete: 'off' %> <%= Shop.human_attribute_name('subscriber_type.non_subscriber') %>
+          </label>
+        </div>  
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

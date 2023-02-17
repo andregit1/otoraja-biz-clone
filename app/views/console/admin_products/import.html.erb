@@ -1,0 +1,6 @@
+<% content_for(:title, 'Admin Product Import') %>
+<div class="card">
+  <%= form_with model: @admin_product_upload, url: console_admin_products_import_confirm_path, multipart: true, local: true do |form| %>
+    <%= render 'form_upload', {admin_product_upload: @admin_product_upload, f: form} %>
+  <% end %>
+</div>

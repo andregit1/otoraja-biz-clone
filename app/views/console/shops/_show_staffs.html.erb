@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title"><%= t 'console.common.staff' %></div>
+    <div class="d-flex justify-content-end">
+      <%= link_to new_console_shop_staff_path(shop_id: @shop.id), :class => 'btn btn-primary' do %>
+        <i class="fas fa-plus"></i> <%= t 'console.shop_staff.add_staff' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t 'console.common.name' %></th>
+          <th><%= t 'console.shop_staff.front_staff' %></th>
+          <th><%= t 'console.common.mechanic' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @shop.shop_staffs.each do |staff| %>
+          <tr class="<%= 'bg-secondary' unless staff.active? %>">
+            <td><%= staff.name %></td>
+            <td>
+              <% if staff.is_front_staff? %>
+              <span class="text-success"><i class="far fa-check-circle"></i></span>
+              <% else %>
+              <span class="text-danger"><i class="fas fa-ban"></i></span>
+              <% end %>
+            </td>
+            <td>
+              <% if staff.is_mechanic? %>
+              <span class="badge badge-pill badge-primary"><%= staff.mechanic_grade %></span>
+              <% else %>
+              <span class="text-danger"><i class="fas fa-ban"></i></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<% content_for(:title, t('admin.shop_product.admin_product')) %>
+<%= render 'search' %>
+
+<div class="card">
+  <div class="card-header">
+    <a href="#" id="selectAll" class="btn btn-success btn-sm"><%= t 'admin.admin_product.select_all' %></a>
+    <a href="#" id="deselectAll" class="btn btn-warning btn-sm"><%= t 'admin.admin_product.deselect_all' %></a>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-hover">
+      <div id="product_list"></div>
+    </table>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex justify-content-between">
+      <div>
+        <a class="btn btn-outline-primary footer-btn mr-2" href="/admin/shop_products"><%= t 'admin.common.back' %></a>
+      </div>
+      <div class="d-flex align-items-end">
+        <% if @shops.length == 1 %>
+        <%= hidden_field_tag 'select_shop',@shops.first.id %>
+        <% else %>
+        <div class="mr-2">
+          <%= label_tag :select_shop, t('admin.admin_product.insert_to') %>
+          <%= select_tag 'select_shop', options_from_collection_for_select(@shops, :id, :name), class: 'form-control' %>
+        </div>
+        <% end %>
+        <div>
+          <button class="btn footer-btn-update text-white mr-2" id="import"><%= t 'admin.admin_product.import' %></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input id="label-imported" type="hidden" value="<%= t 'admin.admin_product.imported' %>">
+<input id="label-category" type="hidden" value="<%= t 'admin.common.category' %>">
+<input id="label-name" type="hidden" value="<%= t 'admin.common.name' %>">
+<input id="label-product_no" type="hidden" value="<%= t 'admin.shop_product.admin_product_no' %>">
+<input id="label-item_detail" type="hidden" value="<%= t 'admin.common.item_detail' %>">
+<input id="label-brand" type="hidden" value="<%= t 'console.common.brand' %>">
+<input id="label-variant" type="hidden" value="<%= t 'console.common.variant' %>">
+<input id="label-tech_spec" type="hidden" value="<%= t 'console.common.tech_spec' %>">
+<input id="label-remind_interval_day" type="hidden" value="<%= t 'admin.common.remind_interval_day' %>">
+<input id="label-created_at" type="hidden" value="<%= t 'admin.admin_product.created_date' %>">

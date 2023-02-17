@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= t('console.whatsapp.service')%></th>
+          <th><%= t('console.whatsapp.template')%></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @whats_app_services.each do |service| %>
+        <%= fields_for "whats_app_services[]", service do |f|%>
+        <tr>
+          <td>
+              <%= f.hidden_field :whats_app_service_id, :value => service.id %>
+              <%= service.name %>
+          </td>
+          <td>
+            <%= f.select :id, @whats_app_available_templates, {:include_blank => true, :selected => service.whats_app_template_id}, {:class=>'form-control select2'} %>
+          </td>
+        </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex justify-content-end">
+      <div class="ml-auto">
+        <%= submit_tag t('console.common.save'), class: 'btn footer-btn-update text-white' %>
+      </div>
+    </div>
+  </div>
+</div>

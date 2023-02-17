@@ -1,0 +1,94 @@
+<div class="card-body">
+  <% if @notification.errors.any? %>
+    <div class="alert alert-danger alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <h5><i class="fas fa-ban"></i> <%= pluralize(@notification.errors.count, "error") %> prohibited this notification from being saved:</h5>
+      <ul>
+      <% @notification.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :subject %>
+    <%= f.text_field :subject, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: "form-control", rows: 10 %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :status %>
+    <div class="row">
+      <div class="col-lg-2">
+      <%= f.select :status, Notification.statuses.keys.to_a, {}, {class: 'form-control'} %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :notification_tags, 'tags' %>
+    <div class="mb-2">
+      <%= f.fields_for :notification_tag_relations do |tag| %>
+        <%= render 'notification_tag_relation_fields', f: tag %>
+      <% end %>
+      <div>
+        <%= link_to_add_association f, :notification_tag_relations, data: {'association-insertion-method' => 'before'}, class: 'btn btn-success btn-block' do %><i class="fas fa-plus-circle"></i> Add Tag<% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <%= f.label :published_from %>
+        <%= f.text_field :published_from, class: "form-control", value: @notification.published_from&.strftime("%d/%m/%Y %H:%M") %>
+      </div>
+      <div class="col-12 col-md-4">
+        <%= f.label :published_to %>
+        <%= f.text_field :published_to, class: "form-control", value: @notification.published_to&.strftime("%d/%m/%Y %H:%M") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group" style="display:none">
+    <%= f.label :notification, t('console.notification.form.display_shops') %>
+    <div class="row">
+      <div class="col-12">
+        <%= collection_check_boxes(:notification, :shop_ids, Shop.pilot_shops, :id, :name) do |b| %>
+          <div class="form-check form-check-inline">
+            <% if controller.action_name.in?(['new']) %>
+              <%= b.label { b.check_box(checked: true) + b.text } %>
+            <% else %>
+              <%= b.label { b.check_box + b.text } %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="card-footer">
+  <div class="row">
+    <div class="col-5 ">
+      <% if controller.action_name.in?(['edit', 'update']) %>
+        <%= link_to console_notification_path(@notification),class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-7 text-right">
+      <%= link_to t('console.common.back'), console_notifications_path, class: 'btn btn-default' %>
+      <% if controller.action_name.in?(['new', 'create']) %>
+        <%= f.submit t('console.common.regist'), :class=>'btn btn-primary' %>
+      <% else %>
+        <%= f.submit t('console.common.update'), :class=>'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

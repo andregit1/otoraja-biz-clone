@@ -1,0 +1,38 @@
+<% content_for(:title, t('console.sidebar.bikes')) %>
+
+<%= render 'search' %>
+
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= t 'console.common.maker' %></th>
+          <th><%= t 'console.common.model' %></th>
+          <th><%= t 'console.bike.color' %></th>
+          <th><%= t 'console.bike.number' %></th>
+          <th><%= t 'console.bike.expiration' %></th>
+          <th><%= t 'console.bike.owner' %></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @bikes.each do |bike| %>
+        <tr>
+          <td><%= bike.maker %></td>
+          <td><%= bike.model %></td>
+          <td><%= bike.color %></td>
+          <td><%= bike.owned_bike.formated_number_plate if bike.owned_bike.has_number_plate %></td>
+          <td><%= bike.owned_bike.formated_expiration if bike.owned_bike.has_expiration%></td>
+          <td>
+            <%= link_to console_customer_show_path(bike.owned_bike.customer),:class => "btn btn-default" do %>
+              <i class="fa fa-user"></i>
+            <% end if bike.owned_bike.customer.present? %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= paginate @bikes, window: 1 %>

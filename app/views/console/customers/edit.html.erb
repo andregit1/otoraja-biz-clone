@@ -1,0 +1,21 @@
+<% content_for(:title, t('console.customer.edit')) %>
+
+<%= form_with(model: @customer, url:console_customer_update_path, local: true) do |f| %>
+  <div class="card card-secondary">
+    <div class="card-header">
+      <span><%= t 'console.common.config' %></span>
+    </div>
+    <div class="card-body p-0">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th class="align-middle"><%= t 'console.common.send_dm' %></th>
+            <td><%= f.check_box :send_dm, data: {toggle: 'toggle'} %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <%= f.submit t('console.common.save'), :class=>'btn btn-primary' %>
+<% end %>

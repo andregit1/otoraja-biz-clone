@@ -1,0 +1,55 @@
+<div class="card-body">
+  <div class="form-group">
+    <p class="text-small text-color-highlight"><%= t('admin.shop_staff.form_requirement_notes') %></p>
+    <%= f.label :name, t('admin.shop_staff.staff_name'), :class=>'text-label' %>
+    <%= f.text_field :name, :class=>'form-control', autocomplete: 'off', required: true %>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-4 col-md-2">
+      <%= f.label :is_front_staff, t('admin.shop_staff.front_staff'), :class=>'text-label' %>
+      <div class="custom-toggle">
+        <%= f.check_box :is_front_staff, :class=>'form-control', autocomplete: 'off', data: {toggle: 'toggle', on: "<span class='text-normal text-color-active'>Ya</span>", off: "<span class='text-normal'>Tidak</span>"} %>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-4 col-md-2">
+        <%= f.label :is_mechanic, t('admin.common.mechanic'), :class=>'text-label' %>
+        <div class="custom-toggle">
+          <%= f.check_box :is_mechanic, :class=>'form-control', autocomplete: 'off', data: {toggle: 'toggle', on: "<span class='text-normal text-color-active'>Ya</span>", off: "<span class='text-normal'>Tidak</span>"} %>
+        </div>
+    </div>
+    <div class="form-group col-4 col-md-2">
+      <%= f.label :mechanic_grade, t('admin.shop_staff.mechanic_grade'), :class=>'text-label' %>
+      <%= f.select :mechanic_grade, 1..10, {selected: 5}, {:class=>'form-control use-select2', autocomplete: 'off'} %>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-4 col-md-2">
+      <%= f.label :active, t('admin.shop_staff.active'), :class=>'text-label' %>
+      <div class="custom-toggle">
+        <%= f.check_box :active, :class=>'form-control', autocomplete: 'off', data: {toggle: 'toggle', on: "<span class='text-normal text-color-active'>Ya</span>", off: "<span class='text-normal'>Tidak</span>"} %>
+      </div>
+    </div>
+  </div>
+  <% if current_user.admin? %>
+  <div class="form-group">
+    <%= f.label :available_shops, t('admin.shop_staff.shop'), :class=>'text-label' %>
+    <%= f.select :shop_id, Shop.all.pluck(:name, :id), {:include_blank => true}, {:class=>'form-control use-select2', required: true} %>
+  </div>
+  <% elsif @shops.length > 1 %>
+  <div class="form-group">
+    <%= f.label :available_shops, t('admin.shop_staff.shop'), :class=>'text-label' %>
+    <%= f.select :shop_id, @shops.pluck(:name, :id), {:include_blank => true}, {:class=>'form-control use-select2', required: true} %>
+  </div>
+  <% else %>
+    <%= f.hidden_field :shop_id, :value => @shops.first.id %>
+  <% end %>
+
+</div>
+<div class="card-footer">
+  <div class="d-flex justify-content-between">
+    <%= link_to t('admin.common.back'), admin_shop_staffs_path, class: 'btn btn-default text-large' %>
+    <%= f.submit t('admin.common.update'), :class=>'btn btn-primary text-large' %>
+  </div>
+</div>

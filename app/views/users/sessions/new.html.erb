@@ -1,0 +1,81 @@
+<div class="view d-flex justify-content-center align-items-center h-100">
+  <div class="login-box">
+    <div class="login-logo">
+      <h1><%= image_tag  "logo.svg", width: '90%' %></h1>
+    </div>
+    <!-- /.login-logo -->
+    <%= render "layouts/flash" %>
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg text-left pl-0"><%= t('admin.notification.brief') %></p>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="input-group mb-3">
+            <%= f.text_field :user_id, id: 'user_id_field', autofocus: true, autocomplete: "user_id", class: 'form-control', placeholder: 'User ID' %>
+          </div>
+          <div class="input-group mb-3">
+            <%= f.password_field :password, id: 'password_field', autocomplete: "current-password", class: 'form-control', placeholder: 'Password' %>
+          </div>
+          <div class="row">
+            <% if devise_mapping.rememberable? %>
+            <div class="col-6">
+              <div class="mt-3 form-check">
+                <%= f.check_box :remember_me, class: 'form-check-input' %>
+                <%= f.label :remember_me, 'Ingat Saya', class: 'form-check-label' %>
+              </div>
+            </div>
+            <% end %>
+            <!-- /.col -->
+            <div class="col-6">
+              <%= f.submit t("admin.common.enter"), id: 'button_login', class: 'btn-base -basic -primary', disabled: true %>
+            </div>
+            <!-- /.col -->
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <br/><button type="button" class="p-0 btn btn-link text-forget-password text-small" data-toggle="modal" data-target="#forgetPasswordModal">Lupa password?</button>
+            </div>
+          </div>
+        <% end %>
+
+        <%#= render "devise/shared/links" %>
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+    <div class="login-logo">
+      <%= link_to "", new_register_path, class: "get-account-banner" %>
+      <div class="row align-items-center mt-2 pl-2">
+        <div class="col-6 col-md-8">
+          <p class="text-very-small text-left mb-0"><%= t('users.sign_in.install_app') %></p>
+        </div>
+        <div class="col-6 col-md-4 pl-0">
+          <a href="https://play.google.com/store/apps/details?id=id.co.otoraja.otoraja_biz_front_app&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"  target="_blank">
+            <%= image_tag 'https://play.google.com/intl/en_us/badges/static/images/badges/id_badge_web_generic.png', class: 'img-fluid', alt: 'Temukan di Google Play' %>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="forgetPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgetPasswordModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 380px;">
+    <div class="py-4 modal-content forget-password-radius">
+      <div class="modal-body login-card-body">
+        <p class="text-center text-normal text-orange font-weight-bold">Lakukan Reset Password</p><br/>
+        <p class="text-label text-center">Hubungi tim Otoraja Biz untuk meminta reset password melalui salah satu cara di bawah ini</p>
+        <div class="mb-3 mt-3 text-center">
+          <%= link_to 'Kirim pesan via Whatsapp', 
+            'https://api.whatsapp.com/send?phone=6285156806558&text=Halo,%20mohon%20bantuannya%20untuk%20mengubah%20password%20OTORAJA%20saya.%20Berikut%20informasinya%20(harap%20diganti)%20userID,%20nama%20bengkel%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B', 
+            target: :_blank,
+            :class => "center-modal-sendwa text-label font-weight-bold"  
+          %>
+        </div>
+        <p class="m-0 text-label text-center">atau email ke</p>
+        <p class="center-modal-sendwa text-center text-label font-weight-bold"><u>cs@otoraja.co.id</u></p>
+      </div>
+      <div class="border-0 justify-content-center modal-footer">
+        <button type="button" class="px-5 btn button-active color-primary-important" data-dismiss="modal"><%= t("admin.common.close") %></button>
+      </div>
+    </div>
+  </div>
+</div>

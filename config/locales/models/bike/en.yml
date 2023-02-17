@@ -1,0 +1,7 @@
+en:
+  bike:
+    notice:
+      successful_bike_updated: 'Bike was successfully updated'
+      unsuccessful_bike_updated: 'Bike was unsuccessfully updated'
+      successful_bike_destoyed: 'Bike was successfully deleted'
+      unsuccessful_bike_destroyed: 'Bike was unsuccessfully deleted'

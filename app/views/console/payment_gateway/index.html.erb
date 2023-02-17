@@ -1,0 +1,41 @@
+<% content_for(:title, t('console.payment_gateway.payment_gateway_settings')) %>
+
+<%= form_with(model: @payment_gateways, url: console_payment_gateway_update_path, method: :post, local: true) do |f| %>
+<div class="card">
+  <div class="card-body">
+    <div class="payment-gateways">
+      <% @payment_gateways.each do |payment_gateway| %>
+        <div class="payment_gateway mb-5">
+          <%= fields_for "payment_gateway[id][]", payment_gateway  do |fpg| %>
+          <div class="form-group row">
+            <label class="font-weight-normal text-normal col-5 col-md-3 col-lg-3 col-form-label">
+              <%= t 'console.payment_gateway.activate' %> <%= payment_gateway.name %>
+            </label>
+            <div class="col-4 col-md-2 col-lg-2" id="payment_toggle">
+              <%= fpg.check_box :is_active, {class: 'payment_gateway_status', data: { 
+                is_active: payment_gateway.is_active,
+                on: "<span class='text-normal text-color-active'>#{t('console.shop_product.active')}</span>", 
+                off: "<span class='text-normal'>#{t('console.shop_product.inactive')}</span>",
+                toggle: 'toggle'}
+              }%>
+            </div>
+          </div>
+          <div class="payment_method hide mb-5">
+            <hr>
+            <p class="font-weight-normal text-normal"><%= t 'console.payment_gateway.payment_method' %></p>
+            <div class="payment_types">
+              <% payment_gateway.payment_types.each do |pt| %>
+              <%= fpg.fields_for 'payment_types_attributes[]', pt do |fpt| %>
+              <%= render 'payment_types_form_field', {f: fpt} %>
+              <%end%>
+              <%end %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<button class="text-large btn button-active mb-2" type="submit"><%= t 'admin.shop_setting.save' %></button>
+<% end %>

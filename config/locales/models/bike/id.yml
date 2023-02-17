@@ -1,0 +1,7 @@
+id:
+  bike:
+    notice:
+      successful_bike_updated: 'Data motor berhasil diubah'
+      unsuccessful_bike_updated: 'Data motor gagal diubah'
+      successful_bike_destroyed: 'Sepeda motor berhasil di hapus'
+      unsuccessful_bike_destroyed: 'Sepeda motor gagal di hapus'

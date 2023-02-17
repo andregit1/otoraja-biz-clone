@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-center align-items-center h-100">
+  <div class="login-box">
+    <div class="login-logo">
+      <h1><%= image_tag  "logo.svg", width: '200' %></h1>
+      <p class="brand-color">Management Console</p>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Masuk</p>
+
+        <%= form_for(resource, as: resource_name, url: new_management_session_path) do |f| %>
+          <div class="input-group mb-3">
+            <%= f.text_field :user_id, autofocus: true, autocomplete: "user_id", class: 'form-control', placeholder: 'User ID' %>
+          </div>
+          <div class="input-group mb-3">
+            <%= f.password_field :password, autocomplete: "current-password", class: 'form-control', placeholder: 'Password' %>
+          </div>
+          <div class="row">
+            <% if devise_mapping.rememberable? %>
+            <div class="col-8">
+              <div class="form-check">
+                <%= f.check_box :remember_me, class: 'form-check-input' %>
+                <%= f.label :remember_me, 'Ingat Kode sandi', class: 'form-check-label' %>
+              </div>
+            </div>
+            <% end %>
+            <!-- /.col -->
+            <div class="col-4">
+              <%= f.submit "Masuk", class: 'btn-base -basic -primary' %>
+            </div>
+            <!-- /.col -->
+          </div>
+        <% end %>
+
+        <%#= render "devise/shared/links" %>
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
+</div>

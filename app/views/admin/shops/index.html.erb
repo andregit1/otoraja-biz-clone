@@ -1,0 +1,40 @@
+<h1 class="text-page-title font-weight-bold"><%= t 'admin.common.workshop_list' %></h1>
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <% if current_user.admin_roles? %>
+    <%= link_to admin_shops_scope_path('all'), :class => 'btn btn-primary' do %><%= t 'admin.shop.all_bengkel' %><% end %>
+    <%= link_to admin_shops_path, :class => 'btn btn-primary' do %><%= t 'admin.shop.managed_bengkel' %><% end %>
+    <% end %>
+    <%= paginate @shops %>
+    <table class="table table-content-fit text-small">
+      <thead>
+        <tr>
+          <th><%= t 'admin.common.workshop' %></th>
+          <th><%= t 'admin.common.address_tel' %></th>
+          <th><%= t 'admin.common.detail' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @shops.each do |shop| %>
+        <tr>
+          <td class="text-nowrap">
+            <%= shop.name %>
+            <br>
+            <%= "(ID: #{shop.bengkel_id})" %>
+          </td>
+          <td>
+            <%= shop.address %>
+            <br>
+            <%= shop.tel %>
+          </td>
+          <td>
+            <%= link_to admin_shops_show_path(shop), :class => 'btn btn-primary text-small' do %>
+              <i class="fas fa-eye"></i>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

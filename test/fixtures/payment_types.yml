@@ -1,0 +1,11 @@
+default:
+  payment_type_id: 1
+  payment_gateway: default
+  name: 'gopay'
+  title: 'GoPay'
+  payment_instruction: 'gopay_instructions_html'
+  icon_path: 'assets/images/logo-gopay.png'
+  is_use_all: 1
+  is_active: 1
+  shop_list: 1
+  expiration_interval: 1

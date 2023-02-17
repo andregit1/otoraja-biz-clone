@@ -1,0 +1,18 @@
+<div class="nested-fields">
+  <div class="form-row">
+    <div class="form-group col-6">
+      <%= f.collection_select :inclusion_product_id, @includable_products, :id, :category_shop_alias_name, { :include_blank => false }, { :class => 'form-control mr-2' } %>
+    </div>
+    <div class="form-group col-4 col-md-3">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Qt</div>
+        </div>
+        <%= f.text_field :quantity, :class => 'form-control mr-2 text-right', autocomplete: 'off' %>
+      </div>
+    </div>
+    <div class="form-group col-1">
+      <%= link_to_remove_association f, class: 'btn btn-danger' do %><i class="icon icon-Cross-circle"></i><% end %>
+    </div>  
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<% content_for(:title, t('console.common.edit') + " #{@shop_config.shop.name} " + t('console.common.config')) %>
+
+<div class="card">
+    <%= form_with(model: @shop_config, url:console_shop_config_path(@shop_config), local: true) do |form| %>
+    <%= render 'form', {config: @shop_config, shop: @shop, f: form} %>
+    <% end %>
+</div>

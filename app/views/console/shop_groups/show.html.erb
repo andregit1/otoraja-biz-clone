@@ -1,0 +1,155 @@
+<% content_for(:title, @shop_group.name) %>
+
+<div class="row mb-2">
+  <div class="col-12 text-right">
+    <%= link_to edit_console_shop_group_path(@shop_group), :class => 'btn btn-primary' do %>
+      <i class="fas fa-edit"></i> <%= t 'console.shop_group.button.edit' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">
+        <%= t 'console.shop_group.shop_group_information'%>
+      </div>
+      <div class="card-body p-0">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th><%= ShopGroup.human_attribute_name(:name) %></th>
+              <td><%= @shop_group.name %></td>
+            </tr>
+            <tr>
+              <th><%= ShopGroup.human_attribute_name(:group_no) %></th>
+              <td><%= @shop_group.group_no %></td>
+            </tr>
+            <tr>
+              <th><%= ShopGroup.human_attribute_name(:founding_year) %></th>
+              <td><%= @shop_group.founding_year %></td>
+            </tr>
+            <tr>
+              <th><%= ShopGroup.human_attribute_name(:is_chain_shop) %></th>
+              <td>
+                <%= @shop_group.is_chain_shop ? 'Yes' : 'No' %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">
+        <%= t 'console.shop_group.owner_information'%>
+      </div>
+      <div class="card-body p-0">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th><%= ShopGroup.human_attribute_name(:owner_name) %></th>
+              <td><%= @shop_group.owner_name %></td>
+            </tr>
+            <tr>
+              <th><%= ShopGroup.human_attribute_name(:owner_tel) %></th>
+              <td>
+                <span class="d-block"><%= @shop_group.owner_tel %></span>
+                <span class="d-block"><%= @shop_group.owner_tel2 %></span>
+              </td>
+            </tr>
+            <tr>
+              <th><%= ShopGroup.human_attribute_name(:owner_wa_tel) %></th>
+              <td>
+                <span class="d-block"><%= @shop_group.owner_wa_tel %></span>
+              </td>
+            </tr>
+            <tr>
+              <th><%= ShopGroup.human_attribute_name(:owner_email) %></th>
+              <td><%= @shop_group.owner_email %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <%= t 'console.shop_group.show.shops' %>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t 'console.shop.bengkel_id' %></th>
+          <th><%= t 'console.common.name' %></th>
+          <th><%= t 'console.common.tel' %></th>
+          <th><%= t 'console.common.address' %></th>
+          <th><%= t 'console.common.status' %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @shop_group.shops.each do |shop| %>
+        <tr>
+          <td><%= shop.bengkel_id %></td>
+          <td><%= shop.name %></td>
+          <td><%= shop.tel %></td>
+          <td><%= shop.address %></td>
+          <td>
+            <% unless shop.nil? %>
+              <% if shop.non_subscriber? %>
+                <span class="badge bg-danger"><%= Shop.human_attribute_name('subscriber_type.non_subscriber') %></span>
+              <% elsif shop.subscriber? %>
+                <span class="badge bg-warning"><%= Shop.human_attribute_name('subscriber_type.subscriber') %></span>
+              <% elsif shop.paid_subscriber? %>
+                <span class="badge bg-success"><%= Shop.human_attribute_name('subscriber_type.paid_subscriber') %></span>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= link_to console_shop_path(shop), :class => 'btn btn-secondary' do %><%= t 'console.shop.detail' %><% end %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-title"><%= t 'console.shop.accounts' %></div>
+    <div class="card-tools">
+    <% unless @shop_group.has_owner_account? %>
+      <%= link_to new_console_user_path(user_id: @shop_group.owner_email, name: @shop_group.owner_name, role: :owner, shop_id: @shop_group.shop_ids),:class => 'btn btn-success' do %>
+        <i class="fas fa-user-plus"></i> <%= t 'console.user.add_owner_user' %>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t 'console.user.user_id' %></th>
+          <th><%= t 'console.user.shop' %></th>
+          <th><%= t 'console.common.name' %></th>
+          <th><%= t 'console.user.role' %></th>
+          <th><%= t 'console.shop.status' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr class="<%= 'bg-secondary' unless user.is_enabled? %>">
+            <td><%= user.user_id %></td>
+            <td><%= user.shops.first.name %></td>
+            <td><%= user.name %></td>
+            <td><%= user.role %></td>
+            <td><%= user.status %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

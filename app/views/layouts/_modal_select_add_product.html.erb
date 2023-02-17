@@ -1,0 +1,108 @@
+<!-- Select Add Product Modal -->
+<div id="selectAddProductModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#selectAddProductModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-down js-modal-close" data-target="#selectAddProductModal">
+      <i class="icon icon-Arrow-down"></i>
+    </div>
+    <div class="modal-body">
+      <p>Edit "<span class="customize_list_name"></span>"</p>
+      <div class="d-flex justify-content-center">
+        <ul class="nav nav-pills">
+          <li class="nav-item pill">
+            <a href="#customize_item_add_history" class="nav-link active history" data-toggle="tab" style="border-radius: 5px 0px 0px 5px;"><p class="tab-items">History</p></a>
+          </li>
+          <li class="nav-item pill">
+            <a href="#customize_item_add_search" class="nav-link search" data-toggle="tab" style="border-radius: 0px 5px 5px 0px;"><p class="tab-items">Search</p></a>
+          </li>
+        </ul>
+      </div>
+      <div class="tab-content item-list">
+        <div id="customize_item_add_history" class="tab-pane active">
+          <input type="hidden" id="add_product_history_current_page" value="1">
+          <input type="hidden" id="add_product_history_no_more_result" value="true">
+          <div class="list-wrapper">
+            <div class="scroll-area">
+              <ul class="list">
+              </ul>
+              <div class="no-reslut">
+                <p><%= t "select_product.no_search_result" %></p>
+              </div>
+            </div>
+            <div class="loading fixed-bottom p-2 hide">
+              <div class="text-center">
+                List Loading ...
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="customize_item_add_search" class="tab-pane">
+          <input type="hidden" id="add_product_search_current_page" value="1">
+          <input type="hidden" id="add_product_search_no_more_result" value="true">
+          <div class="product-search">
+            <div id="add_product_search_detail" class="product-search__content">
+              <div class="filter-box-wrap">
+                <div id="add_product_search_word" class="filter-box" data-placeholder="<%= t 'select_product.search' %>..." contenteditable="true"></div>
+                <div class="append">
+                  <span class="spinner-border searching hide" role="status" aria-hidden="true"></span>
+                  <i class="icon icon-Search unsearching"></i>
+                </div>
+              </div>
+              <div id="add-product-search-detail-inner" class="product-search__content-inner collapse show">
+                <ul class="tag-list"></ul>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p class="mb-0">
+                  <a href="#add-product-search-detail-inner" role="button" data-toggle="collapse" aria-expanded="true" class="collapse-toggle-text">
+                    <span class="collapse_open"><%= t 'select_product.filter' %> <i class="icon icon-Arrow-down"></i></span>
+                    <span class="collapse_close"><%= t 'select_product.close' %> <i class="icon icon-Arrow-up"></i></span>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="list-wrapper">
+            <div class="scroll-area">
+              <ul class="list">
+              </ul>
+              <div class="no-reslut">
+                <p><%= t "select_product.no_search_result" %></p>
+              </div>
+            </div>
+            <div class="loading fixed-bottom p-2 hide">
+              <div class="text-center">
+                List Loading ...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="customize-list-add-product-clone-box" class="hide">
+      <li class="list-record">
+        <input type="hidden" name="shop_product_id" class="shop_product_id">
+        <input type="hidden" name="product_name" class="product_name">
+        <div class="row d-flex justify-content-between align-items-center">
+          <div class="col-10">
+            <span class="list-name"></span>
+            <ul class="inclusion-products">
+            </ul>
+          </div>
+          <div class="col">
+            <%= button_tag :type => "button", class: "btn-outline-circle-default add-product" do %>
+              <i class="fas fa-check"></i>
+            <% end %>
+          </div>
+        </div>
+      </li>
+      <li class="inclusion-product-record">
+        <div class="row d-flex justify-content-start align-items-center">
+          <div class="col">
+            <span class="inclusion-item-name"></span>
+          </div>
+        </div>
+      </li>
+    </div>
+  </div>
+</div>
+<!-- Select Select Add Product Modal -->

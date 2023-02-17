@@ -1,0 +1,8 @@
+en:
+  tech_spec:
+    errors:
+      messages:
+        similar_tech_spec_name: " is considered the same as the existing tech spec: %{tech_spec_name}"
+    notice:
+      successful_tech_spec_saved: 'Tech spec was successfully created.'
+      successful_tech_spec_updated: 'Tech spec was successfully updated.'

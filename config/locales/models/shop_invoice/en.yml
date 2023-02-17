@@ -1,0 +1,11 @@
+en:
+  enums:
+    shop_invoice:
+      status:
+        open: "Open"
+        closed: "Closed"
+      sort:
+        latest: 'Latest'
+        oldest: 'Oldest'
+  
+    

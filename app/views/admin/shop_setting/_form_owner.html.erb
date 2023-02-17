@@ -1,0 +1,53 @@
+  <div class="card card-widget">
+    <div class="card-header color-text-table-header py-4">
+      <h3 class="card-title text-large text-uppercase"><%= t 'admin.shop_setting.owner' %></h3>
+    </div>
+    <div class="card-body p-0">
+
+      <% if owner.errors.any? %>
+        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+          <ul>
+            <% owner.errors.full_messages.each do |message| %>
+            <li class="text-normal"><%= message %></li>
+            <% end %>
+          </ul>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+
+      <div class="form-group row p-3 m-0 border-bottom-enable">
+        <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.name' %></label>
+        <div class="col-8 col-md-8">
+          <%= f.text_field :owner_name, :class=>'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group row p-3 m-0 border-bottom-enable">
+        <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.phone_number' %></label>
+        <div class="col-8 col-md-8">
+          <%= f.text_field :owner_tel, :class=>'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group row p-3 m-0 border-bottom-enable">
+        <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.other_phone_number' %></label>
+        <div class="col-8 col-md-8">
+          <%= f.text_field :owner_tel2, :class=>'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group m-0 row p-3">
+        <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.email' %></label>
+        <div class="col-8 col-md-8">
+          <p class="text-normal m-0"><%= owner.owner_email %></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="mb-5">
+    <%= link_to admin_shop_setting_path, :class => 'text-large btn button-secondary-active' do %><%= t 'admin.shop_setting.cancle' %><% end %>
+    <button class="text-large btn button-active ml-2" type="submit"><%= t 'admin.shop_setting.save' %></button>
+  </div>

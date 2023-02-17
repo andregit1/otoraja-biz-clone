@@ -1,0 +1,90 @@
+<div class="main-content">
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="search-checkins-box">
+        <div class="input-group">
+          <input type="text" id="search_word" name="" value="" class="form-control" placeholder="<%= t 'vehicle.registration_plate_sub' %> / <%= t 'customer.cellphone_full' %> / <%= t 'customer.name' %>">
+          <div class="input-group-append">
+            <span class="input-group-text">
+              <span id="searching" class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
+              <i id="unsearching" class="icon icon-Search"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="calendar_result">
+    <div class="d-flex justify-content-between">
+      <div class="btn-yesterday">
+        <a role="button" id="prev_checkins" class="btn btn-light mb-2"><i class="icon icon-Arrow-left"></i></a>
+      </div>
+      <div class="today">
+        <a id="open_checkin_calender" role="button" class="js-modal-open" data-target="#calendarModal">
+          <span class="text-checkin-date" id="checkin-datepicker">
+            <span id="displaySelectedDate"><%= formatedCheckinDate(@checkin_day) %></span>
+            <input id="selected_date" type="hidden" value="<%= @checkin_day %>"> <i class="icon icon-Calendar"></i>
+          </span>
+          <%= hidden_field_tag :today, @today %>
+        </a>
+      </div>
+      <div class="btn-tomorrow">
+        <a role="button" id="next_checkins" class="btn btn-light mb-2 disabled"><i class="icon icon-Arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ul class="nav nav-pills">
+        <li class="nav-item pill">
+          <a href="#all" class="nav-link active" data-toggle="tab" style="border-radius: 5px 0px 0px 5px;"><p class="tab-checkins"><%= t 'slip_list.all' %></p></a>
+        </li>
+        <li class="nav-item pill">
+          <a href="#unchecked_out" class="nav-link" data-toggle="tab" style="border-radius: 0px 0px 0px 0px;border-right-style:none;border-left-style:none;"><p class="tab-checkins"><%= t 'slip_list.unchecked_out' %></p></a>
+        </li>
+        <li class="nav-item pill">
+          <a href="#checked_out" class="nav-link" data-toggle="tab" style="border-radius: 0px 5px 5px 0px;"><p class="tab-checkins"><%= t 'slip_list.checked_out' %></p></a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tab-content checkin-list">
+      <!-- すべて -->
+      <div id="all" class="tab-pane active"></div>
+      <!-- 未処理 -->
+      <div id="unchecked_out" class="tab-pane"></div>
+      <!-- 処理済 -->
+      <div id="checked_out" class="tab-pane"></div>
+    </div>
+  </div>
+
+  <div id="search_result" style="display:none;">
+    <div class="d-flex justify-content-end">
+      <a role="button" class="btn btn-light mb-2" id="close_search_result">
+        <i class="icon icon-Cross-circle"></i>
+      </a>
+    </div>
+    <div class="d-flex justify-content-center">
+      <ul class="nav nav-pills">
+        <li class="nav-item pill">
+          <a href="#search_all" class="nav-link active" data-toggle="tab" style="border-radius: 5px 0px 0px 5px;"><p class="tab-checkins"><%= t 'slip_list.all' %></p></a>
+        </li>
+        <li class="nav-item pill">
+          <a href="#search_unchecked_out" class="nav-link" data-toggle="tab" style="border-radius: 0px 0px 0px 0px;border-right-style:none;border-left-style:none;"><p class="tab-checkins"><%= t 'slip_list.unchecked_out' %></p></a>
+        </li>
+        <li class="nav-item pill">
+          <a href="#search_checked_out" class="nav-link" data-toggle="tab" style="border-radius: 0px 5px 5px 0px;"><p class="tab-checkins"><%= t 'slip_list.checked_out' %></p></a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content checkin-list" id="search_result_list">
+      <!-- すべて -->
+      <div id="search_all" class="tab-pane active"></div>
+      <!-- 未処理 -->
+      <div id="search_unchecked_out" class="tab-pane"></div>
+      <!-- 処理済 -->
+      <div id="search_checked_out" class="tab-pane"></div>
+    </div>
+  </div>
+</div>
+<%= render 'footer' %>
+<%= render 'maintenance_log/modal_calendar'%>

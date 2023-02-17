@@ -1,0 +1,62 @@
+en:
+  console:
+    shop:
+      table:
+        head:
+          bengkel_id: "Bengkel ID"
+          name: "Bengkel"
+          status: "Status"
+          area_code: "Area Code"
+          item: "Item"
+          subscription_number: "No. Subscription"
+          va_no: "No. Virtual Account"
+          sales_name: "Name of Sales"
+          reg_date: "Register date"
+          validity_periode: "Suspend date"
+          new_ext: "New / Ext"
+      list: "Shop / Bengkel List"
+      package: "Package %{period} Monthly"
+      accounts: "Accounts"
+      add_manager_user: "Add Manager User"
+      add_shop_manager_user: "Add ShopManager User"
+      add_staff_user: "Add Staff User"
+      all_bengkel: "All Bengkel"
+      bengkel_id: "Bengkel ID"
+      address: "Bengkel Address"
+      detail: "Detail"
+      extend_expiration_date: "Extend Expiration Date"
+      until: "Until :"
+      managed_bengkel: "Managed Bengkel"
+      reason_for_cancellation: "Reason for Cancellation"
+      shop_information: "Shop Information"
+      status: "Status"
+      edit:
+        title: "Edit shop"
+        available: "Available"
+        using: "Using" 
+      show:
+        shop_group: "Group"
+        facility: "Facilities"
+        service: "Services"
+        button:
+          edit: "Edit shop"
+        tab:
+          home: "Home"
+          accounts: "Accounts"
+          staffs: "Staffs"
+          config: "Config"
+          wa: "Whats App"
+          products: "Products"
+        business_hours:
+          name: "Business Hours"
+          open: "Open"
+          close: "Close"
+          sun: "Sun"
+          mon: "Mon"
+          tue: "Tue"
+          wed: "Wed"
+          thu: "Thu"
+          fri: "Fri"
+          sat: "Sat"
+      tags: "Search Tags"
+    

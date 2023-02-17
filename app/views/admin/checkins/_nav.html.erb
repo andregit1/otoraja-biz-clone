@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <% mode = 'all' %>
+      <%= link_to t('admin.transaction.all'), admin_checkin_list_path(mode: mode), class: "text-normal nav-link #{params[:mode] == 'all' ? 'active' : ''}" %>
+    </li>
+    <li class="nav-item">
+      <% mode = 'uncheckout' %>
+      <%= link_to t('admin.transaction.processed'), admin_checkin_list_path(mode: mode), class: "text-normal nav-link #{params[:mode] == 'uncheckout' ? 'active' : ''}" %>
+    </li>
+    <li class="nav-item">
+      <% mode = 'checkout' %>
+      <%= link_to t('admin.transaction.done'), admin_checkin_list_path(mode: mode), class: "text-normal nav-link #{params[:mode] == 'checkout' ? 'active' : ''}" %>
+    </li>
+    <li class="nav-item">
+      <% mode = 'deleted' %>
+      <%= link_to t('admin.transaction.void'), admin_checkin_list_path(mode: mode), class: "text-normal nav-link #{params[:mode] == 'deleted' ? 'active' : ''}" %>
+    </li>
+  </ul>
+  <div>
+    <%= link_to admin_checkins_download_path(format: :xlsx, mode: @mode, start_date: @start_date, end_date: @end_date), class: "d-flex align-items-center btn button-secondary-active #{params[:start_date].present? ? "" : "disabled btn-secondary"}" do %>
+      <p class="text-normal mb-0">Download</p> <p class="text-small mb-0 ml-1">(Max 30 hari)</p>
+    <% end %>
+  </div>
+</div>

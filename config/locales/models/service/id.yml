@@ -1,0 +1,9 @@
+id:
+  activerecord:
+    models:
+      service: 'Layanan'
+    attributes:
+      service:
+        id: "ID"
+        name: "Nama layanan"
+

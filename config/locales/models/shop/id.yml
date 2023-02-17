@@ -1,0 +1,24 @@
+id:
+  activerecord:
+    models:
+      shop: 'Toko'
+    attributes:
+      shop:
+        id: "ID"
+        bengkel_id: "Bengkel ID"
+        shop_group: "Kelompok"
+        name: "Nama"
+        tel: "Nomor Telepon"
+        tel2: "Nomor Telepon2"
+        tel3: "Nomor Telepon3"
+        address: "Alamat"
+        longitude: "Garis bujur"
+        latitude: "Garis Lintang"
+        region_id: "Wilayah"
+        province_id: "Propinsi"
+        regency_id: "Kabupaten/Kota"
+      shop/subscriber_type:
+        non_subscriber: "Suspended"
+        subscriber: "Free Trial"
+        paid_subscriber: "Berbayar"
+

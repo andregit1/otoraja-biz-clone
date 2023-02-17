@@ -1,0 +1,13 @@
+<div id="checkoutCompleteModal" class="modal modal-center js-modal">
+  <div class="modal_bg"></div>
+  <div class="modal_content -center">
+    <div class="modal-caption">
+      <%= t 'checked_out' %>
+    </div>
+    <div class="modal-body d-flex justify-content-center">
+      <%= button_tag :type => "button", class: "btn-base -basic -primary w-75 js-modal-close", data: {"target" => "#checkoutCompleteModal"} do %>
+        OK
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<!-- Color Picker Sheet Modal -->
+<div id="colorPickerModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#colorPickerModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-down js-modal-close" data-target="#colorPickerModal">
+      <i class="icon icon-Arrow-down"></i>
+    </div>
+    <div id="color-select">
+      <div class="modal-caption">
+        <%= t 'vehicle.select_color' %>
+      </div>
+      <div id="colorPicker" class="modal-body">
+        
+      </div>
+    </div>
+    <div class="pl-5 pr-5 mt-6">
+      <%= button_tag :type => "button", id: "confirm-color-button", class: "btn-base -basic -primary js-modal-close", data: {"target" => "#colorPickerModal"}, disabled: true do %>
+        <%= t 'ok' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- Color Picker Sheet Modal -->

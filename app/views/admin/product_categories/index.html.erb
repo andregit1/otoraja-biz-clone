@@ -1,0 +1,45 @@
+<% content_for(:title, 'Product Category') %>
+
+<%= render 'search' %>
+<div class="mb-3 text-right">
+  <%= link_to new_admin_product_category_path,:class => 'btn btn-success mb-0' do %>
+    <i class="fas fa-plus"></i> Add Category
+  <% end %>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Class</th>
+          <th>Name</th>
+          <th>Campaign Code</th>
+          <th>Use Reminder</th>
+          <th>Remind by category</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @product_categories.each do |category| %>
+        <tr>
+          <td><%= category.product_class.name %></td>
+          <td><%= category.name %></td>
+          <td><%= category.campaign_code %></td>
+          <td><%= category.use_reminder %></td>
+          <td><%= category.remind_grouping %></td>
+          <td class="text-right">
+            <%= link_to edit_admin_product_category_path(category), :class => 'btn btn-primary' do %>
+              <i class="fas fa-edit"></i> Edit
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <%= paginate @product_categories %>
+</div>

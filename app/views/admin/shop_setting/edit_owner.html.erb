@@ -1,0 +1,9 @@
+<% content_for(:title, t('admin.shop_setting.owner_data')) %>
+
+<%= form_with(model: @owner, url:admin_shop_setting_update_owner_path, local: true) do |form| %>
+<%= render 'form_owner', {owner: @owner, f: form} %>
+<% end %>
+
+<%= form_with(model: @user, url:admin_shop_setting_update_password_path, local: true) do |form| %>
+<%= render 'form_password', {user: @user, f: form} %>
+<% end %>

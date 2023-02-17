@@ -1,0 +1,43 @@
+<% content_for(:title, 'Answers') %>
+
+<div>
+  <%= form_tag({:controller => 'answer', :action => 'index'}) do %>
+    <%= collection_select '', :answer_shop_id, current_user.managed_shops, :id, :name, {prompt: 'Shop Select', selected: @select_shop_id}, {class: 'pull-down-btn'} %>
+    <%= submit_tag('Search', id: 'answer-commit', class: "btn btn-primary btn-sm") %>
+  <% end %>
+</div>
+<% unless @answers.empty? %>
+  <table class="table table-hover bg-white mt-3">
+    <thead>
+      <tr>
+        <th>Customer ID</th>
+        <th>Name</th>
+        <th>Rate <%= sort_asc(:rate, @select_shop_id) %><%= sort_desc(:rate, @select_shop_id) %></th>
+        <th>Comment</th>
+        <th>Checkin Date <%= sort_asc('checkins.datetime', @select_shop_id) %><%= sort_desc('checkins.datetime', @select_shop_id) %></th>
+        <th>Answer Date <%= sort_asc(:answered_at, @select_shop_id) %><%= sort_desc(:answered_at, @select_shop_id) %></th>
+      </tr>
+    </thead>
+    <tbody id="answer-tbody">
+      <% @answers.each do |answer| %>
+        <% customer = answer.questionnaire.checkin.customer %>
+        <tr>
+          <td><%= customer.id %></td>
+          <td><%= customer.name.blank? ? 'No name' : customer.name %></td>
+          <td><div class='star-<%= answer.rate %> answer-raty'></div></td>
+          <td><%= answer.comment.gsub(/\n/, ' ').truncate(30) %></td>
+          <td><%= formatedDateTz(answer.questionnaire.checkin.datetime, 'Jakarta') %></td>
+          <td><%= formatedDateTz(answer.answered_at, 'Jakarta') %></td>
+          <td>
+            <%= link_to console_answer_path(answer),:class => "btn btn-primary" do %>
+              <i class="fas fa-eye"></i> Show</a>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @answers %>
+
+<% end %>

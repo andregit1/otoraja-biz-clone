@@ -1,0 +1,8 @@
+id:
+  brand:
+    errors:
+      messages:
+        similar_brand_name: " dianggap sama dengan merek produk yang sudah ada:  %{brand_name} "
+    notice:
+      successful_brand_saved: 'Merek produk berhasil disimpan.'
+      successful_brand_updated: 'Merek produk berhasil diubah.'

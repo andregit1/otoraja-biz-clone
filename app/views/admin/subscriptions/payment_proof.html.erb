@@ -1,0 +1,69 @@
+<h1 class="text-page-title font-weight-bold"><%= t 'admin.subscription.payment_proof' %></h1>
+
+<%= form_with(model: @subscription, url: admin_subscriptions_upload_payment_path, local: true) do |form| %>
+  <div class="card">
+    <div class="card-body">
+      <p class="text-normal"><%= t 'admin.subscription.upload_payment' %></p>
+      <div class="input-group col-7 pl-0">
+        <div class="custom-file custom-file-upload">
+          <%= form.file_field :payment_receipt, class: "custom-file-input", id: "payment_receipt", accept: "application/pdf,image/png,image/jpg" %>
+          <label class="custom-file-label" for="payment_receipt" data-browse="Pilih File"></label>
+        </div>
+      </div>
+      <p class="text-small text-danger mb-0 <%= 'hide' if !invalid %>">Gagal unggah bukti bayar. Silahkan coba kembali.</p>
+      <p class="text-normal mt-3"><%= t 'admin.subscription.upload_format' %></p>
+      <div class="border-top border-bottom pt-3">
+        <p class="text-normal font-weight-bold"><%= t 'admin.subscription.invoice_detail' %></p>
+        <div class="row text-normal mb-4">
+        <div class="col-5 col-md-3 pb-2"><%= t 'admin.subscription.status' %></div>
+        <div class="col-7 col-md-9 font-weight-bold">
+          <% if @subscription.shop.non_subscriber? %>
+            <% if @subscription.shop.status_processing? %>
+              <%= t 'admin.subscription.subscription_status.process' %>
+            <% elsif @subscription.shop.payment_pending? && !@subscription.shop.payment_expired? %>
+              <%=  t 'admin.subscription.subscription_status.payment_pending' %>
+            <% else %>
+                <%= t 'admin.subscription.subscription_status.suspend' %>
+            <% end %>
+          <% end %>
+          <% if @subscription.shop.subscriber? %>
+            <% if @subscription.shop.status_processing? %>
+              <%= t 'admin.subscription.subscription_status.process' %>
+            <% elsif @subscription.shop.payment_pending? %>
+              <%=  t 'admin.subscription.subscription_status.payment_pending' %>
+            <% else %>
+              <%= t 'admin.subscription.subscription_status.active' %>
+            <% end %>
+          <% end %>
+          <% if @subscription.shop.paid_subscriber? %>
+            <% if @subscription.shop.status_processing? %>
+              <%= t 'admin.subscription.subscription_status.process' %>
+            <% elsif @subscription.shop.in_grace_period? %>
+              <%= t 'admin.subscription.subscription_status.date_left' %>
+            <% elsif @subscription.shop.payment_pending? %>
+              <%=  t 'admin.subscription.subscription_status.payment_pending' %>
+            <% else %>
+              <%= t 'admin.subscription.subscription_status.active' %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="col-5 col-md-3 pb-2"><%= t 'admin.subscription.subscription_date' %></div>
+        <div class="col-7 col-md-9 font-weight-bold"><%= formatedDateUseDash(@subscription.created_at) %></div>
+        <div class="col-5 col-md-3 pb-2"><%= t 'admin.common.shop' %></div>
+        <div class="col-7 col-md-9 font-weight-bold"><%= @subscription.shop.name %></div>
+        <div class="col-5 col-md-3 pb-2"><%= t 'admin.subscription.package_name' %></div>
+        <div class="col-7 col-md-9 font-weight-bold"><%= t 'admin.subscription.monthly_package', period: @subscription.subscription_period != "1" ? @subscription.subscription_period : "" %></div>
+        <div class="col-5 col-md-3 pb-2"><%= t 'admin.subscription.fee' %></div>
+        <div class="col-7 col-md-9 font-weight-bold">Rp <%= formatedRupiah(@subscription.fee) %></div>
+        <div class="col-5 col-md-3 pb-2"><%= t 'admin.subscription.payment_method' %></div>
+        <div class="col-7 col-md-9 font-weight-bold"><%= @subscription.payment_type.title  %></div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <%= link_to admin_subscriptions_path, class: "btn button-secondary-active text-large mb-5 mr-3" do %>
+    <%= t 'admin.common.close' %>
+  <% end %>
+  <%= form.submit (t 'admin.common.update'), class: "btn button-active text-large mb-5" %>
+<% end %>

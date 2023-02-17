@@ -1,0 +1,3 @@
+class CustomerPolicy < ApplicationPolicy
+  
+end

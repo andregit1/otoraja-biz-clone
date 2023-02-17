@@ -1,0 +1,21 @@
+<div class="modal fade" id="requestSubsModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog mt-5 w-md-25 modal_vertical_center " role="document">
+    <div class="modal-content">
+      <div class="modal-body px-3 text-center">
+        <div id="request-content">
+          <p class="text-normal mb-4"><%= t 'admin.subscription.processing_request_info' %></p>
+          <div>
+            <i class="fas fa-spinner fa-spin text-large"></i>
+          </div>
+        </div>
+        <div id="retry-request-content" class="hide">
+          <p class="text-normal mb-4"><%= t 'admin.common.network_problem' %></p>
+          <div>
+            <button type="button" class="btn button-secondary-active text-large col-5" data-dismiss="modal"><%= t 'admin.common.cancel'%></button>
+            <button type="button" class="btn button-active text-large col-5" id="retry-request-subs"><%= t 'admin.common.try_again'%></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

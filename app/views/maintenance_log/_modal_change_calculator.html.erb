@@ -1,0 +1,44 @@
+
+<!-- Number Pad Sheet Modal -->
+<div id="calculatorModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#calculatorModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-down js-modal-close" data-target="#calculatorModal">
+      <i class="icon icon-Arrow-down"></i>
+    </div>
+    <div id="calculator-select">
+      <div class="modal-caption">
+      </div>
+      <div id="" class="modal-body row">
+        <div id="calculator_values">
+          <div class="d-flex">
+            <label><%= t 'calculator.total' %></label>
+            <div id="order_total" class="ml-auto">0</div>
+          </div>
+          <%# <div class="d-flex">
+            <label>Adjusted</label>
+          </div> %>
+          <div hidden id="order_adjusted" class="ml-auto">0</div>
+          <div class="d-flex">
+            <label><%= t 'calculator.received' %></label>
+            <input type="text" id="order_received" class="ml-auto text-right" />
+          </div>
+          <div class="d-flex">
+            <label id="order_change_text"><%= t 'calculator.change' %></label>
+            <div id="order_change" class="ml-auto">0</div>
+          </div>
+        </div>
+        <div class="row">
+          <div id="calculator"></div>
+        </div>
+      </div>
+      <div id="calculator-button" class="pl-5 pr-5 mt-6">
+        <%= button_tag :type => "button", class: "btn-base -basic -primary js-modal-open", data: {"target" => "#orderPreviewModal"}, disabled: true do %>
+          <%= t 'ok' %>
+        <% end %>
+        <%= button_tag :type => "button", id: "close-calculator-modal-button", class: "btn-base -basic -primary js-modal-close d-none", data: {"target" => "#calculatorModal"}, disabled: true %>
+      </div>
+    </div> 
+  </div>
+</div>
+<!-- Number Pad Sheet Modal -->

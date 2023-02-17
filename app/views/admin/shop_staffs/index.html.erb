@@ -1,0 +1,61 @@
+<div class="content-header supplier-header-mtop">
+  <div class="row">
+    <div class="text-page-title font-weight-bold col-6">
+      <%= t('admin.shop_staff.shop_staff') %>
+    </div>
+    <div class="supplier-add-btn col-6">
+      <%= link_to new_admin_shop_staff_path,:class => 'btn button-secondary-active text-large' do %>
+        <i class="fas fa-plus"></i> <%= t 'admin.shop_staff.add_staff' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render 'search'%>
+
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-sm table-hover text-normal">
+        <thead class="color-text-table-header">
+          <tr>
+            <th width="5%" class="staff-pl-1"><%= sort_link(@q, :name, t('admin.common.name'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th width="5%"><%= sort_link(@q, :is_front_staff, t('admin.shop_staff.front_staff'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th width="5%"><%= sort_link(@q, :mechanic_grade, t('admin.common.mechanic'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th width="5%"></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @shop_staffs.each do |staff| %>
+          <tr class="<%= 'bg-secondary' unless staff.active? %>">
+            <td class="staff-pl-1"><%= staff.name %><br>(<%= staff.shop.name %>)</td>
+            <td class="staff-field-icon">
+              <% if staff.is_front_staff? %>
+              <span class="text-success"><i class="far fa-check-circle"></i></span>
+              <% else %>
+              <span class="text-danger"><i class="fas fa-ban"></i></span>
+              <% end %>
+            </td>
+            <td class="staff-field-icon">
+              <% if staff.is_mechanic? %>
+              <span class="badge badge-pill badge-primary"><%= staff.mechanic_grade %></span>
+              <% else %>
+              <span class="text-danger"><i class="fas fa-ban"></i></span>
+              <% end %>
+            </td>
+            <td class="staff-field-icon">
+              <%= link_to edit_admin_shop_staff_path(staff), :class => 'btn btn-primary text-small' do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <%= paginate @shop_staffs, window: 1 %>
+</div>

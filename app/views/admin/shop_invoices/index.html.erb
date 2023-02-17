@@ -1,0 +1,218 @@
+<% if @is_invoice %>
+  <div class="content-header header-mtop">
+    <div class="row">
+      <div class="text-page-title font-weight-bold col-7">
+        <h1 class="text-page-title font-weight-bold"><%= t 'admin.invoice.invoices' %></h1>
+      </div>
+      <div class="supplier-add-btn col-5">
+        <%= link_to admin_shop_purchases_path(:mode => 0), :class => 'btn button-secondary-active text-large mb-2' do %>
+          <i class="fas fa-plus"></i> <%= t 'admin.common.new' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% if @is_inventory %>
+  <div class="content-header header-mtop">
+    <div class="row">
+      <div class="text-page-title font-weight-bold col-7">
+        <h1 class="text-page-title font-weight-bold"><%= t 'admin.invoice.inventory' %></h1>
+      </div>
+      <div class="supplier-add-btn col-5">
+        <%= link_to admin_shop_purchases_path(:mode => 1), :class => 'btn button-secondary-active text-large mb-2' do %>
+          <i class="fas fa-plus"></i> <%= t 'admin.common.new' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= hidden_field_tag 'mode', @mode %>
+<%= hidden_field_tag 'is_invoice', @is_invoice %>
+<%= hidden_field_tag 'is_inventory', @is_inventory %>
+<%= hidden_field_tag 'select_shop', session[:default_user_shop] %>
+
+<div class="list-view-wrapper">
+  <div class="card card-widget">
+    <div class="card-header color-text-table-header" data-card-widget="collapse">
+      <h3 class="card-title font-weight-bold">
+        <i class="fas fa-chevron-down"></i>
+        <i class="fas fa-chevron-up"></i>
+        <%= t 'admin.common.filter' %>
+      </h3>
+    </div>
+    <div class="card-body p-3">
+      <section id="list-invoice-search-section">
+        <div>
+          <input type="hidden" id="shop_invoice_search_current_page" value="1">
+          <input type="hidden" id="shop_invoice_search_no_more_result" value="true">
+          <div class="row">
+            <% if @is_invoice %>
+              <div class="form-group col-5">
+                <%= label_tag :select_supplier, t('admin.common.supplier'), :class => 'text-label' %>
+                <div>
+                  <%= select_tag 'select_supplier', options_from_collection_for_select(Supplier.where(shop_id: session[:default_user_shop]), :id, :name), prompt: 'Semua', class: 'form-control form-control-sm' %>
+                </div>
+              </div>
+              <div class="form-group p-0 col-3">
+                <%= label_tag :select_filter, t('admin.common.status'), :class => 'text-label' %>
+                <div>
+                  <%= select_tag 'select_invoice_status', options_for_select(ShopInvoice.statuses_i18n.invert), prompt: 'Semua', class: 'form-control form-control-sm col-xs-6' %>
+                </div>
+              </div>
+              <div class="form-group col-4">
+                <%= label_tag :select_sort, t('admin.common.sort'), :class => 'text-label' %>
+                <div>
+                  <%= select_tag 'select_invoice_sort', options_for_select(ShopInvoice.sorts_i18n.invert), class: 'form-control form-control-sm col-xs-3' %>
+                </div>
+              </div>
+              <div class="form-group col-12">
+                <label class="text-label"><%= t 'admin.common.keyword' %> <i class="fas fa-info-circle" data-html="true" data-toggle="tooltip" title="Item Name"></i></label>
+                <div class="row">
+                  <div class="form-group col-9 search-field">
+                    <input type="text" name="shop-invoice-search" id="shop-invoice-search" value="" class="form-control" autocomplete="off">
+                    <i id="search-clear-btn" class="icon icon-Cross search-with-clear clear"></i>
+                    <i id="search-btn" class="icon icon-Search search-with-clear"></i>
+                  </div>
+                  <div class="form-group col-3">
+                  <button id="shop-invoice-search-btn" name="button" type="button" class="btn button-secondary-active">
+                    <span class="text-large">Cari</span>
+                  </button>
+                </div>
+              </div>
+            <% else %>
+              <div class="form-group col-6 col-md-3">
+                <%= label_tag :select_filter, t('admin.invoice.filter'), :class => 'text-label' %>
+                <div>
+                  <%= select_tag 'select_invoice_status', options_for_select(ShopInvoice.statuses_i18n.invert), prompt: 'Semua', class: 'form-control form-control-sm col-xs-6' %>
+                </div>
+              </div>
+              <div class="form-group col-6 col-md-3">
+                <%= label_tag :select_sort, t('admin.common.sort'), :class => 'text-label' %>
+                <div>
+                  <%= select_tag 'select_invoice_sort', options_for_select(ShopInvoice.sorts_i18n.invert), class: 'form-control form-control-sm col-xs-3' %>
+                </div>
+              </div>
+              <div class="form-group col-12 col-md-6">
+                <label class="text-label"><%= t 'admin.common.keyword' %> <i class="fas fa-info-circle" data-html="true" data-toggle="tooltip" title="Item Name"></i></label>
+                <div class="row">
+                  <div class="form-group col-9 search-field">
+                    <input type="text" name="shop-invoice-search" id="shop-invoice-search" value="" class="form-control" autocomplete="off">
+                    <i id="search-clear-btn" class="icon icon-Cross search-with-clear clear"></i>
+                    <i id="search-btn" class="icon icon-Search search-with-clear"></i>
+                  </div>
+                  <div class="form-group col-3">
+                  <button id="shop-invoice-search-btn" name="button" type="button" class="btn button-secondary-active">
+                    <span class="text-large">Cari</span>
+                  </button>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  
+  <div class="card card-widget">
+      <% if @is_invoice %>
+      <div class="card-header color-text-table-header">
+        <div class="no_search_result hide">
+          <p class="text-label text-center mb-0"><%= t "select_product.list_empty" %></p>
+        </div>
+        <div class="row row-invoice-header">
+          <h3 class="card-title col-5 font-weight-bold"><%= t('admin.invoice.invoice_information') %></h3>
+          <h3 class="card-title col-7 font-weight-bold"><%= t('admin.invoice.invoice_product') %></h3>
+        </div>
+      </div>
+      <% else %>
+      <div class="no_search_result hide">
+        <div class="card-header color-text-table-header">
+          <p class="text-label text-center mb-0"><%= t "select_product.list_empty" %></p>
+        </div>
+      </div>
+      <% end %>
+      <div class="card-body p-0 card-body-invoice">
+        <section id="list-invoice-search-body-section">
+          <div class="products-box-admin invoice-list">
+            <div class="scroll-area">
+              <ul id="invoice_list" class="list mb-0">
+                <%# inject items here %>
+              </ul>
+            </div>
+            <div class="loading p-2 hide">
+              <div class="text-center">
+                <i class="fas fa-spinner fa-spin"></i>
+              </div>
+            </div>
+            <div id="edit-invoice-item-clone" class="hide">
+              <li class="row list-item px-4" data-target="#editInvoiceModal">
+                <input type="hidden" class="item__status">
+                <% if @is_invoice %>
+                  <div class="item col-5">
+                    <div class="item__supplier__name text-label font-weight-bold text-nowrap">
+                    </div>
+                    <div class="item__title item__arrival__date text-label font-weight-bold">
+                    </div>
+                    <div class="item__title">
+                      <p class="item__draft ">
+                      </p>
+                    </div> 
+                  </div>
+                  <div class="col-5">
+                    <div class="item__title text-label font-weight-bold">
+                      No.<span class="item__invoice__no mb-1">
+                      </span>
+                    </div>
+                    <div class="item">
+                      <ul class="item__product__list text-small ml-0">
+                      </ul>
+                    </div> 
+                  </div>
+                <% else %>
+                  <div class="item col-5">
+                    <div class="item__title item__arrival__date text-small">
+                    </div>
+                    <div class="item__title">
+                      <p class="item__invoice__no text-normal font-weight-bold mb-1">
+                      </p>
+                    </div>
+                    <div class="item__title">
+                      <p class="item__draft text-small">
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="item__supplier__name">
+                    </div>
+                  </div>
+                <% end %>
+                <div class="col-2 d-flex align-items-center justify-content-end">
+                  <div class="invoice-list-btn">
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <input id="label-admin_product" type="hidden">
+    <input id="label-shop_alias_name" type="hidden">
+    <input id="label-item_detail" type="hidden">
+    <input id="label-stock_minimum" type="hidden">
+    <input id="label-stock" type="hidden">
+    <input id="label-sales_unit_price" type="hidden">
+    <input id="label-remind_interval_day" type="hidden">
+    <input id="label-is_stock_control" type="hidden">
+    <input id="label-is_use" type="hidden">
+    <input id="label-admin_product-no" type="hidden">
+    <input id="label-shop_product-no" type="hidden">
+
+    <input id="new-activity-item-id" type="hidden">
+  </div>
+
+<div id="paginator" class="d-flex justify-content-center"></div>
+<%= render "modal_edit_invoice" %>
+<%= render "admin/shop_purchases/modal_add_product" %>
+<%= render "admin/shop_purchases/modal_find_product" %>

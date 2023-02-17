@@ -1,0 +1,14 @@
+en:
+  console:
+    facility:
+      button:
+        add: "Add facility"
+        edit: "Edit facility"
+      index:
+        title: "Facility"
+      new:
+        title: "Add facility"
+      edit:
+        title: "Edit facility"
+    
+    

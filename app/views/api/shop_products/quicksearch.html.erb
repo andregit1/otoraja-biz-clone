@@ -1,0 +1,3 @@
+<% @shop_search_tags.each do |shop_search_tag| %>
+    <li id="<%= shop_search_tag.id %>" class="tag-list__item" data-tag-order="<%= shop_search_tag.order %>"><a href="#"><%= shop_search_tag.name %></a></li>
+<% end %>

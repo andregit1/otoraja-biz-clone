@@ -1,0 +1,81 @@
+<% content_for(:title, t('console.requests.new_application.title')) %>
+
+<%= render 'search' %>
+
+<div class="d-flex justify-content-end">
+  <%= paginate @requests, window: 1 %>
+</div>
+<div class="card content-datatable">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover table-sticky">
+        <thead>
+          <tr>
+            <th><%= NewContractRequest.human_attribute_name(:id) %></th>
+            <th><%= NewContractRequest.human_attribute_name(:name) %></th>
+            <th><%= NewContractRequest.human_attribute_name(:email) %></th>
+            <th><%= NewContractRequest.human_attribute_name(:tel) %></th>
+            <th><%= NewContractRequest.human_attribute_name(:shop_name) %></th>
+            <th><%= NewContractRequest.human_attribute_name(:shop_address) %></th>
+            <% if false %>
+            <th><%= NewContractRequest.human_attribute_name(:business_form) %></th>
+            <th><%= NewContractRequest.human_attribute_name(:number_of_employees) %></th>
+            <th><%= NewContractRequest.human_attribute_name(:desired_start_date) %></th>
+            <% end %>
+            <th><%= NewContractRequest.human_attribute_name(:created_at) %></th>
+            <th><%= NewContractRequest.human_attribute_name(:status) %></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @requests.each do |request| %>
+            <tr>
+              <th><%= request.id %></th>
+              <td><%= request.name %></td>
+              <td><%= request.email %></td>
+              <td><%= request.tel %></td>
+              <td><%= request.shop_name %></td>
+              <td><%= request.shop_address %></td>
+              <% if false %>
+              <td><%= request.business_form %></td>
+              <td><%= request.number_of_employees %></td>
+              <td><%= formatedDateTz(request.desired_start_date, 'Jakarta') unless request.desired_start_date.nil? %></td>
+              <% end %>
+              <td><%= formatedDateTime(request.created_at,'Jakarta',false) %></td>
+              <td class="text-right">
+                <div class="dropdown">
+                  <% if request.status_todo? %>
+                    <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <%= NewContractRequest.human_attribute_name('status.todo') %>
+                    </button>
+                  <% elsif request.status_processing? %>
+                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <%= NewContractRequest.human_attribute_name('status.processing') %>
+                    </button>
+                  <% elsif request.status_processed? %>
+                    <button class="btn btn-sm btn-success" type="button" id="dropdownMenuButton">
+                      <%= NewContractRequest.human_attribute_name('status.processed') %>
+                    </button>
+                  <% end %>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <% NewContractRequest.statuses.keys.each do |status| %>
+                      <%= link_to console_requests_update_new_application_status_path(request,status: status), method: :post, class: 'dropdown-item' do %><%= NewContractRequest.human_attribute_name("status.#{status}") %><% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <% unless request.status_processed?%>
+                  <%= link_to bulk_create_console_shop_groups_path(request_id: request.id), method: :post, class: 'btn btn-sm btn-primary text-nowrap', data: { confirm: "Are you sure you want to create a shop from this application?", 'commit-class': "btn btn-primary" } do %>
+                    <%= t('console.requests.button.create_account') %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

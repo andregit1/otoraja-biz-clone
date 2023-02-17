@@ -1,0 +1,60 @@
+version: 0.2
+
+env:
+  parameter-store:
+    AWS_DEFAULT_REGION: "/global/AWS_DEFAULT_REGION"
+    CONTAINER_AWS_ACCESS_KEY_ID: "/global/APP_USER/AWS_ACCESS_KEY_ID"
+    CONTAINER_AWS_SECRET_ACCESS_KEY: "/global/APP_USER/AWS_SECRET_ACCESS_KEY"
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+    commands:
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+      - apt -y update
+      - apt -y install jq
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region ${AWS_DEFAULT_REGION})
+      - AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' --output text)
+      - echo $AWS_ACCOUNT_ID
+      - REPOSITORY_URI_APP="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME_APP}"
+      - echo $REPOSITORY_URI_APP
+      - APP_IMAGE="${IMAGE_REPO_NAME_APP}:${IMAGE_TAG}"
+      - echo $APP_IMAGE
+      - REPOSITORY_URI_WEB="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME_WEB}"
+      - echo $REPOSITORY_URI_WEB
+      - WEB_IMAGE="${IMAGE_REPO_NAME_WEB}:${IMAGE_TAG}"
+      - echo $WEB_IMAGE
+      - CURRENT_VERSION=`cat ${CODEBUILD_SRC_DIR_CurrentVersion}/current_version.json | jq -r ".current_version"`
+      - echo $CURRENT_VERSION
+      - echo output .env
+      - aws ssm get-parameters-by-path --path ${SSM_PARAM_PATH} --with-decryption | jq -r '.Parameters[] | [.Name, .Value] | @csv | gsub("'${SSM_PARAM_PATH}'"; "") | gsub("\""; "") | gsub(","; "=")' > .env
+      - echo "AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}" >> .env
+      - echo "AWS_ACCESS_KEY_ID=${CONTAINER_AWS_ACCESS_KEY_ID}" >> .env
+      - echo "AWS_SECRET_ACCESS_KEY=${CONTAINER_AWS_SECRET_ACCESS_KEY}" >> .env
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - echo "${APP_IMAGE}"
+      - docker build --no-cache -t "${APP_IMAGE}" .
+      - echo assets:precompile
+      - docker run --rm --env-file .env -v `pwd`:/app "${APP_IMAGE}" bundle exec rails assets:precompile
+      - echo current version
+      - docker run --rm --env-file .env -v `pwd`:/app "${APP_IMAGE}" bundle exec rails r lib/tasks/current_version_setting.rb "${CURRENT_VERSION}"
+      - docker build -t "${APP_IMAGE}" .
+      - docker tag "${APP_IMAGE}" "${REPOSITORY_URI_APP}:${IMAGE_TAG}"
+      - echo "${WEB_IMAGE}"
+      - docker build --no-cache -t "${WEB_IMAGE}" -f container/web/Dockerfile --build-arg LOCATION="ecs-${RAILS_ENV}" .
+      - docker tag "${WEB_IMAGE}" "${REPOSITORY_URI_WEB}:${IMAGE_TAG}"
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push "${REPOSITORY_URI_APP}:${IMAGE_TAG}"
+      - docker push "${REPOSITORY_URI_WEB}:${IMAGE_TAG}"
+      - echo "[{\"name\":\"otoraja-biz\",\"imageUri\":\"${REPOSITORY_URI_APP}:${IMAGE_TAG}\"},{\"name\":\"otoraja-biz-web\",\"imageUri\":\"${REPOSITORY_URI_WEB}:${IMAGE_TAG}\"}]" > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json

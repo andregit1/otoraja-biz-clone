@@ -1,0 +1,26 @@
+one:
+  name: 'Otoraja-user'
+  user_id: 'dev-owner'
+  email: 'otoraja.@mail.com'
+  role: 'owner'
+  status: 'enabled'
+  encrypted_password: '$2a$11$tbj1BXVjTFIaTNLlSmwrq.on.OvdFheYI7ZGiEuZcjJq/UM8Vu08W'
+  reset_password_token: 
+  reset_password_sent_at:
+  remember_created_at: 
+  export_pattern_id:
+  created_at: '2021-01-26 13:10:54'
+  updated_at: '2021-09-27 07:18:57'
+  encrypted_otp_secret:
+  encrypted_otp_secret_iv:
+  encrypted_otp_secret_salt:
+  consumed_timestep:
+  otp_required_for_login:
+  provider: 'user_id'
+  uid: 'dev-admin'
+  tokens:
+  sign_in_count: 1
+  current_sign_in_at:
+  last_sign_in_at:
+  current_sign_in_ip:
+  last_sign_in_ip: 

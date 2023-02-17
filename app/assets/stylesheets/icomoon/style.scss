@@ -1,0 +1,116 @@
+@font-face {
+  font-family: 'icon';
+  src:
+    url(font-path('icomoon/icon.ttf')) format('truetype'),
+    url(font-path('icomoon/icon.woff')) format('woff'),
+    url(font-path('icomoon/icon.svg')) format('svg');
+  font-weight: normal;
+  font-style: normal;
+  /* font-display: block; */
+}
+
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icon';
+  /* speak: none; */
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-Cross-circle:before {
+  content: "\e916";
+}
+.icon-Attention-circle:before {
+  content: "\e915";
+  color: #e83b33;
+}
+.icon-Add-customer:before {
+  content: "\e900";
+}
+.icon-Arrow-down:before {
+  content: "\e901";
+  color: #a0a9af;
+}
+.icon-Arrow-up:before {
+  content: "\e902";
+  color: #a0a9af;
+}
+.icon-Arrow-left:before {
+  content: "\e903";
+}
+.icon-Arrow-right:before {
+  content: "\e904";
+}
+.icon-Attention:before {
+  content: "\e905";
+}
+.icon-Baloon:before {
+  content: "\e906";
+  color: #75858e;
+}
+.icon-Bike:before {
+  content: "\e907";
+  color: #FFFFFF;
+}
+.icon-Calendar:before {
+  content: "\e908";
+}
+.icon-Cross:before {
+  content: "\e909";
+}
+.icon-Customer:before {
+  content: "\e90a";
+}
+.icon-Delete:before {
+  content: "\e90b";
+}
+.icon-Edit:before {
+  content: "\e90c";
+}
+.icon-Engineer:before {
+  content: "\e90d";
+  color: #75858e;
+}
+.icon-History:before {
+  content: "\e90e";
+}
+.icon-List:before {
+  content: "\e90f";
+}
+.icon-Menu:before {
+  content: "\e910";
+}
+.icon-Note:before {
+  content: "\e911";
+  color: #0a2d82;
+}
+.icon-Plus:before {
+  content: "\e912";
+}
+.icon-Search:before {
+  content: "\e913";
+  color: #a0a9af;
+}
+.icon-Sidebar:before {
+  content: "\e914";
+  color: #e26529;
+}
+.icon-Eraser:before {
+  content: "\e918";
+}
+.icon-Folder:before {
+  content: "\e917";
+}
+.icon-Detail:before {
+  content: "\e919";
+}
+.icon-Pencil:before {
+  content: "\e91a";
+}

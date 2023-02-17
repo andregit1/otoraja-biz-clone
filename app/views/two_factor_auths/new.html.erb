@@ -1,0 +1,26 @@
+<div class="mfa-box">
+  <div class="mfa-logo">
+    <a href="index.html"><b>Otoraja</b>Biz</a>
+  </div>
+  <!-- /.mfa-logo -->
+  <div class="card">
+    <div class="card-body mfa-card-body">
+      <p class="mfa-box-msg"></p>
+        <div id="qr-code">
+            <%= raw @qr_code %>
+        </div>
+        <%= form_tag '/two_factor_auth' do %>
+            <div class='field mb-3'>
+                <%= label_tag :code %><br />
+                <%= text_field_tag :otp_attempt %>
+            </div>
+            <%= submit_tag :submit, class: 'btn btn-primary btn-block btn-flat' %>
+        <% end %>
+        <% if @error %>
+            <div id="mfa-error" class="text-danger"><%= @error %></div>
+        <% end %>
+      <%#= render "devise/shared/links" %>
+    </div>
+    <!-- /.mfa-card-body -->
+  </div>
+</div>

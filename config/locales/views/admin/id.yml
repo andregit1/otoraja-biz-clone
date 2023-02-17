@@ -1,0 +1,1748 @@
+id:
+  admin:
+    admin_product:
+      created_date: "Tanggal dibuat"
+      deselect_all: "Batalkan Pilihan"
+      import: "Impor"
+      imported: "Impor"
+      insert_to: "Impor ke"
+      select_all: "Pilih Semua"
+      brand: "Merek"
+      variant: "Varian"
+      tech_spec: "Spesifikasi Teknis"
+      designated_motorcycle: "Sepeda motor yang ditunjuk (perlu didiskusikan)"
+    bike:
+      color: "Warna"
+      expiration: "Masa Berlaku STNK"
+      number: "Nomor"
+      owner: "Pemilik"
+      maker: "Merek"
+      model: "Model"
+      number_plat: "Nomor polisi"
+      month: "Bln"
+      year: "Thn"
+      number_plat_alert_html: "Nomor polisi <span class='text-danger'>%{vehicle_number}</span> sudah pernah tersimpan sebelumnya"
+      confirmation: "Apakah Anda ingin mencatat sebagai kendaraan baru?"
+      bike: "Sepeda Motor"
+      odometer: "Odometer"
+      km: "km"
+    common:
+      are_you_sure: "Apakah anda yakin?"
+      address: "Alamat"
+      address_tel: 'Alamat & Telepon'
+      admin_product: "Nama Resmi"
+      available_name: "Toko/Bengkel"
+      active_until: 'Aktif s.d.'
+      back: "Kembali"
+      category: "Kategori"
+      checkin_date: "Tanggal Masuk"
+      enter: "Masuk"
+      close: "Tutup"
+      comment: "Komentar"
+      config: "Konfigurasi"
+      customer_id: "ID Pelanggan"
+      date_abbreviated: 'Tgl.'
+      edit: "Edit"
+      export_patterns: "Pola Ekspor"
+      filter: "Filter"
+      item_detail: "Rincian barang"
+      keyword: "Kata Kunci"
+      maker: "Merk"
+      mechanic: "Mekanik"
+      model: "Model"
+      name: "Nama"
+      name_id: "Nama & ID"
+      new: "Baru"
+      no_review: "Tidak Ada Ulasan"
+      number: "NoPol"
+      num_tel: 'No. Telepon'
+      order: "Order"
+      proof: 'Bukti'
+      quantity: "Jumlah"
+      rate: "Penilaian"
+      receipt: "Tanda Terima"
+      regist: "Daftar"
+      remind_interval_day: "Hari Pengingat"
+      shop: "Bengkel/Toko"
+      Shop_name : 'Nama Bengkel'
+      workshop: 'Bengkel'
+      shop_alias_name: "Nama Alias"
+      workshop: 'Bengkel'
+      workshop_list: 'Daftar Bengkel'
+      show: "Detail"
+      staff: "Pegawai"
+      stock: "Stok"
+      status: "Status"
+      min: 'min'
+      stock_minimum: "Stok Minimum"
+      tel: "Nomor Telepon"
+      total: "TOTAL"
+      update: "Simpan"
+      sort: "Sortir"
+      search: "Cari"
+      color: "Warna"
+      detail: "Detil"
+      date: "Tanggal"
+      date_abbreviated: 'Tgl.'
+      payment_date: 'Tanggal Bayar'
+      description: "Deskripsi"
+      total_money: "Total (Rp.)"
+      action: "Aksi"
+      request_date: "Tanggal Request"
+      terms_condition: "Syarat & Ketentuan"
+      download: "Unduh"
+      month: "bulan"
+      proof: 'Bukti'
+      name_of_product: 'Nama Produk'
+      delete: "Hapus"
+      yes_label: "Ya"
+      no_label: "Tidak"
+      period: "Periode"
+      show_also: "Tampilkan juga"
+      end_of_list: "Akhir dari list"
+      days: "hari"
+      tel_baru: "No. Telp. Baru"
+      cancel: "Batal"
+      moons: 'Lunas'
+      network_problem: 'Terjadi kendala jaringan'
+      try_again: 'Coba lagi'
+    customer:
+      import_success: "Sukses Import"
+      basic: "Info"
+      basic_information: "Profil"
+      checkins: "Transaksi"
+      checkout_date: "Tanggal Keluar"
+      cuntomer_basic: "Data Pelanggan"
+      customers: "Pelanggan"
+      customer_list: 'Daftar Pelanggan'
+      date: "Tanggal"
+      edit: "Pelanggan - Edit"
+      edit_customer_basic: "Edit Data Pelanggan"
+      email: "Email"
+      expilation_date: "STNK"
+      gender: "Jenis kelamin"
+      maintenance_log: "Transaksi"
+      mileage: "Odometer"
+      owned_bikes: "Sepeda Motor"
+      phone_number: "No. HP"
+      product_service: "Produk / Jasa"
+      registration_information: "Informasi Pendaftaran"
+      registration_number: "Nomor pendaftaran"
+      reviews: "Penilaian"
+      save: "Simpan"
+      send_dm: "Kirim DM"
+      subtotal: "Subtotal"
+      vehicle_information: "Informasi kendaran"
+      last_visit_date: "Svc. Terakhir"
+      odometer: "Odometer"
+      number_plat: "Plat No."
+      customer_id: "ID"
+      customer_checkbox_name: "Sembunyikan data tanpa nama pelanggan"
+      customer_checkbox_tel: "Sembunyikan data tanpa nomor telepon"
+      customer_checkbox_plat: "Sembunyikan data tanpa plat nomor pelanggan"
+      search_title: "Pencarian"
+      search_title_desc: "(Nama/NomorHP/AngkaPlatNomor)"
+      edit_bike: "Ubah Sepeda Motor"
+      request_token_locked_message: "Permintaan request sudah mencapai batas maximum 3x, mohon tunggu sampai jam %{locked_time}, kemudian refresh halaman untuk melakukan request kembali"
+      phone_number_is_used: Nomor sudah pernah di daftarkan di akun lain
+      phone_number_is_same: Nomor sama
+      phone_number_invalid: Nomor tidak valid
+      edit_bike: "Edit Sepeda Motor"
+    transaction:
+      title: "Transaksi"
+      all: "Semua"
+      processed: "Diproses"
+      done: "Selesai"
+      void: "Void"
+      void_uppercase: "VOID"
+      data_title: "Data Transaksi"
+      customer: "Pelanggan"
+      no_trx: "No. Trx"
+      start: "Mulai"
+      total: "Total (Rp)"
+      status: "Status: "
+      plate_number: "Nomor Polisi"
+      maker: "Merek"
+      model_color: "Model / Warna"
+      odometer: "Odometer"
+      customer_created_at: "Terdaftar"
+      phone_number: "No. Telp"
+    dashboard:
+      attendance_details: "RINCIAN PEKERJAAN"
+      checkins_amount: "JUMLAH TRANSAKSI"
+      checkin_summary: "RINGKASAN TRANSAKSI"
+      dashboard: "Dashboard"
+      days_worked: "Pekerjaan"
+      discount: "Diskon"
+      display_conditions: "Aturan Tampilan"
+      display_period: "Periode"
+      mechanic_attendance: "PEKERJAAN MEKANIK"
+      mechanic_report: "LAPORAN MEKANIK"
+      payment_type: "Tipe Pembayaran"
+      product_category: "Kategori Produk"
+      product_summary: "LAPORAN PRODUK"
+      profit_uppercase: "Keuntungan"
+      profit_by_product: "Keuntungan berdasarkan produk"
+      revenue: "Pendapatan"
+      sales: "Penjualan"
+      sales_amount: "JUMLAH PENJUALAN"
+      sales_details: "LAPORAN PENJUALAN"
+      sales_mechanic: "TRANSAKSI MEKANIK"
+      sales_payment_type: "JENIS PEMBAYARAN"
+      sales_percentage: "Persentase Penjualan"
+      sales_summary: "LAPORAN BENGKEL"
+      service: "Jasa"
+      service_rp: "Jasa Rp"
+      sold: "Penjualan"
+      total_rp: "Total Rp"
+      top_sales: "PERINGKAT PENJUALAN"
+      total_checkins: "TOTAL TRANSAKSI"
+      total_sales_breakdown: "Total rincian penjualan"
+      down_payment: "Uang Muka"
+      total_cash_on_hand: "Total Uang Masuk"
+      total_sales_lowercase: "Total Penjualan"
+      total_sales_uppercase: "TOTAL PENJUALAN"
+      total_transactions: "Total Transaksi"
+      transactions: "Transaksi"
+      transactions_uppercase: "TRANSAKSI"
+      cogs: "Modal"
+      profit: "Keuntungan"
+      product: "Produk"
+      product_rp: "Produk Rp"
+      product_uppercase: "PRODUK"
+      show_all: "Lihat semua"
+      today: "Hari ini"
+      setup_shop: 'SETUP BENGKEL'
+      done: 'SELESAI'
+      not_yet: 'BELUM'
+      close_info: 'Terima kasih. Anda bisa menutup area ini.'
+      initial_shop: 'Selesaikan pengaturan bengkel.'
+      initial_shop_link: 'Bawa saya ke menu Pengaturan Bengkel'
+      initial_staff: 'Daftarkan pegawai Anda.'
+      initial_staff_link: 'Bawa saya ke menu Pegawai'
+      initial_user: 'Buat akses login pegawai.'
+      initial_user_link: 'Bawa saya ke menu Akun'
+      initial_info: | 
+        Sedikit lagi Anda bisa menggunakan Otoraja Biz! Selesaikan langkah di atas dan
+        jangan lupa menginstall aplikasinya di smartphone / tablet Anda.
+    style_guideline: "Panduan Gaya"
+    export_layout:
+      answer_data_export: "Ekspor Data Review"
+      column: "Kolom"
+      custmer_data_export: "Ekspor Data Pelanggan"
+      downloading: "Unduh"
+      example: "Contoh"
+      export_layout: "Layout Ekspor"
+      export_layout_edit: "Edit Layout Ekspor"
+      last_digits_without_masking: "Digit Terakhir Tanpa Masking"
+      no_setting: "Tidak Ada Pengaturan"
+      top_digits_without_masking: "Digit Top Tanpa Masking"
+      type: "Tipe"
+      use_masking: "Gunakan Masking"
+    product_category:
+      add_category: "Tambah Kategori"
+      add_product_category: "Tambah Kategori Produk"
+      campaign_code: "Kode Kampanye"
+      edit_product_category: "Edit Kategori Produk"
+      product_category: "Kategori Produk"
+      product_class: "Kelas Produk"
+      remind_category: "Ingatkan berdasarkan kategori"
+      use_reminder: "Gunakan Pengingat"
+    sales_details:
+      attendance_details: "RINCIAN PEKERJAAN"
+      checkins_amount: "JUMLAH TRANSAKSI"
+      dashboard: "Dashboard"
+      days_worked: "PEKERJAAN"
+      display_conditions: "Aturan Tampilan"
+      display_period: "Periode"
+      mechanic_attendance: "PEKERJAAN MEKANIK"
+      payment_type: "TIPE PEMBAYARAN"
+      product_category: "Kategori Produk"
+      product_summary: "LAPORAN PRODUK"
+      sales_amount: "JUMLAH PENJUALAN"
+      sales_details: "LAPORAN PENJUALAN"
+      sales_mechanic: "TRANSAKSI MEKANIK"
+      sales_payment_type: "JENIS PEMBAYARAN"
+      sales_percentage: "PERSENTASE PENJUALAN"
+      sales_summary: "LAPORAN PENJUALAN"
+      sold: "Penjualan"
+      top_sales: "PERINGKAT PENJUALAN"
+      total_checkins: "TOTAL TRAKSAKSI"
+      total_sales_lowercase: "Nilai Penjualan"
+      total_sales_uppercase: "TOTAL PENJUALAN"
+      cogs: "COGS"
+      profit: "Profit"
+      product: "Produk"
+    shop_config:
+      available_payment_methods: "Metode Pembayaran"
+      close_stock_time: "Tenggat Waktu Stok"
+      custome_reminder: "Pengingat Pelanggan"
+      days: "Hari"
+      everyday: "setiap hari"
+      front: "Depan"
+      front_priority_display: "Tampilan Prioritas Depan"
+      message_send_time: "Waktu pengiriman pesan"
+      payment_method: "Cara Pembayaran"
+      public_receipt_url: "Struk Expired"
+      questionnaire: "Daftar pertanyaan"
+      questionnaire_url: "Survey expired"
+      recipt_layout: "Model struk"
+      remind_interval_days: "Rentang waktu pengingat"
+      shop_config: "Konfigurasi Toko"
+      stock_management: "Manajemen Stok"
+      stock_notification_destination: "Nomor Tujuan Pemberitahuan"
+      use_customer_remind: "Pengingat Untuk Pelanggan"
+      use_recipt: "Gunakan Struk"
+      use_record_stock: "Pemberitahuan Stok"
+      use_stock_notification: "Pemberitahuan Stok"
+      rounding: "Rounding"
+      rounding_direction: "Pembulatan"
+      round_to: "Digit pembulatan"
+      num_of_custom_list: "Total List Custom"
+      num_of_products_in_custom_list: "Total produk dlm list custom"
+    shop_staff:
+      active: "Aktif"
+      inactive: "non-Aktif"
+      yes_label: "Ya"
+      no_label: "Tidak"
+      add_shop_staff: "Tambah Pegawai"
+      edit_shop_staff: "Edit Pegawai"
+      add_staff: "Baru"
+      front_staff: "Staff"
+      mechanic_grade: "Kelas Mekanik"
+      position: "Posisi"
+      shop_staff: "Pegawai"
+      staff_name: "Nama Pegawai*"
+      shop: "Bengkel*"
+      form_requirement_notes: "Yang bertanda * wajib diisi"
+    shop:
+      accounts: "Akun"
+      add_manager_user: "Tambahkan Pengguna Pengelola"
+      add_shop_manager_user: "Tambahkan Pengguna ShopManager"
+      add_staff_user: "Tambahkan Pengguna Staf"
+      all_bengkel: "Semua Bengkel"
+      bengkel_id: "Bengkel ID"
+      detail: "Detail"
+      managed_bengkel: "Bengkel Rekanan"
+      shop_information: "Daftar Toko/Bengkel"
+      shop_list: 'Daftar Bengkel'
+      status: "Status"
+      shop_detail: 'Detil Bengkel'
+      information_lable: 'Information'
+    sidebar:
+      administrator: "Fungsi Administrator"
+      transaction_list: "List Transaksi"
+      bikes: "Motor"
+      csv_export: "Ekspor CSV"
+      export_config: "Konfigurasi Ekspor"
+      logout: "Log out"
+      product: "Produk"
+      product_inventory: 'Inventaris Produk'
+      admin_product: "Admin Produk"
+      import_product: 'Impor Produk'
+      packaging_product_relation: "Paket Penjualan"
+      release_note: "Catatan rilis"
+      shop_management: "Manajemen Bengkel"
+      users: "Pengguna"
+      warehouse_management: "Manajemen Gudang"
+      checkin_list: "List Transaksi"
+      invoice: "Faktur"
+      purchase: "Pembelian"
+      sales_details: "Laporan Penjualan"
+      product_non_active: 'Produk Non-aktif'
+      inventory: "Buat Stok Opname"
+      inventory_list: "Daftar Stok Opname"
+      inventory_taking: 'Stok Opname'
+      stock_book_report: "Laporan Stok"
+      expense_report: "Catatan Pengeluaran"
+    stock:
+      action: "Aksi"
+      daily_history: "Log Harian"
+      history: "Sejarah"
+      payment: "Pembayaran"
+      price: "Harga"
+      purchase_price: "Harga Beli"
+      purchase_unit_price: "Harga Satuan"
+      stock_history: "Riwayat Stok"
+      edit_stock_control: "Edit"
+      supplier: "Pemasok"
+      profit: "Profit"
+    subscription:
+      change: 'Ubah'
+      until : 'Berlaku Hingga'
+      subcripstion_lable : 'SUB'
+      owner: "Pemilik"
+      plan: "Rencana Saat Ini"
+      status: "Status"
+      period: "Periode"
+      fee: "Biaya"
+      history_description: "Langganan "
+      expiration_date: "Tanggal Kadaluarsa"
+      exp_date: "Aktif Sampai"
+      expires_in: "Kadaluarsa Dalam"
+      cancel_reason: "Alasan Berhenti Berlangganan"
+      days_remaining: "Hari"
+      cancel: "Batalkan"
+      payment: 'Pembayaran'
+      subscription: "Langganan"
+      subscriptions: "Berlangganan"
+      bank_account_no: "No. Rekening Bank"
+      no_active_msg: "Tidak Ada Langganan Aktif"
+      no_expired_msg: "Tidak Langganan Yang Kadaluarsa"
+      no_subscriptions_msg: "Tidak Ada Langganan"
+      current_plan: "Rencana Saat Ini"
+      expired_plans: "Rencana Kadaluarsa"
+      finalized: "Selesai"
+      cancelled: "Dibatalkan"
+      new_subscription: "Pilih Rencana Langganan"
+      select: "Pilih"
+      plan_one: "Paket Lite"
+      plan_two: "Paket Super"
+      plan_three: "Paket Ultimate"
+      status_change_one: "Ganti Status Ke Pembuatan Akun Bank"
+      status_change_two: "Tambahkan No. rekening dan ganti status ke pembayaran ditunda"
+      status_change_three: "Pembayaran dikonfirmasi, Ganti status ke pembayaran dikonfirmasi"
+      status_change_four: "Semua selasai, ganti status ke selesai"
+      history: "Riwayat Langganan"
+      change_plan: "Ganti Paket"
+      subscription_packet: "Paket Langganan"
+      subscription_plan_packet: 'Pilih Paket'
+      subscription_confirmation: "Anda memilih untuk berlangganan paket berikut ini"
+      agree_statement_first: "Saya telah membaca dan setuju dengan"
+      agree_statement_last: "berlangganan otoraja biz"
+      payment_statement_html: "Silahkan melakukan pembayaran kenomor Virtual Account berikut ini: <h5> %{virtual_account} </h5> Mohon lakukan transfer pembayaran <b> paling lambat %{payment_periods} hari</b>  atau tanggal <b>%{date_remaining}</b> maksimal <b>pukul 14.00</b>  "
+      payment_method_inactive: 'Maaf, untuk sementara pembayaran dengan metode ini tidak bisa dilakukan, silahkan pilih metode pembayaran yang lain.'
+      payment_method: 'Metode Bayar'
+      subscription_status:
+        demo: "DEMO"
+        paid: "BERBAYAR"
+        suspend: "Suspended"
+        date_left: "Akan Habis"
+        process: "Diproses"
+        free_trial: 'FREE TRIAL'
+        payment_pending: "Tunggu Bayar"
+        active: "Aktif"
+        payment_expired: 'Pembayaran kadaluwarsa'
+      no_plan: 'Belum berlangganan'
+      subscription_price_detail: "Harga sudah termasuk peminjaman tablet dan printer." 
+      subscription_desk: "Jika ingin mengaktifkan kembali Otoraja Biz untuk bengkel ini, silahkan hubungi staff Otoraja yang menangani anda"
+      subscription_desk_final: "Paket Langganan sudah final"
+      subscription_expired_alert_html: "Masa langganan bengkel <strong>%{shop_name}</strong> tersisa <strong>%{days_remaining} hari</strong> lagi"
+      extension_history: 'Riwayat Extension'
+      extension: 'EXTENSION'
+      your_package: "Paket Anda"
+      package_name:  "Nama Paket"
+      monthly_package: "Paket %{period} Bulanan"
+      demo_package_name: "Coba Gratis 1 Bulan"
+      start_subscribe: "Mulai Langganan"
+      select_packet: "Pilih Paket"
+      detail: "Rincian"
+      demo_info: "Diperpanjang per bulan (date to date)"
+      already_paid: "Sudah bayar?"
+      upload_receipt: "Unggah bukti pembayaran disini"
+      confirm_invoice: "Konfirmasi Tagihan"
+      subscription_date: "Tgl. Permintaan"
+      payment_date: "Tgl. Bayar"
+      payment_method_option: "Pilihan metode pembayaran"
+      payment_method: "Metode Bayar"
+      payment: "Pembayaran"
+      payment_header: "Menunggu pembayaran Anda untuk transaksi berikut ini:"
+      va_copy: "Nomor VA (klik untuk salin)"
+      payment_expired: "Batas waktu pembayaran "
+      payment_proof: "Bukti Bayar"
+      upload_payment: "Unggah (upload) bukti pembayaran Anda untuk konfirmasi pembayaran secara manual"
+      upload_format: "Format bukti pembayaran yang dapat diterima adalah JPG, PNG, dan PDF."
+      invoice_detail: "Detil Tagihan"
+      receipt_info: 'Ini adalah tanda terima Anda untuk pembayaran paket berlangganan Otoraja Biz.'
+      download_receipt_info: 'Anda dapat mengunduh bukti pembayaran ini untuk disimpan / diprint jika sewaktu-waktu dibutuhkan.'
+      processing_subs_info: 'Permintaan Anda sebelumnya sedang diproses.'
+      processing_request_info: 'Memproses permintaan Anda'
+      mandiri_instructions_html: |
+        <div class="accordion" id="payment-instructions">
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-0" id="mandiri-1">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#internet-banking" aria-expanded="true" aria-controls="internet-banking">
+                  <div id="instruction-btn-1" class="d-flex justify-content-between align-items-center">Internet Banking <i class="fas fa-angle-up"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="internet-banking" class="collapse show" aria-labelledby="mandiri-1" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Masuk ke Mandiri Internet Banking (https://ibank.mandiri.co.id).</p></li>
+                  <li><p class="text-normal">Dari menu utama, pilih Pembayaran, lalu pilih Multi Payment.</p></li>
+                  <li><p class="text-normal">Pilih rekening Anda di kolom Dari Rekening, lalu di Nama Billing pilih Midtrans.</p></li>
+                  <li><p class="text-normal">Masukkan Kode Pembayaran dan Anda akan menerima informasi detil pembayarannya.</p></li>
+                  <li><p class="text-normal">Konfirmasi pembayaran Anda menggunakan Token Mandiri.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-bottom-0 border-top" id="mandiri-2">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left collapsed text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#atm-mandiri" aria-expanded="false" aria-controls="atm-mandiri">
+                  <div id="instruction-btn-2" class="d-flex justify-content-between align-items-center">ATM Mandiri <i class="fas fa-angle-down"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="atm-mandiri" class="collapse" aria-labelledby="mandiri-2" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Dari menu utama, pilih Bayar / Beli.</p></li>
+                  <li><p class="text-normal">Pilih Lainnya.</p></li>
+                  <li><p class="text-normal">Pilih Multi Payment.</p></li>
+                  <li><p class="text-normal">Masukkan 70012 (kode Midtrans), lalu tekan Benar.</p></li>
+                  <li><p class="text-normal">Masukkan Kode Pembayaran lalu tekan Benar.</p></li>
+                  <li><p class="text-normal">Detil pembayaran Anda akan ditampilkan di laman konfirmasi. Jika semua informasinya sudah benar, tekan Ya.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      bca_instructions_html: |
+        <div class="accordion" id="payment-instructions">
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-0" id="bca-1">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#m-bca" aria-expanded="true" aria-controls="m-bca">
+                  <div id="instruction-btn-1" class="d-flex justify-content-between align-items-center">m-BCA <i class="fas fa-angle-up"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="m-bca" class="collapse show" aria-labelledby="bca-1" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Masuk ke aplikasi BCA Mobile.</p></li>
+                  <li><p class="text-normal">Pilih m-BCA, lalu masukkan kode akses m-BCA Anda.</p></li>
+                  <li><p class="text-normal">Pilih m-Transfer, lalu pilih BCA Virtual Account.</p></li>
+                  <li><p class="text-normal">Masukkan Nomor Virtual Account atau pilih dari Daftar Transfer.</p></li>
+                  <li><p class="text-normal">Isi jumlah yang harus dibayarkan.</p></li>
+                  <li><p class="text-normal">Masukkan pin m-BCA Anda.</p></li>
+                  <li><p class="text-normal">Pembayaran sudah selesai. Simpan resinya sebagai bukti pembayaran Anda.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-bottom-0 border-top" id="bca-2">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left collapsed text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#atm-bca" aria-expanded="false" aria-controls="atm-bca">
+                  <div id="instruction-btn-2" class="d-flex justify-content-between align-items-center">ATM BCA <i class="fas fa-angle-down"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="atm-bca" class="collapse" aria-labelledby="bca-2" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Dari menu utama, pilih Transaksi Lainnya.</p></li>
+                  <li><p class="text-normal">Pilih Transfer.</p></li>
+                  <li><p class="text-normal">Pilih Transfer ke BCA Virtual Account.</p></li>
+                  <li><p class="text-normal">Masukkan Kode Pembayaran Anda (11 angka), lalu tekan Benar.</p></li>
+                  <li><p class="text-normal">Masukkan nominal pembayaran sesuai tagihan, lalu tekan Benar.</p></li>
+                  <li><p class="text-normal">Detil pembayaran Anda akan ditampilkan di laman konfirmasi. Jika semua informasinya sudah benar, tekan Ya.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-bottom-0 border-top" id="bca-3">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left collapsed text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#klik-bca" aria-expanded="false" aria-controls="klik-bca">
+                  <div id="instruction-btn-3" class="d-flex justify-content-between align-items-center">Klik BCA <i class="fas fa-angle-down"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="klik-bca" class="collapse" aria-labelledby="bca-3" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Pilih menu Transfer.</p></li>
+                  <li><p class="text-normal">Pilih Transfer ke BCA Virtual Account.</p></li>
+                  <li><p class="text-normal">Masukkan nomor Virtual Account atau pilih dari daftar Transfer, lalu klik Berikutnya.</p></li>
+                  <li><p class="text-normal">Jumlah yang harus dibayar, nomor rekening dan nama rekening tujuan akan ditampilkan di laman konfirmasi pembayaran. Jika semua informasinya sudah benar, klik Berikutnya.</p></li>
+                  <li><p class="text-normal">Gunakan Token BCA Anda dan masukkan KEYBCA Response APPLI1, lalu klik OK.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      bni_instructions_html: |
+        <div class="accordion" id="payment-instructions">
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-0" id="bni-1">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#mobile-banking" aria-expanded="true" aria-controls="mobile-banking">
+                  <div id="instruction-btn-1" class="d-flex justify-content-between align-items-center">Mobile Banking <i class="fas fa-angle-up"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="mobile-banking" class="collapse show" aria-labelledby="bni-1" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Buka aplikasi BNI Mobile Banking dan login.</p></li>
+                  <li><p class="text-normal">Pilih menu Transfer.</p></li>
+                  <li><p class="text-normal">Pilih menu Tagihan Virtual Account.</p></li>
+                  <li><p class="text-normal">Pilih rekening bank yang akan Anda gunakan.</p></li>
+                  <li><p class="text-normal">Masukkan 16 digit nomor virtual account.</p></li>
+                  <li><p class="text-normal">Informasi tagihan akan muncul di laman validasi pembayaran.</p></li>
+                  <li><p class="text-normal">Jika semua informasi sudah benar, masukkan password Anda untuk melakukan pembayaran.</p></li>
+                  <li><p class="text-normal">Transaksi Anda akan diproses.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-bottom-0 border-top" id="bni-2">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left collapsed text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#atm-bni" aria-expanded="false" aria-controls="atm-bni">
+                  <div id="instruction-btn-2" class="d-flex justify-content-between align-items-center">ATM BNI <i class="fas fa-angle-up"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="atm-bni" class="collapse" aria-labelledby="bni-2" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Dari menu utama, pilih Lainnya.</p></li>
+                  <li><p class="text-normal">Pilih Transfer.</p></li>
+                  <li><p class="text-normal">Pilih Rekening Simpanan.</p></li>
+                  <li><p class="text-normal">Pilih ke Rekening BNI.</p></li>
+                  <li><p class="text-normal">Masukkan nomor rekening pembayaran lalu tekan Ya.</p></li>
+                  <li><p class="text-normal">Masukkan jumlah yang harus dibayarkan. Jika jumlah yang dimasukkan tidak sama dengan jumlah tagihan, transaksi akan ditolak.</p></li>
+                  <li><p class="text-normal">Jumlah pembayaran, nomor rekening, dan nama rekening tujuan akan muncul di laman konfirmasi pembayaran. Jika semua informasinya sudah benar, tekan Ya.</p></li>
+                  <li><p class="text-normal">Pembayaran selesai.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-bottom-0 border-top" id="bni-3">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left collapsed text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#internet-banking" aria-expanded="false" aria-controls="internet-banking">
+                  <div id="instruction-btn-3" class="d-flex justify-content-between align-items-center">Internet Banking <i class="fas fa-angle-up"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="internet-banking" class="collapse" aria-labelledby="bni-3" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Masuk ke https://ibank.bni.co.id dan klik Login.</p></li>
+                  <li><p class="text-normal">Lanjutkan masuk menggunakan User ID dan Password Anda.</p></li>
+                  <li><p class="text-normal">Klik Transfer, kemudian pilih Tambah Rekening Favorit, lalu klik Lanjutkan.</p></li>
+                  <li><p class="text-normal">Masukkan nama rekening, nomor rekening, dan email, lalu klik Lanjutkan.</p></li>
+                  <li><p class="text-normal">Masukkan Kode Otentikasi dari token Anda, lalu klik Lanjutkan.</p></li>
+                  <li><p class="text-normal">Kembali ke menu utama dan pilih Transfer, lalu pilih Transfer Antar Rekening BNI.</p></li>
+                  <li><p class="text-normal">Pilih rekening yang baru saja Anda daftarkan sebagai Rekening Tujuan, kemudian lengkapi form isiannya sebelum klik Lanjutkan.</p></li>
+                  <li><p class="text-normal">Cek dan pastikan bahwa informasi yang Anda isikan sudah benar. Jika sudah, masukkan Kode Otentikasi dan klik Lanjutkan untuk menyelesaikan transaksi.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      bri_instructions_html: |
+        <div class="accordion" id="payment-instructions">
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-0" id="bri-1">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#brimo" aria-expanded="true" aria-controls="brimo">
+                  <div id="instruction-btn-1" class="d-flex justify-content-between align-items-center">BRImo <i class="fas fa-angle-up"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="brimo" class="collapse show" aria-labelledby="bri-1" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Login ke aplikasi BRI Mobile, lalu pilih Mobile Banking BRI.</p></li>
+                  <li><p class="text-normal">Pilih Pembayaran, lalu pilih BRIVA.</p></li>
+                  <li><p class="text-normal">Masukkan Nomor BRIVA.</p></li>
+                  <li><p class="text-normal">Jumlah yang harus dibayar, kode pembayaran, dan nama penerima akan muncul di laman konfirmasi pembayaran. Jika informasinya sudah benar, pilih Lanjutkan.</p></li>
+                  <li><p class="text-normal">Masukkan PIN Mobile Banking BRI Anda, lalu pilih OK.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-bottom-0 border-top" id="bri-2">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left collapsed text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#atm-bri" aria-expanded="false" aria-controls="atm-bri">
+                  <div id="instruction-btn-2" class="d-flex justify-content-between align-items-center">ATM BRI <i class="fas fa-angle-down"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="atm-bri" class="collapse" aria-labelledby="bri-2" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Di menu utama, pilih Transaksi Lain.</p></li>
+                  <li><p class="text-normal">Pilih Pembayaran.</p></li>
+                  <li><p class="text-normal">Pilih Lainnya.</p></li>
+                  <li><p class="text-normal">Pilih BRIVA.</p></li>
+                  <li><p class="text-normal">Masukkan Nomor BRIVA dan tekan Benar.</p></li>
+                  <li><p class="text-normal">Jumlah yang harus dibayar, kode pembayaran, dan nama penerima akan muncul di laman konfirmasi pembayaran. Jika informasinya sudah benar, tekan Ya.</p></li>
+                  <li><p class="text-normal">Pembayaran selesai. Simpan bukti pembayaran Anda.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-bottom-0 border-top" id="bri-3">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left collapsed text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#ib-bri" aria-expanded="false" aria-controls="ib-bri">
+                  <div id="instruction-btn-3" class="d-flex justify-content-between align-items-center">IB BRI <i class="fas fa-angle-down"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="ib-bri" class="collapse" aria-labelledby="bri-3" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Login ke Internet Banking BRI.</p></li>
+                  <li><p class="text-normal">Pilih Pembayaran & Pembelian.</p></li>
+                  <li><p class="text-normal">Pilih sub menu BRIVA.</p></li>
+                  <li><p class="text-normal">Masukkan Nomor BRIVA.</p></li>
+                  <li><p class="text-normal">Jumlah yang harus dibayar, kode pembayaran, dan nama penerima akan muncul di laman konfirmasi pembayaran. Jika informasinya sudah benar, pilih Kirim.</p></li>
+                  <li><p class="text-normal">Masukkan password dan mToken, lalu pilih Kirim.</p></li>
+                  <li><p class="text-normal">Pembayaran selesai. Pilih Print untuk mendapatkan bukti pembayaran Anda.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      gopay_instructions_html: |
+        <div class="accordion" id="payment-instructions">
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-0" id="qr">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#qris" aria-expanded="true" aria-controls="qris">
+                  <div id="instruction-btn-1" class="d-flex justify-content-between align-items-center">GoPay <i class="fas fa-angle-up"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="qris" class="collapse show" aria-labelledby="qr" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Buka aplikasi Gojek atau aplikasi e-wallet lainnya.</p></li>
+                  <li><p class="text-normal">Pindai kode QR yang tertera di monitor.</p></li>
+                  <li><p class="text-normal">Jika menggunakan satu perangkat, unduh kode QR terlebih dahulu ke perangkat Anda.</p></li>
+                  <li><p class="text-normal">Di aplikasi Gojek, pilih Pay / Bayar, lalu pilih icon foto di atas kanan layar pemindaian. Pilih foto kode QR yang telah Anda unduh.</p></li>
+                  <li><p class="text-normal">Periksa informasi pembayaran di aplikasi. Jika sudah benar, ketuk Pay / Bayar.</p></li>
+                  <li><p class="text-normal">Masukkan PIN Anda.</p></li>
+                  <li><p class="text-normal">Transaksi Anda sudah selesai.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      shopee_instructions_html: |
+        <div class="accordion" id="payment-instructions">
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-0" id="qr">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#qris" aria-expanded="true" aria-controls="qris">
+                  <div id="instruction-btn-1" class="d-flex justify-content-between align-items-center">ShopeePay <i class="fas fa-angle-up"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="qris" class="collapse show" aria-labelledby="qr" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Buka aplikasi Shopee atau aplikasi e-wallet lainnya.</p></li>
+                  <li><p class="text-normal">Pindai kode QR yang tertera di monitor.</p></li>
+                  <li><p class="text-normal">Jika menggunakan satu perangkat, unduh kode QR terlebih dahulu ke perangkat Anda.</p></li>
+                  <li><p class="text-normal">Di aplikasi Shoppe, pilih Pay / Bayar, lalu pilih icon foto di atas kanan layar pemindaian. Pilih foto kode QR yang telah Anda unduh.</p></li>
+                  <li><p class="text-normal">Periksa informasi pembayaran di aplikasi. Jika sudah benar, ketuk Pay / Bayar.</p></li>
+                  <li><p class="text-normal">Masukkan PIN Anda.</p></li>
+                  <li><p class="text-normal">Transaksi Anda sudah selesai.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      qris_instructions_html: |
+        <div class="accordion" id="payment-instructions">
+          <div class="card shadow-none m-0">
+            <div class="card-header p-3 border-0" id="qr">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-normal text-left text-body p-0 font-weight-bold" type="button" data-toggle="collapse" data-target="#qris" aria-expanded="true" aria-controls="qris">
+                  <div id="instruction-btn-1" class="d-flex justify-content-between align-items-center">QRIS <i class="fas fa-angle-up"></i></div>
+                </button>
+              </h2>
+            </div>
+            <div id="qris" class="collapse show" aria-labelledby="qr" data-parent="#payment-instructions">
+              <div class="card-body px-3 py-0">
+                <ol class="pl-3">
+                  <li><p class="text-normal">Buka aplikasi e-wallet yang mendukung pembayaran via QRIS.</p></li>
+                  <li><p class="text-normal">Pindai kode QR yang tertera di monitor.</p></li>
+                  <li><p class="text-normal">Jika menggunakan satu perangkat, unduh kode QR terlebih dahulu ke perangkat Anda.</p></li>
+                  <li><p class="text-normal">Di aplikasi e-wallet, ketuk icon Pindai, lalu pilih icon foto dan pilih foto kode QR yang telah Anda unduh.</p></li>
+                  <li><p class="text-normal">Periksa informasi pembayaran di aplikasi. Jika sudah benar, ketuk Pay / Bayar.</p></li>
+                  <li><p class="text-normal">Masukkan PIN Anda.</p></li>
+                  <li><p class="text-normal">Transaksi Anda sudah selesai.</p></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      terms_condition_content_html: |
+        <strong align='center'> PENDAHULUAN </strong>
+        <br>
+        <b>Syarat dan Ketentuan</b> ini dibuat untuk menjelaskan kewajiban kami sebagai Penyedia Produk dan Layanan dan
+        kewajiban Anda sebagai Pelanggan.
+        <br><br>
+        Layanan Aplikasi Otoraja Biz adalah Layanan Aplikasi Otoraja milik PT Otoraja Network Indonesia sebagai Penyedia
+        Layanan yang
+        bertujuan untuk membantu Pemilik Bengkel dalam menjalankan operasional bengkelnya agar mampu bersaing dalam
+        industri
+        otomotif di Indonesia. Dengan Layanan Aplikasi Otoraja Biz,
+        Pemilik Bengkel dapat melakukan transaksi dengan cepat, memantau jumlah stok persediaan barang dan mendapatkan
+        laporan penjualan secara langsung.
+        <br><br>
+
+        Syarat-syarat ini mengikat dan berlaku bagi Anda ketika terhubung dengan Layanan Aplikasi Otoraja Biz.
+        <br><br>
+
+        Layanan Aplikasi Otoraja Biz dapat berubah dari masa ke masa menurut kebijakan perusahaan dengan mempertimbangkan
+        masukan dari para Pengguna ataupun lainnya yang
+        dianggap berguna untuk memperbaiki produk dan sistem layanan kami.
+        Syarat-syarat dan ketentuan ini tidak dimaksudkan untuk menjawab setiap pertanyaan atau menunjukkan setiap masalah
+        yang dapat timbul dari penggunaan layanan Aplikasi Otoraja Biz.
+        <br><br>
+
+        PT Otoraja Network Indonesia selaku penyedia layanan Aplikasi Otoraja Biz memiliki hak untuk mengubah Syarat dan
+        Ketentuan ini kapan saja,
+        dan akan berlaku ketika Syarat dan Ketentuan yang baru telah diinformasikan kepada pengguna/pelanggan, baik secara
+        langsung (dengan dibuktikan melalui surat edaran),
+        maupun secara tidak langsung melalui platform website, social media atau pun chat.
+        <br><br>
+
+        PT Otoraja Network Indonesia akan berusaha untuk mengumumkan perubahan-perubahannya kepada Anda melalui email,
+        pemberitahuan melalui situs web, atau lainnya.
+        Karena cukup memungkinkan bahwa Syarat dan Ketentuan ini akan berubah dari masa ke masa, maka menjadi kewajiban
+        Anda
+        untuk memastikan bahwa Anda sudah membaca,
+        mengerti, dan menyetujui Syarat dan Ketentuan terbaru yang tersedia pada situs web kami.
+        <br><br>
+
+        Yang dimaksud dalam Syarat dan Ketentuan ini adalah penekanan pada <b>Akses</b> dan <b>Penggunaan Layanan</b>
+        Aplikasi Otoraja Biz <br><br>
+
+        Dengan mendaftarkan diri dalam Layanan Aplikasi Otoraja Biz, Anda menyatakan bahwa Anda sudah membaca dan
+        mengerti Syarat dan Ketentuan ini dan telah dianggap memiliki wewenang untuk bertindak atas nama diri sendiri,
+        mewakili seseorang atau sekelompok orang, mewakili organisasi, atau mewakili badan lainnya yang terdaftar untuk
+        menggunakan layanan kami.<br><br>
+
+        <b>A. Definisi</b>
+        <br>
+        <ol align='justify'>
+          <li><b>Syarat dan Ketentuan </b> – berarti Syarat dan Ketentuan ini;</li>
+          <li>
+            <b>Biaya Akses</b> – berarti Biaya yang di-Tagihkan berdasarkan pilihan periode atau waktu tertentu (sudah
+            termasuk pajak) yang harus Anda bayarkan
+            berdasarkan Daftar Harga atau Biaya yang dicantumkan di situs web Otoraja (PT Otoraja Network Indonesia
+            berhak mengubah dari masa ke masa dengan sepengetahuan Anda);
+          </li>
+          <li>
+            <b>Informasi Rahasia </b> – meliputi seluruh informasi yang disebarkan antara pihak dalam syarat dan
+            ketentuan ini, baik secara tertulis, elektronik, maupun lisan,
+            dan termasuk layanan ini,tetapi tidak termasuk informasi yang sudah menjadi atau akan dijadikan untuk umum
+            /
+            publik, terkecuali yang sudah diungkapkan dan
+            terbongkar tanpa hak atau oleh pihak pengguna atau lainnya secara tidak sah;
+          </li>
+          <li><b>Data</b> – berarti data apapun yang Anda masukkan atau dimasukkan dengan kewenangan Anda di situs web;
+          </li>
+          <li>
+            <b>Hak atas Kekayaan Intelektual</b> – berarti paten, merek dagang, merek jasa atau layanan, hak cipta,
+            hak
+            pada desain, pengetahuan, atau hak kekayaan intelektual atau lainnya,
+            yang terdaftar atau tidak terdaftar;
+          </li>
+          <li>
+            <b>Layanan</b> – berarti layanan aplikasi meliputi penyediaan sistem pencatatan/akuntansi, bantuan
+            operasional dan
+            layanan lainnya yang disediakan (dan dapat diubah atau diperbarui dari masa ke masa) melalui situs web;
+          </li>
+          <li><b>Situs web</b> – berarti situs internet di domain <a href='www.otoraja.com'>www.otoraja.com</a>;
+            <a href='biz.otoraja.id'>biz.otoraja.id</a>
+            atau situs internet
+            lainnya yang dikelola oleh Aplikasi Otoraja atau PT Otoraja Network Indonesia;</li>
+          <li><b>Otoraja</b> – berarti PT Otoraja Network Indonesia yang terdaftar di Negara Republik Indonesia;</li>
+          <li><b>Pengguna Diundang</b> – berarti setiap orang atau badan, selain Pelanggan, yang memakai layanan dari
+            masa
+            ke masa dengan izin dari Pelanggan;</li>
+          <li><b> Pelanggan</b> – berarti orang, maupun atas nama pribadi, organisasi atau badan lainnya, yang mendaftar
+            untuk menggunakan Layanan;</li>
+          <li><b>Anda</b> – berarti Pelanggan atau Pengguna Diundang.</li>
+          <li><b>Subscription</b> - ialah pembayaran berulang yang dibayar di muka untuk menggunakan Layanan Aplikasi
+            Otoraja Biz yang disediakan oleh Otoraja</li>
+        </ol>
+        <b>B. Penggunaan Peranti Lunak</b>
+        <ol type=1>
+          <li>
+            Otoraja memberi hak kepada Anda untuk mengakses dan memanfaatkan Layanan Aplikasi Otoraja Biz melalui
+            situs
+            web kami dengan peran penggunaan yang sudah ditentukan untuk Anda,
+            berdasarkan jenis layanan yang Anda pilih. Hak ini bersifat tidak eksklusif, tidak dapat
+            dipindahtangankan,
+            dan dibatasi oleh dan bergantung pada syarat dan ketentuan ini.
+            Anda mengakui dan menyetujui, bergantung kepada perjanjian tertulis apapun yang berlaku antara Pelanggan
+            dan
+            Pengguna Diundang, atau hukum lainnya yang berlaku:
+            <ul>
+              <li>Pengguna/Pelanggan bertanggung jawab untuk menentukan siapa yang memperoleh akses sebagai Pengguna
+                Diundang dan jenis peran dan hak yang mereka punya untuk mengakses jenis data yang Anda miliki;
+              </li>
+              <li>Pengguna/Pelanggan bertanggung jawab untuk semua penggunaan Layanan oleh Pengguna Diundang;</li>
+              <li>
+                Pengguna/Pelanggan bertanggung jawab untuk mengendalikan setiap tingkat akses untuk Pengguna
+                Diundang kepada organisasi dan layanan yang bersangkut-pautsetiap saat,
+                dan bisa menarik atau mengubah akses atau tingkat akses Pengguna Diundang kapanpun untuk alasan
+                apapun di dalam kasus manapun;
+              </li>
+              <li>
+                jika ada perselisihan antara Pengguna/Pelanggan dan Pengguna Diundang mengenai akses kepada
+                organisasi atau layanan apapun, Pelanggan harus
+                membuat keputusan dan mengatur akses atau tingkat akses ke data atau layanan yang akan Pengguna
+                Diundang peroleh jika ada.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <ol type='a'>
+              <li>
+                Otoraja tidak bertanggungjawab dan Anda setuju untuk membebaskan Otoraja atas tanggung jawab
+                terhadap segala kerusakan atau kerugian
+                (termasuk Induk Perusahaan, direksi, karyawan dan semua personil diperusahaan) yang diakibatkan
+                secara langsung atau
+                tidak langsung dari adanya penyediaan barang-barang yang dimasukkan melalui aplikasi oleh Anda,
+                atas
+                barang-barang yang dilarang/dibatasi
+                menurut ketentuan hukum yang berlaku.
+              </li>
+              <li>
+                Berikut ini adalah Daftar Jenis Barang yang dilarang dan/atau dibatasi untuk diperdagangkan oleh
+                Penjual pada layanan Aplikasi Otoraja Biz:
+                <ul>
+                  <li>
+                    Segala jenis obat-obatan maupun zat-zat lain yang dilarang ataupun dibatasi peredarannya
+                    menurut ketentuan hukum yang berlaku,
+                    termasuk namun tidak terbatas pada ketentuan Undang-Undang Narkotika, Undang-Undang
+                    Psikotropika, dan Undang-Undang Kesehatan.
+                    Termasuk pula dalam ketentuan ini adalah obat keras, obat-obatan yang memerlukan resep
+                    dokter, obat bius dan sejenisnya,
+                    atau obat yang tidak memiliki izin edar dari Badan Pengawas Obat dan Makanan (BPOM).
+                  </li>
+                  <li>
+                    Kosmetik dan makanan minuman yang membahayakan keselamatan penggunanya, ataupun yang tidak
+                    mempunyai izin edar dari Badan Pengawas Obat dan Makanan (BPOM).
+                  </li>
+                  <li>
+                    Bahan yang diklasifikasikan sebagai Bahan Berbahaya menurut ketentuan hukum/peraturan yang
+                    berlaku.
+                  </li>
+                  <li>
+                    Barang-barang lain yang kepemilikannya ataupun peredarannya melanggar ketentuan hukum yang
+                    berlaku di Indonesia.
+                  </li>
+                  <li>Barang-Barang yang melecehkan pihak/ras tertentu atau dapat merendahkan martabat orang
+                    lain.</li>
+                  <li>Barang-barang yang melanggar Hak atas Kekayaan Intelektual</li>
+                  <li>Barang-Barang lain yang melanggar ketentuan hukum yang berlaku di Indonesia.</li>
+                </ul>
+              </li>
+              <li>
+                Anda memahami dan menyetujui bahwa Otoraja memiliki hak untuk segera menghapus setiap Barang yang
+                melanggar salah satu dari ketentuan yang telah disebutkan sebelumnya
+                dalam Daftar Jenis Barang yang dilarang dan/atau dibatasi untuk diperdagangkan dan Otoraja juga
+                tidak bertanggungjawab untuk memberikan kompensasi untuk setiap
+                'kerugian apapun terkait Barang yang dihapus terkait pelanggaran yang dilakukan oleh Anda.
+              </li>
+            </ol>
+          </li>
+        </ol>
+        <b>C. Kewajiban Anda</b>
+        <ol>
+          <li>
+            <b>Kewajiban Umum</b>
+            <ol>
+              <li>Anda wajib mengikuti syarat dan ketentuan ini, maupun formulir dan/atau dokumen lain terkait
+                dengan
+                Layanan Aplikasi Otoraja yang merupakan bagian tidak terpisahkan dari Syarat dan Ketentuan ini.
+              </li>
+              <li>
+                Anda harus memastikan hanya memakai Layanan dan Website untuk keperluan internal bisnis Anda yang
+                benar dan secara sah,
+                dengan Syarat dan Ketentuan dan pemberitahuan yang diumumkan oleh Otoraja atau ketentuan yang
+                tercantum di situs web.
+                Anda boleh memakai Layanan dan Situs Web atas nama orang atau badan lain, atau untuk memberi
+                layanan
+                kepada mereka,
+                tetapi Anda harus memastikan bahwa Anda mempunyai wewenang untuk melakukannya, dan semua pihak
+                yang
+                menerima Layanan melalui Anda memenuhi
+                dan menyetujui semua syarat dalam Syarat dan Ketentuan ini yang berlaku kepada Anda;
+              </li>
+            </ol>
+          </li>
+          <li>
+            <b>Syarat Akses</b>
+            <ol>
+              <li>
+                Anda harus memastikan bahwa semua nama pengguna dan sandi yang diperlukan untuk mengakses Layanan
+                Aplikasi Otoraja tersimpan dengan aman dan secara rahasia.
+                Anda harus segera memberitahu Otoraja mengenai pemakaian sandiAnda olehpihak yang tidak berwenang,
+                atau pelanggaran keamanan lainnya, dan Otoraja akan menetapkan semula sandi Anda,
+                dan Anda harus melakukan semua tindakan lainnya yang dianggap cukup penting oleh Aplikasi Otoraja
+                untuk mempertahankan atau meningkatkan keamanan sistem komputer dan jaringan Aplikasi Otoraja,
+                dan akses Anda kepada Layanan kami.
+              </li>
+              <li>
+                Sebagai syarat dari Ketentuan-ketentuan ini, saat mengakses dan menggunakan Layanan Aplikasi
+                Otoraja, Anda <b>dilarang</b>:
+                <ul>
+                  <li>mencoba untuk melemahkan keamanan atau integritas dari sistem komputer atau jaringan
+                    Aplikasi Otoraja, atau jika Layanan-nya dihostpihak ketiga, sistem komputer atau jaringan
+                    pihak ketiga itu;</li>
+                  <li>
+                    menggunakan atau menyalahgunakan Layanan Aplikasi Otoraja dengan cara apapun
+                    yang dapat mengganggu kemampuan pengguna lain untuk menggunakan Layanan atau Situs Web;
+                  </li>
+                  <li>
+                    mencoba untuk mendapatkan akses yang tidak sah kepada materi apapun selain yang sudah
+                    dinyatakan dengan jelas bahwa Anda telah mendapatkan izin untuk mengaksesnya,
+                    atau untuk mengakses sistem komputer kami di mana Layanan-nya di host;
+                  </li>
+                  <li>
+                    mengirimkan, atau memasukkan ke Situs Web: fail apapun yang dapat merusak peranti komputer
+                    atau peranti lunak orang lain,
+                    materi atau Data yang melanggar hukum apapun (termasuk Data atau materi lainnya yang
+                    dilindungi oleh hak cipta atau rahasia dagang di mana Anda tidak memiliki hak untuk
+                    memakainya);
+                  </li>
+                  <li>
+                    mencoba untuk mengubah, menyalin, meniru, membongkar, atau melakukan reverse engineering
+                    (merekayasa balik) untuk program komputer apapun yang dipakai untuk memberi Layanan
+                    Aplikasi
+                    Otoraja,
+                    atau untuk menggunakan Situs Web di luar penggunaan yang diperlukan dan dimaksudkan.
+                  </li>
+                </ul>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <b>Batasan Penggunaan</b>
+            <br>
+            Penggunaan Layanan Aplikasi Otoraja mungkin dapat dibatasi melingkupi, tapi tidak terbatas kepada,
+            banyaknya transaksi bulanan dan jumlah panggilan yang diizinkan untuk Anda gunakan dengan memanggil kepada
+            application programming interface(antarmuka pemrograman aplikasi) Aplikasi Otoraja.
+            Apabila ada, batasan- batasan tersebut akan ditentukan dan dicantumkan pada Layanan yang terkait.
+          </li>
+          <li>
+            <b>Syarat Komunikasi</b>
+            <br>
+            <ol>
+              <li>
+                Sebagai syarat pada Ketentuan ini, jika Anda memakai peranti komunikasi apapun yang tersedia
+                melalui
+                Situs Web (seperti forum apapun atau ruang percakapan/ chat),
+                Anda setuju untuk memakai peranti- peranti komunikasi tersebut hanya untuk tujuan yang sah. Anda
+                tidak dibenarkan untuk memakai peranti-peranti komunikasi tersebut untuk
+                memasang atau menyebarkan materi apapun yang tidak terkait dengan pemakaian Layanan-nya,
+                termasuk (tapi tidak terbatas dengan): menawarkan barang dan jasa untuk dijual, e-mail komersial
+                yang tidak diminta atau diinginkan, fail yang dapat merusak peranti komputer
+                atau peranti lunak orang lain, bahan-bahan yang mungkin dapat menghina pengguna Layanan atau Situs
+                Web yang lain, atau materi yang melanggar undang-undang apapun
+                termasuk materi yang dilindungi oleh hak cipta atau rahasia dagang di mana Anda tidak memiliki hak
+                untuk memakainya).
+              </li>
+              <li>
+                Saat Anda melakukan komunikasi dalam bentuk apapun di Situs Web, Anda menjamin bahwa Anda
+                dibenarkan
+                untuk membuat komunikasi tersebut.
+                Aplikasi Otoraja tidak berkewajiban untuk memastikan bahwa komunikasi pada Situs Web adalah sah
+                dan
+                benar,
+                atau bahwa mereka terkait hanya pada penggunaan Layanan. Aplikasi Otoraja berhak untuk menghapus
+                komunikasi apapun setiap saat atas kebijakannya sendiri.
+              </li>
+            </ol>
+          </li>
+          <li>
+            <b>Tanggung Jawab Ganti Rugi</b>
+            </br>
+            Anda membebaskan Aplikasi Otoraja dari semua: tuntutan, gugatan, biaya kerugian, kerusakan, dan kehilangan
+            yang timbul sebagai hasil dari pelanggaran Anda kepada Syarat dan Ketentuan
+            yang tertera di Syarat dan Ketentuan ini, atau kewajiban apapun yang mungkin Anda punya kepada Otoraja,
+            termasuk (tapi tidak terbatas kepada) biaya apapun yang berkaitan kepada perolehan
+            Biaya Akses apapun yang sudah jatuh tempo tetapi belum Anda bayar.
+          </li>
+        </ol>
+        <b>D. Ketentuan Berlangganan Aplikasi Otoraja Biz </b><br>
+        <ol>
+          <li>
+            <b>Kebijakan Berlangganan</b>
+            <ol type='a'>
+              <li>Otoraja menyedikan Layanan Aplikasi Otoraja Biz</li>
+              <li>
+                Pelanggan bersedia berlangganan Aplikasi Otoraja Biz sesuai dengan paket layanan yang dipilih dan
+                tersedia.
+              </li>
+              <li>
+                Dalam hal Otoraja meminjamkan alat berupa Tablet beserta Printer (“Alat”) kepada
+                Pelanggan/Pengguna
+                Diundang untuk dapat digunakan dalam melakukan Layanan yang
+                diatur dalam Syarat dan Ketentuan ini dan menjaga agar alat tersebut dalam keadaan baik dan dapat
+                berfungsi (tidak rusak) serta akan mengembalikan alat dan
+                barang tersebut dalam keadaan baik jika langganan paket pada Layanan telah berakhir. Apabila
+                selama
+                penggunaan alat tersebut mengalami kerusakan,
+                maka Pelanggan/Pengguna Diundang wajib untuk menginformasikan kepada Otoraja dalam waktu 1x24 jam
+                untuk dapat ditindaklanjuti oleh Otoraja.
+              </li>
+              <li>
+                Terhadap ketentuan peminjaman alat berlaku untuk jangka waktu maksimal 6 (enam) bulan pemakaiann
+                atau jika
+                kerjasama Layanan Aplikasi telah berakhir, tergantung peristiwa mana yang terlebih dulu terjadi.
+              </li>
+              <li>
+                Pengunaan Alat hanya akan digunakan oleh Pelanggan/Pengguna Diundang untuk keperluan Layanan
+                terkait
+                kegiatan bisnis Bengkel dengan Otoraja dan
+                tidak akan digunakan untuk keperluan pribadi serta keperluan lain yang tidak berkaitan dengan
+                kegiatan
+                bisnis antara Pelanggan/Pengguna Diundang dengan Otoraja.
+                Otoraja berhak melakukan evaluasi atas penggunaan alat dan jika terdapat pelanggaran maka Otoraja
+                berhak
+                untuk melakukan Pengakhiran sebagaimana yang diatur dalam Syarat dan Ketentuan ini.
+              </li>
+              <li>
+                Jangka waktu berlangganan pada Layanan Aplikasi Otoraja Biz adalah selama periode Paket pilihan
+                yang
+                didaftarkan dan telah dibayarkan oleh Anda.
+              </li>
+              <li>
+                Paket berlangganan Layanan Aplikasi Otoraja Biz dinyatakan aktif pada H+1 setelah diterimanya
+                pembayaran
+                oleh Otoraja dari Anda sesuai dengan daftar harga paket yang dipilih.
+              </li>
+              <li>
+                Anda dapat mengubah pilihan paket langganan selama jangka waktu Langganan masih aktif dengan
+                memberitahukan
+                hal tersebut kepada Otoraja dan memenuhi ketentuan yang berlaku.
+              </li>
+              <li>
+                Apabila Anda melakukan perubahan langganan paket sebagaimana disebutkan di atas, maka setelah
+                dilakukan
+                pembayaran terkait perubahan paket tersebut maka
+                secara otomatis Otoraja akan menghentikan langganan paket yang terakhir, dan Otoraja tidak akan
+                menyediakan
+                pengembalian uang atas sisa periode pada Langganan Paket tersebut.
+              </li>
+              <li>
+                Dalam hal terjadi gangguan pada Layanan Aplikasi Otoraja Biz , maka Anda dapat melaporkan hal
+                tersebut
+                kepada Customer Service Otoraja di Nomor 021-521- 4077 dengan
+                jam operasional setiap hari kalender dari pukul 09.00-17.00
+              </li>
+              <li>
+                Bila laporan tersebut diterima Otoraja di luar waktu operasional sebagaimana disebutkan di atas,
+                maka
+                terhadap laporan tersebut akan ditindaklanjuti pada hari dan jam kerja berikutnya.
+              </li>
+              <li>
+                Otoraja akan memberikan update terkait perkembangan proses penyelesaian atas laporan gangguan
+                selama
+                1x24
+              </li>
+            </ol>
+          <li>
+            <b>Jangka waktu berlangganan:</b>
+            <ol type='a'>
+              <li>
+                Jangka waktu berlangganan secara sah berakhir sesuai
+                dengan jangka waktu periode berlangganan paket pilihan yang didaftarkan dan telah dibayarkan oleh
+                Pelanggan.
+              </li>
+              <li>
+                Pemberitahuan jatuh tempo waktu berlangganan akan diberitahukan oleh Otoraja selambat-lambatnya 5
+                hari
+                kerja sebelum tanggal berakhirnya langganan paket.
+              </li>
+              <li>
+                Terhadap pemberitahuan sebagaimana dimaksud dalam ayat 2 di atas, maka Pelanggan wajib memberikan
+                konfirmasi terkait perpanjangan jangka
+                waktu Perjanjian minimal 2 hari kerja sebelum berakhirnya jangka waktu berlangganan.
+              </li>
+              <li>
+                Jika tidak ada perubahan harga dan perubahan paket maka Paket Langganan akan diperpanjang secara
+                otomatis oleh Otoraja,
+                dan hal tersebut cukup dibuktikan dengan bukti transfer pembayaran ke rekening Virtual Account
+                atas
+                nama
+                pelanggan
+                untuk pembayaran paket langganan periode selanjutnya (Rekening Virtual Account akan diberitahukan
+                setelah dilakukan pembayaran pertama kali).
+              </li>
+              <li>
+                Jika ketentuan ayat 4 di atas tidak dipenuhi oleh Pelanggan, maka Otoraja berhak untuk memutus
+                akses
+                Pelanggan pada Aplikasi Otoraja Biz.
+              </li>
+              <li>
+                Pengaktifan kembali Akses Pelanggan dalam Aplikasi Otoraja Biz dapat dilakukan oleh Otoraja
+                apabila
+                Pelanggan telah melunasi semua kewajiban Pembayaran.
+              </li>
+              <li>
+                Apabila pada saat layanan Berlangganan ini berakhir atau diputuskan terdapat kewajiban yang belum
+                dapat
+                diselesaikan oleh Para Pihak, maka ketentuan- ketentuan dalam layanan Berlangganan
+                ini tetap berlaku sampai diselesaikannya hak dan kewajiban Para Pihak.
+              </li>
+              <li>
+                Dalam hal Pelanggan memutuskan untuk mengakhiri layanan paket berdasarkan syarat dan ketentuan ini
+                secara sepihak sebelum jangka waktu berlangganan berakhir, maka sisa biaya berlangganan
+                berdasarkan
+                jangka waktu layanan yang belum dijalani, secara otomatis kan hilang atau hangus.
+              </li>
+            </ol>
+          </li>
+          </li>
+          <li>
+            <b>Kewajiban pembayaran</b>
+            <ol type='a'>
+              <li>
+                Tagihan untuk Biaya Akses akan dibuat sebesar nilai sebagaimana sesuai layanan Daftar Harga Paket
+                yang
+                telah dipilih oleh Anda,
+                dan dibayarkan di depan setiap kali sebelum diaktivasi periode berlangganan/pemakaiannya untuk
+                Layanan
+                Aplikasi Otoraja biz.
+                Semua tagihan akan terdiri dari Biaya Akses untuk kurun waktu layanan sesuai paket pilihan Anda.
+                Otoraja
+                akan secara otomatis terus membuat
+                tagihan untuk Anda setelah pemakaian periode berjalan berakhir untuk melanjut ke pemakaian periode
+                berikutnya selama penggunaan Layanan i
+                ni dan/atau paket pilihan berlangganan Anda tidak mengalami perubahaan dan akan berakhir
+                berdasarkan
+                Syarat dan Ketentuan yang telah ditentukan.
+              </li>
+              <li>
+                Semua tagihan dari layanan Aplikasi Otoraja akan dibertahukan/dikirim kepada Anda atau kepada
+                kontak
+                penagihan yang telah Anda berikan melalui email.
+                Anda harus melakukan pembayaran untuk seluruh nilai yang tertera di tagihan Anda sebelum melewati
+                tanggal batas waktu yang ditentukan sesuai tagihannya sebelum aktivasi dapat di mulai/diaktifkan,
+                Anda mempunyai tanggung jawab untuk pembayaran semua pajak dan bea yang ditambahkan kepada Biaya
+                Akses
+                tersebut. Anda juga diminta untuk menyimpan bukti transaksi.
+                Jika layanan sempat terhenti sebelum pembayaran dilakukan, kami akan mengaktifkan layanan dalam
+                waktu 2
+                (dua) hari kerja.
+              </li>
+            </ol>
+          </li>
+        </ol>
+        <b>E. Kerahasiaan dan Privasi</b>
+        <ol>
+          <li>
+            Kerahasiaan informasi dan Privasi Anda adalah hal yang sangat penting dan utama bagi kami di Otoraja.
+            Untuk
+            melindungi hak-hak Anda
+            dengan lebih baik kami telah menyediakan Kebijakan Privasi Otoraja untuk menjelaskan praktik privasi kami
+            secara rinci. Silakan baca Kebijakan
+            Privasi untuk memahami bagaimana Otoraja mengumpulkan dan menggunakan informasi yang berkaitan dengan Akun
+            Anda dan/atau penggunaan Layanan oleh Anda.
+          </li>
+          <li>
+            Anda wajib menyetujui Kebijakan Privasi Otoraja yang berlaku, termasuk namun tidak terbatas pada
+            penggunaan
+            data pribadi.
+          </li>
+        </ol>
+        <b>F. Kepemilikan Hak atas Kekayaan Intelektual</b>
+        <ol>
+          <li>
+            Kepemilikan dan semua Hak atas Kekayaan Intelektual yang diperoleh dari layanan, situs web, dan
+            dokumentasi
+            apapun yang terkait dengan layanan tetap menjadi hak milik Otoraja.
+          </li>
+          <li>
+            Kepemilikan dan semua Hak atas Kekayaan Intelektual yang terdapat di data tetap menjadi hak milik Anda.
+            Akan
+            tetapi,
+            akses kepada data Anda bergantung pada pelunasan Biaya Akses Aplikasi Otoraja ketikatagihan jatuh tempo.
+            Anda memberi izin kepada Otoraja untuk memakai,
+            menyalin, mengirim, menyimpan, dan mencadangkan informasi dan data Anda dengan maksud dan tujuan supaya
+            dapat memberi Anda akses kepada dan menggunakan layanan Aplikasi Otoraja,
+            atau untuk tujuan lainnya yang terkait dengan menyediakan layanan kami untuk Anda.
+          </li>
+        </ol>
+        <b>G. Jaminan dan Pengakuan</b>
+        <ol>
+          <li>
+            Anda menjamin bahwa, jika Anda mendaftar untuk menggunakan layanan atas nama orang lain, Anda memiliki
+            wewenang untuk menyetujui ketentuan-
+            ketentuan ini atas nama orang itu, dan menyetujui bahwa dengan mendaftar untuk memakai layanan Aplikasi
+            Otoraja, Anda mengikat orang yang
+            Anda atas namakan untuk, atau dengan niat untuk, membuat tindakan atas nama mereka kepada setiap kewajiban
+            manapun yang telah Anda setujui pada
+            Ketentuan- ketentuan ini, tanpa membatasi kewajiban Anda sendiri kepada ketentuannya.
+          </li>
+          <li>
+            Anda mengakui bahwa:
+            <ol type='a'>
+              <li>
+                Anda memiliki wewenang untuk menggunakan layanan dan situs web, dan untuk mengakses informasi dan
+                data yang Anda masukkan ke situs web, termasuk informasi atau data apapun yang dimasukkan ke dalam
+                situs web oleh siapapun yang telah Anda beri kewenangan untuk menggunakan layanan Aplikasi
+                Otoraja.
+                Anda juga berwenang untuk mengakses informasi dan data yang sudah diproses, yang disediakan untuk
+                Anda melalui
+                penggunaan Anda pada situs web dan layanan kami (maupun informasi dan data itu Anda miliki sendiri
+                atau milik orang lain).
+              </li>
+              <li>
+                Aplikasi Otoraja tidak bertanggung jawab kepada siapapun selain Anda, dan tidak ada maksud apapun
+                dalam Syarat dan Ketentuan ini untuk memberi
+                manfaat kepada siapapun selain Anda. Jika Anda memakai layanan atau mengakses situs web atas nama
+                atau untuk manfaat seseorang selain Anda (maupun organisasi berbadan
+                hukum atau tidak, atau lainnya), Anda menyutujui bahwa:
+                <ul>
+                  <li>Anda bertanggung jawab untuk memastikan bahwa Anda memiliki hak untuk melakukannya;</li>
+                  <li>
+                    Anda bertanggung jawab atas pemberian wewenang kepada siapapun yang Anda beri akses ke
+                    informasi atau data,
+                    dan Anda menyetujui bahwa Otoraja tidak memiliki tanggung jawab untuk menyediakan siapapun
+                    akses
+                    terhadap informasi atau data tersebut tanpa otorisasi Anda, dan boleh menunjukkan
+                    permohonan
+                    apapun untuk mendapatkan informasi kepada Anda untuk dilayani;
+                  </li>
+                  <li>
+                    Anda membebaskan Aplikasi Otoraja dari tuntutan apapun atau kehilangan yang terkait pada:
+                    Penolakan Aplikasi Otoraja
+                    untuk menyediakan akses kepada siapapun ke informasi atau data Anda sesuai dengan
+                    ketentuan
+                    ini; Penyediaan informasi
+                    atau data oleh Aplikasi Otoraja kepada siapapun berdasarkan otorisasi Anda.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Penyediaan, akses kepada, dan pemakaian layanan Aplikasi Otoraja tersedia sebagaimana adanya dan
+                pada risiko Anda sendiri.
+              </li>
+              <li>
+                Aplikasi Otoraja tidak menjamin bahwa penggunaan layanan tidak akan pernah terganggu atau bebas
+                dari
+                kesalahan. Antara lain,
+                operasi dan ketersediaan sistem yang digunakan untuk mengakses layanan, termasuk layanan telepon
+                yang diakses secara umum,
+                jaringan komputer dan internet, bisa susah diprediksi dan mungkin bisa dari masa ke masa
+                mengganggu
+                atau mencegah akses kepada layanan.
+                Aplikasi Otoraja dengan bagaimanapun tidak bertanggung jawab atas gangguan tersebut, atau
+                pencegahan
+                akses kepada penggunaan layanan.
+              </li>
+              <li>
+                Untuk menentukan bahwa layanan kami memenuhi keperluan bisnis Anda dan bisa digunakan sesuai
+                dengan
+                tujuan adalah tanggung jawab Anda sendiri.
+              </li>
+              <li>
+                Anda tetap memiliki tanggung jawab untuk mematuhi semua undang-undang atau peraturan yang berlaku.
+                Menjadi tanggung jawab Anda untuk memeriksa bahwa penyimpanan dan akses kepada data Anda melalui
+                layanan dan situs web
+                tetap mematuhi undang-undang yang berlaku kepada Anda (termasuk undang-undang apapun yang
+                memerlukan
+                Anda untuk menyimpan arsip).
+              </li>
+            </ol>
+          </li>
+          <li>
+            Aplikasi Otoraja tidak memberi jaminan untuk layanannya. Tanpa mengabaikan ketentuan di atas, Aplikasi
+            Otoraja tidak menjamin bahwa
+            layanan Kami akan memenuhi semua keperluan Anda, atau bahwa akan sesuai untuk tujuan yang Anda niatkan.
+            Untuk menghindari keraguan,
+            semua ketentuan atau jaminan yang bisa diartikan dikecualikan sejauh yang diizinkan oleh undang-undang,
+            termasuk (tanpa batasan) jaminan penjualan,
+            kesesuaian untuk tujuan, dan tanpa pelanggaran.
+          </li>
+          <li>
+            Anda menjamin dan menunjukkan bahwa Anda sedang memperoleh hak untuk mengakses dan menggunakan layanan
+            untuk
+            tujuan bisnis dan bahwa,
+            sampai batas maksimum yang diizinkan oleh undang-undang, jaminan konsumen berdasarkan hukum atau
+            undang-undang yang dimaksudkan untuk melindungi
+            konsumen non-bisnis di yurisdiksi manapun tidak berlaku untuk penyediaan layanan, situs web, atau
+            ketentuan
+            ini.
+          </li>
+          <li>
+            Anda mengakui bahwa Anda bertanggungjawab dengan produk yang Anda jual, sehingga Otoraja terlepas dari
+            segala kewajiban dan tuntutan hukum apabila Anda menjual produk yang tidak diizinkan oleh
+            ketentuan-ketentuan hukum yang berlaku, termasuk tidak terbatas pada ketentuan Daftar Jenis Barang yang
+            Dilarang dan/atau Dibatasi yang diperdagangkan oleh Penjual
+            pada aplikasi Otoraja sebagaimana dicantumkan di dalam huruf B nomor 3 Syarat dan Ketentuan Layanan
+            Otoraja
+            Biz.
+          </li>
+          <li>
+            Anda menjamin alat dan barang yang dipinjamkan oleh Otoraja sebagaimana diatur dalam Syarat dan Ketentuan
+            ini akan dijaga dengan baik, sehingga ketika
+            masa kerja sama penggunaan Layanan yang diatur dalam Syarat dan Ketentuan ini berakhir Anda akan
+            mengembalikan alat dan barang yang Otoraja pinjamkan dalam kondisi baik.
+          </li>
+        </ol>
+        <b>H. Batasan Kewajiban:</b>
+        <ol>
+          <li>
+            Sampai batas maksimal yang diizinkan oleh hukum, Otoraja mengecualikan semua kewajiban dan tanggung jawab
+            kepada Anda
+            (atau orang lain manapun) dalam kontrak, gugatan kesalahan (termasuk kelalaian), atau selainnya, untuk
+            kehilangan apapun
+            (termasuk kehilangan informasi, data, dan penyimpanan) atau kerusakan yang diakibatkan, secara langsung
+            atau
+            tidak langsung,
+            dari penggunaan apapun, atau ketergantungan kepada, layanan atau situs web.
+          </li>
+          <li>
+            Jika Anda mengalami kerugian atau kerusakan apapun karena kelalaian atau kegagalan Aplikasi Otoraja untuk
+            memenuhi ketentuan ini,
+            tuntutan apapun dari Anda kepada Aplikasi Otoraja yang timbul dari kelalaian atau kegagalan Aplikasi
+            Otoraja
+            akan dibataskan mengenai satu kejadian atau serangkaian kejadian yang terhubung, kepada Biaya Akses yang
+            sudah Anda lunaskan dalam 12 (duabelas) bulan sebelumnya.
+          </li>
+          <li>
+            Jika Anda tidak puas dengan pelayanan kami, jalur penyelesaian tunggal dan eksklusif Anda adalah untuk
+            menghentikan ketentuan ini berdasarkan pasal ketentuan huruf H.
+          </li>
+        </ol>
+        <b>I. Ketentuan masa percobaan :</b>
+        <ol>
+          <li>
+            Kebijakan Masa Percobaan:
+            <ol typo='a'>
+              <li>
+                Masa Percobaan yang dimaksud adalah berlangsung selama 30 (tigapuluh) hari setelah pendaftaran
+                Anda
+                telah
+                diaktivasi dalam layanan ini. Apabila masa percobaan ditentukan lain, maka informasi tentang
+                perubahan masa percobaan
+                akan didasarkan pada kesepakatan oleh kedua belah Pihak.
+              </li>
+              <li>
+                Saat Anda pertama mendaftar dan/atau mendapat aktivasi untuk mengakses layanan, Anda bisa
+                mengevaluasi layanan kami dengan ketentuan untuk
+                masa percobaan yang sudah ditentukan, tanpa kewajiban untuk melanjutkan penggunaan layanan
+                tersebut.
+                Jika Anda memilih untuk melanjutkan penggunaan layanan setelah masa percobaan selesai, Anda dapat
+                memilih
+                jenis layanan berbayar dari Program Kemitraan Otoraja. Setelah itu Anda akan ditagih sesuai tarif
+                di
+                mana
+                Anda memasuki informasi untuk penagihan Anda sesuai dengan layanan yang Anda pilih, atau Anda
+                dapat
+                melakukan
+                proses permintaan perpanjangan pelayanan. Jika Anda memilih untuk berhenti menggunakan layanan
+                kami,
+                A
+                nda bisa menghapus keanggotaan Anda atau tidak melakukan proses permintaan perpanjangan pelayanan
+              </li>
+            </ol>
+          </li>
+          <li>
+            Pelanggaran
+            <ol type='a'>
+              <li>
+                Jika Anda melakukan pelanggaran atas Syarat dan Ketentuan ini (termasuk, tapi tidak terbatas
+                dengan,
+                tidak membayar Biaya Akses apapun) dan tidak menyelesaikan masalah
+                pelanggaran dalam 14 (empatbelas) hari setelah menerima pemberitahuan pelanggaran tersebut jika
+                permasalahan pelanggaran tersebut bisa diselesaikan;
+              </li>
+              <li>
+                Jika Anda melakukan pelanggaran atas Syarat dan Ketentuan ini dan pelanggaran itu tidak bisa
+                diselesaikan (termasuk, tapi tidak terbatas dengan)
+                pelanggaran apapun mengenai Ketentuan Huruf C.4 atau kegagalan untuk membayar Biaya Akses yang
+                sudah
+                melewati tanggal jatuh tempo lebih dari 30 (tigapuluh) hari;
+              </li>
+              <li>
+                Jika Anda atau bisnis Anda bangkrut, atau sedang melewati proses untuk mengakhiri keberadaan
+                organisasi, Otoraja bisa mengambil salah satu atau semua tindakan berikut:
+                <ul>
+                  <li>Menangguhkan atau mengakhiri akses Anda ke semua data atau data apapun;</li>
+                  <li>Menangguhkan akses Anda ke layanan dan situs web Aplikasi Otoraja untuk kurun waktu yang
+                    tidak menentu;</li>
+                </ul>
+              </li>
+              <li>
+                Pemutusan penggunaan Layanan berdasarkan Syarat dan Ketentuan ini tidak mengurangi hak dan
+                kewajiban
+                para pihak yang masih harus dibayar sampai dengan tanggal
+                pengakhiran. Pada pengakhiran penggunaan Layanan berdasarkan Syarat dan Ketentuan ini Anda akan
+                tetap menanggung biaya yang masih harus dibayar dan jumlah yang
+                jatuh tempo untuk pembayaran sebelum atau setelah pengakhiran, dan segera berhenti menggunakan
+                layanan dan situs web kami.
+              </li>
+            </ol>
+          </li>
+        </ol>
+        <b>J. Ketentuan Umum Lainnya</b>
+        <ol>
+          <li>
+            Syarat dan Ketentuan ini, bersama dengan Kebijakan Privasi Aplikasi Otoraja dan ketentuan dari
+            pemberitahuan
+            atau
+            instruksi yang diberikan kepada Anda di bawah Syarat dan Ketentuan ini menggantikan dan menghapus semua
+            perjanjian sebelumnya,
+            representasi (baik lisan maupun tulisan), dan pemahaman, dan merupakan keseluruhan perjanjian antara Anda
+            dan Otoraja yang berhubungan
+            dengan layanan dan hal lainnya yang dibahas dalam Ketentuan ini.
+          </li>
+          <li>
+            Jika salah satu pihak melepaskan tuntutan dari pelanggaran apapun pada Syarat dan Ketentuan ini tidak akan
+            melepaskan mereka dari tuntutan
+            pelanggaran lainnya. Pelepasan dari tuntutan tidak efektif kecuali dibuat secara tertulis.
+          </li>
+          <li>
+            Para pihak tidak harus bertanggung jawab atas keterlambatan atau kegagalan dalam menyelesaikan
+            kewajibannya
+            di bawah Ketentuan ini jika
+            keterlambatan atau kegagalannya adalah karena sebab apapun yang di luar kendali. Ayat Ketentuan ini tidak
+            berlaku untuk kewajiban pembayaran uang apapun yang sedang berjalan.
+          </li>
+          <li>
+            Anda tidak dapat mengalihkan atau memindahkan hak kepada orang lain tanpa persetujuan tertulis dari
+            Otoraja,
+            atau mekanisme lainnya yang ditetapkan oleh Otoraja.
+          </li>
+          <li>
+            Apabila terjadi perselisihan antara kedua belah pihak, akan coba diselesaikan secara musyawarah terlebih
+            dahulu untuk mencapai mufakat.
+            Apabila dengan cara tersebut tidak tercapai kata sepakat, maka kedua belah pihak sepakat untuk
+            menyelesaikan
+            permasalahan tersebut dilakukan melalui
+            prosedur hukum dengan memilih kedudukan hukum Republik Indonesia di Kantor Pengadilan Negeri Jakarta
+            Selatan.
+          </li>
+          <li>
+            Setiap pemberitahuan yang diberikan berdasarkan Syarat dan Ketentuan ini oleh satu pihak ke pihak yang
+            lain
+            harus dilakukan secara tertulis melalui
+            email dan akan dianggap telah diberikan pada saat pengiriman dilakukan. Pemberitahuan kepada Otoraja harus
+            dikirim ke sales@otoraja.co.id atau
+            ke alamat email lainnya yang diberitahukan kepada Anda oleh Otoraja. Pemberitahuan kepada Anda akan
+            dikirim
+            ke alamat email yang Anda berikan
+            saat membuat akses Anda pada layanan kami.
+          </li>
+          <li>
+            Setelah Subscription diaktifkan atau dapat digunakan, Anda bisa membatalkan setiap saat tanpa biaya
+            tambahan
+            kecuali yang sudah dibayarkan (tidak dapat dikembalikan).
+            Jika diminta, maka layanan aplikasi akan diputus/dinonaktif setelah di proses team Otoraja.
+          </li>
+        </ol>
+    supplier:
+      add_supplier: "Tambah Supplier/Vendor"
+      add_btn: "Baru"
+      edit_supplier: "Ubah Supplier/Vendor"
+      delete: "Hapus"
+      supplier: "Supplier/Vendor"
+      supplier_list: 'Daftar Supplier/Vendor'
+      supplier_name: "Nama"
+      address_and_tel: "Alamat & Telepon"
+    user:
+      add_admin_operator_user: "Menambah Pengguna Operator Admin"
+      add_owner_user: "Menambah Pengguna Pemilik"
+      add_shop: "Menambah Toko"
+      shop_users: "Pengguna Toko"
+      available_shops: "Toko/Bengkel"
+      disabled: "Suspend"
+      edit_user: "Edit Pengguna"
+      enabled: "Aktifkan"
+      role: "Wewenang"
+      user_id: "ID pengguna"
+    invoice:
+      invoice_information : "Informasi"
+      invoice_product : "Produk"
+      invoices: "Faktur"
+      purchase_unit_price: "Harga Pembelian"
+      quantity: "Stok Masuk"
+      stock: "Stok skrg."
+      invoice_no: "Faktur No."
+      label_find_product: "Barang dalam Faktur"
+      invoice_total: "Total (Rp)"
+      invoice_unit_price: "Harga Beli Satuan (modal)"
+      inventory_no: "Nama Stok Opname"
+      supplier: "Supplier"
+      payment_method: "Cara Pembayaran"
+      arrival_date: "Tanggal"
+      product_addition: "Tambah Produk"
+      find_product: "Cari Produk"
+      add_product: "Produk Baru"
+      edit_invoice: "Edit Faktur"
+      edit_inventory: "Edit Stok Opname"
+      filter: "Filter"
+      sort: "Sortir"
+      status: "Finalisasi"
+      name: "Nama"
+      difference: "Beda"
+      inventory: "Stok Opname"
+      inventory_stock: "Stok Tercatat"
+      inventory_actual: "Stok Aktual"
+      inventory_now: "Stok Skrg."
+      notes: "Keterangan"
+      average_price: "Harga Beli Rata-Rata"
+      invoice_checkbox_label: "Centang jika selesai mengisi form."
+    purchase:
+      nav_link: "Pembelian"
+      purchases: "Data Faktur"
+      inventory: "Data Stok Opname"
+      close: "Tutup"
+      items_selected: "produk yang dipilih"
+      view_more: "Lihat"
+      delete_question: "Apakah Anda benar-benar ingin menghapus ini?"
+      delete_confirm: "Konfirmasi Penghapusan"
+      empty_product_info: 'Belum ada produk yang dipilih'
+      inventory_subinfo: 'produk dalam stok opname ini.'
+      mandatory_label: 'Yang bertanda * wajib diisi.'
+      modal_btn_cancel: 'Kembali'
+      modal_btn_confirm: 'Lanjut'
+      modal_sub_label: 'Ingin melanjutkan ?'
+      modal_label: 'Hitung stok diaktifkan untuk'
+      modal_label_next: 'produk jika Anda menyimpan formulir.'
+      is_stock_confirm_lbl: 'Mau aktifkan perhitungan stock ?'
+      is_stock_confirm: 'OK'
+      is_stock_cancel: 'Nanti'
+      is_stock_notif_final: 'Stok produk ini tidak berkurang. Ubah di Inventaris produk'
+      is_stock_active_lbl: 'Penghitungan stock akan diaktifkan'
+      is_stock_cancel_lbl: 'Kami akan ingatkan kembali.'
+    disable_menu:
+      alert_info: "Maaf, menu ini tidak dapat diakses."
+      transaction_list_and_order_info_html: "Kini List Transaksi dan Order hanya dapat diakses melalui aplikasi <b>Otoraja Biz</b> di gadget Android."
+    product_non_active:
+      product_non_active: 'Produk Non-aktif'
+      multiple_select_product_info: 'produk dipilih'
+      select_all_product_bellow: 'pilih semua produk dibawah ini'
+      confirmation_restore_product: 'Produk terpilih akan diaktifkan kembali'
+      confirmation: 'Yakin ingin melanjutkan?'
+      product_not_found_info: 'Produk tidak ditemukan'
+      change_filter_disclaimer: 'Mengubah filter akan mengosongkan pilihan.'
+      remaining-product-label_html: 'Pilih <span id="total-product-unselected"></span> produk'
+      start_delete_product: 'Mulai mengaktifkan produk'
+      restore: 'Pulihkan'
+    notification:
+      brief: "Masukkan ID dan password untuk mengakses Panel Manajemen Anda."
+      notification_unidentified: "Ketidaksesuaian User atau password."
+      custom_failure_message: "User ID/Password salah. Silahkan coba lagi"
+      see_all_messages: "Lihat Semua Pesan"
+    stock_book_report:
+      stock_book_report: "Laporan Buku Stok"
+      last_stock_zero: "Stok akhir nol"
+      no_stock_movement: "Tidak ada pergerakan stok"
+      not_available: "Produk tidak tersedia di bengkel"
+      name: "Nama Produk/Part No."
+      first_stock: "Stok Awal"
+      stock_in: "Stok Masuk"
+      stock_out: "Stok Keluar"
+      last_stock: "Stok Akhir"
+      stock_value: "Nilai Stok"
+      product_name: "Nama produk"
+      avg_price: "Harga Modal"
+    shop_setting: 
+      add_shop: 'Tambah Bengkel'
+      address: 'Alamat'
+      area: 'Wilayah'
+      branch_name: 'Nama Cabang'
+      cancle: 'Batalkan'
+      change_password: 'Ganti Password'
+      city: 'Kota / Kab'
+      closing_hours: 'Jam tutup'
+      email: 'Email'
+      empty_branch_info: 'Belum ada bengkel terdaftar di grub ini.'
+      empty_facility: 'Belum ada fasilitas yang ditambahkan'
+      empty_service: 'Belum ada layanan yang ditambahkan'
+      facility: 'Fasilitas'
+      group_name: 'Nama Grup'
+      have_branch: 'Punya Cabang'
+      id_user: 'ID Akun'
+      keyword_search: 'Kata bantu pencarian'
+      name: 'Nama'
+      new_password: 'Pass. Baru'
+      old_password: 'Pass. Lama'
+      open_day: 'Hari buka'
+      opening_hours: 'Jam buka'
+      other_Tel: 'Telp. Lainnya'
+      other_phone_number: 'No. Telp. Lain'
+      owner: 'pemilik'
+      owner_data: 'Data pemilik'
+      phone_number: 'Nomor HP'
+      primary_Tel: 'Telp. Utama'
+      province: 'Provinsi'
+      require_info: '(* = Wajib diisi)'
+      retype_new_password: 'Ulang Pass. Baru'
+      save: 'Simpan'
+      schedule_and_facility: 'Jadwal & Fasilitas'
+      service: 'Layanan'
+      shop_branch: 'Cabang Bengkel'
+      shop_data: 'Data Bengkel'
+      shop_group: 'Bengkel Grup'
+      shop_id: 'ID Bengkel'
+      shop_info: 'Informasi Bengkel'
+      shop_name: 'Nama Bengkel'
+      shop_setting: 'Pengaturan Bengkel'
+      status: 'Status'
+      tel_in_receipt: 'Telp. di Struk'
+      user_group: 'Akun (Grup Bengkel)'
+      verification_email_info: 'Cek email Anda untuk verifikasi.'
+      year_of_register: 'Tahun Daftar'
+      guide_html: | 
+        <ul>
+          <li>
+            Kata bantu pencarian digunakan untuk memasukkan kata kunci secara cepat saat Anda mencari produk di aplikasi.
+          </li>
+          <li>
+            Gunakan tombol panah untuk geser urutan kata bantu.
+          </li>
+        </ul>
+      close_info: 'Tap di luar kotak untuk menutup pop up ini.'
+      bengkel_id_info: 'Daftarkan cabang dahulu'
+      shop_add_info: 'Isi informasi bengkel cabang Anda.' 
+    expenses_report:
+      side_bar_title: "Expense Report"
+      expenses_report_title: "Pengeluaran"
+      periode: "Periode"
+      download: "Download"
+      expenses_create_new_title: "Data Pengeluaran"
+      value: "Nilai (Rp)"
+      date: "Tanggal"
+      add_new: "Tambah"
+      paid_to: "Dibayarkan Kepada"
+      no_ref: "No. Referensi (opsional)"
+      desc: "Deskripsi (opsional)"
+      cancel: "Batal"
+      save: Simpan
+      info_desc: " / 50 Karakter"
+      modal_add_supplier_title: "Silahkan mengisi data penerima pembayaran"
+      name: "Nama (Wajib diisi)"
+      tel: "Nomor telepon"
+      address: "Alamat"
+      modal_confirm_delete: "Yakin ingin menghapus data pengeluaran ini ?"
+      confirm_no: "Tidak"
+      confirm_yes: "Ya"
+    mechanic_report:
+      price: "Subtotal (Rp)"
+      transaction_number: "No. Transaksi"
+      type: "Tipe"

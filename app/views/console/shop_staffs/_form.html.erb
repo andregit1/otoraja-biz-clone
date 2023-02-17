@@ -1,0 +1,75 @@
+<div class="card-body">
+
+  <% if shop_staff.errors.any? %>
+  <div class="callout callout-danger">
+    <h2><%= pluralize(shop_staff.errors.count, "error") %> prohibited this User from being saved:</h2>
+    <ul>
+      <% shop_staff.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, t('console.shop_staff.staff_name') %>
+    <%= f.text_field :name, :class=>'form-control', autocomplete: 'off' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :is_front_staff, t('console.shop_staff.front_staff') %>
+    <div>
+      <%= f.check_box :is_front_staff, :class=>'form-control custom-checkbox', autocomplete: 'off', data: {toggle: 'toggle', on: t('console.shop_product.yes'), off: t('console.shop_product.no')} %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :is_mechanic, t('console.common.mechanic') %>
+    <div>
+     <%= f.check_box :is_mechanic, :class=>'form-control custom-checkbox', autocomplete: 'off', data: {toggle: 'toggle', on: t('console.shop_product.yes'), off: t('console.shop_product.no')} %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :mechanic_grade, t('console.shop_staff.mechanic_grade') %>
+    <div class="row">
+      <div class="col-2">
+        <%= f.select :mechanic_grade, 1..10, {selected: 5}, {:class=>'form-control select2', autocomplete: 'off'} %>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :active, t('console.shop_staff.active') %>
+    <div>
+      <%= f.check_box :active, :class=>'form-control custom-checkbox', autocomplete: 'off', data: {toggle: 'toggle', on: t('console.shop_staff.active'), off: t('console.shop_staff.inactive')} %>
+    </div>
+  </div>
+  <% if @shops.length > 1 %>
+  <div class="form-group">
+    <%= f.label :available_shops, t('console.common.available_name') %>
+    <%= f.select :shop_id, @shops.pluck(:name, :id), {:include_blank => true}, {:class=>'form-control select2'} %>
+  </div>
+  <% else %>
+  <div class="form-group">
+    <%= f.hidden_field :shop_id, :value => @shops.first.id %>
+    <%= f.hidden_field :to_shop, :value => true %>
+    <%= f.label :available_shops, t('console.common.available_name') %><br>
+    <%= @shops.first.name %>
+  </div>
+  <% end %>
+
+</div>
+<div class="card-footer">
+  <% if controller.action_name.in?(['new', 'create']) %>
+    <div class="d-flex justify-content-between">
+      <% if @shops.length > 1 %>
+        <%= link_to t('console.common.back'), console_shop_staffs_path, class: 'btn btn-default' %>
+      <% else %>
+        <%= link_to t('console.common.back'), console_shop_path(@shops.first), class: 'btn btn-default' %>
+      <% end %>
+      <%= f.submit t('console.common.regist'), :class=>'btn btn-primary' %>
+    </div>
+  <% else %>
+    <div class="d-flex justify-content-between">
+      <%= link_to t('console.common.back'), console_shop_staffs_path, class: 'btn btn-default' %>
+      <%= f.submit t('console.common.update'), :class=>'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

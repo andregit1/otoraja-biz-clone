@@ -1,0 +1,6 @@
+<% content_for(:title, t('admin.supplier.add_supplier')) %>
+<div class="card">
+  <%= form_with(model: @supplier, url: admin_suppliers_path, local: true) do |form| %>
+  <%= render 'form', {supplier: @supplier, roles: @roles, f: form} %>
+  <% end %>
+</div>

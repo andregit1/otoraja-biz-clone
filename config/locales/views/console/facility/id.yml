@@ -1,0 +1,12 @@
+id:
+  console:
+    facility:
+      button:
+        add: "Menambah fasilitas"
+        edit: "Edit fasilitas"
+      index:
+        title: "Fasilitas"
+      new:
+        title: "Menambah fasilitas"
+      edit:
+        title: "Edit fasilitas"

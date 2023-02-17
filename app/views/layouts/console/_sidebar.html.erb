@@ -1,0 +1,227 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+
+  <%= link_to console_dashboard_index_path, class: 'console-navbar brand-link navbar-primary d-flex align-items-center' do%>
+    <%= image_tag  "admin_logo.svg", width: '33', height: '33', class: 'brand-image' %>
+    <span class="brand-text font-weight-light">Biz Otoraja<br><span>Mangement Console</span></span>
+  <% end %>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+          <%= link_to console_dashboard_index_path, class: 'nav-link' do%>
+            <i class="fas fa-chart-line"></i> <p><%= t 'console.dashboard.dashboard' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to console_customer_list_path, class: 'nav-link' do%>
+            <i class="fa fa-address-card"></i> <p><%= t 'console.customer.customers' %></p>
+          <% end %>
+        </li>
+        
+        <li class="nav-item">
+          <%= link_to console_bikes_path, class: 'nav-link' do%>
+            <i class="fas fa-motorcycle"></i> <p><%= t 'console.sidebar.bikes' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item text-label">
+          <%= link_to console_checkins_path(mode: 'all'), class: 'nav-link' do%>
+            <i class="fas fa-clipboard"></i> <p><%= t 'admin.sidebar.transaction_list' %></p>
+          <% end %>
+        </li>
+        
+        <!-- Warehouse Management-->
+        <li class="nav-header"><%= t 'console.sidebar.warehouse_management' %></li>
+
+        <li class="nav-item">
+          <%= link_to console_shop_products_path, class: 'nav-link' do%>
+            <i class="fas fa-cubes"></i> <p><%= t 'console.sidebar.product' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to console_stock_path, class: 'nav-link' do%>
+            <i class="fas fa-cubes"></i> <p><%= t 'console.common.stock' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to console_product_categories_path, class: 'nav-link' do%>
+            <i class="fas fa-tags"></i> <p><%= t 'console.common.category' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to console_suppliers_path, class: 'nav-link' do%>
+            <i class="fas fa-truck"></i> <p><%= t 'console.supplier.supplier' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to console_makers_path, class: 'nav-link' do%>
+            <i class="fas fa-motorcycle"></i> <p><%= t 'console.common.maker' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to console_bike_models_path, class: 'nav-link' do%>
+            <i class="fas fa-motorcycle"></i> <p><%= t 'console.common.model' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+           <%= link_to console_variants_path, class: 'nav-link' do%>
+             <i class="fas fa-tags"></i> <p><%= t 'console.common.variant' %></p>
+           <% end %>
+         </li>
+
+        <li class="nav-item">
+	        <%= link_to console_brands_path, class: 'nav-link' do%>
+            <i class="fas fa-tags"></i> <p><%= t 'console.brand.brand' %></p>
+          <% end %>
+         </li>
+         
+        <li class="nav-item">
+          <%= link_to console_tech_specs_path, class: 'nav-link' do%>
+            <i class="fas fa-tags"></i> <p><%= t 'console.tech_spec.tech_spec' %></p>
+          <% end %>
+        </li>
+
+        <!-- Shop Management -->
+        <li class="nav-header"><%= t 'console.sidebar.shop_management' %></li>
+
+        <li class="nav-item">
+          <%= link_to console_subscriptions_path, class: 'nav-link' do%>
+            <i class="fa fa-file-contract"></i> <p><%= t 'console.subscription.subscription' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to console_subscriptions_invoice_path, class: 'nav-link' do%>
+            <i class="fa fa-file-excel"></i> <p><%= t 'console.subscription.invoice' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to console_shop_groups_path, class: 'nav-link' do%>
+            <i class="fa fa-home"></i> <p><%= t 'console.shop_group.index.title' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to console_shops_path, class: 'nav-link' do%>
+            <i class="fa fa-home"></i> <p><%= t 'console.shop.shop_information' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to console_facilities_path, class: 'nav-link' do%>
+            <i class="fa fa-home"></i> <p><%= t 'console.facility.index.title' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to console_services_path, class: 'nav-link' do%>
+            <i class="fa fa-home"></i> <p><%= t 'console.service.index.title' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to console_shop_staffs_path, class: 'nav-link' do%>
+            <i class="fa fa-user"></i> <p><%= t 'console.common.staff' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to console_shop_configs_path, class: 'nav-link' do%>
+            <i class="fa fa-cog"></i> <p><%= t 'console.common.config' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-header"><%= t 'console.sidebar.administrator' %></li>
+        <li class="nav-item">
+          <%= link_to console_notifications_path, class: 'nav-link' do%>
+            <i class="fas fa-bell"></i> <p><%= t 'console.notification.index.title' %></p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to console_requests_new_application_path(q: {status_in:[NewContractRequest.statuses[:todo], NewContractRequest.statuses[:processing]]}), class: 'nav-link' do%>
+            <i class="fas fa-envelope"></i> <p><%= t 'console.requests.new_application.title' %></p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to console_answers_path, class: 'nav-link' do%>
+            <i class="far fa-comment-dots"></i> <p><%= t 'console.answer.answers' %></p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to console_export_list_path, class: 'nav-link' do%>
+            <i class="fas fa-file-csv"></i> <p><%= t 'console.sidebar.csv_export' %></p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to console_admin_products_import_path, class: 'nav-link' do%>
+            <i class="fas fa-file-csv"></i> <p><%= t 'console.sidebar.import_admin_product' %></p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to console_shop_products_import_path, class: 'nav-link' do%>
+            <i class="fas fa-file-csv"></i> <p><%= t 'console.sidebar.import_shop_product' %></p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to console_customers_import_path, class: 'nav-link' do%>
+            <i class="fas fa-file-csv"></i> <p><%= t 'console.sidebar.import_customer' %></p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to console_export_patterns_path, class: 'nav-link' do%>
+            <i class="fa fa-cog"></i> <p><%= t 'console.sidebar.export_config' %></p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to console_whats_app_templates_path, class: 'nav-link' do%>
+            <i class="far fa-comment"></i> <p><%= t 'console.sidebar.whatsapp' %></p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to console_users_path, class: 'nav-link' do%>
+            <i class="fa fa-user"></i> <p><%= t 'console.sidebar.users' %></p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to console_versions_path, class: 'nav-link' do%>
+            <i class="fa fa-cog"></i> <p><%= t 'console.sidebar.versions' %></p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to console_payment_gateway_path, class: 'nav-link' do%>
+            <i class="fa fa-cog"></i> <p><%= t 'console.sidebar.payment_gateway' %></p>
+          <% end %>
+        </li>
+
+        <li class="nav-header"></li>
+        <li class="nav-item">
+          <%= link_to '#', class: 'nav-link', role: 'button', :data => {toggle: 'modal', target: '#releaseNoteModal'}  do %>
+            <i class="fas fa-info"></i> <p><%= t 'console.sidebar.release_note' %></p>
+          <% end %> 
+        </li>
+        <li class="nav-item">
+          <%= link_to destroy_management_session_path, method: :delete, class: 'nav-link' do %>
+            <i class="fas fa-sign-out-alt"></i> <p><%= t 'console.sidebar.logout' %></p>
+          <% end %> 
+        </li>        
+        <li class="nav-header"></li><!-- 余白調整用 -->
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
+<%= render 'layouts/admin/release_note_dialog' %>

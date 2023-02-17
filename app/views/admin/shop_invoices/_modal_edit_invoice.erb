@@ -1,0 +1,186 @@
+<!-- Drawer Modal -->
+<div id="editInvoiceModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#editInvoiceModal"></div>
+  <div class="modal_content -drawer">
+    <div class="modal-header">
+      <% if @is_invoice %>
+        <div class="modal-title col-12"><%= t('admin.invoice.edit_invoice')%></div>
+
+      <% end %>
+      <% if @is_inventory %>
+        <div class="modal-title col-12"><%= t('admin.invoice.edit_inventory')%></div>
+      <% end %> 
+      <div class="col-1"></div>
+    </div>
+    <div class="modal-body customer-info-body">
+      <form id="edit-invoice-form">
+        <input type="hidden" class="item__shop__id" id="shop_id">
+        <input type="hidden" class="item__shop__staff__id" id="shop_staff_id">
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <% if @is_invoice %>
+                <label><%= t('admin.invoice.invoice_no')%></label>
+              <% end %>
+              <% if @is_inventory %>
+                <label><%= t('admin.invoice.inventory_no')%></label>
+              <% end %>
+              
+              <input id="invoice_no" name="invoice_no" class="ml-auto" type="text" />
+            </div>
+            <% if @is_invoice %>
+            <div class="col">
+              <label><%= t('admin.invoice.supplier')%></label>
+              <%= select_tag 'supplier_id', options_from_collection_for_select(@suppliers, :id, :name), class: 'form-control form-control-sm drawer_modal_input_border' %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <% if @is_invoice %>
+            <div class="col">
+              <label><%= t('admin.invoice.payment_method')%></label>
+              <%= select_tag 'payment_method', options_for_select(StockControl.pay_types), class: 'form-control form-control-sm drawer_modal_input_border' %>
+            </div>
+            <% end %>
+            <div class="col">
+              <label><%= t('admin.invoice.arrival_date')%></label>
+              <input type="datetime-local" id="arrival_date" name="arrival_date" class="form-control form-control-sm drawer_modal_input_border" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-12">
+              <label><%= t('admin.invoice.status')%></label>
+              <input id="status" name="status" type="checkbox" checked="true" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <ul id="stock-control-list" class="product-info-body p-0 w-100">
+            </ul>
+          </div>
+        </div>
+        <% if @is_invoice %>
+          <div class="modal-header" style="position:relative;left:-28px">
+            <div class="modal-title"><%= t('admin.invoice.product_addition')%></div>
+            <div class="col-1"></div>
+          </div>
+        <% end %>
+        <div class="row">
+          <div class="col">
+            <%= button_tag :type => "button", id: "btn-find-product", class: "btn-base -thin -primary js-modal-open", data: {"target" => "#findProductModal"}, disabled: true do %>
+            <%= t 'admin.invoice.find_product' %><i class="icon icon-Plus -icon-left"></i>
+            <% end %>
+          </div>
+          <% if @is_invoice %>
+          <div class="col">
+            <%= button_tag :type => "button", id: "btn-add-product", class: "btn-base -thin -primary js-modal-open", data: {"target" => "#addProductModal"}, disabled: true do %>
+            <%= t 'admin.invoice.add_product' %><i class="icon icon-Pencil -icon-left"></i><i class="icon icon-Plus -icon-small-bottom-right"></i>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+      </form>
+    </div>
+    <div class="admin-control-footer row">
+      <div class="col-6">
+        <%= button_tag :type => "button", id: "cancel-edit-invoice-button", class: "btn-base -basic -normal js-modal-close", data: {"target" => "#editInvoiceModal"} do %>
+        <%= t 'cancel' %>
+        <% end %>
+      </div>
+      <div class="col-6">
+        <%= button_tag :type => "button", id: "confirm-edit-invoice-button", class: "btn-base -basic -primary js-modal-close", data: {"target" => "#editInvoiceModal"}, disabled: true do %>
+        <%= t 'ok' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% if @is_invoice %>
+<div id="stock-control-item-clone" class="hide product-info-body p-0">
+  <li class="row list-item">
+    <input type="hidden" class="item__stock__control__id" name="id">
+    <input type="hidden" class="item__shop__product__id" name="shop_product_id">
+    <div class="item__count col-1">
+    </div>
+    <div class="col-11">
+      <div class="item__name">
+      </div>
+      <div class="d-flex justify-content-between">
+        <div class="form-group mr-4">
+          <label><%= t('admin.invoice.stock')%></label>
+          <div class="item__stock"></div>
+        </div>
+        <div class="form-group mr-4">
+          <label><%= t('admin.invoice.quantity')%></label>
+          <input class="item__incoming__stock form-field formated_input_number" name="quantity" type="text" />
+        </div>
+        <div class="form-group">
+          <label><%= t('admin.invoice.purchase_unit_price')%></label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text price_addon">Rp.</div>
+            </div>
+            <input name="purchase_unit_price" type="text" class="product_unit_price_edit item__purchase__unit__price form-field formated_input_number" >
+          </div>
+        </div>
+        <div>
+          <button name="button" type="button" class="btn item__destroy">
+            <a class="btn-circle-default btn-remove-maintenance_log">
+              <i class="icon icon-Delete"></i>
+            </a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </li>
+</div>
+<% end %>
+<% if @is_inventory %>
+<div id="stock-control-item-clone" class="hide product-info-body p-0">
+  <li class="row list-item d-flex justify-content-between">
+    <input type="hidden" class="item__stock__control__id" name="id">
+    <input type="hidden" class="item__shop__product__id" name="shop_product_id">
+    <div class="item__count col-1"></div>
+    <div class="col-11">
+      <div class="item__name"></div>
+      <div class="d-flex justify-content-between">
+        <div class="form-group mr-4">
+          <label><%= t('admin.invoice.inventory_stock')%></label>
+          <div class="item__stock__at__close"></div>
+        </div>
+        <div class="form-group mr-4">
+          <label><%= t('admin.invoice.inventory_actual')%></label>
+          <input class="item__incoming__stock form-field formated_input_number" name="quantity" type="text" />
+        </div>
+        <div class="form-group mr-4">
+          <label><%= t('admin.invoice.difference')%></label>
+          <div class="item__stock_difference"></div>
+        </div>
+        <div class="form-group show_close_only">
+          <label><%= t('admin.invoice.average_price')%></label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text price_addon">Rp.</div>
+            </div>
+            <input name="average_price" type="text" class="product_unit_price_edit item__average__price form-field formated_input_number" >
+          </div>
+        </div>
+        <div>
+          <button name="button" type="button" class="btn item__destroy">
+            <a class="btn-circle-default btn-remove-maintenance_log">
+              <i class="icon icon-Delete"></i>
+            </a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </li>
+</div>
+<% end %>
+</div>
+<!-- Drawer Modal -->

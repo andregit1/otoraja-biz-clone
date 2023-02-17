@@ -1,0 +1,234 @@
+$('#total-sales').html('Rp. <%== formatedRupiah(@total_sales) %>')
+
+var salesDetails = [];
+var salesDetailsCache = [];
+
+var getSalesDetailsCache = function(){
+  return salesDetailsCache;
+}
+
+var setSalesDetailsCache = function(object){
+  salesDetailsCache = object
+}
+
+var toLocalCurrency = function(value){
+	
+  return value.toLocaleString("id-ID", {style: 'currency', currency:'IDN'});
+
+}
+
+
+//----------------------
+//- PRODUCT SUMMARY -
+//----------------------
+
+salesDetails = JSON.parse("<%= @sales_details_json %>".replace(new RegExp("&quot;", "g"), '"'));
+setSalesDetailsCache(salesDetails)
+$('#details-tbody').empty();
+<% @sales_details_by_product.each do |detail| %>
+  $('#details-tbody').append("<tr><td><%= detail[:name] %></td><td class='text-right'><%= formatedDecimalPoint(detail[:sold]) %></td><td><span style='float: right;'><%= formatedRupiah(detail[:sales]) %></span></td><td class='text-right'><%= formatedDecimalPoint(detail[:cogs]) %></td><td class='text-right'><%= formatedDecimalPoint(detail[:discount]) %></td><td class='text-right'><%= formatedDecimalPoint(detail[:gross_profit]) %></td></tr>");
+<% end %>
+$("#sales_details_category").empty()
+$("#sales_details_category").append('<option value="0">Semua</option>')
+<% @sales_details_categories.each do |category| %>
+  $("#sales_details_category").append('<option value="<%= category[0] %>"><%= category[1] %></option>')
+<% end %>
+
+var salesPieChartData = {
+  labels: <%== @sales_details.first(11).map{|detail| detail[:name] }.compact %>,
+  datasets: [{
+    backgroundColor: [
+      "#aaecfc",
+      "#6bd5f3",
+      "#37a6e1",
+      "#509458",
+      "#80c686",
+      "#b1f9b6",
+      "#ff9e4b",
+      "#ffd771",
+      "#ebebb6",
+      "#ffff97",
+    ],
+    data: <%== @sales_details.first(11).map{|detail| detail[:sales] }.compact %>
+  }]
+}
+var salesPieChartCanvas = $('#salesPieChart').get(0).getContext('2d')
+
+var salesPieChartOptions = {
+  maintainAspectRatio: false,
+  legend: {
+    display: false,
+    position: 'right'
+  },
+  tooltips: {
+    callbacks: {
+      label: function(tooltipItem, data) {
+        var label = data.labels[tooltipItem.index]
+        var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+        return [label + ' : Rp. ' + value.toLocaleString('id-ID')]
+      }
+    }
+  },
+  plugins: {
+    labels: {
+      render: function (args) {
+        var percentage = args.percentage >= 10 ? args.percentage + '%' : ''
+        return percentage
+      },
+      fontColor: 'black',
+      fontSize: 14,
+    }
+  },
+  legendCallback: function(chart) {
+    var text = [];
+    text.push('<ul style="padding: 0px">');
+
+    let salesDetails = <%== @sales_details.first(11).map{|detail| ApplicationController.helpers.formatedAmount(detail[:sales]) }.compact %>
+    chart.legend.legendItems.forEach(function(item, index){
+      text.push('<li style="list-style: none; font-size: 0.8rem">');
+      text.push(`<div style='display:inline-block; width: 12px; height: 12px; margin-right:3px; background-color:${item.fillStyle}; border: solid 1px ${item.strokeStyle}'></div>`);
+      text.push(`${item.text} Rp. ${(salesDetails[index])}`)
+      text.push('</li>');
+    })
+    text.push('</ul>');
+    return text.join(''); 
+  }
+}
+
+if(salesPieChart){
+  salesPieChart.destroy();
+}
+
+var salesPieChart = new Chart(salesPieChartCanvas, {
+  type: 'pie', 
+  data: salesPieChartData,
+  options: salesPieChartOptions,
+})
+var legend = salesPieChart.generateLegend()
+$('#pie-legend').html(legend);
+
+//add detail
+var addDetailElement = function(detail){
+  $('#details-tbody').append(`<tr><td>${detail.name}</td><td class='text-right'>${formatedNumber(detail.sold)}</td><td><span style='float: right;'>${formatedNumber(detail.sales)}</span></td><td class='text-right'>${formatedNumber(detail.cogs)}</td><td class='text-right'>${formatedNumber(detail.discount)}</td><td class='text-right'>${formatedNumber(detail.gross_profit)}</td></tr>`);
+}
+
+//initialize pagination
+var detailElementHtml = function(detail){
+  return `<tr><td>${detail.name}</td><td class='text-right'>${formatedNumber(detail.sold)}</td><td><span style='float: right;'>${formatedNumber(detail.sales)}</span></td><td class='text-right'>${formatedNumber(detail.cogs)}</td><td class='text-right'>${formatedNumber(detail.discount)}</td><td class='text-right'>${formatedNumber(detail.gross_profit)}</td></tr>`;
+}
+var paginationList = []
+
+getSalesDetailsCache().forEach(function(detail, index){
+    paginationList.push(detailElementHtml(detail))
+})
+
+$("#sales-details").paginate({dataSet:paginationList})
+
+//handle category change
+$("#sales_details_category").off().on("change", function(event){
+  $('#details-tbody').empty();
+  var id = $(this).val();
+  var categoryDataHtml = []
+  getSalesDetailsCache().forEach(function(detail, index){
+    if(id==0){
+      categoryDataHtml.push(detailElementHtml(detail));
+      return;
+    }
+    if(detail.id==id){
+      categoryDataHtml.push(detailElementHtml(detail));
+    }
+  });
+  if(id!=0){
+    $(".fa-sort").hide();
+  }else{
+    $(".fa-sort").show();
+  }
+  emitChangedEvent(categoryDataHtml);
+})
+
+//handle sorting
+$("#sales-details .fa-sort").off().on("click", function(event){
+  isAsc = $(this).hasClass("asc");
+  var property = $(this).data("property");
+  $('#details-tbody').empty();
+  var sortedDataHtml = []
+  $.fn.sortBy({'property' : property, 'data': getSalesDetailsCache(), 'desc' : !isAsc}).forEach(function(detail, index){
+    sortedDataHtml.push(detailElementHtml(detail));
+  });
+  $(this).toggleClass("asc");
+  emitChangedEvent(sortedDataHtml);
+});
+
+
+//handle search
+$('#shop-product-search-btn').off().on("click", function(){
+  var details = getSalesDetailsCache();
+  var datasearch = $("#shop-product-search").val().toLowerCase();
+  $('#details-tbody').empty();
+  var searchDataHtml = []
+  details.forEach(function(detail, index){
+    if(parseHtmlEntities(detail.name).toLowerCase().toString().includes(datasearch)){
+      searchDataHtml.push(detailElementHtml(detail));
+    }
+  });
+  $("#sales-details").paginate({dataSet:searchDataHtml})
+  $("#shop-product-search-clear-btn").show();
+  $(".fa-sort").hide();
+  emitChangedEvent(searchDataHtml)
+});
+
+$("#shop-product-search-clear-btn").off().on("click", function(event){
+  $('#details-tbody').empty();
+  var searchDataHtml = []
+  getSalesDetailsCache().forEach(function(detail, index){
+      searchDataHtml.push(detailElementHtml(detail));
+  })
+  $("#shop-product-search-clear-btn").hide();
+  $("#shop-product-search").val(null)
+  $("#sales_details_category").val(0)
+  $(".fa-sort").show();
+  emitChangedEvent(searchDataHtml)
+});
+
+//to encode and decode single quotation
+function parseHtmlEntities(str) {
+  return str.replace(/&#([0-9]{1,3});/gi, function(match, numStr) {
+    var num = parseInt(numStr, 10);
+    return String.fromCharCode(num);
+  });
+}
+
+//handle data change event
+function emitChangedEvent(sortedData){
+  var event = new Event("data.sorted", {bubbles: true});
+  event.data = {dataSet: sortedData};
+  document.querySelector(`#sales-details`).dispatchEvent(event);
+}
+
+
+// ウィンドウリサイズに対応
+$('#salesBarChart').css('width', '100%')
+$('#checkinsBarChart').css('width', '100%')
+<%# $('#salesPieChart').css('width', '100%') %>
+
+// 紐付く店舗が複数ある場合はセレクトボックス活性化
+<% if current_user.managed_shops.length >= 2 %>
+  $('#dashboard_shop_id').removeClass('unavailable-btn')
+<% end %>
+
+// 使用不可状態を解除
+$('#daterange-btn').removeClass('unavailable-btn')
+<%# $('#dashboard_unit_type').removeClass('unavailable-btn') %>
+$('#sales_aggregation_unit_type').removeClass('unavailable-btn')
+$('#checkins_aggregation_unit_type').removeClass('unavailable-btn')
+$('#revenue_aggregation_unit_type').removeClass('unavailable-btn')
+$('#profit_aggregation_unit_type').removeClass('unavailable-btn')
+
+// ピリオドで数値3桁区切り
+function formatedNumber(num) {
+  return num.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')
+}
+
+setTimeout(function(){
+  window.app.sales_details.hideLoading();
+}, 1);

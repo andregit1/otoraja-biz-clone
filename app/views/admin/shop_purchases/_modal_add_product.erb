@@ -1,0 +1,94 @@
+<!-- Drawer Modal -->
+<div id="addProductModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#addProductModal"></div>
+  <div class="modal_content -drawer">
+    <div class="modal-header">
+      <div class="modal-title text-large text-uppercase"><%= t 'admin.shop_product.add_new_product' %></div>
+    </div>
+    <div class="modal-body product-info-body">
+      <p class="text-small text-color-highlight"><%= t 'admin.shop_product.form_requirement_notes' %></p>
+      <form id="add-product-form">
+        <input id="admin_product_id" name="admin_product_id" class="ml-auto product_item_id" type="hidden" >
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label class="text-label"><%= t 'admin.shop_product.product_alias' %>*</label>
+            <input id="shop_alias_name" name="shop_alias_name" type="text" class="text-normal form-control">
+          </div>
+          <div class="form-group col-6">
+            <label class="text-label"><%= t 'admin.common.category' %>*</label>
+            <div>
+              <%= select_tag 'product_category_id', options_from_collection_for_select(ProductCategory.all.order(id: :asc), :id, :name), class: 'form-control form-control-sm product_category_edit', style: "width:100%" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-6 col-md-6">
+            <label class="text-label"><%= t 'admin.shop_product.store_product_no' %></label>
+            <input id="product_no" name="product_no" type="text" class="product_item_id form-control">
+          </div>
+          <div class="form-group col-3 col-md-2">
+            <label class="text-label"><%= t 'admin.shop_product.availability' %></label>
+            <input id="is_use" type="checkbox" name="availability" data-on="<span class='text-normal text-color-active'><%= t 'admin.shop_product.active' %></span>" data-off="<span class='text-normal'><%= t 'admin.shop_product.inactive' %></span>" checked data-toggle="toggle">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-12">
+            <label class="text-label"><%= t 'admin.shop_product.product_name' %></label>
+            <select id="add-admin-product_id" name="admin_product_id" class="form-control">
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row border-bottom pb-3 mb-4">
+          <div class="form-group col-6">
+            <label class="text-label"><%= t 'admin.shop_product.unit_price' %>*</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Rp</div>
+              </div>
+              <input id="sales_unit_price" name="sales_unit_price" type="number" class="text-normal text-right form-control">
+            </div>
+          </div>
+          <div class="form-group col-6">
+            <label class="text-label"><%= t 'admin.shop_product.item_details' %></label>
+            <input id="item_detail" name="item_detail" type="text" class="form-control">
+          </div>
+        </div>
+
+        <h1 class="text-large text-uppercase mb-4"><%=  t 'admin.shop_product.stock_product' %></h1>
+
+        <div class="form-group row">
+          <label class="font-weight-normal text-normal col-6 col-form-label"><%= t 'admin.shop_product.stock_count' %></label>
+          <div class="col-3 col-md-2">
+            <input id="is_stock_control" type="checkbox" name="is_stock_control" data-on="<span class='text-normal text-color-active'><%= t 'admin.shop_product.active' %></span>" data-off="<span class='text-normal'><%= t 'admin.shop_product.inactive' %></span>" data-toggle="toggle">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="font-weight-normal text-normal col-6 col-form-label"><%= t 'admin.shop_product.remind_min_stock' %></label>
+          <div class="col-3 col-md-2">
+              <input name="stock_minimum" id="stock_minimum_product" type="number" min="0" class="text-normal form-control text-right text-color-disabled" disabled>
+          </div>
+          <p class="font-weight-normal text-normal align-self-center mb-0 pr-2">pcs</p>
+          <p id="stock_minimum_status" class="text-small text-color-highlight font-weight-normal font-italic align-self-center mb-0">(aktif)</p>
+        </div>
+      </form>
+    </div>
+    <div class="admin-control-footer row">
+      <div class="col-6">
+        <%= button_tag :type => "button", id: "cancel-add-product-button", class: "text-large btn button-secondary-active js-modal-close w-100", data: {"target" => "#addProductModal"} do %>
+          <%= t 'cancel' %>
+        <% end %>
+      </div>
+      <div class="col-6">
+        <%= button_tag :type => "button", id: "confirm-add-product-button", class: "text-large btn js-modal-close w-100", data: {"target" => "#addProductModal"} do %>
+          <%= t 'admin.shop_product.save' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Drawer Modal -->

@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+  pre_build:
+    commands:
+      - CURRENT_VERSION=`TZ='Asia/Tokyo' date +%H%M%y%m%d`
+      - echo $CURRENT_VERSION
+  build:
+    commands:
+      - echo Build started on `date`
+  post_build:
+    commands:
+      - echo "{\"current_version\":\"${CURRENT_VERSION}\"}" > current_version.json
+artifacts:
+  files: current_version.json

@@ -1,0 +1,5 @@
+<% content_for(:title, t('admin.shop_setting.shop_data')) %>
+
+<%= form_with(model: @shop, url:admin_shop_setting_update_branch_path(@shop.id), id: 'form-branch', local: true) do |form| %>
+<%= render 'form_branch', {shop: @shop, f: form} %>
+<% end %>

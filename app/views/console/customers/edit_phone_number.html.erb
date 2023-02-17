@@ -1,0 +1,27 @@
+<% content_for(:title, t('console.customer.phone_edit')) %>
+
+<%= form_with(model: @customer, url:console_customer_update_phone_number_path, local: true, method: :patch) do |f| %>
+  <div class="card card-secondary">
+    <div class="card-body p-0">
+      <div class="form-group">
+        <div class="phone_number_edit">
+          <%= f.label t('console.common.tel') %>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <%= f.select :phone_country_code, @country_code_list, {selected: @phone_country_code}, {class: 'form-control select-country'} %>
+            </div>
+            <%= f.telephone_field :phone_national, class: 'form-control', autocomplete: 'off', maxlength: 18, value: @phone_national %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col text-right">
+          <%= link_to t('console.common.back'), console_customer_show_path, class: 'btn btn-default' %>
+          <%= f.submit t('console.common.save'), :class=>'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

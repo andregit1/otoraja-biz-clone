@@ -1,0 +1,246 @@
+<% content_for(:title, t('admin.common.stock')) %>
+<% content_for(:show_daily_history, true) %>
+<div class="alert alert-danger hide" role="alert">
+  An error has occured. Please refresh your browser
+</div>
+<%= render 'search' %>
+
+<div class="card content-datatable">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table id="stock-table" class="table table-hover table-sticky">
+        <thead>
+          <tr>
+            <th><%= table_sort_link('admin_product_id', t('admin.common.admin_product')) %></th>
+            <th><%= table_sort_link('shop_alias_name', t('admin.common.shop_alias_name')) %></th>
+            <th><%= table_sort_link('shop_products.item_detail', t('admin.common.item_detail')) %></th>
+            <th><%= t 'admin.common.quantity' %></th>
+            <th><%= t 'admin.common.stock' %></th>
+            <th><%= t 'admin.stock.purchase_price' %></th>
+            <th><%= t 'admin.stock.purchase_unit_price' %></th>
+            <th><%= t 'admin.stock.history' %></th>
+            <th><%= t 'admin.stock.profit' %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |item| %>
+            <tr data-category-id="<%= item.product_category_id %>" data-shop-id="<%= item.shop_id %>" data-search-id="<%= item.shop_id %>-<%= item.product_category_id %><%= '-shortage' if item.is_shortage %>" >
+              <td class="product-id" data-product-id="<%= item.id %>" data-stock-id="<%= item&.stock&.id %>">
+                <%= item&.admin_product&.name %>
+              </td>
+              <td class="name">
+                <%= item.shop_alias_name %>
+              </td>
+              <td class="shop">
+                <%= item.item_detail %>
+              </td>
+              <td class="quantity-field">
+                <input name="edited" type="hidden" value="0">
+                <%= number_field_tag 'quantity[]','', {:class=>'quantity-input form-control', autocomplete: 'off', oninput: 'if(value.length>12)value=value.slice(0,12)'} %>
+              </td>
+              <td>
+                <span class="new-total"><%= item&.stock&.quantity %>
+                <% if (item&.stock&.quantity&&item&.purchase_unit_price.nil?)||(item&.stock&.quantity&&(item&.maintenance_log_created_at.nil?||item&.stock_control_updated_at > item&.maintenance_log_created_at))%>
+                  <i class="fas fa-edit text-primary edit-stock-control pl-1" data-shop-product-id="<%= item.id %>" data-toggle="modal" data-target="#stockControlModal" data-backdrop="static" title="This product has no price control information"></i>
+                  <% end %>
+                </span>
+                <input class="original-total" type="hidden" value="<%= item&.stock&.quantity %>">
+              </td>
+              <td>
+                <%= number_field_tag 'purchase_price[]','', {:id => '',:class=>'purchase-price-input form-control', autocomplete: 'off', oninput: 'if(value.length>12)value=value.slice(0,12)', disabled: true, required: false} %>
+              </td>
+              <td>
+                <span class="purchase-unit-price-text"></span>
+                <%= hidden_field_tag 'purchase_unit_price[]','', {:id => '', :class=>'purchase-unit-price-input form-control', autocomplete: 'off', oninput: 'if(value.length>12)value=value.slice(0,12)'} %>
+              </td>
+              <td class="text-right">
+                <%= link_to '#', tabindex: "-1", class: "btn btn-default #{'disabled' unless item.stock_histories.any?}", data: {"toggle" => "modal", "target" => "#stockHistoryModal", "backdrop" => "static", "shop-product-id" => item.id} do %>
+                  <i class="fas fa-chart-line"></i>
+                <% end %>
+              </td>
+              <td class="text-right">
+                <%= link_to '#', tabindex: "-1", class: "btn btn-default #{'disabled' unless item&.stock&.quantity&&item&.purchase_unit_price}", data: {"toggle" => "modal", "target" => "#stockProfitModal", "backdrop" => "static", "stock-product-id" => item.id, "stock-control-id" => item.stock_control_id } do %>
+                  <i class="fas fa-search-dollar"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex">
+      <div class="col">
+        <%= select_tag "select_action", options_for_select(@stock_actions) , class: 'form-control form-control-sm pull-down-btn' %>
+      </div>
+      <div class="col">
+        <input id="stock-date-btn" class="form-control form-control-sm pull-down-btn"></select>
+      </div>
+      <div class="col">
+        <%= select_tag "select_supplier", options_from_collection_for_select(@suppliers, :id, :name), class: 'form-control form-control-sm pull-down-btn' %>
+      </div>
+      <div class="col">
+        <%= select_tag "select_pay", options_for_select(@pay_type) , class: 'form-control form-control-sm pull-down-btn' %>
+      </div>
+      <div class="col">
+        <a role="button" class="btn footer-btn-update text-white" id="register-btn" style="height: 30px; padding-top: 1px;"> <%= t('admin.common.update') %></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div>
+  <%= form_tag({:controller => 'stock', :action => 'index'}, :remote => true, :class => 'form-ajax') do %>
+    <%= hidden_field_tag :ajax_handler, 'handle_stock_history' %>
+    <%= hidden_field_tag :start_date, drpInitialStartDate(), :id => 'start_date' %>
+    <%= hidden_field_tag :end_date, drpInitialEndDate(), :id => 'end_date' %>
+    <%= hidden_field_tag :shop_product_id, '', :id => 'shop-product-id' %>
+    <%= submit_tag('Submit', :id => 'stock-history-commit', :style=>"display:none;") %>
+
+    <!-- Modal -->
+    <div class="modal fade" id="stockHistoryModal" tabindex="-1" role="dialog" aria-labelledby="stockHistoryModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><%= t 'admin.stock.stock_history' %></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="stockHistoryModalBody" class="modal-body">
+            <button type="button" class="pull-down-btn mt-3" id="stock-daterange-btn">
+              <i class="far fa-calendar-alt mr-1"></i>
+              <span>
+              <%== drpInitialRange() %>
+              </span>
+            </button>
+
+            <div class="pl-5 pr-5 pb-5 mt-4 border bg-white">
+              <canvas id="stockHistoryChart" style="height: 350px; width: 50%;" class="chartjs-render-monitor"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+  <% end %>
+</div>
+
+<div>
+  <%= form_tag({:controller => 'stock', :action => 'index'}, :remote => true, :class => 'form-ajax') do %>
+    <%= hidden_field_tag :ajax_handler, 'handle_daily_history', :id => 'handle_daily_history' %>
+    <%= hidden_field_tag :daily_history_date, '', :id => 'daily_history_date' %>
+    <%= hidden_field_tag :daily_history_shop_id, '', :id => 'daily-history-shop-id' %>
+    <%= submit_tag('Submit', :id => 'daily-history-commit', :style=>"display:none;") %>
+
+    <!-- Modal -->
+    <div class="modal fade" id="dailyHistoryModal" tabindex="-1" role="dialog" aria-labelledby="dailyHistoryModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><%= t 'admin.stock.daily_history' %></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="dailyHistoryModalBody" class="modal-body">
+            <input id="daily-history-date-btn" class="form-control form-control-sm pull-down-btn w-25">
+
+            <div class="pb-3 mt-4 bg-white scroll-body-table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th><%= t 'admin.stock.supplier' %></th>
+                    <th><%= t 'admin.common.shop_alias_name' %></th>
+                    <th><%= t 'admin.stock.action' %></th>
+                    <th><%= t 'admin.common.quantity' %></th>
+                    <th><%= t 'admin.stock.purchase_price' %></th>
+                    <th><%= t 'admin.stock.purchase_unit_price' %></th>
+                    <th><%= t 'admin.stock.payment' %></th>
+                  </tr>
+                </thead>
+                <tbody id="daily-history-tbody"> 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+  <% end %>
+</div>
+
+<div>
+  <%= form_tag({:controller => 'stock', :action => 'index'}, :remote => true, :class => 'form-ajax') do %>
+    <%= hidden_field_tag :ajax_handler, 'handle_stock_control' %>
+    <%= submit_tag('Submit', :id => 'stock-control-commit', :style=>"display:none;") %>
+
+    <!-- Modal -->
+    <div class="modal fade" id="stockControlModal" tabindex="-1" role="dialog" aria-labelledby="stockControlModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><%= t 'admin.stock.edit_stock_control' %><span></span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="stockControlModalBody" class="modal-body">
+            <div id="edit-form" class="pl-5 pr-5 pb-5 mt-4">
+              <div>
+                <label>
+                  <%= t 'admin.stock.purchase_price' %>
+                </label>  
+                <input id="edit-purchase-price" class="form-control"/>
+              </div>
+              <div class="mt-2">
+                <label>
+                  <%= t 'admin.stock.purchase_unit_price' %>
+                </label>
+                <input id="edit-purchase-unit-price"  class="form-control"/>
+              </div>
+              <div class="mt-4 pl-auto">
+                <button id="edit-btn" class="btn footer-btn-update text-white"><%= t 'admin.common.update'%></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+  <% end %>
+</div>
+
+<div>
+  <%= form_tag({:controller => 'stock', :action => 'index'}, :remote => true, :class => 'form-ajax') do %>
+    <%= hidden_field_tag :ajax_handler, 'handle_stock_profit' %>
+    <%= hidden_field_tag :stock_control_id, '', :id => 'stock-control-id' %>
+    <%= hidden_field_tag :stock_product_id, '', :id => 'stock-product-id' %>
+    <%= submit_tag('Submit', :id => 'stock-profit-commit', :style=>"display:none;") %>
+
+    <!-- Modal -->
+    <div class="modal fade" id="stockProfitModal" tabindex="-1" role="dialog" aria-labelledby="stockProfitModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><%= t 'admin.stock.profit' %><span></span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="stockProfitModalBody" class="modal-body">
+            <div id="revenueLegend"></div>
+            <div class="pl-5 pr-5 pb-5 mt-4 border bg-white">
+              <canvas id="stockProfitChart" style="height: 350px; width: 50%;" class="chartjs-render-monitor"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+  <% end %>
+</div>

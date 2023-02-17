@@ -1,0 +1,12 @@
+<% readonly = false unless readonly.present? %>
+<span class="selected-mechanic-wrapper nested-fields">
+    <%= f.hidden_field :maintenance_log_detail_id, :class => 'hidden_maintenance_log_detail_id' %>
+    <%= f.hidden_field :shop_staff_id, :class => 'hidden_shop_staff_id' %>
+    <% staff = ShopStaff.find_by(id: f.object.shop_staff_id) %>
+    <span id="<%= f.object.shop_staff_id unless f.object.shop_staff_id.nil? %>" class="badge badge-pill badge-outline badge-mechanic -removable">
+        <%= staff.name unless staff.nil? %>
+        <% unless readonly %>
+        <%= link_to_remove_association 'x', f %>
+        <% end %>
+    </span>
+</span>

@@ -1,0 +1,40 @@
+<% content_for(:title, t('console.whatsapp.title')) %>
+
+<%= form_tag console_update_default_template_path, method: :post do%>
+  <%= render 'update_default'%>
+<% end %>
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= t('console.whatsapp.service')%></th>
+          <th><%= t('console.whatsapp.template')%></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @whats_app_templates.each do |template| %>
+        <tr>
+          <td><%= template.service_name %></td>
+          <td><%= template.template_name %></td>
+          <td class="text-right">
+            <%= link_to edit_console_whats_app_template_path(template), :class => "btn btn-primary" do %>
+            <i class="fas fa-edit"></i>&nbsp;<%= t 'console.common.edit'  %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex justify-content-start">
+      <div>
+        <%= link_to new_console_whats_app_template_path,:class => 'btn footer-btn' do %>
+          <i class="fas fa-plus"></i>&nbsp;<%= t 'console.whatsapp.add' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

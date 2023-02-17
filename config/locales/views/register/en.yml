@@ -1,0 +1,186 @@
+en:
+  register:
+    new:
+      sign_up: "Sign up"
+      lead_text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      send: "Send"
+      header: "Thank you for your availability register an Otoraja Biz account"
+      sub_header: "Fill in the data below completely and correctly"
+      email_help: "One email is only for one account and can't be changed anymore"
+      email_invalid: "Email already registered"
+      product_choices: "Selected Otoraja products"
+      agree: "Agree"
+      agreement_header: "User consent"
+      agreement_body: "By checking the box below, you acknowledge that you have read and agree to the Terms and Conditions of using Otoraja's products and services, as well as the applicable Privacy Policy."
+      terms_header: "Terms & Conditions (click to read)"
+      terms_condition: "OTORAJA BIZ APPLICATION TERMS AND CONDITIONS"
+      terms_agree_help: "Click the button above to close this page after you have read and understood the Otoraja Product and Service User Terms and Conditions."
+      privacy_header: "Privacy Policy (click to read)"
+      privacy_policy: "Privacy Policy PT OTORAJA NETWORK INDONESIA Workshop Support Services"
+      privacy_agree_help: "Click the button above to close this page after you have read and understood the Otoraja Products and Services User Privacy Policy."
+      privacy_body_html: 
+                    'PT OTORAJA NETWORK INDONESIA (selanjutnya disebut sebagai "kami", "kita" atau "milik kami") akan berusaha untuk melindungi privasi pelanggan dengan melakukan penanganan informasi pribadi yang sah, 
+                    adil dan transparan, dengan memastikan keakuratan, integritas, dan kebaruan informasi pribadi, dan dengan menerapkan langkah-langkah keamanan yang sesuai, sesuai dengan 
+                    Kebijakan Privasi Layanan Dukungan Bengkel PT OTORAJA NETWORK INDONESIA (selanjutnya disebut sebagai "Kebijakan Privasi ini") dan undang-undang dan peraturan tentang perlindungan informasi pribadi.
+                    </br>
+                    </br>
+                    Kebijakan Privasi ini berlaku untuk penanganan informasi pribadi pemilik bengkel dan staf bengkel (selanjutnya disebut "Anda") yang menggunakan layanan seperti aplikasi, sistem, produk, konten, dll.
+                    Yang disediakan di Layanan Dukungan Bengkel (selanjutnya secara kolektif disebut sebagai "Layanan").
+                    Membaca Kebijakan Privasi ini akan memperdalam pemahaman Anda sehubungan dengan perlindungan privasi Anda.
+                    </br>
+                    </br>
+                    <ol>
+                      <li>
+                        <b>Informasi yang Kami Kumpulkan Tentang Anda</b>
+                        </br>
+                        Dalam Layanan, kami menangani data Anda berikut ini (selanjutnya disebut sebagai "data Anda").
+                        Data Anda dapat mencakup informasi pribadi Anda dan informasi lain yang dibuat atau dikumpulkan sehubungan dengan penggunaan Layanan.
+                        <ul>
+                          <li>Informasi yang Anda daftarkan sehubungan dengan penggunaan Layanan （nama, alamat, nomor telepon, alamat email, jenis kelamin, usia, informasi toko, informasi staf bengkel, informasi yang berkaitan dengan pembayaran seperti informasi rekening bank, nomor identifikasi nasional (KTP), nomor identifikasi pajak (NPWP), nomor identifikasi kendaraan dalam pemeliharaan, informasi kendaraan dalam pemeliharaan, dll.)</li>
+                          <li>Informasi yang diberikan saat Anda mengajukan pertanyaan tentang Layanan (nama, isi pertanyaan, informasi kontak, dll.)</li>
+                          <li>Informasi yang diunggah saat menggunakan Layanan (informasi bengkel tentang produk dan layanan, penjualan, pembelian, dll.)</li>
+                          <li>Riwayat penggunaan Layanan, catatan operasi</li>
+                          <li>Informasi tentang perangkat Anda (informasi lokasi, informasi cookie, nama model, versi Sistem Operasi, kode negara, kode operator, dll.)</li>
+                          <li>Informasi lain yang berkaitan dengan individu yang diperoleh atau diturunkan untuk mencapai “2. Tujuan penggunaan."</li>
+                          <li>Informasi tentang kategori yang kami berikan pemberitahuan terpisah.</li>
+                        </ul>
+                        Berikut ini adalah metode pengumpulan data Anda
+                        <ul>
+                          <li>Kumpulkan secara langsung dari Anda melalui perangkat yang kami sediakan atau dokumen tertulis</li>
+                          <li>Kumpulkan data Anda dari perangkat Anda</li>
+                          <li>Kumpulkan data Anda dari layanan lain, berdasarkan persetujuan Anda</li>
+                        </ul>
+                      </li>
+                      </br>
+                      <li>
+                        <b>Tujuan Penggunaan</b>
+                        </br>
+                        Kami dapat menggunakan data Anda untuk tujuan berikut. Dan ini dapat digunakan untuk tujuan berikut dalam kombinasi dengan informasi yang kami peroleh secara terpisah. 
+                        <ul>
+                          <li>Untuk melakukan dan menyediakan Layanan (termasuk layanan tambahan dan terkait)</li>
+                          <li>Untuk menanggapi pertanyaan, permintaan dan keluhan</li>
+                          <li>Untuk meningkatkan Layanan atau membuat layanan baru</li>
+                          <li>Untuk meneliti dan menganalisis penggunaan Layanan</li>
+                          <li>Untuk analisis pemasaran langsung dan penawaran terkait dengan kami, mitra bisnis kami, dan perusahaan terkait</li>
+                          <li>Untuk mengoperasikan, mengelola acara dan kampanye kami, mitra bisnis kami, dan perusahaan terkait</li>
+                          <li>Untuk memberikan berbagai informasi untuk acara dan kampanye kami, mitra bisnis kami, dan perusahaan terkait</li>
+                          <li>Untuk memberikan informasi tentang layanan kami, mitra bisnis kami, dan perusahaan terkait</li>
+                          <li>Untuk memastikan keamanan penyediaan Layanan</li>
+                          <li>Untuk perlindungan dan keamanan properti dan hak</li>
+                          <li>Untuk mematuhi hukum, peraturan, dan aturan lainnya</li>
+                          <li>Untuk mengambil tindakan keamanan, seperti kontrol akses dan akuisisi catatan</li>
+                          <li>Untuk tujuan penggunaan yang pemberitahuan terpisah diberikan setelah memperoleh informasi pribadi yang dimaksud</li>
+                          <li>Untuk tujuan lain yang diizinkan oleh hukum dan peraturan yang berlaku</li>
+                        </ul>
+                      </li>
+                      </br>
+                      <li>
+                        <b>Berbagi Data Anda</b>
+                        </br>
+                        Kami dapat membagikan data Anda dengan pihak ketiga termasuk mitra bisnis kami, perusahaan terkait dan kontraktor sejauh yang diperlukan untuk mencapai tujuan penggunaan. 
+                        Terlepas dari tujuan penggunaan, data Anda dapat diubah menjadi data yang tidak dapat diidentifikasi oleh individu, kemudian dibagikan dengan pihak ketiga sebagai data statistik atau gabungan.
+                        Selain itu, untuk menyediakan Layanan yang memanfaatkan informasi lokasi, informasi lokasi Anda mungkin diberikan kepada penyedia aplikasi peta.
+                      </li>
+                      </br>
+                      <li>
+                        <b>Transfer Informasi Pribadi Internasional</b>
+                        </br>
+                        Saat kami mencapai tujuan penggunaan, kami dapat mentransfer informasi pribadi Anda ke negara atau wilayah di mana tidak ada tingkat hukum atau peraturan yang memadai 
+                        mengenai perlindungan informasi pribadi yang setara dengan negara atau wilayah tempat Anda tinggal. Saat mentransfer informasi pribadi Anda ke negara atau wilayah lain, kami akan 
+                        mengambil tindakan yang sesuai sesuai dengan hukum dan peraturan yang berlaku.
+                      </li>
+                      </br>
+                      <li>
+                        <b>Koreksi dan Penghapusan Informasi Pribadi</b>
+                        </br>
+                        Anda dapat memperbaiki sebagian informasi pribadi Anda di Layanan. Jika Anda ingin memperbaiki atau menghapus informasi pribadi Anda lainnya, silakan hubungi kami melalui email 
+                        ke sales@otoraja.co.id. Kami akan menanggapi dengan tulus dan tepat sesuai dengan hukum dan peraturan yang berlaku. Harap diperhatikan bahwa beberapa atau semua informasi pribadi 
+                        Anda diperlukan untuk memenuhi kewajiban hukum dan peraturan yang berlaku dan / atau menyediakan Layanan dengan benar dan dapat disimpan.
+                      </li>
+                      </br>
+                      <li>
+                        <b>Penyimpanan Informasi Pribadi</b>
+                        </br>
+                        Kami menyimpan informasi pribadi Anda selama jangka waktu yang diperlukan untuk mencapai tujuan penggunaan, atau jangka waktu yang diperlukan untuk memenuhi kewajiban hukum dan 
+                        peraturan yang berlaku. 
+                      </li>
+                      </br>
+                      <li>
+                        <b>Pilihan Anda</b>
+                        </br>
+                        Pada prinsipnya, Anda akan memiliki pilihan apakah akan memberikan informasi kepada kami. Namun, saat Anda menggunakan Layanan, jika Anda tidak memberikan data, Anda mungkin 
+                        tidak dapat menggunakan Layanan, atau beberapa fungsi Layanan mungkin tidak berfungsi dengan baik. 
+                      </li>
+                      </br>
+                      <li>
+                        <b>Cookies</b>
+                        </br>
+                        Situs web kami dapat menghasilkan cookie dan teknologi serupa lainnya. Kami dapat menganalisis penggunaan Anda atas situs web seperti status akses, lalu lintas, 
+                        dan perutean untuk meningkatkan situs web ini, dan untuk merencanakan, mengembangkan, dan meningkatkan Layanan. Dalam analisis ini, informasi dapat diberikan kepada penyedia alat analisis.
+                        Anda berhak menolak atau menerima cookie dari situs web ini kapan saja dengan mengaktifkan pengaturan di browser Anda. Informasi tentang prosedur yang harus diikuti untuk 
+                        mengaktifkan atau menonaktifkan cookie dapat ditemukan di situs web penyedia browser Internet Anda melalui layar bantuan Anda. Perlu diketahui bahwa jika cookie dinonaktifkan, 
+                        tidak semua fitur situs web ini dapat beroperasi sebagaimana mestinya. 
+                      </li>
+                      </br>
+                      <li>
+                        <b>Keamanan</b>
+                        </br>
+                        Kami telah menetapkan struktur manajemen untuk melindungi informasi pribadi untuk mencegah akses tidak sah ke data Anda, kehilangan, kerusakan, pemalsuan, kebocoran, dll. 
+                        Kami mengambil tindakan keamanan organisasi, fisik dan teknis yang sesuai. 
+                        Kami menyadari pentingnya melindungi informasi pribadi dan mengambil tindakan yang tepat bagi karyawan yang menangani informasi pribadi seperti memberikan pelatihan / 
+                        pendidikan untuk melindungi informasi pribadi. 
+                        Jika terjadi kecelakaan seperti kebocoran informasi pribadi, kami akan menanggapinya dengan tepat dengan menyelidiki semua fakta dan penyebabnya serta mengambil 
+                        tindakan untuk mencegah kerusakan sekunder dan terulang kembali, dll.
+                      </li>
+                      </br>
+                      <li>
+                        <b>Hubungi Kami</b>
+                        </br>
+                        PT OTORAJA NETWORK INDONESIA </br>
+                        Sinarmas MSIG Tower, lantai 41 </br>
+                        Jl. Jendral Sudirman Kav. 21 </br>
+                        Setiabudi Jakarta Selatan 12920 </br>
+                        021-521-4077, Departemen Sales 
+                      </li>
+                      </br>
+                      <li>
+                        <b>Ubah Kebijakan Privasi ini</b>
+                        </br>
+                        Kami dapat mengubah, memodifikasi, menambah, atau menghapus konten Kebijakan Privasi ini dari waktu ke waktu untuk mematuhi perubahan dalam tujuan bisnis. 
+                        Setiap perubahan yang kami lakukan pada Kebijakan Privasi ini akan diberitahukan melalui Layanan. 
+                      </li>
+                      </br>
+                      <li>
+                        <b>Bahasa yang Mengatur</b>
+                        </br>
+                        Bahasa Indonesia akan menjadi bahasa yang mengatur Kebijakan Privasi ini. Versi apa pun dalam bahasa lain hanya untuk tujuan kenyamanan.
+                      </li>
+                    </ol>
+                    [Ditetapkan 14 Agustus, 2020]'
+  placeholders:
+    name: "Name according to ID Card"
+    email: "Email"
+    tel: "HP number"
+    shop_name: "Shop name"
+    otoraja_biz: "Otoraja Biz (Free Trial 30 days)"
+    otoraja_bp: "Otoraja BP (spare parts shopping)"
+    referal: "Referral (opsional)"
+    regency: "Regency"
+    distric: "Distric"
+    select_regency: "Select Regency"
+    select_distric: "Select Distric"
+  recaptcha: 
+    errors: 
+      verification_failed: 'verification failed.' 
+  thank_you:
+    thank_you: "Thank you!"
+    header_html: "<strong>We have sent your username and password to your email.</strong> If it's not in your Inbox, please check your Spam folder."
+    sub_header: "Make sure the Otoraja Biz application is installed on your smartphone / tablet."
+    help_html: "<strong>Need help or have questions?</strong> </br> Contact CS Otoraja via WA at number 0851-5680-6558."
+  password:
+    congrats: "Congrats!"
+    header: "This is your first login. Please change the password first."
+    old_password: "Old password"
+    new_password: "New password"
+    confirm_password: "Confirm new password"
+    change_and_login: "Change and login"

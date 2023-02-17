@@ -1,0 +1,8 @@
+en:
+  variant:
+    errors:
+      messages:
+        similar_variant_name: " is considered the same as the existing variant: %{variant_name}"
+    notice:
+      successful_variant_saved: 'Variant was successfully created.'
+      successful_variant_updated: 'Variant was successfully updated.'

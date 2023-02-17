@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Biz OTORAJA</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= stylesheet_link_tag    'admin', media: 'all' %>
+  <%= javascript_include_tag 'admin' %>
+  <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <%= render 'layouts/admin/google_analytics' %>
+</head>
+
+<body id="<%= sprintf("%s_%s",controller_name,action_name) %>" class="sidebar-mini layout-fixed" data-controller="<%= controller_name %>" data-action="<%= action_name %>">
+<div class="wrapper">
+  <%= render 'layouts/admin/header' %>
+
+  <%= render 'layouts/admin/sidebar' %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-between">
+          <h1 class="m-0 text-dark text-page-title font-weight-bold"><%= yield :title %></h1>
+          <% if content_for?(:show_daily_history) %>
+            <%= link_to '#', class: "btn btn-primary", data: {"toggle" => "modal", "target" => "#dailyHistoryModal", "backdrop" => "static"} do %>
+              <%= t 'admin.stock.daily_history' %>
+            <% end %>
+          <% end %>
+          <% if content_for?(:shop_invoice) %>
+            <%= link_to admin_shop_purchases_path(:mode => 0), :class => 'btn button-active text-normal mb-2' do %>
+              <i class="fa fa-plus"></i> <%= t 'admin.common.new' %>
+            <% end %>
+          <% end %>
+          <% if content_for?(:shop_product) %>
+            <%= button_tag :type => "button", id: "btn-product-add", class: "btn button-secondary-active text-normal mb-2  js-modal-open", data: {"target" => "#addProductModal"} do %>
+              <i class="fa fa-plus"></i> <%= t 'admin.common.new' %>
+            <% end %>
+          <% end %>
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <%= render 'layouts/flash' %>
+
+        <%= yield %>
+      </div>
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+</div>
+</body>
+
+</html>

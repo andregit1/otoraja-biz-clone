@@ -1,0 +1,36 @@
+<% readonly = false unless readonly.present? %>
+<!-- Input Note Modal -->
+<div id="inputNoteModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#inputNoteModal"></div>
+  <div class="modal_content -fullscreen">
+    <div class="modal-header">
+      <button class="close col-1 js-modal-close confirm-note" data-target="#inputNoteModal">
+        <i class="icon icon-Arrow-left"></i>
+      </button>
+      <div class="modal-title col-10 text-center"><%= t 'select_product.edit.infomation' %></div>
+      <div class="col-1"></div>
+    </div>
+    <div class="modal-body">
+      <p><%= t 'note.question' %></p>
+      <% if readonly %>
+      <%= f.text_area :note, :class => 'form-control mb-5', :readonly => 'readonly' %>
+      <% else %>
+      <%= f.text_area :note, :class => 'form-control mb-5' %>
+      <% end %>
+      <div class="row px-5">
+        <div class="col-6">
+          <%= button_tag :type => "button", class: "btn-base -basic -normal js-modal-close", data: {"target" => "#inputNoteModal"} do %>
+            <%= t 'cancel' %>
+          <% end %>
+        </div>
+        <div class="col-6">
+          <%= button_tag :type => "button", class: "btn-base -basic -primary js-modal-close confirm-note", data: {"target" => "#inputNoteModal"} do %>
+            <%= t 'ok' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Input Note Modal -->

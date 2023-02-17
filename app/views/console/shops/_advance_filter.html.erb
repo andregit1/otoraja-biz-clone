@@ -1,0 +1,110 @@
+<thead>
+  <tr>
+    <%= search_form_for @q, url: console_shops_path, id: 'console-subs-search' do |f| %>
+      <th></th>
+      <th>
+        <input type="checkbox" id="select-all-subscription" class="checkbox" data-total="<%= @shops.total_count %>">
+        <%= f.hidden_field :page, :value => params[:page].present? ? params[:page] : '1' %>
+        <%= f.hidden_field :checkbox, :value => '' %>
+        <%= f.hidden_field :checkbox_ids, :value => '' %>
+      </th>
+      <th>
+        <%= t 'console.shop.table.head.bengkel_id' %>
+        <div class="search-field">
+          <%= f.text_field :bengkel_id_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+        </div>
+      </th>
+      <th>
+        <%= t 'console.shop.table.head.name' %>
+        <div class="search-field">
+          <%= f.text_field :name_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+        </div>
+      </th>
+      <th>
+        <%= t 'console.shop.table.head.status' %>
+        <div class="search-field">
+         <%= f.select :subscriber_type_eq, options_for_select([
+            ["Free Trial", 1],
+            ["Berbayar", 2],
+            ["Suspend", 0],
+            ], selected: params[:q].present? ? params[:q][:subscriber_type_eq] : nil), {include_blank: true}, { class: "text-small selection" } %>
+        </div>
+      </th>
+      <th>
+        <%= t 'console.shop.table.head.area_code' %>
+        <div class="search-field">
+          <%= f.select :subscriptions_va_code_area_va_code_eq, VaCodeArea.select(:va_code).map{|va| va.va_code}, {prompt: ""}, {class: "text-small selection"} %>
+        </div>
+      </th>
+      <th>
+        <%= t 'console.shop.table.head.item' %>
+        <div class="search-field">
+          <%= f.select :subscriptions_period_eq, options_for_select([
+            [t("console.subscription.item.one"), 1],
+            [t("console.subscription.item.three"), 3],
+            [t("console.subscription.item.six"), 6],
+            [t("console.subscription.item.twelve"), 12]
+            ], selected: params[:q].present? ? params[:q][:subscriptions_period_eq] : nil), {include_blank: true}, { class: "text-small selection" } %>
+        </div>
+      </th>
+      <th>
+        <%= t 'console.shop.table.head.subscription_number' %>
+        <div class="search-field">
+          <%= f.text_field :subscriptions_order_ids_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+        </div>
+      </th>
+      <th>
+        <%= t 'console.shop.table.head.va_no' %>
+        <div class="search-field">
+          <%= f.text_field :virtual_bank_no_or_subscriptions_payment_gateway_va_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+        </div>
+      </th>
+      <th>
+        <%= t 'console.shop.table.head.sales_name' %>
+        <div class="search-field">
+          <%= f.text_field :subscriptions_sales_name_cont, autocomplete: 'off', placeholder: "&#xe913;".html_safe, class: 'text-small', style: "font-family:icon"  %>
+        </div>
+      </th>
+      <th>
+        <%= t 'console.shop.table.head.reg_date' %>
+        <div class="search-field">
+          <%= f.hidden_field :created_at_gteq, :value => params[:q].present? ? params[:q][:created_at_gteq] : '' %>
+          <%= f.hidden_field :created_at_lteq, :value => params[:q].present? ? params[:q][:created_at_lteq] : '' %>
+          <button type="button" class="pull-down-btn text-left text-small" id="created_at-btn">
+          <div>
+            <i class="far fa-calendar-alt mr-1"></i>
+            <span>
+              <%= t 'console.subscription.today' %>
+            </span>
+          </div>
+        </button>
+        </div>
+      </th>
+      <th>
+        <%= t 'console.shop.table.head.validity_periode' %>
+        <div class="search-field">
+          <%= f.hidden_field :expiration_date_gteq, :value => params[:q].present? ? params[:q][:expiration_date_gteq] : '' %>
+          <%= f.hidden_field :expiration_date_lteq, :value => params[:q].present? ? params[:q][:expiration_date_lteq] : '' %>
+          <button type="button" class="pull-down-btn text-left text-small" id="end_date-btn">
+          <div>
+            <i class="far fa-calendar-alt mr-1"></i>
+            <span>
+              <%= t 'console.subscription.today' %>
+            </span>
+        </div>
+      </th>
+      <th>
+        <%= t 'console.shop.table.head.new_ext' %>
+        <div class="search-field">
+
+        <%= f.select :is_reactivated_eq, options_for_select([
+            ["New", false],
+            ["Ext", true],
+            ], selected: params[:q].present? ? params[:q][:is_reactivated_eq] : nil), {include_blank: true}, { class: "text-small selection" } %> 
+        </div>
+      </th>
+      <th></th>
+      <th></th>
+    <% end %>
+  </tr>
+</thead>

@@ -1,0 +1,11 @@
+en:
+  admin:
+    notification:
+      index:
+        title: "Notifications"
+        date: "Date"
+        tag: "Tag"
+        subject: "Title/Subject"
+        loadingtxt: "Retrieving data ..."
+        filterTag: "type / tag"
+    

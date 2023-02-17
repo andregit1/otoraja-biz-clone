@@ -1,0 +1,126 @@
+<% content_for(:title, t('admin.stock_book_report.stock_book_report')) %>
+
+<%= form_with url: admin_stock_book_report_path, local: true, method: :get do |f| %>
+  <div class="card card-widget">
+    <div class="card-body">
+    <%= f.hidden_field :start_date, :value => @start_date || drpInitialStartDate() %>
+    <%= f.hidden_field :end_date, :value => @end_date || drpInitialEndDate() %>
+
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label class="text-label"><%= t 'admin.common.period' %></label>
+        <button type="button" class="pull-down-btn form-control text-left text-normal" id="daterange-btn-report">
+          <div>
+            <i class="far fa-calendar-alt mr-1"></i>
+            <span>
+            </span>
+          </div>
+        </button>
+      </div>
+
+      <div class="form-group col-6">
+        <%= f.label :select_category, t('admin.common.category'), class: 'text-label' %>
+        <div>
+        <%= f.select :select_category, ProductCategory.all.order(id: :asc).pluck(:name, :id), { include_blank: 'Semua', selected: @select_category}, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <%= f.label t('admin.common.show_also'), class: 'text-label' %>
+    </div>
+    <div class="form-check form-check-inline wmobile-100">
+      <%= f.check_box :last_stock_zero, checked: @last_stock_zero, class: 'form-check-input' %>
+      <%= f.label :last_stock_zero, t('admin.stock_book_report.last_stock_zero'), class: 'text-label form-check-label' %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.check_box :no_stock_movement, checked: @no_stock_movement, class: 'form-check-input' %>
+      <%= f.label :no_stock_movement, t('admin.stock_book_report.no_stock_movement'), class: 'text-label form-check-label' %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.check_box :not_available, checked: @not_available, class: 'form-check-input' %>
+      <%= f.label :not_available, t('admin.stock_book_report.not_available'), class: 'text-label form-check-label' %>
+    </div>
+
+    <%= f.submit t('admin.common.search'), class: 'btn btn-primary form-control', id: 'report-filter', hidden: true %>
+    </div>
+  </div>
+
+ 
+  <% if @stock_products.any? %>
+    <div class="card card-widget">
+      <div class="card-body px-0">
+        <div class="form-row justify-content-between px-4">
+          <div class="form-group col-7 col-md-6">
+            <div class="search-field">
+              <%= f.text_field :q, class: 'form-control', placeholder: I18n.t('admin.stock_book_report.product_name'), autocomplete: 'off' %>
+              <i id="search-clear-btn" class="icon icon-Cross search-with-clear clear"></i>
+              <i id="search-btn" class="icon icon-Search search-with-clear"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= link_to admin_stock_book_report_download_path(format: :csv, start_date: @start_date, end_date: @end_date, select_category: @select_category, last_stock_zero: params[:last_stock_zero], no_stock_movement: params[:no_stock_movement], not_available: params[:not_available]),class: "btn button-secondary-active" do %>
+              <span class="text-large">Download</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table fixed-column-table">
+            <thead class="thead-light text-label">
+              <tr>
+                <th class="align-top"><%= t 'admin.stock_book_report.name' %></th>
+                <th class="align-top text-right"><%= t 'admin.stock_book_report.first_stock' %></th>
+                <th class="align-top text-right"><%= t 'admin.stock_book_report.stock_in' %></th>
+                <th class="align-top text-right"><%= t 'admin.stock_book_report.stock_out' %></th>
+                <th class="align-top text-right"><%= t 'admin.stock_book_report.last_stock' %></th>
+                <th class="align-top text-right"><%= t 'admin.stock_book_report.avg_price' %></th>
+                <th class="align-top text-right"><%= t 'admin.stock_book_report.stock_value' %></th>
+                <th class="align-top"><%= t 'admin.common.detail' %></th>
+              </tr>
+            </thead>
+            <tbody class="text-label">
+              <% @stock_products.each do |item| %>
+                <tr
+                class="item-detail"
+                data-shop-product-id="<%= item.id %>" 
+                data-shop-alias-name="<%= item.shop_alias_name %>" 
+                data-category="<%= item.pc_name %>"
+                data-product-no="<%= item.product_no %>"
+                data-availability="<%= item.is_use %>"
+                data-admin-product-name="<%= item.ap_name %>"
+                data-price="<%= item.sales_unit_price %>"
+                data-item-detail="<%= item.item_detail %>"
+                data-is-stock-control="<%= item.is_stock_control %>"
+                data-stock-minimum="<%= item.stock_minimum %>"
+                >
+                  <td><%= item.shop_alias_name %> <%= "(#{item.product_no})" if item.product_no.present? %></td>
+                  <td class="text-right"><%= item.last_stock.to_i - item.stock_in.to_i - item.stock_out.to_i %></td>
+                  <td class="text-right"><%= item.stock_in.to_i %></td>
+                  <td class="text-right"><%= item.stock_out.to_i %></td>
+                  <td class="text-right"><%= item.last_stock.to_i %></td>
+                  <td class="text-right"><%= formatedRupiah(item.last_average_price.to_i) %></td>
+                  <td class="text-right"><%= formatedRupiah(item.last_average_price.to_i * item.last_stock.to_i) %></td>
+                  <td>
+                  <button name="button" type="button" class="btn btn-primary">
+                    <i class="fas fa-eye js-modal-open" data-target="#detailProductModal"></i>
+                  </button>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="no_search_result color-text-table-header p-3 text-center">
+      <p class="font-italic text-normal m-0">Tidak ada data yang bisa disajikan</p>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="d-flex justify-content-center">
+  <%= paginate @stock_products, window: 1 %>
+</div>
+
+<%= render "modal_detail_product" %>

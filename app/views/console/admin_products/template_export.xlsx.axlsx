@@ -1,0 +1,57 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Admin Product Import Template") do |sheet|
+  sheet.add_row AdminProductUpload.columns
+
+  @admin_products.each do |admin_product|
+    column_values = [
+      admin_product.id,              
+      admin_product.product_category.id,
+      admin_product.product_category.name,
+      admin_product&.product_no,
+      admin_product.name,
+      admin_product&.item_detail,
+      admin_product&.brand&.id,
+      admin_product&.brand&.name,
+      admin_product&.variant&.id,
+      admin_product&.variant&.name,
+      admin_product&.tech_spec&.id,
+      admin_product&.tech_spec&.name,
+      admin_product&.default_remind_interval_day,
+      admin_product&.campaign_code
+    ]
+    sheet.add_row column_values
+  end
+end
+
+wb.add_worksheet(name: "Product Category") do |sheet|
+  sheet.add_row %w(id name)
+  
+  @product_categories.each do |product_category|
+    sheet.add_row [product_category.id, product_category.name]
+  end
+end
+
+wb.add_worksheet(name: "Brand") do |sheet|
+  sheet.add_row %w(id name)
+  
+  @brands.each do |brand|
+    sheet.add_row [brand.id, brand.name]
+  end
+end
+
+wb.add_worksheet(name: "Variant") do |sheet|
+  sheet.add_row %w(id name product_category_name)
+  
+  @variants.each do |variant|
+    sheet.add_row [variant.id, variant.name, variant.product_category.name]
+  end
+end
+
+wb.add_worksheet(name: "Tech Spec") do |sheet|
+  sheet.add_row %w(id name product_category_name)
+  
+  @tech_specs.each do |tech_spec|
+    sheet.add_row [tech_spec.id, tech_spec.name, tech_spec.product_category.name]
+  end
+end

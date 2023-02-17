@@ -1,0 +1,15 @@
+en:
+  admin:
+    packaging_product:
+      add_packaging_product: "Add Packaging Product"
+      shop: "Shop"
+      product_category: "Product Category"
+      product_name: "Product Name"
+      item_detail: "Item Detail"
+      sales_unit_price: "Sales Unit Price"
+      is_use: "Is Use"
+      add_product: "Add Product"
+      inclusion_products: "Inclusion Products"
+      regist: "Regist"
+      back: "Back"
+      edit_packaging_product: "Edit Packaging Product"

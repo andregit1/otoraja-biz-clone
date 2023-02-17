@@ -1,0 +1,87 @@
+<div class="card-body p-0">
+  <table class="table table-bordered">
+    <tr>
+      <th><%= t 'console.shop.status' %></th>
+      <td>
+        <% unless @shop.nil? %>
+          <% if @shop.non_subscriber? %>
+            <span class="badge bg-danger"><%= Shop.human_attribute_name('subscriber_type.non_subscriber') %></span>
+          <% elsif @shop.subscriber? %>
+            <span class="badge bg-warning"><%= Shop.human_attribute_name('subscriber_type.subscriber') %></span>
+          <% elsif @shop.paid_subscriber? %>
+            <span class="badge bg-success"><%= Shop.human_attribute_name('subscriber_type.paid_subscriber') %></span>
+          <% end %>
+        <% end %>
+      </td>
+      </td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.questionnaire_url' %></th>
+      <td><%= config.questionnaire_expiration_days %> <%= t 'console.shop_config.days' %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.message_send_time' %></th>
+      <td><%= formatedTime(config.message_send_time, 'Jakarta') %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.front_priority_display' %></th>
+      <td><%= config.front_priority_display %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.remind_interval_days' %></th>
+      <td><%= config.customer_remind_interval_days %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.use_customer_remind' %></th>
+      <td><%= config.use_customer_remind %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.use_recipt' %></th>
+      <td><%= config.use_receipt %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.recipt_layout' %></th>
+      <td><%= config.receipt_layout %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.public_receipt_url' %></th>
+      <td><%= config.receipt_open_expiration_days %> <%= t 'console.shop_config.days' %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.stock_notification_destination' %></th>
+      <td><%= config.stock_notification_destination %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.use_stock_notification' %></th>
+      <td><%= config.use_stock_notification %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.use_record_stock' %></th>
+      <td><%= config.use_record_stock %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.close_stock_time' %></th>
+      <td><%= formatedTime(config.close_stock_time, 'Jakarta') %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.available_payment_methods' %></th>
+      <td><%= config.shop.payment_methods.map{|method| method.name}.join(', ') %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.rounding_direction' %></th>
+      <td><%= config.rounding_direction %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.round_to' %></th>
+      <td><%= config.round_to %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.num_of_custom_list' %></th>
+      <td><%= config.num_of_custom_list %></td>
+    </tr>
+    <tr>
+      <th><%= t 'console.shop_config.num_of_products_in_custom_list' %></th>
+      <td><%= config.num_of_products_in_custom_list %></td>
+    </tr>
+  </table>
+</div>

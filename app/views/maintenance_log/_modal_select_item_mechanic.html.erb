@@ -1,0 +1,27 @@
+<!-- Select Item Mechanic Modal -->
+<div id="selectItemMechanicModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#selectItemMechanicModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-down js-modal-close" data-target="#selectItemMechanicModal">
+      <i class="icon icon-Arrow-down"></i>
+    </div>
+    
+    <div class="modal-body">
+      <p><%= t 'slip.select_item_staff' %></p>
+      
+      <% @mechanics.each do |mechanic| %>
+      <span class="badge badge-pill" data-id="<%= mechanic.id %>">
+        <%= mechanic.name %>
+      </span>
+      <% end %>
+
+      <div class="pl-5 pr-5 mt-6">
+        <%= button_tag :type => "button", class: "btn-base -basic -primary js-modal-close", data: {"target" => "#selectItemMechanicModal"} do %>
+          <%= t 'ok' %>
+        <% end %>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- Select Item Mechanic Modal -->

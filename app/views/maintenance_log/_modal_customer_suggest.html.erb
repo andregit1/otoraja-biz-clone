@@ -1,0 +1,85 @@
+<div id="customerSuggestModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#customerSuggestModal"></div>
+  <div class="modal_content -fullscreen">
+    <div class="modal-header">
+      <button id="customer-suggest-modal-close" class="close col-1 js-modal-close" data-target="#customerSuggestModal">
+        <i class="icon icon-Arrow-left"></i>
+      </button>
+      <div class="modal-title col-10 text-center"><%= t 'customer.infomation' %></div>
+      <div class="col-1"></div>
+    </div>
+    <div class="modal-body customer-info-body">
+      <div class="customer-info-body_label"><%= t 'vehicle.registration_plate_sub' %></div>
+      <div id="c-suggest-input-numberplate-box" class="mb-2 input-numberplate blank">
+        <%= select_tag 'c-suggest-number_plate_area', options_for_select(MaintenanceLog.number_plate_areas.keys.to_a, selected: 'B'), class: 'input-numberplate_area' %>
+        <%= number_field_tag 'c-suggest-number_plate_number', nil, :class=>'input-numberplate_number', autocomplete: 'off', oninput: 'if(value.length>4)value=value.slice(0,4)', placeholder: t('example_no_plate_up') %>
+        <%= url_field_tag 'c-suggest-number_plate_pref', nil, :class=>'input-numberplate_pref', autocomplete: 'off',  oninput: 'value=value.toUpperCase();if(value.length>3)value=value.slice(0,3)', placeholder: t('example_no_plate_down') %>
+        <span class="spinner-border spinner-border-sm search-spinner" style="display:none;"></span>
+      </div>
+      <div class="customer-info-body_label"><%= t 'customer.cellphone_full' %></div>
+      <div id="c-suggest-phone_valid_err_msg" class="small text-danger"></div>
+      <div id="c-suggest-input-tel-box" class="mb-2 input-tel blank">
+        <%= select_tag 'c-suggest-phone_country_code', options_for_select(@country_code_list, selected: 62), class: 'input-tel_country-code' %>
+        <%= telephone_field_tag 'c-suggest-phone_national', nil, class: 'input-tel_phone-national', autocomplete: 'off', maxlength: 18, placeholder: t('example_phone_no')%>
+        <span class="spinner-border spinner-border-sm search-spinner" style="display:none;"></span>
+      </div>
+      <div class="customer-info-body_label"><%= t 'customer.name' %></div>
+      <div id="c-suggest-input-name-box" class="mb-2 input-name blank">
+        <%= text_field_tag 'c-suggest-customer_name', nil, class: 'input-name_customer-name', autocomplete: 'off', maxlength: 45, placeholder: t('example_name') %>
+        <span class="spinner-border spinner-border-sm search-spinner" style="display:none;"></span>
+      </div>
+
+      <div id="c-suggest-customer-regist-block" >
+        <div class="pt-4 d-flex justify-content-center">
+          <%= button_tag :type => "button", id: "c-suggest-customer-registration-btn", :class =>"btn-base -basic -primary w-75", disabled: true do %>
+            <%= t 'customer.registration' %>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="suggest-customer-list-wrapper">
+              <table class="table table-hover suggest-customer-list" id="c-suggest-customer_list">
+                <thead class="search_header" style="display:none;">
+                  <tr>
+                    <th class="name_tel_col"><%= t 'name_tel' %></th>
+                    <th class="vehicle_col"><%= t 'vehicle.title' %></th>
+                    <th class="vehicle_info_col"></th>
+                    <th class="add_col text-right pr-0"><%= t 'add' %></th>
+                  </tr>
+                </thead>
+                <tbody class="search_result" style="display:none;">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="c-suggest-sms-confirm-block" style="display:none;">
+        <%= hidden_field_tag :confirm_tel, '', id: 'c-suggest-confirm_tel' %>
+        <%= hidden_field_tag :confirm_tel, '', id: 'c-suggest-confirm_tel_national_hyphen' %>
+        <%= hidden_field_tag :confirm_phone_country_code, '', id: 'c-suggest-confirm_phone_country_code' %>
+        <%= hidden_field_tag :confirm_phone_national, '', id: 'c-suggest-confirm_phone_national' %>
+        <div class="customer-info-body_label">
+          <div class="d-flex justify-content-center">
+            <%= t "sms_confirm"%>
+          </div>
+          <div class="d-flex justify-content-center">
+            <%= button_tag :type => "button", id: "c-suggest-sms-confirm-btn",  :class =>"btn-base -basic -primary w-75" do %>
+              <%= t "confirm"%>
+            <% end %>
+          </div>
+          <div class="mt-5 d-flex justify-content-center">
+            <%= button_tag :type => "button", id: "c-suggest-sms-resend-btn",  :class =>"btn-base -basic -normal w-75" do %>
+              <%= t "resend_sms"%>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<%= button_tag :type => "button", id: "open-customer-suggest-modal", class: "js-modal-open", data: {"target" => "#customerSuggestModal"}, style: "display:none;" %>

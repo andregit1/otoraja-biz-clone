@@ -1,0 +1,15 @@
+id:
+  admin:
+    packaging_product:
+      add_packaging_product: "Tambah Paket"
+      shop: "Bengkel"
+      product_category: "Kategori Paket"
+      product_name: "Nama Paket"
+      item_detail: "Deskripsi Isi Paket"
+      sales_unit_price: "Harga Jual"
+      is_use: "Tersedia"
+      add_product: "Tambah Produk"
+      inclusion_products: "Produk Dalam Paket"
+      regist: "Simpan"
+      back: "Kembali"
+      edit_packaging_product: "Edit Paket"

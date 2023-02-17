@@ -1,0 +1,142 @@
+<div class="d-flex justify-content-between mb-3">
+  <h1 class="text-page-title font-weight-bold"><%= t 'admin.shop.shop_detail' %></h1>
+  <%= link_to admin_shops_path,:class => "btn-detail-back text-normal mb-2" do %>
+  <%= t 'admin.common.back' %></a>
+  <% end %>
+</div>
+<div class="card text-small">
+  <div class="card-header">
+    <div class="card-title text-large"><%= (t 'admin.shop.information_lable').upcase %></div>
+  </div>
+  <div class="card-body p-0">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th class="text-nowrap"><%= t 'admin.shop.bengkel_id' %></th>
+          <td><%= @shop.bengkel_id %></td>
+        </tr>
+        <tr>
+          <th ><%= t 'admin.common.name' %></th>
+          <td><%= @shop.name %></td>
+        </tr>
+        <tr>
+          <th class="text-nowrap"><%= t 'admin.common.num_tel' %></th>
+          <td><%= @shop.tel %></td>
+        </tr>
+        <tr>
+          <th><%= t 'admin.common.address' %></th>
+          <td><%= @shop.address %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <div class="card-title text-large"><%= (t 'admin.common.config').upcase %></div>
+  </div>
+  <%= render 'admin/shop_configs/list_body', {config: @shop.shop_config} %>
+</div>
+<div class="card">
+  <div class="card-header">
+    <div class="card-title text-large"><%= (t 'admin.shop.accounts').upcase %></div>
+    <div class="card-tools">
+    <% if current_user.admin_roles? %>
+      <% unless @shop.has_staff_account? %>
+        <%= link_to new_admin_user_path(role: :staff, shop_id: @shop.id),:class => 'btn btn-success' do %>
+          <i class="fas fa-user-plus"></i> <%= t 'admin.shop.add_staff_user' %>
+        <% end %>
+      <% end %>
+      <% unless @shop.has_shop_manager_account? %>
+        <%= link_to new_admin_user_path(role: :shop_manager, shop_id: @shop.id),:class => 'btn btn-success' do %>
+          <i class="fas fa-user-plus"></i> <%= t 'admin.shop.add_shop_manager_user' %>
+        <% end %>
+      <% end %>
+      <% unless @shop.has_manager_account? %>
+        <%= link_to new_admin_user_path(role: :manager, shop_id: @shop.id),:class => 'btn btn-success' do %>
+          <i class="fas fa-user-plus"></i> <%= t 'admin.shop.add_manager_user' %>
+        <% end %>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+  <div class="card-body p-0 table-responsive">
+    <table class="table text-small">
+      <thead>
+        <tr>
+          <th><%= t 'admin.common.name_id' %></th>
+          <th><%= t 'admin.user.level' %></th>
+          <th><%= t 'admin.shop.status' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @shop.users.each do |user| %>
+          <tr class="<%= 'bg-secondary' unless user.is_enabled? %>">
+            <td> 
+              <%= user.name %><br>
+              <%= "ID: #{user.user_id}" %>
+            </td>
+            <td><%= user.role %></td>
+            <td>
+              <% if user.is_enabled? %>
+              <span class="text-success"><i class="far fa-check-circle"></i></span>
+              <% else %>
+              <span class="text-danger"><i class="fas fa-ban"></i></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <div class="card-title text-large"><%= (t 'admin.common.staff').upcase %></div>
+  </div>
+  <div class="card-body p-0 table-responsive">
+    <table class="table text-small">
+      <thead>
+        <tr>
+          <th><%= t 'admin.common.name' %></th>
+          <th><%= t 'admin.shop_config.front' %></th>
+          <th><%= t 'admin.common.mechanic' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @shop.shop_staffs.each do |staff| %>
+          <tr class="<%= 'color-disabled' unless staff.active? %>">
+            <td class="<%= 'text-muted' unless staff.active? %>"><%= staff.name %></td>
+            <td>
+              <% if staff.is_front_staff? %>
+              <span class="text-success"><i class="far fa-check-circle"></i></span>
+              <% else %>
+              <span class="text-danger"><i class="fas fa-ban"></i></span>
+              <% end %>
+            </td>
+            <td>
+              <% if staff.is_mechanic? %>
+              <span class="badge badge-pill badge-primary"><%= staff.mechanic_grade %></span>
+              <% else %>
+              <span class="text-danger"><i class="fas fa-ban"></i></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header text-large"><%= t 'console.shop.tags' %></div>
+  <div class="card-body">
+    <% unless @tags.blank? %>
+      <ul class="tag-list text-small">
+        <% @tags.each do |tag| %>
+        <li class="tag-list__item"><%= tag.name %>,</li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>
+</div>

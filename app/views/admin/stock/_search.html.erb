@@ -1,0 +1,40 @@
+
+<div class="card card-widget">
+  <div class="card-header" data-card-widget="collapse">
+    <h3 class="card-title">
+      <i class="fas fa-chevron-down"></i>
+      <i class="fas fa-chevron-up"></i>
+      <%= t('admin.common.filter') %>
+    </h3>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <%= search_form_for @q, url: admin_stock_path, class: 'd-flex align-items-end search-form' do |f| %>
+      <%= hidden_field_tag :sort %>
+      <div class="form-group mr-3 w-25">
+        <%= label_tag :select_shop, t('admin.common.shop'), id: 'lbl_shop' %>
+        <div>
+          <%= select_tag "select_shop", options_from_collection_for_select(@shops, :id, :name, selected: @select_shop.id), class: 'form-control form-control-sm' %>
+        </div>
+      </div>
+      <div class="form-group mr-3 w-25">
+        <%= label_tag :select_category, t('admin.common.category'), id: 'lbl_shop' %>
+        <div>
+          <%= select_tag "select_category", options_from_collection_for_select(@categories, :id, :name, selected: @select_category.id), class: 'form-control form-control-sm' %>
+        </div>
+      </div>
+      <div class="form-group mr-3 d-flex align-items-center">
+          <%= check_box_tag 'shortage', true, @shortage %>
+          <%= label_tag 'shortage', t('admin.shop_product.shortage'), class: 'mb-0 ml-2 font-weight-normal' %>
+      </div>
+      <div class="form-group mr-3">
+        <label><%= t 'admin.common.keyword' %> <i class="fas fa-info-circle" data-html="true" data-toggle="tooltip" title="<%= t 'admin.common.shop_alias_name' %><br><%= t 'admin.common.item_detail' %>"></i></label>
+        <%= f.search_field :shop_alias_name_or_item_detail_cont , class: 'form-control', autocomplete: 'off' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit t('admin.shop_product.search') , class: 'btn btn-primary'%>
+      </div> 
+    <% end %>
+  </div>
+  <!-- /.card-body -->
+</div>

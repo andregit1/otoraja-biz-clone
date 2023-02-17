@@ -1,0 +1,76 @@
+<% content_for(:title, 'CSV Export') %>
+
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">Answer Data Export</div>
+      <div class="card-body">
+        <%= link_to console_export_answer_path(format: :csv), class: 'list-group-item list-group-item-action', data: { disable_with: 'Downloading...' } do %>
+          <i class="fas fa-file-export"></i> Download
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">Customer Data Export</div>
+      <div class="card-body">
+        <%= link_to console_customers_export_path(format: :csv), class: "list-group-item list-group-item-action #{'disabled' if current_user.export_pattern.nil?}", data: { disable_with: 'Downloading...' } do %>
+          <i class="fas fa-file-export"></i> Download <%= '(Export Pattern is not set)' if current_user.export_pattern.nil? %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">Bengkel Data Export</div>
+      <div class="card-body">
+        <%= form_tag '/console/export/shop_sales_data.csv', method: :get do %>
+          <%= hidden_field_tag 'start_date_sales', '' %>
+          <%= hidden_field_tag 'end_date_sales', '' %>
+          <button type="button" class="pull-down-btn d-block mb-2" id="daterange-btn-sales">
+            <i class="far fa-calendar-alt mr-1"></i>
+            <span>
+              Last 7 Days
+            </span>
+          </button>
+
+          <%= button_tag 'btn', class: 'list-group-item list-group-item-action' do %>
+            <i class="fas fa-file-export"></i> Download
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">Item Master Export</div>
+      <div class="card-body">
+        <%= link_to console_export_item_master_path(format: :csv), class: "list-group-item list-group-item-action", data: { disable_with: 'Downloading...' } do %>
+          <i class="fas fa-file-export"></i> Download
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">Bengkel Data Subscription</div>
+      <div class="card-body">
+        <%= form_tag '/console/export/subscriptions_data.csv', method: :get do %>
+          <%= hidden_field_tag 'start_date_subscription', '' %>
+          <%= hidden_field_tag 'end_date_subscription', '' %>
+          <button type="button" class="pull-down-btn d-block mb-2" id="daterange-btn-subscription">
+            <i class="far fa-calendar-alt mr-1"></i>
+            <span>
+              Last 7 Days
+            </span>
+          </button>
+
+          <%= button_tag 'btn', class: 'list-group-item list-group-item-action' do %>
+            <i class="fas fa-file-export"></i> Download
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

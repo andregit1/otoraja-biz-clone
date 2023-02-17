@@ -1,0 +1,70 @@
+id:
+  admin:
+    shop_product:
+      default_sort: 'Semua Kategori'
+      add_product: "Tambah Produk"
+      add_product_from_master: "Tambah Produk dari Master"
+      admin_product: "Nama Resmi"
+      is_stock_control: "Stok di Cek"
+      is_use: "Digunakan"
+      no: "Tidak"
+      sales_unit_price: "Harga Satuan"
+      search: "Cari"
+      shop_product: "Inventaris Produk"
+      shop_products: "Produk"
+      shortage: "Kekurangan"
+      yes: "Ya"
+      gross_profit: Gross Profit
+      admin_product_no: "Nomor Produk admin"
+      add_new_product: "Tambah Produk Baru"
+      add_new_product_invoice: "Tambah Produk ke Faktur"
+      add_new_product_stock_opname: "Tambah Produk ke Stok Opname"
+      edit_product: "ubah data produk"
+      store_product_no: "Nomor / Part Number"
+      availability: "Tersedia"
+      active: "Ya"
+      inactive: "Tidak"
+      product_name: "Nama Resmi / Admin Produk"
+      product_alias: "Nama di Bengkel"
+      item_details: "Detail Lainnya"
+      unit_price: "Harga Jual"
+      profit: "Profit"
+      avg_unit_price: "Harga Modal Rata-Rata"
+      min_stock: "Stok Minimal"
+      min_stock_alert_day: "Pengingat Cust. (X hari)"
+      current_stock: "Stok saat ini"
+      purchase_history: "RIWAYAT STOK"
+      supplier: "Pemasok"
+      date: "Tanggal"
+      added: "Jumlah"
+      purchase_price: "Harga Pembelian"
+      price: "Harga"
+      stock_min: "Stok / Min."
+      sort: "Urutkan"
+      save: "Simpan"
+      notes: "Catatan"
+      brand: "Merek"
+      variant: "Varian"
+      specification: "Spesifikasi"
+      confirmation_message: 'Data merek, varian, dan spesifikasi akan berubah mengikuti "Nama Resmi"/"Admin Product"'
+      confirmation_message_delete_product: 'Produk akan dihapus dari daftar barang'
+      confirmation_message_multiple_delete_product: 'Produk terpilih akan dihapus dari daftar barang'
+      confirmation_message_more_time: 'Sepertinnya sistem membutuhkan tambahan waktu untuk mengeksekusi perintah ini'
+      confirmation: "Apakah anda ingin melanjutkan?"
+      cancel: "Batal"
+      confirm: "Lanjut"
+      number: "No."
+      stock: "Stok"
+      stock_product: 'Stok Produk'
+      stock_count: 'Hitung stok'
+      stock_history: 'Riwayat stok'
+      form_requirement_notes: "Yang bertanda * wajib diisi"
+      admin_product_notes: "Merek, varian & spesifikasi terisi otomatis dari Admin Produk"
+      remind_min_stock: 'Ingatkan stok minimal'
+      multiple_delete_info: 'produk dipilih.'
+      select_all_product: 'Pilih semua produk dibawah ini'
+      change_filter_disclaimer: 'Mengubah filter akan mengosongkan pilihan.'
+      remaining-product-label_html: 'Pilih <span id="total-product-unselected"></span> produk'
+      start_delete_product : 'Mulai menghapus produk'
+      customer_reminder: "Pengingat Pelanggan"
+      purchase_reminder: "Ingatkan untuk beli lagi setelah"

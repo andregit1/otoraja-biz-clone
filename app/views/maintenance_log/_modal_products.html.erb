@@ -1,0 +1,176 @@
+<!-- Select Product Modal -->
+<div id="selectProductsModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#selectProductsModal"></div>
+  <div class="modal_content -fullscreen">
+    <div class="modal-header">
+      <div class="col-1"></div>
+      <div class="modal-title col-10 text-center"><%= t 'select_product.select' %></div>
+      <button class="close col-1 js-modal-close" data-target="#selectProductsModal">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="d-flex justify-content-center tab-wrapper">
+        <ul class="nav nav-pills">
+          <li class="nav-item pill">
+            <a href="#product_select_list" class="nav-link select-list" data-toggle="tab" style="border-radius: 5px 0px 0px 5px;">
+              <p class="tab-select-item">List</p>
+            </a>
+          </li>
+          <li class="nav-item pill">
+            <a href="#product_select_history" class="nav-link select-history" data-toggle="tab" style="border-radius: 0px 0px 0px 0px;border-right-style:none;border-left-style:none;">
+              <p class="tab-select-item">History</p>
+            </a>
+          </li>
+          <li class="nav-item pill">
+            <a href="#product_select_search" class="nav-link select-search" data-toggle="tab" style="border-radius: 0px 5px 5px 0px;">
+              <p class="tab-select-item">Search</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="tab-content">
+        <div id="product_select_list" class="tab-pane active">
+          <div class="no-list-box">
+            <div class="text-center">
+              <p class="no-registed">There is no registered list yet</p>
+              <% if current_user.manager? || current_user.shop_manager? %>
+                <p class="explanation">Let's make a list</p>
+                <%= button_tag :type => "button", id: "btn-createList", class: "btn-base -basic -primary js-modal-open", data: {"target" => "#customizeShopProductListModal"} do %>
+                  Create new list <i class="icon icon-Plus"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="list-box hide">
+            <div class="search-box">
+              <div class="filter-box-wrap">
+                <div id="product_select_lists_search_word" class="filter-box" data-placeholder="<%= t 'select_product.list_search' %>..." contenteditable="true"></div>
+                <div class="append">
+                  <span class="spinner-border searching hide" role="status" aria-hidden="true"></span>
+                  <i class="icon icon-Search unsearching"></i>
+                </div>
+              </div>
+            </div>
+            <div class="lists-box">
+              <ul class="product-list">
+
+              </ul>
+            </div>
+          </div>
+          <div class="list-detail-box hide">
+            <div class="nav-box d-flex justify-content-start align-items-center">
+              <div class="back-to-list"><i class="icon icon-Arrow-left"></i></div>
+              <div class="list-name ml-3"></div>
+            </div>
+            <div class="products-box">
+              <ul class="product-list">
+
+              </ul>
+            </div>
+            <div class="detail-footer">
+              <div class="text-center">
+                <%= button_tag :type => "button", id: "btn-add-all-list-products", class: "btn-base -basic -primary" do %>
+                  Add All
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="product_select_history" class="tab-pane">
+          <input type="hidden" id="product_select_history_current_page" value="1">
+          <input type="hidden" id="product_select_history_no_more_result" value="true">
+          <div class="filter-box-wrap">
+            <div id="select_prodcut_history_search_word" class="filter-box" data-placeholder="<%= t 'select_product.search' %>..." contenteditable="true"></div>
+            <div class="append">
+              <span class="spinner-border searching hide" role="status" aria-hidden="true"></span>
+              <i class="icon icon-Search unsearching"></i>
+            </div>
+          </div>
+          <div class="tool-box d-flex justify-content-between my-2">
+            <div class="d-flex justify-content-start align-items-center">
+              <input type="checkbox" id="chk_select_product_customer_filter" data-on="include" data-off="exclude" data-onstyle="basic">
+              <label for="chk_select_product_customer_filter" class="ml-3 my-0 check-title">
+                <p class="m-0 explanation">Customer purchase history</p>
+                <p class="m-0 note">Please enter customer information</p>
+              </label>
+            </div>
+            <div class="d-flex justify-content-end align-items-start">
+              <div class="dropdown">
+                <button type="button" class="btn btn-basic dropdown-toggle hide" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Within 1 week</button>
+                <ul class="dropdown-menu">
+                  <li><button class="dropdown-item active" value="1w">Within 1 week</button></li>
+                  <li><button class="dropdown-item" value="1m">Within 1 month</button></li>
+                  <li><button class="dropdown-item" value="3m">Within 3 months</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="products-box">
+            <div class="scroll-area">
+              <ul class="product-list">
+              </ul>
+              <div class="no_search_result">
+                <p><%= t "select_product.no_search_result" %></p>
+              </div>
+            </div>
+            <div class="loading fixed-bottom p-2 hide">
+              <div class="text-center">
+                List Loading ...
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="product_select_search" class="tab-pane">
+          <div class="product-search">
+            <input type="hidden" id="product_select_search_current_page" value="1">
+            <input type="hidden" id="product_select_search_no_more_result" value="true">
+            <div id="search-detail" class="product-search__content">
+              <div class="filter-box-wrap">
+                <div id="select_prodcut_search_word" class="filter-box" data-placeholder="<%= t 'select_product.search' %>..." contenteditable="true"></div>
+                <div class="append">
+                  <span class="spinner-border searching hide" role="status" aria-hidden="true"></span>
+                  <i class="icon icon-Search unsearching"></i>
+                </div>
+              </div>
+              <div id="search-detail-inner" class="product-search__content-inner collapse show">
+                <ul class="tag-list"></ul>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p class="mb-0">
+                  <a href="#search-detail-inner" role="button" data-toggle="collapse" aria-expanded="true" class="collapse-toggle-text"><span class="collapse_open"><%= t 'select_product.filter' %> <i class="icon icon-Arrow-down"></i></span><span class="collapse_close"><%= t 'select_product.close' %> <i class="icon icon-Arrow-up"></i></span></a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="products-box">
+            <div class="scroll-area">
+              <ul class="product-list">
+              </ul>
+              <div class="no_search_result hide">
+                <p><%= t "select_product.no_search_result" %></p>
+                <div class="text-center">
+                  <%= button_tag :type => "button", id: "btn-manualInputBtn", class: "btn-base -basic -primary js-modal-open hide", data: {"target" => "#manualInputModal"} do %>
+                    <%= t('product_registration.btn_new') %> <i class="icon icon-Plus"></i>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="manual_input fixed-bottom hide">
+              <p class="text-explanetion">Jika produk belum pernah didaftarkan</p>
+              <%= button_tag :type => "button", id: "btn-manualInputBtn", class: "btn-base -basic -primary js-modal-open mt-1", data: {"target" => "#manualInputModal"} do %>
+                <%= t('product_registration.btn_new') %> <span class="text-right"><i class="icon icon-Plus"></i></span>
+              <% end %>
+            </div>
+            <div class="loading fixed-bottom p-2 hide">
+              <div class="text-center">
+                List Loading ...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Select Product Modal -->

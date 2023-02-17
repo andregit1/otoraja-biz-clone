@@ -1,0 +1,19 @@
+<div>
+  <div class="row related-product">
+    <%= f.hidden_field :shop_product_id, :class => 'hidden_shop_product_id' %>
+    <%= f.hidden_field :category_name, :class => 'hidden_category_name' %>
+    <%= f.hidden_field :product_no, :class => 'hidden_product_no' %>
+    <%= f.hidden_field :item_name, :class => 'hidden_item_name' %>
+    <%= f.hidden_field :item_detail, :class => 'hidden_item_detail' %>
+    <%= f.hidden_field :quantity, :class => 'hidden_quantity' %>
+    <div class="col-auto product__title">
+      <p class="product__inclusion-product-name pl-4">
+        <%= f.object.item_name %>
+        <%= sprintf('[%s]',f.object.product_no) if f.object.product_no.present? %>
+      </p>
+    </div>
+    <div class="col-auto text-right">
+      <p class="product__inclusion-product-quantity pl-4"><%= 'x ' unless f.object.quantity.nil? %><%= f.object.quantity || '--' %></p>
+    </div>
+  </div>
+</div>

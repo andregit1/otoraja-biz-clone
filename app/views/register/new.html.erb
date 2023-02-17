@@ -1,0 +1,108 @@
+<div class="d-flex justify-content-center">
+  <div class="mx-5 mb-5">
+    <div class="login-logo mt-3">
+      <h1><%= link_to image_tag("logo.svg", width: '200'), "https://www.otoraja.id/" %></h1>
+    </div>
+    <%= form_with(model: @request, url: register_index_path, local: true, id: "register-form") do |f| %>
+      <div class="card">
+        <div class="card-body">
+          <p class="text-normal mb-4"><%= t 'register.new.header' %></p>
+          <p class="text-normal font-weight-bold"><%= t 'register.new.sub_header' %></p>
+          
+          <%= render "users/shared/error_messages", resource: @request %>
+          <%= render "layouts/flash" %>
+
+          <div class="form-row">
+            <div class="form-group col-lg-6">
+              <%= f.text_field :name, class: 'form-control', maxlength: 255, placeholder: t('register.placeholders.name') %>
+            </div>
+            <div class="form-group col-lg-6 <%= 'invalid-field' if invalid %>">
+              <%= f.email_field :email, class: "form-control #{'border-danger' if invalid}", maxlength: 255, placeholder: t('register.placeholders.email') %>
+              <i class="fas fa-exclamation-triangle text-danger hide"></i>
+              <p class="email-invalid text-small text-danger mb-0 <%= 'hide' if !invalid %>"><%= t 'register.new.email_invalid' %></p>
+              <p class="text-small text-muted mb-0"><%= t 'register.new.email_help' %></p>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-lg-6 mb-4">
+              <%= f.text_field :tel, class: 'form-control', maxlength: 20, placeholder: t('register.placeholders.tel') %>
+            </div>
+            <div class="form-group col-lg-6 mb-4">
+              <%= f.text_field :shop_name, class: 'form-control', maxlength: 255, placeholder: t('register.placeholders.shop_name') %>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-lg-6">
+              <%= f.collection_select :regency_id, @regencies, :id, :complete_name, { prompt: ""}, { class: 'form-control mr-2 mt-2', placeholder: t('register.placeholders.select_regency'), required: true} %>
+            </div>
+            <div class="form-group col-lg-6">
+              <%= f.collection_select :distric_id, Distric.where(regency_id: @request.regency_id), :id, :name, {}, { class: 'form-control mr-2 mt-2', placeholder: t('register.placeholders.select_distric'), required: true} %>
+            </div>
+          </div>
+
+          <p class="text-normal font-weight-bold mt-3"><%= t 'register.new.product_choices' %></p>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <div class="form-check">
+                <div class="d-md-flex align-items-center">
+                  <%= f.check_box :is_otoraja_biz, class: 'form-check-input checkbox-md mr-2' %>
+                  <%= f.label :is_otoraja_biz, t('register.placeholders.otoraja_biz'), class: 'text-normal form-check-label ml-2' %>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <div class="form-check">
+                <div class="d-md-flex align-items-center">
+                  <%= f.check_box :is_otoraja_bp, class: 'form-check-input checkbox-md mr-2' %>
+                  <%= f.label :is_otoraja_bp, t('register.placeholders.otoraja_bp'), class: 'text-normal form-check-label ml-2' %>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-lg-6">
+              <%= f.text_field :referral, class: 'form-control', placeholder: t('register.placeholders.referal') %>
+            </div>
+          </div>
+
+          <p class="text-normal font-weight-bold mt-3"><%= t 'register.new.agreement_header' %></p>
+          <p class="text-normal"><%= t 'register.new.agreement_body' %></p>
+
+          <div class="form-row">
+            <div class="form-group col-lg-6">
+              <div class="form-check">
+                <div class="d-md-flex align-items-center">
+                  <input id="terms-checkbox" class="form-check-input checkbox-md mr-2" type="checkbox" value="" name="terms">
+                  <button type="button" class="text-normal text-left btn btn-link p-0 ml-2" data-toggle="modal" data-target="#termsModal"><u><%= t 'register.new.terms_header' %></u></button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-lg-6">
+              <div class="form-check">
+                <div class="d-md-flex align-items-center">
+                   <input id="privacy-checkbox" class="form-check-input checkbox-md mr-2" type="checkbox" value="" name="privacy">
+                  <button type="button" class="text-normal text-left btn btn-link p-0 ml-2" data-toggle="modal" data-target="#privacyModal"><u><%= t 'register.new.privacy_header' %></u></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="card-footer bg-white">
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-3 mb-3">
+              <%= recaptcha_tags callback: "captchaResponse" %>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 mb-3">
+              <%= f.submit t('register.new.send'), id: "confirm-registration-button", class: "btn button-inactive text-large btn-lg w-100 h-100", disabled: true %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'privacy_modal' %>
+<%= render 'terms_modal' %>

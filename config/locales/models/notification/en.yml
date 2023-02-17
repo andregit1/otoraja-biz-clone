@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      notification: 'Notification'
+    attributes:
+      notification:
+        id: "ID"
+        subject: "Subject"
+        body: "Body"
+        status: "Status"
+        published_from: "Published From"
+        published_to: "Published To"
+        tags: "Tags"

@@ -1,0 +1,9 @@
+<div class="main-content">
+  <%= form_with(model: @maintenance_log, url: new_maintenance_log_path, local: true, html:{novalidate: true}, id: 'maintenance-log-form') do |form| %>
+    <%= render 'form', maintenance_log: @maintenance_log, config: @config, f: form %>
+  <% end %>
+  <% if flash[:success] %>
+    <%= render 'modal_checkout_complete' %>
+    <%= button_tag :type => "button", id: "open-checkedout-modal", class: "js-modal-open", data: {"target" => "#checkoutCompleteModal"}, style: "display:none;" %>
+  <% end %>
+</div>

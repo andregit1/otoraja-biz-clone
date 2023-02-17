@@ -1,0 +1,128 @@
+<% content_for(:title, t('console.shop_product.shop_product')) %>
+<div class="list-view-wrapper">
+  <section id="list-search-section">
+    <% if @default_shop.present? %>
+    <div class="form-group mr-3 w-100 d-flex justify-content-between align-items-end">
+      <%= link_to console_shop_path(@default_shop), class: 'btn btn-outline-primary ml-2', style: 'width: auto;' do %>
+        <%= t 'console.common.back' %>
+      <% end %>
+      <%= link_to console_admin_products_path(shop_id: @default_shop.id), class: 'btn btn-outline-primary mr-2', style: 'width: auto;' do %>
+        <i class="fas fa-plus"></i> <%= t 'console.shop_product.add_product_from_master' %>
+      <% end %>
+    </div>
+    <% else %>
+    <div class="form-group mr-3 w-100 d-flex justify-content-end align-items-end">
+      <%= link_to console_admin_products_path, class: 'btn btn-outline-primary mr-2', style: 'width: auto;' do %>
+        <i class="fas fa-plus"></i> <%= t 'console.shop_product.add_product_from_master' %>
+      <% end %>
+    </div>
+    <% end %>
+    <input type="hidden" id="shop_product_search_current_page" value="1">
+    <input type="hidden" id="shop_product_search_no_more_result" value="true">
+    <input type="hidden" id="shop_product_search_console" value="true">
+    <%= hidden_field_tag 'default-filter', @filter %>
+    <div class="form-group mr-3 w-100">
+      <%= label_tag :select_shop, t('console.common.shop') %>
+        <div>
+          <%= select_tag 'select_shop', options_from_collection_for_select(current_user.managed_shops, :id, :name), class: 'form-control form-control-sm' %>
+        </div>
+    </div>
+    <div class="form-group d-flex justify-content-between">
+      <div class="w-50 mr-2">
+        <%= label_tag :select_category, t('console.common.category') %>
+        <div>
+          <%= select_tag 'select_category', options_from_collection_for_select(ProductCategory.all.order(id: :asc), :id, :name), prompt: t('console.common.all_category') ,class: 'form-control form-control-sm' %>
+        </div>
+      </div>
+      <div class="w-25 mx-2">
+        <%= label_tag :select_use, t('console.shop_product.is_use') %>
+        <div>
+          <%= select_tag 'select_use', options_for_select(ShopProduct.uses_i18n.invert), class: 'form-control form-control-sm' %>
+        </div>
+      </div>
+      <div class="w-25 ml-2">
+        <%= label_tag :select_sort, t('console.shop_product.sort') %>
+        <div>
+          <%= select_tag 'select_sort', options_for_select(ShopProduct.sorts_i18n.invert), class: 'form-control form-control-sm' %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group search-field">
+      <%= text_field_tag 'shop-product-search', '', class:'form-control w-100', autocomplete: 'off', placeholder: t('console.common.keyword')  %>
+      <i id="shop-product-search-clear-btn" class="icon icon-Cross search-with-clear clear"></i>
+      <i id="shop-product-search-btn" class="icon icon-Search search-with-clear"></i>
+    </div>
+  </section>
+  <section id="list-search-body-section">
+    <div class="products-box-admin">
+      <div class="scroll-area">
+        <ul id="product_list" class="list">
+          <%# inject items here %>
+        </ul>
+        <div class="no_search_result hide">
+          <p><%= t "select_product.no_search_result" %></p>
+        </div>
+      </div>
+      <div class="loading p-2 hide">
+        <div class="text-center">
+          <i class="fas fa-spinner fa-spin"></i>
+        </div>
+      </div>
+      <div id="add-product-item-clone" class="hide">
+        <li class="row list-item  js-modal-open" data-target="#editProductModal">
+          <div class="item col-10">
+            <div class="item__title">
+              <p class="item__name">
+              </p>
+            </div>
+            <div class="item__title">
+              <p class="item__description">
+              </p>
+            </div>
+            <div class="d-flex justify-content-end align-items-end">
+              <div class="text-right ">
+                <span class="item__attribute mb-0"><%= t 'console.shop_product.price' %></span>
+                <span class="mb-0"><span class="item__price mr-2"></span></span>
+                <span class="item__attribute mb-0"><%= t 'console.shop_product.stock_min' %></span>
+                <span class="mb-0 item__quantity"><span class="item__current__quantity"></span>/<span class="item__min__quantity"></span></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-2 d-flex align-items-center justify-content-end">
+            <button name="button" type="button" class="btn item__edit">
+              <i class="icon icon-Arrow-right js-modal-open" data-target="#editProductModal"></i>
+            </button>
+          </div>
+        </li>
+      </div>
+    </div>
+  </section>
+  
+  <section class="admin-control-footer">
+    <div>
+      <%= button_tag :type => "button", id: "btn-product-add", class: "btn-base -thin -primary js-modal-open", data: {"target" => "#addProductModal"} do %>
+        <%= t 'console.shop_product.add_new_product' %><i class="icon icon-Plus -icon-right"></i>
+      <% end %>
+    </div>
+  </section>
+  <input id="label-admin_product_id" type="hidden" value="">
+  <input id="label-shop_alias_name" type="hidden" value="">
+  <input id="label-item_detail" type="hidden" value="">
+  <input id="label-stock_minimum" type="hidden" value="">
+  <input id="label-stock" type="hidden" value="">
+  <input id="label-sales_unit_price" type="hidden" value="">
+  <input id="label-remind_interval_day" type="hidden" value="">
+  <input id="label-is_stock_control" type="hidden" value="">
+  <input id="label-is_use" type="hidden" value="">
+  <input id="label-admin_product-no" type="hidden" value="">
+  <input id="label-shop_product-no" type="hidden" value="">
+  <input id="label-product-category-id" type="hidden" value="">
+  <input id="label-gross-profit" type="hidden" value="">
+  <input id="label-average-price" type="hidden" value="">
+  <button id="btn-product-edit" type="button" class="btn-base -basic -primary js-modal-open hide" data-target="#editProductModal" style="visibility:hidden">editProductModal</button>
+  <input id="label-id" type="hidden" value="">
+
+  <input id="new-activity-item-id" type="hidden" value="">
+</div>
+<%= render "modal_add_product" %>
+<%= render "modal_edit_product" %>

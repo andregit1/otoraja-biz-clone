@@ -1,0 +1,32 @@
+<div class="card-body">
+
+  <% if facility.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(facility.errors.count, "error") %> prohibited this facilty from being saved:</h2>
+      <ul>
+      <% facility.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, Facility.human_attribute_name(:name) %>
+    <%= f.text_field :name, :class=>'form-control', autofocus: true, autocomplete: 'off' %>
+  </div>
+
+</div>
+
+<div class="card-footer">
+  <div class="row">
+    <div class="col text-right">
+      <%= link_to t('console.common.back'), console_facilities_path, class: 'btn btn-default' %>
+      <% if controller.action_name.in?(['new', 'create']) %>
+        <%= f.submit t('console.common.regist'), :class=>'btn btn-primary' %>
+      <% else %>
+        <%= f.submit t('console.common.update'), :class=>'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

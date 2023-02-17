@@ -1,0 +1,36 @@
+<% content_for(:title, 'Export Layout Edit') %>
+
+<%= render 'error_messages', m: @export_layout %>
+
+<div>
+  <label>Type</label>
+  <%= @export_layout.export_type.name %>
+</div>
+
+<%= form_with(model: @export_layout, url:console_export_layout_update_path, local: true) do |f| %>
+  <div class="form-group">
+    <%= f.label :name, 'Name' %>
+    <%= f.text_field :name, :class=>'form-control', autocomplete: 'off' %>
+  </div>
+
+  <div class="form-group">
+    <div class="mt-4 mb-2">
+      <div class="row">
+        <label class="col-2">Column</label>
+        <label class="col-2">Order</label>
+        <label class="col-1">Use Masking</label>
+        <label class="col-2">Top Digits Without Masking</label>
+        <label class="col-2">Last Digits Without Masking</label>
+      </div>
+      <%= f.fields_for :export_layout_columns, @export_layout.export_layout_columns.order(:order).includes(:export_masking_rule) do |layout_column| %>
+        <%= render 'export_layout_column_fields', f: layout_column %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association f, :export_layout_columns, data: {"association-insertion-method" => "before"},class: 'btn btn-success' do %><i class="fas fa-plus-circle"></i> Add </a><% end %>
+      </div>
+    </div>
+  </div>
+
+  <%= f.submit 'Update', :class=>'btn btn-primary' %>
+  <%= link_to 'Back', console_export_layout_path(@export_layout), class: 'btn btn-default' %>
+<% end %>

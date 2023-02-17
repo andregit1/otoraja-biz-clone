@@ -1,0 +1,147 @@
+<!-- Drawer Modal -->
+<div id="editProductModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#editProductModal"></div>
+  <div class="modal_content -drawer">
+    <div class="modal-header">
+      <div class="modal-title col-12 product_edit_modal_title"><%= t 'console.shop_product.edit_product' %></div>
+      <div class="col-1"></div>
+    </div>
+    <div class="modal-body product-info-body">
+      <form id="update-product-form">
+        <div class="form-group">
+          <input name="shop_product_id" type="hidden" value="">
+          <input id="admin_product_id" name="admin_product_id" class="ml-auto product_item_id" type="hidden" >
+          <div class="row"> 
+            <div class="col-9 col-lg-10">
+              <label><%= t 'console.shop_product.store_product_no' %></label>
+              <input id="product_no" name="product_no" type="text" class="product_item_id" >
+            </div>
+            <div class="col-3 col-lg-2">
+              <label><%= t 'console.shop_product.availability' %></label>
+              <input id="is_use" type="checkbox" name="availability" data-on="<%= t 'console.shop_product.active' %>" data-off="<%= t 'console.shop_product.inactive' %>" data-toggle="toggle" data-size="sm">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-12">
+              <label><%= t 'console.shop_product.product_name' %></label>
+              <select id="edit-admin-product_id" name="admin_product_id" class="form-control form-control-sm drawer_modal_input_border" style="width:100%">
+              
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-12">
+              <label><%= t 'console.shop_product.product_alias' %></label>
+              <input id="shop_alias_name" name="shop_alias_name" type="text" >
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-6">
+              <label><%= t 'console.shop_product.item_detatils' %></label>
+              <input id="item_detail" name="item_detail" type="text" >
+            </div>
+            <div class="col-6">
+              <label><%= t 'console.common.category' %></label>
+              <div>
+                <%= select_tag 'edit_product_category_id', options_from_collection_for_select(@product_categories, :id, :name), class: 'form-control form-control-sm product_category_edit', style: "width:100%;" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group pt-2">
+          <div class="row">
+            <div class="col-6 center_border">
+              <label><%= t 'console.shop_product.unit_price' %></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text price_addon">Rp.</div>
+                </div>
+                <input id="sales_unit_price" name="sales_unit_price" type="number" class="product_unit_price_edit" >
+              </div>
+              <div class="row mt-3">
+                <div class="col-6">
+                  <label class="no_border_label"><%= t 'console.shop_product.profit' %></label>
+                </div>
+                <div class="col-6">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text no_border_addon">Rp.</div>
+                    </div>
+                    <input name="gross-profit" type="text" class="no-border" disabled >
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-6">
+                  <label class="no_border_label"><%= t 'console.shop_product.avg_unit_price' %></label>
+                </div>
+                <div class="col-6">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text no_border_addon">Rp.</div>
+                    </div>
+                    <input name="average-price" type="text" class="no-border" disabled >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <label class="ml-2"><%= t 'console.shop_product.min_stock' %></label>
+              <input id="stock_minimum" name="stock_minimum" type="number" class="product_stock_edit ml-2" >
+              <label class="ml-2 mt-2"><%= t 'console.shop_product.min_stock_alert_day' %></label>
+              <input id="remind_interval_day" name="remind_interval_day" type="number" class="product_stock_edit ml-2" >
+              <div class="row mt-3">
+                <div class="col-6">
+                  <label class="no_border_label"><%= t 'console.shop_product.current_stock' %></label>
+                </div>
+                <div class="col-6">
+                  <input id="quantity" name="quantity" type="text" class="no-border" disabled >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+      <div class="purchase_history_title"><%= t 'console.shop_product.purchase_history' %></div>
+      <table class="table table-hover mt-3">
+        <thead>
+          <tr class="purchase_history_header">
+            <th><%= t 'console.common.number' %></th>
+            <th><%= t 'console.shop_product.supplier' %></th>
+            <th><%= t 'console.shop_product.date' %></th>
+            <th><%= t 'console.shop_product.added' %></th>
+            <th><%= t 'console.shop_product.purchase_price' %></th>
+          </tr>
+        </thead>
+        <tbody id="purchase_history">
+          
+        </tbody>
+      </table>
+    </div>
+    <div class="footer row fixed">
+      <div class="col-6">
+        <%= button_tag :type => "button", id: "cancel-update-product-button", class: "btn-base -basic -normal js-modal-close", data: {"target" => "#editProductModal"} do %>
+          <%= t 'cancel' %>
+        <% end %>
+      </div>
+      <div class="col-6">
+        <%= button_tag :type => "button", id: "confirm-update-product-button", class: "btn-base -basic -primary js-modal-close", data: {"target" => "#editProductModal"} do %>
+          <%= t 'console.shop_product.save' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Drawer Modal -->

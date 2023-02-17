@@ -1,0 +1,83 @@
+<% readonly = false unless readonly.present? %>
+<div id="footer-bar">
+  <div class="d-flex justify-content-between">
+    <div class="footer-btns d-flex">
+      <%= link_to new_maintenance_log_path, :class => 'btn btn-maintenance_log', data:
+        {
+          confirm: t('slip.footer.page_transition_question'),
+          cancel: t('cancel'),
+          commit: t('ok')
+        }, title: t('slip.footer.page_transition_confirm') do %>
+        <i class="icon icon-Edit"></i>
+        <span><%= t 'slip.footer.create' %></span>
+      <% end %>
+      <%= link_to front_index_path, :class => 'btn btn-checkins', data:
+        {
+          confirm: t('slip.footer.page_transition_question'),
+          cancel: t('cancel'),
+          commit: t('ok')
+        }, title: t('slip.footer.page_transition_confirm') do %>
+        <i class="icon icon-List"></i>
+        <span><%= t 'slip.footer.order_list' %></span>
+      <% end %>
+    </div>
+    <div class="footer-info">
+      <table class="table-footer">
+        <thead>
+          <tr>
+            <th class="col-id"><%= t 'slip.footer.order_id' %></th>
+            <th class="col-staff"><%= t 'slip.footer.staff' %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @checkin_no.nil? ? '-----' : @checkin_no %></td>
+            <td>
+              <div class="select-staff-box">
+                <%= hidden_field_tag :current_staff_id, nil,value: session[:current_staff_id] %>
+                <button type="button" id="user_select"
+                    class="btn-select-user dropdown-toggle"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                  <%= current_staff.name if current_staff.present? %>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdown1">
+                  <% @staff_list.each do |staff| %>
+                    <% if current_staff.present? && current_staff.id == staff.id %>
+                    <a class="dropdown-item active" href="#"><%= staff.name %></a>
+                    <% else %>
+                    <%= link_to "/maintenance_log/new?current_staff_id=#{staff.id}", class: 'dropdown-item' do %><%= staff.name %><% end %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <% unless readonly %>
+      <% if @maintenance_log.checkin.nil? %>
+        <%= link_to new_maintenance_log_path, :class => 'btn-circle-default btn-remove-maintenance_log', data:
+        {
+          confirm: t('slip.footer.delete_question'),
+          cancel: t('cancel'),
+          commit: t('delete')
+        }, title: t('slip.footer.delete_confirm') do %>
+          <i class="icon icon-Delete"></i>
+        <% end %>
+      <% else %>
+        <%= link_to destroy_maintenance_log_path(@maintenance_log.checkin.id), method: :delete, class: 'btn-circle-default btn-remove-maintenance_log', data:
+        {
+          confirm: t('slip.footer.delete_question'),
+          cancel: t('cancel'),
+          commit: t('delete')
+        }, title: t('slip.footer.delete_confirm') do %><i class="icon icon-Delete"></i><% end %>
+      <% end %>
+    <% else %>
+      <div class="btn-circle-default btn-remove-maintenance_log" style="visibility:hidden;"></div>
+    <% end %>
+  </div>
+</div>
+

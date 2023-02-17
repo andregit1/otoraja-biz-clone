@@ -1,0 +1,8 @@
+
+<% content_for(:title, t('console.brand.add_brand')) %>
+
+<div class="card">
+  <%= form_with(model: @brand, url: console_brands_path, local: true) do |form| %>
+    <%= render 'form', {brand: @brand, f: form} %>
+  <% end %>
+</div>

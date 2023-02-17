@@ -1,0 +1,8 @@
+en:
+  change_phone_number_verification:
+    show:
+      success_verify: Verification Success
+      success_info: Success replace old phone number to new phone number.
+      failed_title: The phone number is already change to new phone number.
+      failed_info: This verification link has been used.
+      note: If in SMC application hasn't change yet, please refersh this page

@@ -1,0 +1,31 @@
+id:
+  console:
+    shop_group:
+      shop_group_information: "Informasi Akun"
+      account_id: "Akun ID"
+      owner_name: "Nama Owner"
+      owner_information: "Informasi pemilik"
+      button:
+        add: "Menambah Akun"
+        edit: "Edit Akun"
+      index:
+        title: "Akun Bengkel"
+      show:
+        shops: "Toko"
+      new:
+        title: "Menambah Akun"
+      edit:
+        title: "Edit Akun"
+      form:
+        male: "laki-laki"
+        female: "perempuan"
+        name: "Nama Akun"
+        shops: "Bengkel"
+        status: "Status Akun"
+        owner_name: "Nama"
+        owner_email: "Email"
+        tel: "Nomor Telepon"
+        tel2: "Nomor Telepon 2"
+        owner_wa_tel: "Whatsapp Tel"
+        virtual_bank_no: "Virtual Bank No."
+        

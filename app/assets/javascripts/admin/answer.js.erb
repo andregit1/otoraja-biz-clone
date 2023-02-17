@@ -1,0 +1,97 @@
+(function() {
+  onPageLoad(["answer", "customers#answers"], function() {
+    rates = [...Array(5).keys()].map(i => ++i);
+    rates.forEach(function(value) {
+      $(`.star-${value}`).raty({
+        starType: 'img',
+        starOff: "<%= image_path('star-off.png') %>",
+        starOn: "<%= image_path('star-on.png') %>",
+        readOnly: true,
+        score: value,
+      });
+    });
+  });
+  
+  onPageLoad("answer#index", function() {
+    $('#rate').select2({
+      containerCssClass: "text-normal",
+      dropdownCssClass: "text-normal",
+      minimumResultsForSearch: -1
+    });
+
+    var options = {
+      ranges: {
+        "Hari ini": [moment(), moment()],
+        "7 hari terakhir": [moment().subtract(6, "days"), moment()],
+        "Bulan ini": [moment().startOf("month"), moment()],
+        "30 hari terakhir": [moment().subtract(30, "days"), moment()],
+      },
+      showDropdowns: true,
+      showWeekNumbers: true,
+      showISOWeekNumbers: true,
+      autoApply: true,
+      startDate: moment(),
+      endDate: moment(),
+      locale: {
+        "customRangeLabel": "Pilih rentang",
+      },
+      maxSpan: {
+        "days": 30
+      },
+    };
+
+    var callback = function(start, end, label){
+      let date_range_text = start.format("D/M/YYYY") + " - " + end.format("D/M/YYYY");
+
+      if(start.isSame(moment(), 'day') && end.isSame(moment(), 'day')) {
+        date_range_text = "Hari ini";
+      }
+      else if(start.isSame(moment().subtract(6, "days"), 'day') && end.isSame(moment(), 'day')) {
+        date_range_text = "7 hari terakhir";
+      }
+      else if(start.isSame(moment().startOf("month"), 'day') && end.isSame(moment(), 'day')) {
+        date_range_text = "Bulan ini";
+      }
+      else if(start.isSame(moment().subtract(30, "days"), 'day') && end.isSame(moment(), 'day')) {
+        date_range_text = "30 hari terakhir";
+      }
+
+      $("#daterange-btn span").html(date_range_text);
+
+      $("#start_date").val(start.format("YYYY-MM-DD 00:00:00"));
+      $("#end_date").val(end.format("YYYY-MM-DD 23:59:59"));
+      // localStorage.setItem("date_range",JSON.stringify({
+      //   start: start,
+      //   end : end
+      // }));
+      $(".date-range-readonly").text(`${start.format("DD MMM YYYY")} - ${end.format("DD MMM YYYY")}`)
+    }
+
+    $("#daterange-btn").daterangepicker(
+      options,
+      callback
+    );
+
+    let start = moment($("#start_date").val());
+    let end = moment($("#end_date").val());
+    callback(start, end);
+
+    $("#daterange-btn").data('daterangepicker').setStartDate(start);
+    $("#daterange-btn").data('daterangepicker').setEndDate(end);
+
+    $('tr[data-link]').click(function(){
+      window.location = $(this).data('link');
+    });
+
+    $('.sort_asc').click(function(){
+      $('#direction').val('asc');
+      $('#column').val($(this).data('column'));
+      $('#answer-commit').click();
+    });
+    $('.sort_desc').click(function(){
+      $('#direction').val('desc');
+      $('#column').val($(this).data('column'));
+      $('#answer-commit').click();
+    });
+  });
+}.call(this));

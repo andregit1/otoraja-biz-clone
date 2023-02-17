@@ -1,0 +1,2 @@
+class ShopStaffPolicy < ApplicationPolicy
+end

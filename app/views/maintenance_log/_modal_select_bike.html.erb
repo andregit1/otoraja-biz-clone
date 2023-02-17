@@ -1,0 +1,67 @@
+<!-- Bike Select Sheet Modal -->
+<div id="bikeSelectModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#bikeSelectModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-down js-modal-close" data-target="#bikeSelectModal">
+      <i class="icon icon-Arrow-down"></i>
+    </div>
+    <div id="color-select">
+      <div class="modal-caption">
+        <%= t 'select_bike' %>
+      </div>
+      <div id="bikeSelect" class="modal-body">
+        <table id="table-select-bike" class="table-select-bike">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="table-select-bike-body-template" style="display:none;">
+            <tr>
+              <td>
+                <div class="radio-circle mb-5">
+                  <input type="radio"><label></label>
+                </div>
+              </td>
+              <td>
+                <div class="bike-plate"><div>
+              </td>
+              <td>
+                <div class="bike-expiration"></div>
+              </td>  
+              <td>
+                <div class="bike-maker"></div>
+              </td>
+              <td>
+                <div class="bike-model"></div>
+              </td>
+              <td>
+                <div class="bike-color"></div>
+              </td>
+            </tr>
+          </tbody>
+          <tbody id="table-select-bike-body">
+          </tbody>
+          <tbody>
+            <tr>
+              <td colspan='6'>
+                <a id='add_new_bike' role="button" class='btn pl-0 pt-4 pb-4'><span class='btn-circle-primary'><i class='icon icon-Plus'></i></span> <%= t 'add_new' %></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="pl-5 pr-5 mt-6">
+      <%= button_tag :type => "button", id: 'confirm-bike-button', class: "btn-base -basic -primary js-modal-close", data: {"target" => "#bikeSelectModal"} do %>
+        <%= t 'ok' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- Bike Select Sheet Modal -->

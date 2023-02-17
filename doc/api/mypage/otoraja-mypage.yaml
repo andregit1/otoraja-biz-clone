@@ -1,0 +1,1829 @@
+openapi: "3.0.1"
+info:
+  title: "otoraja-mypage #RAILS_ENV#"
+  version: "1.0"
+  description: "OTORAJA Mypage API #RAILS_ENV#"
+servers:
+- url: "https://api.otoraja.id/{basePath}"
+  variables:
+    basePath:
+      default: "member"
+paths:
+  /info:
+    get:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  member:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/Customer"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/info"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /checkin/list:
+    get:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestCheckins'
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  checkins:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/Checkin"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/checkin/list"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /maintenance_log/{maintenance_log_id}:
+    get:
+      parameters:
+      - name: "maintenance_log_id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  maintenance_log:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/MaintenanceLog"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/maintenance_log/{maintenance_log_id}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.path.maintenance_log_id: "method.request.path.maintenance_log_id"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        cacheNamespace: "2rfo47"
+        cacheKeyParameters:
+        - "method.request.path.maintenance_log_id"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /item:
+    get:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  item:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/Item"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/item"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /owned_bike/{bike_id}:
+    get:
+      parameters:
+      - name: "bike_id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  owned_bike:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/Bike"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/owned_bike/{bike_id}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.path.bike_id: "method.request.path.bike_id"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        cacheNamespace: "2rfo47"
+        cacheKeyParameters:
+        - "method.request.path.bike_id"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /maker:
+    get:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  member:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/Maker"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/maker"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /owned_bike/{bike_id}/owned_bike_update:
+    put:
+      parameters:
+      - name: "bike_id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnedBikeUpdate'
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/owned_bike/{bike_id}/owned_bike_update"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.path.bike_id: "method.request.path.bike_id"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "PUT"
+        cacheNamespace: "2rfo47"
+        cacheKeyParameters:
+        - "method.request.path.bike_id"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'PUT,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /customer_update:
+    put:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerUpdate'
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/customer_update"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "PUT"
+        cacheNamespace: "2rfo47"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'PUT,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /answer_choice/list/{checkin_id}:
+    get:
+      parameters:
+      - name: "checkin_id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  answer_choices:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/AnswerChoices"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/answer_choice/list/{checkin_id}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.path.checkin_id: "method.request.path.checkin_id"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        cacheNamespace: "2rfo47"
+        cacheKeyParameters:
+        - "method.request.path.checkin_id"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /token/{checkin_id}/show:
+    parameters:
+      - name: "checkin_id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+    get:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  answer_choices:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/Token"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/token/{checkin_id}/show"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.path.checkin_id: "method.request.path.checkin_id"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        cacheNamespace: "2rfo47"
+        cacheKeyParameters:
+        - "method.request.path.checkin_id"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /answer/create/{uuid}:
+    post:
+      parameters:
+      - name: "uuid"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Answers'
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/answer/create/{uuid}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.path.uuid: "method.request.path.uuid"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "POST"
+        cacheNamespace: "2rfo47"
+        cacheKeyParameters:
+        - "method.request.path.uuid"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /term:
+    get:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  member:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/Term"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/term"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /customer/term/update:
+    put:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/customer/term/update"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "PUT"
+        cacheNamespace: "2rfo47"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'PUT,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /save_settings:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/save_settings"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "POST"
+        cacheNamespace: "2rfo47"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /create_confirm_sms_token/{uuid}:
+    post:
+      parameters:
+      - name: "uuid"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TmpTel'
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/create_confirm_sms_token/{uuid}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.path.uuid: "method.request.path.uuid"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "POST"
+        cacheNamespace: "2rfo47"
+        cacheKeyParameters:
+        - "method.request.path.uuid"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /create_email_token:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Email'
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/create_email_token"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "POST"
+        cacheNamespace: "2rfo47"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /create_sms_token_for_primary:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TmpTel'
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/create_sms_token_for_primary"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "POST"
+        cacheNamespace: "2rfo47"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /update_expired_at/{uuid}:
+    put:
+      parameters:
+      - name: "uuid"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/update_expired_at/{uuid}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.path.uuid: "method.request.path.uuid"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "PUT"
+        cacheNamespace: "2rfo47"
+        cacheKeyParameters:
+        - "method.request.path.uuid"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'PUT,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /customer/get_change_tel/{uuid}:
+    get:
+      parameters:
+      - name: "uuid"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  customer_tel:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/CustomerTel"
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/customer/get_change_tel/{uuid}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.path.uuid: "method.request.path.uuid"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        cacheNamespace: "2rfo47"
+        cacheKeyParameters:
+        - "method.request.path.uuid"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /update_tel/{id}:
+    put:
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/update_tel/{id}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "PUT"
+        cacheNamespace: "2rfo47"
+        cacheKeyParameters:
+        - "method.request.path.id"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'PUT,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /send_email:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TmpEmail'
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+      security:
+      - otoraja-biz: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/send_email"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "POST"
+        cacheNamespace: "2rfo47"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /customer/get_change_mail/{uuid}:
+    get:
+      parameters:
+      - name: "uuid"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  customer_mail:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/CustomerMail"
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/customer/get_change_mail/{uuid}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.path.uuid: "method.request.path.uuid"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "GET"
+        cacheNamespace: "2rfo47"
+        cacheKeyParameters:
+        - "method.request.path.uuid"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /update_email/{id}:
+    put:
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+      security:
+      - api_key: []
+      x-amazon-apigateway-integration:
+        uri: "https://${stageVariables.ENDPOINT_DOMAIN}/member/update_email/{id}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        connectionType: "VPC_LINK"
+        connectionId: "${stageVariables.VPC_LINK_ID}"
+        httpMethod: "PUT"
+        cacheNamespace: "2rfo47"
+        cacheKeyParameters:
+        - "method.request.path.id"
+        type: "http_proxy"
+    options:
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'PUT,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+components:
+  schemas:
+    Empty:
+      title: "Empty Schema"
+      type: "object"
+    Customer:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        tel:
+          type: "string"
+        email:
+          type: "string"
+        mypage_terms_agreed_at:
+          type: "string"
+        bikes:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Bike"
+    Checkin:
+      type: "object"
+      properties:
+        shop_name:
+          type: "string"
+        id:
+          type: "integer"
+          format: "int64"
+        datetime:
+          type: "string"
+        checkout_datetime:
+          type: "string"
+        maintenance_log_id:
+          type: "integer"
+          format: "int64"
+        formated_number_plate:
+          type: "string"
+        maker:
+          type: "string"
+        model:
+          type: "string"
+        maintenance_log_detail_names:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/MaintenanceLogDetailName"
+    RequestCheckins:
+      type: "object"
+      properties:
+        search:
+          type: "string"
+        item_id:
+          type: "integer"
+        maker:
+          type: "string"
+        model:
+          type: "string"
+        number_plate_area:
+          type: "string"
+        number_plate_number:
+          type: "string"
+        number_plate_pref:
+          type: "string"
+    Bike:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        formated_number_plate:
+          type: "string"
+        formated_expiration:
+          type: "string"
+        maker:
+          type: "string"
+        model:
+          type: "string"
+        color:
+          type: "string"
+    MaintenanceLog:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        formated_number_plate:
+          type: "string"
+        formated_expiration:
+          type: "string"
+        total_price:
+          type: "integer"
+        amount_paid:
+          type: "integer"
+        adjustment:
+          type: "integer"
+        maker:
+          type: "string"
+        model:
+          type: "string"
+        color:
+          type: "string"
+        shop_id:
+          type: "integer"
+          format: "int64"
+        shop_name:
+          type: "string"
+        checkin_id:
+          type: "integer"
+          format: "int64"
+        datetime:
+          type: "string"
+        checkout_datetime:
+          type: "string"
+        maintenance_main_mechanic_id:
+          type: "integer"
+          format: "int64"
+        maintenance_main_mechanic_name:
+          type: "string"
+        maintenance_main_staff_id:
+          type: "integer"
+          format: "int64"
+        maintenance_main_staff_name:
+          type: "string"
+        maintenance_log_payment_methods:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/MaintenanceLogPaymentMethod"
+        maintenance_log_details:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/MaintenanceLogDetail"
+    MaintenanceLogPaymentMethod:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        amount:
+          type: "integer"
+    MaintenanceLogDetail:
+      type: "object"
+      properties:
+        shop_product_id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        description:
+          type: "string"
+        quantity:
+          type: "number"
+          format: "float"
+        unit_price:
+          type: "integer"
+        sub_total_price:
+          type: "integer"
+        discount_type:
+          type: "integer"
+        discount_rate:
+          type: "integer"
+        discount_amount:
+          type: "integer"
+          format: "int64"
+        maintenance_mechanics:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/MaintenanceMechanic"
+    MaintenanceLogDetailName:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+    MaintenanceMechanic:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+    Item:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+    Maker:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        order:
+          type: "integer"
+    OwnedBikeUpdate:
+      type: "object"
+      properties:
+        number_plate_area:
+          type: "string"
+        number_plate_number:
+          type: "string"
+        number_plate_pref:
+          type: "string"
+        maker:
+          type: "string"
+        model:
+          type: "string"
+    CustomerUpdate:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        tel:
+          type: "string"
+    AnswerChoices:
+      type: "object"
+      properties:
+        positive_choice:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Choices"
+        negative_choice:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Choices"
+        visiting_reasons:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/VisitingReasons"
+    Choices:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        export_id:
+          type: "string"
+        choice:
+          type: "string"
+    VisitingReasons:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+    Token:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        uuid:
+          type: "integer"
+          format: "int64"
+        rate:
+          type: "integer"
+    Answers:
+      type: "object"
+      properties:
+        rate:
+          type: "integer"
+        comment:
+          type: "string"
+        review:
+          type: "string"
+        reasons:
+          type: "string"
+    Term:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        terms:
+          type: "string"
+        effective_date:
+          type: "string"
+    TmpTel:
+      type: "object"
+      properties:
+        tmp_tel:
+          type: "string"
+    CustomerTel:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        tel:
+          type: "string"
+        tmp_tel:
+          type: "string"
+    CustomerMail:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        email:
+          type: "string"
+        tmp_email:
+          type: "string"
+    Email:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+    TmpEmail:
+      type: "object"
+      properties:
+        tmp_email:
+          type: "string"
+  securitySchemes:
+    otoraja-biz:
+      type: "apiKey"
+      name: "Authorization"
+      in: "header"
+      x-amazon-apigateway-authtype: "cognito_user_pools"
+      x-amazon-apigateway-authorizer:
+        providerARNs:
+        - "arn:aws:cognito-idp:ap-southeast-1:072739647532:userpool/#COGNITO_USER_POOL#"
+        type: "cognito_user_pools"
+    api_key:
+      type: "apiKey"
+      name: "x-api-key"
+      in: "header"

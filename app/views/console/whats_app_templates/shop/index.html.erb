@@ -1,0 +1,27 @@
+<% content_for(:title, 'Whats App Templates') %>
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Template</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @whats_app_templates.each do |template| %>
+        <tr>
+          <td><%= template.whats_app_service_id %></td>
+          <td><%= template.template_name %></td>
+          <td class="text-right">
+            <%= link_to edit_console_whats_app_template_path(template), :class => "btn btn-primary" do %>
+            <i class="fas fa-edit"></i>&nbsp;<%= t 'console.common.edit'  %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

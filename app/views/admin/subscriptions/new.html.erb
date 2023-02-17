@@ -1,0 +1,143 @@
+<div class="d-flex justify-content-between mb-1">
+  <h1 class="text-page-title font-weight-bold"><%= t 'admin.subscription.subscription_packet' %></h1>
+  <%= link_to admin_subscriptions_path,:class => "btn button-secondary-active text-normal d-flex align-items-center" do %>
+  <%= t 'admin.common.back' %></a>
+  <% end %>
+</div>
+<div class="card">
+  <div class="card-body">
+    <ul class="pl-3 text-small">
+      <li>
+        <b><%= t 'admin.subscription.status' %></b>
+        <p>
+          <% if @subscription.finalized? %>
+            <span class="badge badge-success p-2"><%=  t 'admin.subscription.subscription_status.paid' %></span>
+          <% elsif @subscription.cancelled? %>
+            <span class="badge badge-dark p-2"><%= @subscription.status.humanize %></span>
+          <% elsif @subscription.payment_pending? %>
+            <span class="badge badge-purple p-2"><%=  t 'admin.subscription.subscription_status.payment_pending' %></span>
+          <% elsif @subscription.expire? %>
+            <span class="badge badge-danger p-2"><%= @subscription.status.humanize %></span>
+          <% elsif @subscription.demo_period? %>
+            <span class="badge badge-secondary p-2"><%= t 'admin.subscription.subscription_status.demo' %></span>
+          <% else %>
+            <span class="badge badge-warning p-2"><%= t 'admin.subscription.subscription_status.process' %></span>
+          <% end %>
+        </p>
+      </li>
+
+      <li>
+        <b><%= t 'admin.common.request_date' %></b>
+        <p>
+          <%= formatedDateUseDash(@subscription.created_at) if @subscription.created_at.present? %>
+        </p>
+      </li>
+
+      <li>
+        <b><%= t 'admin.subscription.subscription_packet' %></b>
+        <% if Subscription.plans[@subscription.plan] == 0 %>
+          <p><%=  t 'admin.subscription.no_plan' %></p>
+        <% else %>
+          <p><%= Subscription.plans_i18n[@subscription.plan] %></p>
+        <% end %>
+      </li>
+
+      <li>
+        <b><%= t 'admin.subscription.period' %></b>
+        <p><%= "#{@period} #{(t 'admin.common.month').capitalize()}" %></p>
+      </li>
+
+      <li>
+        <b><%= t 'admin.subscription.fee' %></b>
+        <p>Rp <%= formatedRupiah(@subscription.fee.to_i) %></p>
+      </li>
+    </ul>
+    </p>
+    <p>
+      <% if @subscription.payment_pending? %>
+        <% if @subscription.payment_expired.present? %>
+          <%= t 'admin.subscription.payment_statement_html', virtual_account: @subscription.shop.virtual_bank_no, payment_periods: ENV['PAYMENT_PERIOD'].to_i, date_remaining: Date.parse(@subscription.payment_expired.to_s)  %>
+        <% else %>
+          <%= t 'admin.subscription.payment_statement_html', virtual_account: @subscription.shop.virtual_bank_no, payment_periods: ENV['PAYMENT_PERIOD'].to_i, date_remaining: "-"  %>
+        <% end %>
+      <% end %>
+    </p>
+    <% if @subscription.shop.change_plan_time? %>
+      <%= link_to admin_subscription_plan_new_path(@subscription.shop.id), :class => "btn button-secondary-active text-small " do %>
+      <%= t 'admin.subscription.change_plan' %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<h1 class="text-page-title font-weight-bold mb-2"><%= t 'admin.subscription.history' %></h1>
+<div class="card mb-5">
+  <div class="card-body table-responsive p-0">
+    <table class="table text-small table-content-fit">
+      <thead>
+        <tr>
+          <th><%= t 'admin.common.payment_date' %></th>
+          <th><%= t 'admin.common.description' %></th>
+          <th class="text-nowrap"><%= t 'admin.common.total_money' %></th>
+          <th><%= t 'admin.common.proof' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @subscription_history.each do | plan_shop | %>
+          <tr>
+            <td>
+              <%= formatedDateUseDash(plan_shop.payment_date) if plan_shop.payment_date.present? %>
+            </td>
+            <td>
+              <%= "#{plan_shop.shop.name} Otoraja Biz" %><br>
+              <% if plan_shop.demo_period? %>
+                <%= t 'admin.subscription.subscription_status.demo' %>
+              <% else %>
+                <%= t 'admin.subscription.history_description' %> 
+              <% end %>
+              <%= Subscription.periods[plan_shop.period] %> 
+              <%= t 'admin.common.month' %> <br>
+              <%= "#{formatedDateUseDash(plan_shop.start_date)} s.d #{formatedDateUseDash(plan_shop.end_date - 1.day)}" if plan_shop.start_date.present? %> 
+            </td>
+            <td>
+              <%= formatedRupiah(plan_shop.fee) %>
+            </td>
+            <td>
+              <% unless plan_shop.demo_period? %>
+                <%= link_to admin_subscriptions_show_path(plan_shop.id),:class => "btn btn-primary" do %>
+                  <i class="fas fa-receipt"></i></a>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<h1 class="text-page-title font-weight-bold"><%= t 'admin.subscription.extension_history' %></h1>
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table text-small table-content-fit">
+      <thead>
+        <tr>
+          <th><%= t 'admin.common.date_abbreviated' %></th>
+          <th><%= t 'admin.common.description' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @extension_history.each do | extension | %>
+        <tr>
+          <td>
+            <%= formatedDateUseDash(extension.created_at)%>
+          </td>
+          <td>
+            <p class="m-0"><%= t 'admin.subscription.extension' %></p>
+            <%= extension.shop.name %><br>
+            <%= "#{formatedDateUseDash(extension.start_date)} s.d #{formatedDateUseDash(extension.end_date)}" if extension.start_date.present? %> 
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

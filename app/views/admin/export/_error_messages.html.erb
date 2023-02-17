@@ -1,0 +1,10 @@
+<% if m.errors.any? %>
+  <div class="callout callout-danger">
+    <h2><%= pluralize(m.errors.count, "error") %> Update failed:</h2>
+    <ul>
+      <% m.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

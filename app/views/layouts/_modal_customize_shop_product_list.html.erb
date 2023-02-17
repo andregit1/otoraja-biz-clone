@@ -1,0 +1,95 @@
+<!-- Customize Shop Product List Modal -->
+<div id="customizeShopProductListModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#customizeShopProductListModal"></div>
+  <div class="modal_content -fullscreen">
+    <div class="modal-header -management">
+      <div class="col-1"></div>
+      <div class="modal-title col-10 text-center"><%= t('customize_list.list_title') %></div>
+      <button class="close col-1 js-modal-close -management" data-target="#customizeShopProductListModal">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body __body">
+      <div class="search-box">
+        <div class="filter-box-wrap">
+          <div id="customize_lists_search_word" class="filter-box" data-placeholder="<%= t 'select_product.list_search' %>..." contenteditable="true"></div>
+          <div class="append">
+            <span class="spinner-border searching hide" role="status" aria-hidden="true"></span>
+            <i class="icon icon-Search unsearching"></i>
+          </div>
+        </div>
+        <div class="add-box my-3 d-flex justify-content-between align-items-center">
+          <%= button_tag :type => "button", id: "btn-create-new-customize-list", class: "btn js-modal-open" do %>
+            <span class="btn-circle-primary"><i class="icon icon-Plus"></i></span> Create new list
+          <% end %>
+          <div class="list-count">
+            <span class="selected-items">0</span> / <span class="max-items"><%= current_user&.shops&.first&.shop_config&.num_of_custom_list || 0 %></span>
+          </div>
+        </div>
+      </div>
+      <div class="lists-box">
+        <ul class="list-sotable">
+        </ul>
+      </div>
+    </div>
+    <div class="modal-footer __footer">
+      <div class="text-center">
+        <%= button_tag :type => "button", id: "btn-update-customize-list-order", class: "btn-base -basic -primary" do %>
+          <%= t('customize_list.update_list') %>
+        <% end %>
+      </div>
+    </div>
+    <div id="customize-list-clone-box" class="hide">
+      <div class="open_detail_dialog">
+        <%= button_tag :type => "button", class: "btn-circle-default list-detail js-modal-open", data: {"target" => "#customizeShopProductDetailModal"} do %>
+          <i class="icon icon-Detail"></i>
+        <% end %>
+      </div>
+      <li class="list-record">
+        <input type="hidden" name="customize_shop_list_id" class="customize_shop_list_id">
+        <div class="row d-flex justify-content-between align-items-center">
+          <div class="col">
+            <i class="icon icon-Sidebar handle"></i> 
+            <i class="icon icon-Folder ml-3"></i> 
+          </div>
+          <div class="col-8">
+            <span class="list-name"></span>
+          </div>
+          <div class="col">
+            <%= button_tag :type => "button", class: "btn-circle-default list-detail js-modal-open", data: {"target" => "#customizeShopProductDetailModal"} do %>
+              <i class="icon icon-Detail"></i>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    </div>
+  </div>
+  <%= render 'layouts/dialog_input_new_customize_list_name' %>
+  <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center h-100">
+    <div id="customize_list_updated_alert" role="alert" aria-live="assertive" aria-atomic="true" class="toast hide" data-autohide="true" data-delay="3000">
+      <div class="toast-body">
+        <div class="alert alert-success toast-message" role="alert">
+          List is Updated Complete
+        </div>
+      </div>
+    </div>
+    <div id="customize_detail_updated_alert" role="alert" aria-live="assertive" aria-atomic="true" class="toast hide" data-autohide="true" data-delay="3000">
+      <div class="toast-body">
+        <div class="alert alert-success toast-message" role="alert">
+          Detail is Updated Complete
+        </div>
+      </div>
+    </div>
+    <div id="customize_detail_deleted_alert" role="alert" aria-live="assertive" aria-atomic="true" class="toast hide" data-autohide="true" data-delay="3000">
+      <div class="toast-body">
+        <div class="alert alert-success toast-message" role="alert">
+          List is Deleted Complete
+        </div>
+      </div>
+    </div>
+  </div>
+<%# <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center h-100">
+
+</div> %>
+</div>
+<!-- Customize Shop Product List Modal -->

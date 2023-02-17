@@ -1,0 +1,5 @@
+<div class="main-content">
+  <%= form_with(model: @maintenance_log, url: edit_maintenance_log_path, local: true, html:{novalidate: true}, id: 'maintenance-log-form') do |form| %>
+    <%= render 'form', maintenance_log: @maintenance_log, config: @config, f: form %>
+  <% end %>
+</div>

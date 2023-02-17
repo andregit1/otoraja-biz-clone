@@ -1,0 +1,112 @@
+<% content_for(:title, t('admin.product_non_active.product_non_active')) %>
+<div class="list-view-wrapper">
+  <section id="list-search-section">
+    <div class="card card-widget">
+      <div class="card-header color-text-table-header" data-card-widget="collapse">
+        <h3 class="card-title">
+          <i class="fas fa-chevron-down"></i>
+          <i class="fas fa-chevron-up"></i>
+          <span class="text-normal">
+            <%= t 'admin.common.filter' %>
+          </span>
+        </h3>
+      </div>
+      <div class="card-body">
+        <input type="hidden" id="shop_product_search_current_page" value="1">
+        <input type="hidden" id="shop_product_search_no_more_result" value="true">
+        <%= hidden_field_tag 'default-filter', @filter %>
+        <%= hidden_field_tag 'select_shop', session[:default_user_shop] %>
+
+        <div class="d-flex justify-content-between">
+          <div class="form-group search-field col-6 p-0">
+            <label class="text-label"><%= t 'admin.common.keyword' %> <i class="fas fa-info-circle" data-html="true" data-toggle="tooltip" title="<%= t 'admin.common.name_of_product' %>"></i></label>
+            <%= text_field_tag 'shop-product-search', '', class:'form-control w-100 text-normal', autocomplete: 'off'  %>
+            <i id="shop-product-search-clear-btn" class="icon icon-Cross search-with-clear clear"></i>
+            <i id="shop-product-search-btn" class="icon icon-Search search-with-clear"></i>
+          </div>
+
+          <div class="form-group col-6 pr-0">
+            <%= label_tag :select_category, t('admin.common.category'), class: 'text-label' %>
+            <div>
+              <%= select_tag 'select_category', options_from_collection_for_select(ProductCategory.all.order(id: :asc), :id, :name), prompt: t('admin.shop_product.default_sort') ,class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+         <p class="text-small text-color-highlight m-0"><%= t "admin.product_non_active.change_filter_disclaimer" %></p>
+       </div>
+    </div>
+  </section>
+  <section id="list-search-body-section">
+    <div class="no_search_result hide color-text-table-header p-3 mb-3 text-center">
+      <p class="font-italic text-normal"><%= t "admin.product_non_active.product_not_found_info" %></p>
+    </div>
+    <div class="products-box-admin card card-widget">
+      <div class="px-3 py-3 color-text-table-header d-flex align-items-center">
+        <div class="d-flex w-100">
+          <div>
+            <input type="checkbox" id="select-all-product" class="checkbox-md" >
+          </div>
+          <div class="col-11 pl-3">
+            <div class="text-normal">
+              <span id="count-selected-restore">0</span> <%= t "admin.product_non_active.multiple_select_product_info" %>
+              <a href='#' class="text-color-highlight font-weight-bold m-0" id="select-all-remaining-product">
+                <u>
+                  <%= t "admin.product_non_active.remaining-product-label_html" %>
+                </u> 
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="flex-shrink-1 col-6 col-md-3 p-0">
+          <button type="button" id="multiple-restore-button" class="btn color-inactive text-light btn-process-restore float-right">
+            <div class="row px-2">
+              <%= image_tag  'ls-undo-white.svg', class: 'img-responsive' %>
+              <span class="text-small m-0 pl-1"> <%= t "admin.product_non_active.restore" %></span>
+            </div>
+          </button>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <ul id="product_list" class="list mb-0">
+          <%# inject items here %>
+        </ul>
+        <div class="loading p-3 hide">
+          <div class="text-center">
+            <i class="fas fa-spinner fa-spin"></i>
+          </div>
+          
+        </div>
+        <div id="add-product-item-clone" class="hide">
+          <li class="d-flex list-item p-3">
+            <div class="d-flex w-100 pr-3">
+              <div>
+                <input type="checkbox" class="select-product checkbox-md mt-1">
+              </div>
+              <div class="col-11 pl-3 ">
+                <div class="item__title">
+                  <p class="item__name text-normal font-weight-bold">
+                  </p>
+                </div>
+                <div class="item__title">
+                  <p class="item__description description_product text-small text-dark mb-0">
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="flex-shrink-1">
+              <button name="button" type="button" class="btn btn-primary btn-restore-product single-restore-btn ">
+                 <%= image_tag  'ls-undo-white.svg', class: 'img-responsive' %>
+              </button>
+            </div>
+          </li>
+        </div>
+      </div>
+    </div>
+  </section>
+  <input id="label-id" type="hidden" value="">
+  <input id="mode" type="hidden" value="">
+  <div id="paginator" class="d-flex justify-content-center text-small"></div>
+</div>
+<%= render "modal_confirmation_restore.html" %>

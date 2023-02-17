@@ -1,0 +1,31 @@
+en:
+  console:
+    shop_group:
+      shop_group_information: "Contractor Information"
+      account_id: "Account ID"
+      owner_name: "Owner's Name"
+      owner_information: "Owner Information"
+      button:
+        add: "Add Contractor"
+        edit: "Edit Contractor"   
+      index:
+        title: "Contractor"
+      show:
+        shops: "Shops"
+      new:
+        title: "Add Contractor"
+      edit:
+        title: "Edit Contractor"
+      form:
+        male: "Male"
+        female: "Female"
+        name: "Nama"
+        shops: "Bengkel"
+        status: "Status"
+        owner_name: "Nama"
+        owner_email: "Email"
+        tel: "Tel"
+        tel2: "Tel2"
+        owner_wa_tel: "Whats App Tel"
+        virtual_bank_no: "Virtual Bank No."
+    

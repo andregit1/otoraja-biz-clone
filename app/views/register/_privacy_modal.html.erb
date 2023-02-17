@@ -1,0 +1,21 @@
+<div class="modal" id="privacyModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-scrollable min-vw-100 m-0">
+    <div class="modal-content min-vh-100">
+      <div class="modal-header justify-content-center border-0">
+        <h5 class="modal-title">
+          <div class="login-logo mt-3">
+            <h1><%= image_tag  "logo.svg", width: '200' %></h1>
+          </div>
+        </h5>
+      </div>
+      <div class="modal-body px-md-5">
+        <p class="text-center font-weight-bold"><%= t 'register.new.privacy_policy' %></p>
+        <p><%= t 'register.new.privacy_body_html' %></p>
+      </div>
+      <div class="modal-footer flex-column justify-content-center bg-light">
+        <button id="confirm-privacy" type="button" class="btn button-active text-normal px-5"><%= t 'register.new.agree' %></button>
+        <p class="text-label text-center text-muted my-3"><%= t 'register.new.privacy_agree_help' %></p>
+      </div>
+    </div>
+  </div>
+</div>

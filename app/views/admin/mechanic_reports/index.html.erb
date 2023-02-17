@@ -1,0 +1,67 @@
+<% content_for(:title, "Detail Laporan Mekanik") %>
+
+<%= form_with url: admin_mechanic_reports_path, local: true, method: :get do |f| %>
+  <%= f.hidden_field :start_date, :value => @start_date || drpInitialStartDate() %>
+  <%= f.hidden_field :end_date, :value => @end_date || drpInitialEndDate() %>
+  <div class="card card-widget">
+    <div class="card-body">
+    <div class="form-row">
+      <div class="form-group col-6">
+        <%= f.label :select_mechanic, "Mekanik", class: 'text-label' %>
+        <div>
+        <%= f.select :select_mechanic, @shop_staffs.order(id: :asc).pluck(:name, :id), { include_blank: 'Tanpa Mekanik', selected: @select_mechanic }, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group col-6">
+        <label class="text-label"><%= t 'admin.common.period' %></label>
+        <button type="button" class="pull-down-btn form-control text-left text-normal" id="daterange-btn-report">
+          <div>
+            <i class="far fa-calendar-alt mr-1"></i>
+            <span>
+            </span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <%= f.submit t('admin.common.search'), class: 'btn btn-primary form-control', id: 'report-filter', hidden: true %>
+    </div>
+  </div>
+
+  <% if @mechanic_transactions.any? %>
+    <div class="card card-widget">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table fixed-column-table">
+            <thead class="thead-light text-label">
+              <tr>
+                <th class="align-top"><%= t 'admin.common.date_abbreviated' %></th>
+                <th class="align-top"><%= t 'admin.mechanic_report.transaction_number' %></th>
+                <th class="align-top"><%= t 'admin.mechanic_report.type' %></th>
+                <th class="align-top"><%= t 'admin.common.name' %></th>
+                <th class="align-top"><%= t 'admin.common.quantity' %></th>
+                <th class="align-top"><%= t 'admin.mechanic_report.price' %></th>
+              </tr>
+            </thead>
+            <tbody class="text-label">
+              <% @mechanic_transactions.each do |item| %>
+                <tr>
+                  <td><%= formatedDateTz(item.checkout_datetime, 'Jakarta') %></td>
+                  <td><%= Checkin.find(item.id).checkin_no %></td>
+                  <td><%= item.type %></td>
+                  <td><%= item.name %></td>
+                  <td class="text-center"><%= item.quantity.to_i %></td>
+                  <td><%= formatedRupiah(item.sub_total_price) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="no_search_result color-text-table-header p-3 text-center">
+      <p class="font-italic text-normal m-0">Tidak ada data yang bisa disajikan</p>
+    </div>
+  <% end %>
+<% end %>

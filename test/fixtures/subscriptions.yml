@@ -1,0 +1,10 @@
+shop_one_subs:
+  id: 1
+  shop_group: one
+  plan: 2
+  period: 1
+  start_date: "2022-03-07 00:00:00"
+  end_date: "2022-04-07 00:00:00"
+  fee: 125000
+  status: 4
+  shop_id: one

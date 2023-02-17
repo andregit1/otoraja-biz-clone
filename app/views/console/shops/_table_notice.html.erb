@@ -1,0 +1,32 @@
+<% if @imports.present? %>
+<div class="card content-datatable">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover table-sticky">
+                <thead>
+                    <tr> 
+                        <th>Bengkel ID </th>
+                        <% if @subscription.present? %>
+                            <th>Start Date</th>
+                        <% end %>
+                        <th>Expiration Date</th>
+                        <th>Result </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @imports.each do |import| %> 
+                        <tr>
+                            <td> <%= import[:bengkel_id] %> </td>
+                            <% if @subscription.present? %>
+                                <td><%= import[:start_date] %></td>
+                            <% end %>
+                            <td> <%= import[:expiration_date] %> </td>
+                            <td> <%= import[:reason] %> </td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<% end %>

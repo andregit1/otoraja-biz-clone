@@ -1,0 +1,67 @@
+<div class="card card-widget">
+  <div class="card-body p-3">
+    <form id="checkin-search">     
+      <%= hidden_field_tag :mode, @mode %>
+      <%= hidden_field_tag :shop_id, @shop_id %>
+      <%= hidden_field_tag :start_date, @start_date ? @start_date : "", :id => 'start_date' %>
+      <%= hidden_field_tag :end_date, @end_date ? @end_date : "", :id => 'end_date' %>
+      <div class="form-group w-100">
+        <%= label_tag :select_shop, t('console.common.shop') %>
+          <div>
+            <%= select_tag 'select_shop', options_from_collection_for_select(current_user.managed_shops, :id, :name, @shop_id), class: 'form-control form-control-sm use_select2' %>
+          </div>
+      </div>
+      <div class="form-row mb-0">
+        <div class="form-group col-lg-4 col-12">
+          <label class="text-label"><%= t 'admin.common.keyword' %> <i class="fas fa-info-circle" data-html="true" data-toggle="tooltip" title="Nomor Transaksi"></i></label>
+          <div class="form-group search-field">
+            <input type="text" name="no_trx" id="no-trx-search" value="<%= @search_no_trx %>" class="form-control text-label" autocomplete="off">
+            <i id="search-btn" class="icon icon-Search search-with-clear"></i>
+          </div>
+        </div>
+        <% if @mode == :all %>
+          <div class="form-group col-lg-2 col-4">
+            <%= label_tag :select_sort, t('admin.common.basis_data'), class: 'text-label' %>
+            <%= select_tag 'base_date', options_for_select(@search_base_date, :selected => @base_date_selected), {id: 'select-checkin-base-date', class: 'form-control form-control-sm col-xs-3 use_select2_no_search'} %>
+          </div>
+        <% end %>
+        <% unless @mode == :deleted %>
+          <div class="form-group col-lg-3 col-5">
+            <label class="text-label">
+              <%= 
+                if @mode == :all 
+                  (t 'admin.common.tanggal')
+                elsif @mode == :checkout  
+                  (t 'admin.common.tanggal_keluar')
+                elsif @mode == :uncheckout
+                  (t 'admin.common.tanggal_masuk')
+                end
+              %>
+            </label>
+            <button type="button" class="pull-down-btn form-control text-left text-normal" id="daterange-btn">
+              <div>
+                <i class="far fa-calendar-alt mr-1"></i>
+                <span class="text-label" id="daterange-change">
+                  Semua
+                </span>
+              </div>
+            </button>
+          </div>
+          <div class="form-group col-lg-3 col-3">
+            <%= label_tag :select_sort, t('admin.common.urutkan'), :class => 'text-label' %>
+            <%= select_tag 'order', options_for_select(@search_sort, :selected => @search_sort_selected), {id: 'select-checkin-sort', class: 'form-control form-control-sm col-xs-3 use_select2_no_search'} %>
+          </div>
+        <% end %>
+        <% if @mode == :deleted %>
+          <div class="form-group col-lg-6 col-12">
+            <label class="text-label"><%= t 'admin.common.periode ' %></label>
+            <div class="pull-down-date">
+              <i class = "far fa-calendar"></i>
+              <input type="text" id="void_daterangepicker" name="value_start_end_date" data-datepicker="separateRange" class="form-control text-left text-normal" placeholder="Pilih.." value="<%= params[:value_start_end_date] %>" autocomplete="off"/>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </form>
+  </div>
+</div>

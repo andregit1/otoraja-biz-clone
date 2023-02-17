@@ -1,0 +1,10 @@
+en:
+  enums:
+    stock_control:
+      pay_type:
+        Cash: 'Tunai'
+        Credit: 'Kredit'
+        Other: 'Lainnya'
+  activerecord:
+    models:
+      shop_product: 'StockControl'

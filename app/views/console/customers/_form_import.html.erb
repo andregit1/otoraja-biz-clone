@@ -1,0 +1,93 @@
+<div class="card-header">
+  <div class="row">
+    <div class="col-4">
+      <table>
+        <tr>
+          <th>Shop:</th>
+          <td class="text-primary text-right"><%= @shop&.name %></td>
+        </tr>
+        <tr>
+          <th>Add Customers:</th>
+          <td class="text-right"><%= @add_customers_count %></td>
+        </tr>
+        <tr>
+          <th>Existing Customers:</th>
+          <td class="text-right"><%= @exisiting_customers_count %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="card-body p-0">
+  <div class="table-responsive">
+    <%= hidden_field_tag "shop_id", @shop&.id %>
+    <table class="table table-sticky">
+      <thead>
+        <tr>
+          <th colspan="3">Customer Info</th>
+          <th colspan="5">Owned Bike</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Tel</th>
+          <th>Name</th>
+          <th>Number Plate</th>
+          <th>Expiration</th>
+          <th>Maker</th>
+          <th>Model</th>
+          <th>Color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each_with_index do |customer, index| %>
+          <% if customer[:id].nil? %>
+          <tr class="table-primary">
+            <td>+</td>
+          <% else %>
+          <tr class="table-warning">
+            <td></td>
+          <% end %>
+            <td>
+              <%= customer[:tel] unless customer[:tel].nil? %>
+              <%= hidden_field_tag "customers[#{index}][id]", customer[:id] %>
+              <%= hidden_field_tag "customers[#{index}][tel]", customer[:tel] %>
+              <%= hidden_field_tag "customers[#{index}][name]", customer[:name] %>
+              <%= hidden_field_tag "customers[#{index}][number_plate_area]", customer[:number_plate_area] %>
+              <%= hidden_field_tag "customers[#{index}][number_plate_number]", customer[:number_plate_number] %>
+              <%= hidden_field_tag "customers[#{index}][number_plate_pref]", customer[:number_plate_pref] %>
+              <%= hidden_field_tag "customers[#{index}][expiration_month]", customer[:expiration_month] %>
+              <%= hidden_field_tag "customers[#{index}][expiration_year]", customer[:expiration_year] %>
+              <%= hidden_field_tag "customers[#{index}][maker]", customer[:maker] %>
+              <%= hidden_field_tag "customers[#{index}][model]", customer[:model] %>
+              <%= hidden_field_tag "customers[#{index}][color]", customer[:color] %>
+            </td>
+            <td>
+              <%= customer[:name] unless customer[:name].nil? %>
+            </td>
+            <td>
+              <%= customer[:number_plate_area] unless customer[:number_plate_area].nil? %>
+              <%= customer[:number_plate_number] unless customer[:number_plate_number].nil? %>
+              <%= customer[:number_plate_pref] unless customer[:number_plate_pref].nil? %>
+            </td>
+            <td>
+              <%= customer[:expiration_month] unless customer[:expiration_month].nil? %>
+              <% unless customer[:expiration_month].nil? && customer[:expiration_year].nil? %>/<% end %>
+              <%= customer[:expiration_year] unless customer[:expiration_year].nil? %>
+            </td>
+            <td><%= customer[:maker] unless customer[:maker].nil? %></td>
+            <td><%= customer[:model] unless customer[:model].nil? %></td>
+            <td><%= customer[:color] unless customer[:color].nil? %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card-footer">
+  <div class="d-flex justify-content-between">
+    <%= link_to console_customers_import_path, class: "btn btn-default" do %>
+      Back
+    <% end %>
+    <%= f.submit "Import", class: "btn btn-primary" %>
+  </div>
+</div>

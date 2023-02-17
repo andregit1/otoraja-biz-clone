@@ -1,0 +1,70 @@
+<div id="whatsAppOptinModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#whatsAppOptinModal"></div>
+  <div class="modal_content -fullscreen">
+    <div class="modal-header">
+      <button class="close col-1 js-modal-close" data-target="#whatsAppOptinModal">
+        <i class="icon icon-Arrow-left"></i>
+      </button>
+      <div class="modal-title col-10 text-center"><%= t 'customer.infomation' %></div>
+      <div class="col-1"></div>
+    </div>
+    <div class="modal-body customer-info-body">
+      <div class="mb-3 customer-info-body_label"><%= t 'customer.cellphone_full' %></div>
+      <div id="optin_phone_valid_err_msg" class="small text-danger"></div>
+      <div id="input-tel-box" class="mb-5 input-tel blank">
+        <%= select_tag 'optin_phone_country_code', options_for_select(@country_code_list, selected: 62), class: 'input-tel_country-code' %>
+        <%= telephone_field_tag 'optin_phone_national', nil, class: 'input-tel_phone-national', autocomplete: 'off', maxlength: 18, placeholder: t('example_phone_no') %>
+        <span class="spinner-border spinner-border-sm search-spinner" style="display:none;"></span>
+      </div>
+      <div class="check-square mb-5">
+          <%= check_box_tag :opt_in_service, 'payments' %>
+          <%= label_tag "opt_in_service", "Allow Otoraja to send your receipts using What's App" %>
+        </div>
+
+      <div id="customer-regist-block" >
+        <div class="pt-4 d-flex justify-content-center">
+          <%= button_tag :type => "button", id: "optin-btn", :class =>"btn-base -basic -primary w-75", disabled: true do %>
+            <%= t 'customer.registration' %>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="suggest-customer-list-wrapper">
+              <table class="table table-hover suggest-customer-list" id="customer_list">
+                <thead class="search_header" style="display:none;">
+                  <tr>
+                    <th class="name_tel_col"><%= t 'name_tel' %></th>
+                    <th class="vehicle_col"><%= t 'vehicle.title' %></th>
+                    <th class="vehicle_info_col"></th>
+                    <th class="add_col text-right pr-0"><%= t 'add' %></th>
+                  </tr>
+                </thead>
+                <tbody class="search_result" style="display:none;">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="sms-confirm-block" style="display:none;">
+        <%= hidden_field_tag :confirm_tel, '', id: 'confirm_tel' %>
+        <div class="d-flex justify-content-center mb-3 customer-info-body_label">
+          <%= t "sms_confirm"%>
+        </div>
+        <div class="d-flex justify-content-center">
+          <%= button_tag :type => "button", id: "sms-confirm-btn",  :class =>"btn-base -basic -primary w-75" do %>
+            <%= t "confirm"%>
+          <% end %>
+        </div>
+        <div class="mt-5 d-flex justify-content-center">
+          <%= button_tag :type => "button", id: "sms-resend-btn",  :class =>"btn-base -basic -normal w-75" do %>
+            <%= t "resend_sms"%>
+          <% end %>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

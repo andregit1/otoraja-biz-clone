@@ -1,0 +1,114 @@
+
+<div class="content-header header-mtop">
+    <div class="row">
+        <div class="text-page-title font-weight-bold col-7">
+            <h1 class="text-page-title font-weight-bold"><%= t 'admin.expenses_report.expenses_report_title' %></h1>
+        </div>
+        <div class="supplier-add-btn col-5">
+            <%= link_to new_admin_shop_expense_path(), :class => 'btn button-secondary-active text-large mb-2' do %>
+                <i class="fas fa-plus"></i> <%= t 'admin.common.new' %>
+            <% end %>
+        </div>
+    </div>
+</div>
+<%= form_with url: admin_shop_expenses_path, local: true, method: :get do |f| %>
+    <%= f.hidden_field :start_date, :value => @start_date || drpInitialStartDate() %>
+    <%= f.hidden_field :end_date, :value => @end_date || drpInitialEndDate() %>
+    <div class="expense_report-view-wrapper">
+        <div class="card card-widget">
+            <div class="card-header color-text-table-header" data-card-widget="collapse">
+                <h3 class="card-title font-weight-bold">
+                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-chevron-up"></i>
+                    <%= t 'admin.expenses_report.periode' %>
+                </h3>
+            </div>
+            <div class="card-body p-3">
+                <button type="button" class="pull-down-btn form-control text-left text-normal" id="daterange-btn-report">
+                <div>
+                    <i class="far fa-calendar-alt mr-1"></i>
+                    <span>
+                    </span>
+                </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <% if @shop_expenses.any? %>
+        <div class="card card-widget">
+            <div class="card-body expense-report-filter-padding">
+                <div class="row">
+                    <div class="col-md-5 col-7">
+                        <div class="form-group search-field">
+                            <%= f.text_field :keyword, class: 'text-field form-control text-normal', value: params[:keyword],  placeholder: 'Cari', autocomplete: 'off' %>
+                            <i id="search-clear-btn" class="icon icon-Cross search-with-clear clear"></i>
+                            <i id="search-btn" class="icon icon-Search search-with-clear"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-5 text-right">      
+                        <%= link_to admin_shop_expenses_download_path(format: :csv, start_date: @start_date, end_date: @end_date, keyword: params[:keyword]), :class => 'btn button-secondary-active ' do %>
+                            <span class="text-large"><%= t 'admin.expenses_report.download' %></span>
+                        <% end %>
+                    </div>
+                </div>   
+            </div>
+            <div class="card-header border-radius-unset color-text-table-header">
+                <div class="row row-invoice-header">
+                    <span class="col-6 text-small">
+                        Periode: 
+                        <% if (formatedDateTz(@start_date, 'Jakarta') == formatedDateTz(@end_date, 'Jakarta')) %>
+                            <span class="font-weight-bold"><%= formatedDateTz(@start_date, 'Jakarta') %></span>
+                        <% else %>
+                                <span class="font-weight-bold"> <%= formatedDateTz(@start_date, 'Jakarta') %> s.d <%= formatedDateTz(@end_date, 'Jakarta') %></span>
+                        <% end %>
+                    </span>
+                    <span class="col-4 col-offset-2 text-small font-weight-bold text-right"><%= @total_expense.present? ? formatedAmount(@total_expense) : '0' %></span>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="products-box-admin invoice-list">
+                    <div class="scroll-area">
+                        <ul class="list mb-0">
+                            <% @shop_expenses.each do |shop_expense| %>
+                                <input id="expenses-report-id" type="hidden" value="<%= shop_expense.supplier.name %>">
+                                <li class="row list-item  px-4">
+                                    <div class="col-7">
+                                        <div class="expense-report-title">
+                                            <span class="text-small"><%= shop_expense.supplier.name %></span>
+                                        </div>
+                                        <div class="expense-report-desc">
+                                            <span class="text-small"><%= shop_expense.description %></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="expense-report-item-price text-right">
+                                            <span class="text-small">
+                                                <%= shop_expense.value.present? ? formatedAmount(shop_expense.value) : '0' %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 text-right">
+                                        <%= link_to admin_shop_expense_path(shop_expense.id), :class => 'btn btn-primary ' do %>
+                                            <i class="fas fa-eye"></i>
+                                        <% end %>
+                                    </div>
+                                </li>
+                            <% end %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% else %>
+        <div class="no_search_result color-text-table-header p-3 text-center">
+            <p class="font-italic text-normal m-0">Tidak ada data yang bisa disajikan</p>
+        </div>
+    <% end %>
+    <%= f.submit t('admin.common.search'), class: 'btn btn-primary form-control', id: 'expense-report-filter', hidden: true %>
+<% end %>
+
+
+<div class="d-flex justify-content-center">
+    <%= paginate @shop_expenses, window: 1 %>
+</div>

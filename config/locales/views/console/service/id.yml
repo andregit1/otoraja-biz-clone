@@ -1,0 +1,12 @@
+id:
+  console:
+    service:
+      button:
+        add: "Menambah layanan"
+        edit: "Edit layanan"
+      index:
+        title: "Layanan"
+      new:
+        title: "Menambah layanan"
+      edit:
+        title: "Edit layanan"

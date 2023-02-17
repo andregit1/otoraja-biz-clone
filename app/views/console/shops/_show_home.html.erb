@@ -1,0 +1,127 @@
+<div class="row mb-2">
+  <div class="col-12 text-right">
+    <%= link_to edit_console_shop_path(@shop), :class => 'btn btn-primary' do %>
+      <i class="fas fa-edit"></i> <%= t 'console.shop.show.button.edit'%>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><%= t 'console.shop.shop_information'  %></div>
+      </div>
+      <div class="card-body p-0">
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <th><%= t 'console.shop.bengkel_id' %></th>
+              <td><%= @shop.bengkel_id %></td>
+            </tr>
+            <tr>
+              <th><%= t 'console.shop_group.name' %></th>
+              <td>
+                <% unless @shop.shop_group.nil? %>
+                  <%=link_to console_shop_group_path(@shop.shop_group_id) do %>
+                    <% @shop.shop_group.name %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <th><%= t 'console.common.name' %></th>
+              <td><%= @shop.name %></td>
+            </tr>
+            <tr>
+              <th><%= t 'console.common.tel' %></th>
+              <td>
+                <span class="d-block"><%= @shop.tel %></span>
+                <span class="d-block"><%= @shop.tel2 %></span>
+                <span class="d-block"><%= @shop.tel3 %></span>
+              </td>
+            </tr>
+            <tr>
+              <th><%= t 'console.common.address' %></th>
+              <td><%= @shop.address %></td>
+            </tr>
+            <tr>
+              <th><%= Shop.human_attribute_name(:virtual_bank_account_no) %></th>
+              <td>
+                <span class="d-block"><%= @shop.virtual_bank_no %></span>
+              </td>
+            </tr>
+            <tr>
+              <th><%= t 'console.shop.status' %></th>
+              <td>
+                <% if @shop.present? %>
+                  <% if @shop.non_subscriber? %>
+                    <span class="badge bg-danger"><%= Shop.human_attribute_name('subscriber_type.non_subscriber') %></span>
+                  <% elsif @shop.subscriber? %>
+                    <span class="badge bg-warning"><%= Shop.human_attribute_name('subscriber_type.subscriber') %></span>
+                  <% elsif @shop.paid_subscriber? %>
+                    <span class="badge bg-success"><%= Shop.human_attribute_name('subscriber_type.paid_subscriber') %></span>
+                  <% end %>
+                <% end %>
+                <%= t 'console.shop.until_symbol' %><%= formatedDate(@shop.expiration_date) %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header"><%= t 'console.shop.show.business_hours.name' %></div>
+      <div class="card-body p-0">
+        <% unless @shop.shop_business_hours.blank? %>
+        <table class="table table-sm">
+          <tr>
+            <th></th>
+            <th>Open</th>
+            <th>Close</th>
+          </tr>
+          <% @shop.shop_business_hours.each do |v| %>
+          <tr>
+            <td><%= t("console.shop.show.business_hours.#{v.day_of_week}") unless v.day_of_week.nil? %></td>
+            <td><%= v.open_time %></td>
+            <td><%= v.close_time %></td>
+          </tr>
+            <% end %>
+        </table>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header"><%= t 'console.shop.show.facility' %></div>
+      <div class="card-body">
+        <% unless @shop.facilities.blank? %>
+        <ul>
+          <% @shop.facilities.each do |facility| %>
+          <li><%= facility.name %></li>
+          <% end%>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header"><%= t 'console.shop.show.service' %></div>
+      <div class="card-body">
+        <% unless @shop.services.blank? %>
+        <ul>
+          <% @shop.services.each do |service| %>
+          <li><%= service.name %></li>
+          <% end%>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

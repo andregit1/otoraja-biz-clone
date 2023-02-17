@@ -1,0 +1,83 @@
+  <div class="card-header">
+    <div class="d-flex justify-content-between mt-2 mb-2">
+    <div> <%= link_to 'Back', console_shop_products_import_path, class: "btn btn-default mr-3"%></div>
+      <div>
+        <h3 class="mt-1"><%=@shop_products_with_error.length%> <%=t('console.shop_product.form_import_with_error.problem_product')%></h3>
+      </div>
+      <div><%= tag.button t('console.shop_product.form_import_with_error.download_and_fix'), onClick: "exportCSVFile()", class: "btn btn-danger", disabled: @shop_products_with_error.blank?  %></div>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-sticky">
+        <thead>
+          <tr>
+            <th><%=t('console.shop_product.form_import_with_error.line')%></th>
+            <th><%=t('console.shop_product.form_import_with_error.note')%></td>
+            <th>product_no</th>
+            <th>product_class_name</th>
+            <th>product_category</th>
+            <th>admin_product_id</th>
+            <th>shop_alias_name</th>
+            <th>item_detail​</th>
+            <th>stock_minimum​</th>
+            <th>sales_unit_price</th>
+            <th>remind_interval_day</th>
+            <th>stock</th>
+            <th>purchase_unit_price</th>
+            <th>in_store</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @shop_products_with_error.blank? %>
+            <tr>
+              <td colspan="11" class="text-center"><div class="empty_message"><%=t("console.shop_product.form_import_with_error.no_problem_data")%>.</div></td>
+            </tr>
+          <% end %>
+          <div id="products_with_error" class="d-none">
+            <%=@shop_products_with_error.to_json%>
+          </div>
+          <% @shop_products_with_error.each_with_index do |shop_product, index| %>
+            <tr class="table-danger">
+              <td><%= shop_product[:line] %></td>
+              <td><%= shop_product[:error] %></td>
+              <td>
+                <%= shop_product[:product_no] %>
+              </td>
+              <td><%= shop_product[:product_class_name] %></td>
+              <td>
+                <%= shop_product[:product_category_id] %>&nbsp;:&nbsp;<%= shop_product[:product_category_name] %>
+              </td>
+              <td>
+                <%= shop_product[:admin_product_id] %>
+              </td>
+              <td class="text-nowrap">
+                <%= shop_product[:shop_alias_name] %>
+              </td>
+              <td class="text-nowrap">
+                <%= shop_product[:item_detail] %>
+              </td>
+              <td class="text-right">
+                <%= shop_product[:stock_minimum] %>
+              </td>
+              <td class="text-right">
+                <%= formatedDecimalPoint(shop_product[:sales_unit_price].to_i) unless shop_product[:sales_unit_price].blank? %>
+              </td>
+              <td class="text-right">
+                <%= shop_product[:remind_interval_day] %>
+              </td>
+              <td class="text-right">
+                <%= shop_product[:stock] %>
+              </td>
+              <td class="text-right">
+                <%= shop_product[:purchase_unit_price] %>
+              </td>
+              <td>
+                <%= shop_product[:in_store] %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

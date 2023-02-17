@@ -1,0 +1,23 @@
+<%= render "form" %>
+<section class="row">
+  <div class="col-12">
+    <%= button_tag :type => "button", id: "confirm-edit-invoice-button", class: "btn-base -thin -primary m-btom-32", disabled: true do %>
+    <%= t 'admin.shop_product.save' %>
+    <% end %>
+  </div>
+</section>
+
+<div class="modal fade" id="stockControlNotif" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-title stock-control-title-modal text-normal"><%= t('admin.purchase.modal_label') %> <span class="item_stock_list_count"></span> <%= t('admin.purchase.modal_label_next') %></div>
+        <div class="stock-control-title-modal text-normal"> <%= t 'admin.purchase.modal_sub_label' %> </div>
+        <div class="stock-btn-wrapper">
+          <button type="button" class="btn btn-default cancel-btn-modal text-large mr-2" data-dismiss="modal"><%= t 'admin.purchase.modal_btn_cancel' %></button>
+          <button type="button" id="confirm-save-invoice-button" class="btn btn-primary set-confirm-padding text-large" data-dismiss="modal"><%= t 'admin.purchase.modal_btn_confirm' %></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div>
+  <div class="card card-otoraja">
+    <div class="card-header">
+      <h1>Confirm SMS</h1>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col">
+          <%= render 'layouts/step_progress', items:['Masuk', 'Kententuan', 'Konfirmasi', 'Info'], active: 'Konfirmasi' %>
+        </div>
+      </div>
+      <%= render 'layouts/flash_alert' %>
+      <%= form_with url: register_url, local: true do |f| %>
+        <%= f.hidden_field :tel, :value => @customer.tel %>
+        <%= f.hidden_field :send_dm, :value => @customer.send_dm %>
+        <%= f.hidden_field :cognito_id, :value => @customer.cognito_id %>
+        <%= f.hidden_field :cognito_pw, :value => @customer.cognito_pw %>
+        <%= f.hidden_field :session, :value => @session %>
+        <div class="row">
+          <div class="col">
+            <h3>Setelah Menerima Konfirmasi dari SMS, tekan Tombol “Konfirmasi”.</h3>
+            <%= f.submit 'Konfirmasi', class: 'btn btn-lg btn-primary btn-block', name: 'register' %>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <%= f.select :phone_country_code, @country_code_list, {selected: @phone_country_code}, {class: 'form-control form-control-lg select-country'} %>
+            </div>
+            <%= f.telephone_field :phone_national, class: 'form-control form-control-lg', :value => @phone_national, autocomplete: 'off'%>
+            <div class="input-group-append">
+              <%= f.submit 'Kirim Ulang SMS', class: 'btn btn-lg btn-outline-secondary btn-block', name: 'resend' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

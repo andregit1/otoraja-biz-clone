@@ -1,0 +1,6 @@
+<% content_for(:title, 'Customer Import') %>
+<div class="card">
+  <%= form_with model: @customer_upload, url: console_customers_import_confirm_path, multipart: true, local: true do |form| %>
+    <%= render 'form_upload', {f: form} %>
+  <% end %>
+</div>

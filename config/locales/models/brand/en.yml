@@ -1,0 +1,8 @@
+en:
+  brand:
+    errors:
+      messages:
+        similar_brand_name: " is considered the same as the existing brand: %{brand_name}"
+    notice:
+      successful_brand_saved: 'Brand was successfully created.'
+      successful_brand_updated: 'Brand was successfully updated.'

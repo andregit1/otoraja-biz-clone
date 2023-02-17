@@ -1,0 +1,22 @@
+id:
+  activerecord:
+    models:
+      new_contract_request: 'Daftar'
+    attributes:
+      new_contract_request:
+        id: "ID"
+        name: "Nama"
+        email: "Email"
+        tel: "Telepon"
+        shop_name: "Nama Bengkel"
+        shop_address: "Alamat Bengkel"
+        business_form: "Business form"
+        number_of_employees: "Jumlah staf"
+        desired_start_date: "Tanggal penggunaan yang diharapkan"
+        status: "Status"
+        created_at: "Tanggal Permohonan"
+      new_contract_request/status:
+        todo: "Pemohon Baru"
+        processing: "Dalam Proses"
+        processed: "Sudah Diproses"
+

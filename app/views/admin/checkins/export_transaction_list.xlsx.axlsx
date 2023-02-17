@@ -1,0 +1,19 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Transaksi List") do |sheet|
+  sheet.add_row %w(No_Transaksi Tanggal_Masuk Tanggal_Keluar Nama_Pelanggan Nomor_Polisi Merek_Motor Total Status)
+
+  @checkins.each do |checkin|
+    column_values = [
+      checkin&.checkin_no,
+      formatedDateTz(checkin&.datetime, 'Jakarta') ,
+      formatedDateTz(checkin&.checkout_datetime, 'Jakarta'),
+      checkin.customer.name,                                     
+      "#{checkin.maintenance_log.number_plate_area} #{checkin.maintenance_log.number_plate_number} #{checkin.maintenance_log.number_plate_pref}",
+      checkin.maintenance_log.maker,
+      checkin&.maintenance_log&.total_price,
+      checkin.get_status
+    ]
+    sheet.add_row column_values
+  end
+end

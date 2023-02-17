@@ -1,0 +1,18 @@
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item">
+    <% mode = 'all' %>
+    <%= link_to t('admin.transaction.all'), console_checkins_path(mode: mode, shop_id: @shop_id), class: "text-normal nav-link #{params[:mode] == 'all' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <% mode = 'uncheckout' %>
+    <%= link_to t('admin.transaction.processed'), console_checkins_path(mode: mode, shop_id: @shop_id), class: "text-normal nav-link #{params[:mode] == 'uncheckout' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <% mode = 'checkout' %>
+    <%= link_to t('admin.transaction.done'), console_checkins_path(mode: mode, shop_id: @shop_id), class: "text-normal nav-link #{params[:mode] == 'checkout' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <% mode = 'deleted' %>
+    <%= link_to t('admin.transaction.void'), console_checkins_path(mode: mode, shop_id: @shop_id), class: "text-normal nav-link #{params[:mode] == 'deleted' ? 'active' : ''}" %>
+  </li>
+</ul>

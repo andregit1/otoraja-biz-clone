@@ -1,0 +1,11 @@
+en:
+  console:
+    versions:
+      index:
+        title: "Version"
+        management_type: "Management Type"
+        latest_version: "Latest Version"
+        require_version: "Require Version"
+        front_android: "Front Android"
+        button:
+          require_to_latest: "Require To Latest"

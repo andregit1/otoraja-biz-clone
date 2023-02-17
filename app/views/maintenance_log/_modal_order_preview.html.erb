@@ -1,0 +1,74 @@
+<!-- Order Preview Sheet Modal -->
+<div id="orderPreviewModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#orderPreviewModal"></div>
+  <div class="modal_content -fullscreen">
+    <div class="modal-header">
+      <button class="close col-1 js-modal-close" data-target="#orderPreviewModal">
+        <i class="icon icon-Arrow-left"></i>
+      </button>
+      <div class="modal-title col-10 text-center"><%= t 'select_product.infomation' %></div>
+      <div class="col-1"></div>
+    </div>
+    <div id="preview-select">
+      <div class="modal-caption">
+      </div>
+      <div id="" class="modal-body row">
+        <section class="col-12" id="order-preview">
+          <div id="order-preview-details">
+            <table>
+              <thead>
+                <th><%= t 'receipt.item' %></th>
+                <th><%= t 'receipt.qty' %></th>
+                <th><%= t 'receipt.unit_price' %></th>
+                <th><%= t 'receipt.total' %></th>
+              </thead>
+              <tbody id="order-preview-list">
+                
+              </tbody>
+            </table>
+          </div>
+          <footer>
+            <ul>
+              <li class="d-flex">
+                <div class="text-left"><%= t 'receipt.sub_total' %></div>
+                <div id="order-preview-sub-total" class="ml-auto text-right order-preview-total"></div>
+              </li>
+              <li class="" id="order-preview-adjustment-toggle">
+                <div class="text-left"><%= t 'receipt.adjustment' %></div>
+                <div id="order-preview-adjustment" class="ml-auto text-right order-preview-total"></div>
+              </li>
+              <li class="d-flex" id="order-preview-discount-toggle">
+                <div class="text-left"><%= t 'receipt.discount' %></div>
+                <div id="order-preview-discount" class="ml-auto text-right order-preview-total discount-value"></div>
+              </li>
+              <li class="d-flex">
+                <div class="text-left"><%= t 'receipt.total' %></div>
+                <div id="order-preview-total" class="ml-auto text-right order-preview-total"></div>
+              </li>
+              <li class="d-flex">
+                <div class="text-left"><%= t 'receipt.paid' %></div>
+                <div id="order-preview-paid" class="ml-auto text-right order-preview-total"></div>
+              </li>
+              <li class="d-flex">
+                <div class="text-left"><%= t 'receipt.change' %></div>
+                <div id="order-preview-change" class="ml-auto text-right order-preview-total"></div>
+              </li>
+            </ul>
+          </footer>
+        </section>
+      </div>
+    </div>
+    <div id="order-preview-button" class="pl-5 pr-5 mt-6">
+      <%= button_tag :type => "button", id: "order-preview-confirm", class: "btn-base -basic -primary js-modal-close", data: {"target" => "#orderPreviewModal"} do %>
+        <%= t 'ok' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<table hidden>
+  <tr class="related-product clone"><td class="related-product-name pl-4"></td><td colspan="3"></td></tr>
+  <tr class="discount-item clone"><td><%= t 'receipt.discount_small' %></td><td colspan="2"></td><td class="discount-value text-right"></td></tr>
+  <tr class="order-preview-group discount clone"><td><%= t 'receipt.order_discount' %></td><td colspan="2"></td><td class="discount-value text-right"></td></tr>
+  <tr class="order-preview-group adjusted clone"><td><%= t 'receipt.adjustment' %></td><td colspan="2"></td><td id="adjusted-value" class="text-right"></td></tr>
+</table>
+<!-- Order Preview Sheet Modal -->

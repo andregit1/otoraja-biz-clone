@@ -1,0 +1,151 @@
+<% content_for(:title, t('admin.shop_setting.shop_setting')) %>
+
+<div class="card card-widget">
+  <div class="card-header color-text-table-header">
+    <div class='d-flex justify-content-between align-items-center'>
+      <h3 class="card-title text-large text-uppercase"><%= t 'admin.shop_setting.owner' %></h3>
+      <% if current_user.owner? %>
+        <%= link_to admin_shop_setting_edit_owner_path, :class => 'btn btn-primary btn-custom' do %><i class="fas fa-edit text-large"></i><% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table m-0">
+        <tbody>
+          <tr>
+            <th class="col-4 col-md-3 text-normal">
+              <%= t 'admin.shop_setting.name' %>
+            </th>
+            <td class="col-8 col-md-9 text-normal">
+              <%= @owner.owner_name %>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-4 col-md-3 text-normal">
+              <%= t 'admin.shop_setting.phone_number' %>
+            </th>
+            <td class="col-8 col-md-9 text-normal">
+              <%= @owner.owner_tel %>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-4 col-md-3 text-normal">
+              <%= t 'admin.shop_setting.other_phone_number' %>
+            </th>
+            <td class="col-8 col-md-9 text-normal">
+              <%= @owner.owner_tel2 %>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-4 col-md-3 text-normal">
+              <%= t 'admin.shop_setting.email' %>
+            </th>
+            <td class="col-8 col-md-9 text-normal">
+              <%= @owner.owner_email %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card card-widget">
+  <div class="card-header color-text-table-header py-4">
+    <h3 class="card-title text-large text-uppercase"><%= t 'admin.shop_setting.user_group' %></h3>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table m-0">
+        <tbody>
+          <tr>
+            <th class="col-4 col-md-3 text-normal">
+              <%= t 'admin.shop_setting.group_name' %>
+            </th>
+            <td class="col-8 col-md-9 text-normal">
+              <%= @owner.name %>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-4 col-md-3 text-normal">
+              <%= t 'admin.shop_setting.id_user' %>
+            </th>
+            <td class="col-8 col-md-9 text-normal">
+              <%= @owner.group_no %>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-4 col-md-3 text-normal">
+              <%= t 'admin.shop_setting.year_of_register' %>
+            </th>
+            <td class="col-8 col-md-9 text-normal">
+              <%= @owner.created_at.year %>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-4 col-md-3 text-normal">
+              <%= t 'admin.shop_setting.have_branch' %>
+            </th>
+            <td class="col-8 col-md-9 text-normal">
+              <% if current_user.managed_shops.count > 0 %>
+                <%= t 'admin.common.yes_label' %>
+              <% else %>
+                <%= t 'admin.common.no_label' %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card card-widget">
+  <div class="card-header color-text-table-header py-4">
+    <h3 class="card-title text-large text-uppercase"><%= t 'admin.shop_setting.shop_branch' %></h3>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-borderless m-0">
+      <% if current_user.managed_shops.count > 0 %>
+        <% current_user.managed_shops.each do |branch| %>
+          <tbody class="border-bottom-enable">
+            <tr>
+              <th class="col-4 col-md-3 text-normal">
+                <%= t 'admin.shop_setting.shop_id' %>
+              </th>
+              <td class="col-6 col-md-8 text-normal ">
+                <%= branch.bengkel_id %>
+              </td>
+              <td class="col-1 col-md-1 pl-0 pr-3 pt-3" rowspan="2">
+                <%= link_to admin_shop_setting_edit_branch_path(branch.id),:class => "btn btn-primary btn-custom" do %>
+                  <i class="fas fa-edit text-large"></i>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <th class="col-4 col-md-3 text-normal">
+                <%= t 'admin.shop_setting.branch_name' %>
+              </th>
+              <td class="col-8 col-md-9 text-normal">
+                <%= branch.name %>
+              </td>
+            </tr>
+          </tbody>
+        <%end %>
+      <% else %>
+        <p class="p-5 text-center text-normal">
+          <%= t 'admin.shop_setting.empty_branch_info' %>
+        </p>
+      <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% if current_user.owner? %>
+  <%= link_to admin_shop_setting_new_branch_path, :class => "btn button-secondary-active mb-5" do %>
+    <span class="text-large"><i class="fas fa-plus"></i> <%= t 'admin.shop_setting.add_shop' %></span>
+  <% end %>
+<% end %>

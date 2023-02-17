@@ -1,0 +1,33 @@
+done:
+  customer: one
+  shop: one
+  datetime: "2022-02-09 00:00:00"
+  checkout_datetime: "2022-02-09 00:00:00"
+  is_checkout: true
+  deleted: false
+  created_staff_name: "staff"
+  created_staff_id: 1
+  updated_staff_name: "staff"
+  updated_staff_id: 1
+processed:
+  customer: one
+  shop: one
+  datetime: "2022-02-09 00:00:00"
+  checkout_datetime: "2022-02-09 00:00:00"
+  is_checkout: false
+  deleted: false
+  created_staff_name: "staff"
+  created_staff_id: 1
+  updated_staff_name: "staff"
+  updated_staff_id: 1
+deleted:
+  customer: one
+  shop: one
+  datetime: "2022-02-09 00:00:00"
+  checkout_datetime: "2022-02-09 00:00:00"
+  is_checkout: true
+  deleted: true
+  created_staff_name: "staff"
+  created_staff_id: 1
+  updated_staff_name: "staff"
+  updated_staff_id: 1

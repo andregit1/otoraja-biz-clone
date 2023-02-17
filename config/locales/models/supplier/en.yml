@@ -1,0 +1,7 @@
+en:
+  supplier:
+    notice:
+      successful_supplier_created: 'Supplier/Vendor was successfully created!'
+      successful_supplier_updated: 'Supplier/Vendor was successfully updated!'
+      successful_supplier_destroyed: 'Supplier/Vendor was successfully deleted!'
+      unsuccessful_supplier_created: 'Supplier/Vendor was already created!'

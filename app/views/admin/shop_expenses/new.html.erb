@@ -1,0 +1,6 @@
+<%= form_with(model: @shop_expense, url: admin_shop_expenses_path, local: true) do |f| %>
+    <%= render "form", {f: f} %>
+<% end %>
+<%= form_with(model: @supplier, url: admin_shop_expenses_create_supplier_path, :id => 'addModalSupplier' , remote: true,) do |f| %>
+    <%= render "modal_add_expense_report", {f: f}%>
+<% end %>

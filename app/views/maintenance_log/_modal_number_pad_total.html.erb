@@ -1,0 +1,48 @@
+
+<!-- Number Pad Sheet Modal -->
+<div id="numberPadModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#numberPadModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-down js-modal-close" data-target="#numberPadModal">
+      <i class="icon icon-Arrow-down"></i>
+    </div>
+    <div id="price-select">
+      <div class="modal-caption">
+      </div>
+      <div id="" class="modal-body row">
+        <div class="col-7">
+          <section class="grid -discount-grid">
+            <div class="row no-pad">
+              <div class="col-4"><label class="grid-label"><%= t 'select_product.list_price' %></label></div>
+              <div class="col-8 -align-right"><span>Rp.&nbsp;</span><span id="list-price">200,000</span></div>
+            </div>
+            <div class="row no-pad">
+              <div class="col-4"><label class="grid-label"><%= t 'discount' %></label></div>
+              <div class="col-8 -align-right -text-disabled"><span id="discountIndicator">Rp.&nbsp;</span><span id="adjustedAmount">0</span></div>
+            </div>
+            <hr />
+            <div class="row no-pad">
+              <div class="col-4"><label class="grid-label"><%= t 'select_product.selling_price' %></label></div>
+              <div class="col-8 -align-right">
+                <div class="grid-form">
+                  <span class="-text-red -text-bold">Rp.&nbsp;</span><input class="grid-input -align-right -text-red -text-bold" id="numberInput" type="text" readonly value=""/>
+                </div>
+              </div>
+            </div>
+          </section>
+          <div id="number-pad-total-alert" class="text-center text-danger hidden mt-4"><%= t 'warning.total_value' %></div>
+        </div>
+        <div class="col-5">
+          <div id="numberPad"></div>
+        </div>
+      </div>
+      <div id="number-pad-button" class="pl-5 pr-5 mt-6">
+        <%= button_tag :type => "button", class: "btn-base -basic -primary js-modal-close", data: {"target" => "#numberPadModal"} do %>
+          <%= t 'ok' %>
+        <% end %>
+      </div>
+    </div> 
+  </div>
+</div>
+
+<!-- Number Pad Sheet Modal -->

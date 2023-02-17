@@ -1,0 +1,11 @@
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item">
+    <%= link_to t('admin.customer.basic'), admin_customer_show_path, class: "text-large nav-link #{controller.action_name == 'show' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to t('admin.customer.checkins'), admin_customer_checkins_path, class: "text-large nav-link #{controller.action_name == 'checkins' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to t('admin.customer.reviews'), admin_customer_answers_path, class: "text-large nav-link #{controller.action_name == 'answers' ? 'active' : ''}" %>
+  </li>
+</ul>

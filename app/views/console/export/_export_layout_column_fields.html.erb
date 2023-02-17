@@ -1,0 +1,24 @@
+<div class="nested-fields">
+  <div class="row mb-2">
+    <div class="col-2">
+      <%= f.collection_select :export_column_id, @export_columns, :id, :name, { :include_blank => true }, { :class=>'form-control mr-2' } %>
+    </div>
+    <div class="col-2">
+      <%= f.number_field :order, :class=>'form-control mr-2', autocomplete: 'off', oninput: 'if(value.length>4)value=value.slice(0,4)' %>
+    </div>
+    <%= f.fields_for :export_masking_rule, f.object.export_masking_rule || ExportMaskingRule.new do |masking_field| %>
+      <div class="col-1 text-center">
+        <%= masking_field.check_box :use_masking %>
+      </div>
+      <div class="col-2">
+        <%= masking_field.number_field :top_no_masking_digits, :class=>'form-control', autocomplete: 'off' %>
+      </div>
+      <div class="col-2">
+        <%= masking_field.number_field :last_no_masking_digits, :class=>'form-control', autocomplete: 'off' %>
+      </div>
+    <% end %>
+    <div class="col-2">
+      <%= link_to_remove_association f, class: 'btn btn-danger' do %><i class="icon icon-Cross-circle"></i><% end %>
+    </div>
+  </div>
+</div>

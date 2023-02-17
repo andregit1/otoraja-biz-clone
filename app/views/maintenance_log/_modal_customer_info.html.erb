@@ -1,0 +1,96 @@
+<div id="customerInfoModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#customerInfoModal"></div>
+  <div class="modal_content -fullscreen">
+    <div class="modal-header">
+      <button id="close-customer-info-modal" class="close col-1 js-modal-close" data-target="#customerInfoModal">
+        <i class="icon icon-Arrow-left"></i>
+      </button>
+      <div class="modal-title col-10 text-center"><%= t 'customer.infomation' %></div>
+      <div class="col-1"></div>
+    </div>
+    <div class="modal-body customer-info-body row m-0">
+      <div class="col-3 customer-info-body_label"><%= t 'customer.name' %></div>
+      <div class="col-9 customer-info-body_input-box">
+        <%= text_field_tag 'name', nil, id:'c-info-customer_name', class: 'customer-info-body_input', placeholder: t('example_name') %>
+      </div>
+      <hr class="p-0 m-0 col-12" />
+      <div class="col-3 customer-info-body_label"><%= t 'customer.cellphone_full' %></div>
+      <div class="col-9 pl-0 pt-1 pb-1">
+        <div class="input-tel border-0">
+          <%= select_tag 'c-info-phone_country_code', options_for_select(@country_code_list, selected: 62), class: 'input-tel_country-code border-0 pl-0 -text-16' %>
+          <%= telephone_field_tag 'c-info-phone_national', nil, class: 'input-tel_phone-national -text-16', autocomplete: 'off', maxlength: 18, placeholder: t('example_phone_no') %>
+        </div>
+      </div>
+      <hr class="p-0 m-0 col-12" />
+      <div class="col-3 customer-info-body_label"><%= t 'vehicle.registration_plate_full' %></div>
+      <div class="col-9 pl-0 pt-1 pb-1">
+        <div class="input-numberplate border-0">
+        <%= select_tag 'c-info-number_plate_area', options_for_select(MaintenanceLog.number_plate_areas.keys, selected: 'B'), class: 'input-numberplate_area border-0 pl-0 -text-16' %>
+        <%= number_field_tag 'c-info-number_plate_number', nil, :class=>'input-numberplate_number border-0 -text-16', autocomplete: 'off', oninput: 'if(value.length>4)value=value.slice(0,4)', placeholder: t('example_no_plate_up') %>
+        <%= url_field_tag 'c-info-number_plate_pref', nil, :class=>'input-numberplate_pref -text-16', autocomplete: 'off',  oninput: 'value=value.toUpperCase();if(value.length>3)value=value.slice(0,3)', placeholder: t('example_no_plate_down') %>
+      </div>
+      </div>
+      <hr class="p-0 m-0 col-12" />
+      <div class="col-3 customer-info-body_label"><%= t 'vehicle.valid' %></div>
+      <div class="col-9 customer-info-body_input-box">
+        <%= button_tag :type=>"button", id:'c-info-expiration-select', :data=>{'target'=>'#yearPickerModal'}, :class=> 'btn js-modal-open customer-info-body_input' do%>
+          <span class="-text-blank"><%= t 'vehicle.select_month_year' %>&ensp;<i class="icon icon-Arrow-down"></i></span>
+        <% end %>
+        <%= button_tag :type=>"button", id:'c-info-expiration-blank', :data=>{'target'=>'#yearPickerModal'}, :class=> 'btn js-modal-open customer-info-body_input', style: "display:none;" do%>
+          <span class="-text-blank"><%= t 'vehicle.select_month_year' %>&ensp;<i class="icon icon-Arrow-down"></i></span>
+        <% end %>
+        <%= button_tag :type=>"button", id:'c-info-clear-expiration', class: 'ml-2 bg-white border-0', style: "display:none;" do%>
+          <i class="icon icon-Cross-circle"></i>
+        <% end %>
+        <%= hidden_field_tag :expiration_year, '', id: 'c-info-expiration-year' %>
+        <%= hidden_field_tag :expiration_month, '', id: 'c-info-expiration-month' %>
+      </div>
+      <hr class="p-0 m-0 col-12" />
+      <div class="col-3 customer-info-body_label"><%= t 'vehicle.type' %></div>
+      <div class="col-9 customer-info-body_input-box">
+        <%= button_tag :type=>"button", id:'c-info-maker-select', :data=>{'target'=>'#bikePickerModal'}, :class=> 'btn js-modal-open customer-info-body_input' do%>
+          <span class="-text-blank"><%= t 'vehicle.select_manufacturer' %>&ensp;<i class="icon icon-Arrow-down"></i></span>
+        <% end %>
+        <%= button_tag :type=>"button", id:'c-info-maker-blank', :data=>{'target'=>'#bikePickerModal'}, :class=> 'btn js-modal-open customer-info-body_input', style: "display:none;" do%>
+          <span class="-text-blank"><%= t 'vehicle.select_manufacturer' %>&ensp;<i class="icon icon-Arrow-down"></i></span>
+        <% end %>
+        <%= button_tag :type=>"button", id:'c-info-clear-maker', class: 'ml-2 bg-white border-0', style: "display:none;" do%>
+          <i class="icon icon-Cross-circle"></i>
+        <% end %>
+        <%= hidden_field_tag :bike_maker_name, '', id: 'c-info-bike-maker' %>
+      </div>
+      <hr class="p-0 mt-0 mb-0 col-9 offset-3" />
+      <div class="col-3 customer-info-body_label"></div>
+      <div class="col-9 customer-info-body_input-box">
+        <%= text_field_tag 'name', nil, id:'c-info-model', class: 'customer-info-body_input', placeholder: t('vehicle.model') %>
+      </div>
+      <hr class="p-0 m-0 col-12" />
+      <div class="col-3 customer-info-body_label"><%= t 'vehicle.color' %></div>
+      <div class="col-9 customer-info-body_input-box">
+        <%= button_tag :type=>"button", id:'c-info-color-select', :data=>{'target'=>'#colorPickerModal'}, :class=> 'btn js-modal-open customer-info-body_input' do%>
+          <span class="-text-blank"><%= t 'vehicle.select_color' %>&ensp;<i class="icon icon-Arrow-down"></i></span>
+        <% end %>
+        <%= button_tag :type=>"button", id:'c-info-color-blank', :data=>{'target'=>'#colorPickerModal'}, :class=> 'btn js-modal-open customer-info-body_input', style: "display:none;"  do%>
+          <span class="-text-blank"><%= t 'vehicle.select_color' %>&ensp;<i class="icon icon-Arrow-down"></i></span>
+        <% end %>
+        <%= button_tag :type=>"button", id:'c-info-clear-color', class: 'ml-2 bg-white border-0', style: "display:none;" do%>
+          <i class="icon icon-Cross-circle"></i>
+        <% end %>
+        <%= hidden_field_tag :bike_color, '', id: 'c-info-bike-color' %>
+      </div>
+      <hr class="p-0 mt-0 mb-2 col-12" />
+      <div class="col-12 pt-5 d-flex justify-content-center">
+        <%= button_tag :type => "button", id:'c-info-confirm', :class =>"btn-base -basic -primary w-75" do %>
+          <%= t 'ok' %>
+        <% end %>
+      </div>
+      <div id="c-info-phone_valid_err_msg" class="small text-danger m-auto"></div>
+      <input id="selected-expiration-year" type="hidden" value="">
+      <input id="selected-expiration-month" type="hidden" value="">
+      <input id="selected-maker" type="hidden" value="">
+      <input id="selected-color" type="hidden" value="">
+      </div>
+  </div>
+</div>
+
+<%= button_tag :type => "button", id: "open-customer-info-modal", class: "js-modal-open", data: {"target" => "#customerInfoModal"}, style: "display:none;" %>

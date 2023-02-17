@@ -1,0 +1,251 @@
+$('#dailyHistoryModalBody').LoadingOverlay('hide');
+$('#daily-history-tbody').html('');
+$('#stockProfitModalBody').LoadingOverlay('hide');
+$('#stock-profit-tbody').html('');
+
+<% if @stock_profit && @stock_cogs%>
+//----------------------
+//- Revenue BAR CHART -
+//----------------------
+
+var revenueBarChartData = {
+  labels: <%== @stock_profit.keys %>,
+    datasets:[
+    {
+      label               : 'COGS',
+      backgroundColor     : 'rgba(186,252,164,0.9)',
+      borderColor         : 'rgba(186,252,164,0.8)',
+      data                : <%== @stock_cogs.values %>,
+      pointStyle          : 'circle'
+    },
+    {
+      label               : 'Profits',
+      backgroundColor     : 'rgba(60,141,188,0.9)',
+      borderColor         : 'rgba(60,141,188,0.8)',
+      data                : <%== @stock_profit.values %>,
+      pointStyle          : 'circle'
+    }
+  ]
+} 
+
+var revenueBarChartCanvas = $('#stockProfitChart').get(0).getContext('2d')
+
+var revenueBarChartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  legend :{
+    display: false,
+    labels:{
+      usePointStyle: true,
+      fontSize: 18
+    }
+  },
+  legendCallback: function(chart) {
+          var text = []; 
+          text.push('<ul class="' + chart.id + '-legend">'); 
+          for (var i = 0; i < chart.data.datasets.length; i++) { 
+            text.push('<li class="badge badge-pill badge-secondary" style="background-color:' + chart.data.datasets[i].backgroundColor + '"><span></span>'); 
+            if (chart.data.datasets[i].label) { 
+              text.push(chart.data.datasets[i].label); 
+            } 
+            text.push('</li>'); 
+          } 
+          text.push('</ul>'); 
+          return text.join('');
+  },
+  scales:{
+    xAxes:[{
+      stacked: true,
+      barPercentage: 0.5,
+      categoryPercentage: 0.5,
+      ticks: {
+        autoSkip: true,
+        maxTicksLimit: 12
+      }
+    }],
+    yAxes: [{
+      stacked: true,
+      ticks: {
+        beginAtZero: true,
+        userCallback: function(label, index, labels) {
+          if (Math.floor(label) === label) {
+            return formatedNumber(label);
+          }
+        }
+      }
+    }],
+  },
+  tooltips: {
+    callbacks: {
+      label: function(tooltipItem, data) {
+        var label = data.datasets[tooltipItem.datasetIndex].label
+        var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+        return [label + ' : ' + formatedNumber(value)]
+      }
+    }
+  },
+  plugins: {
+    labels: {
+      render: function (args) {
+        return ''
+      },
+    }
+  }
+}
+
+if(revenueBarChart){
+  revenueBarChart.destroy();
+}
+
+var revenueBarChart = new Chart(revenueBarChartCanvas, {
+  type: 'bar', 
+  data: revenueBarChartData,
+  options: revenueBarChartOptions,
+})
+
+var legend = document.getElementById("revenueLegend");
+
+legend.innerHTML = revenueBarChart.generateLegend();
+
+var legendItems = legend.getElementsByTagName('li');
+for (var i = 0; i < legendItems.length; i += 1) {
+  legendItems[i].addEventListener("click", legendClickCallback, false);
+}
+
+
+function legendClickCallback(event) {
+  event = event || window.event;
+
+  var target = event.target || event.srcElement;
+  while (target.nodeName !== 'LI') {
+      target = target.parentElement;
+  }
+  var parent = target.parentElement;
+  var chartId = parseInt(parent.classList[0].split("-")[0], 10);
+  var chart = Chart.instances[chartId];
+  var index = Array.prototype.slice.call(parent.children).indexOf(target);
+  var meta = chart.getDatasetMeta(index);
+
+  if (meta.hidden === null) {
+    meta.hidden = !chart.data.datasets[index].hidden;
+    target.classList.add('hidden');
+  } else {
+    target.classList.remove('hidden');
+    meta.hidden = null;
+  }
+  chart.update();
+}
+<% end %>
+
+<% if @chart_data %>
+  var stockHistoryChartData = {
+    labels  : <%== @chart_data.keys %>,
+    datasets: [
+      {
+        label: 'Stock',
+        type: 'line',
+        data: <%== @chart_data.values %>,
+        backgroundColor: 'rgba(60,141,188,0.9)',
+        borderColor: 'rgba(60,141,188,0.8)',
+        lineTension: 0,
+        fill: false,
+      },
+      <% unless @shop_product.stock_minimum.nil? %>
+      {
+        type: 'line',
+        label: 'Minimum Stock',
+        backgroundColor: 'red',
+        borderColor: 'red',
+      },
+      <% end %>
+    ]
+  }
+  var stockHistoryChartCanvas = $('#stockHistoryChart').get(0).getContext('2d')
+
+  var stockHistoryChartOptions = {
+    responsive              : true,
+    maintainAspectRatio     : false,
+    title: {
+      display: true,
+      fontSize: 18,
+      padding: 30,
+      fontStyle: 'normal',
+      text: '<%== @shop_product.shop_alias_name %>'
+    },
+    legend: {
+      display: true,
+      onClick: function(){ return false; },
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          userCallback: function(label, index, labels) {
+          if (Math.floor(label) === label) {
+            return formatedNumber(label);
+          }
+        }
+        }
+      }],
+      xAxes: [{
+        barPercentage: 0.5,
+        categoryPercentage: 0.5,
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 12
+        }
+      }],
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+          return formatedNumber(value)
+        }
+      }
+    },
+    plugins: {
+      labels: {
+        render: function (args) {
+          return ''
+        },
+      }
+    },
+    <% unless @shop_product.stock_minimum.nil? %>
+    annotation: {
+      annotations: [{
+        type: 'line',
+        mode: 'horizontal',
+        scaleID: 'y-axis-0',
+        value: <%== @shop_product.stock_minimum %>,
+        borderColor: 'red',
+      }]
+    }
+    <% end %>
+  }
+
+  if(stockHistoryChart){
+    stockHistoryChart.destroy();
+  }
+
+  var stockHistoryChart = new Chart(stockHistoryChartCanvas, {
+    type: 'line',
+    data: stockHistoryChartData,
+    options: stockHistoryChartOptions,
+  })
+
+  $('#stockHistoryModalBody').LoadingOverlay('hide');
+
+  function formatedNumber(num) {
+    return num.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')
+  }
+<% elsif @stock_controls %>
+  <% @stock_controls.each do |stock_control| %>
+    $('#daily-history-tbody').append("<tr><td><%= stock_control.supplier&.name if stock_control.action == 'Arrival' %></td><td><%= stock_control.shop_product&.shop_alias_name %><td><%= stock_control.action %></td></td><td><%= stock_control.quantity %></td><td><span class='float-left'>Rp.</span><span class='float-right'><%= formatedRupiah(stock_control.purchase_price) %></span></td><td><span class='float-left'>Rp.</span><span class='float-right'><%= formatedRupiah(stock_control.purchase_unit_price) %></span></td><td><%= stock_control.payment %></td></tr>");
+  <% end %>
+<% end %>
+
+// ピリオドで数値3桁区切り
+function formatedNumber(num) {
+  return num.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')
+}

@@ -1,0 +1,8 @@
+id:
+  variant:
+    errors:
+      messages:
+        similar_variant_name: " dianggap sama dengan varian yang sudah ada:  %{variant_name} "
+    notice:
+      successful_variant_saved: 'Varian berhasil disimpan.'
+      successful_variant_updated: 'Variant berhasil diubah.'

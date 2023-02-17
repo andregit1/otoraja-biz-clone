@@ -1,0 +1,6 @@
+<% content_for(:title, t('console.shop_staff.add_shop_staff')) %>
+<div class="card">
+  <%= form_with(model: @shop_staff, url:console_shop_staffs_path(shop_id: @shop_id), local: true) do |form| %>
+  <%= render 'form', {shop_staff: @shop_staff, f: form} %>
+  <% end %>
+</div>

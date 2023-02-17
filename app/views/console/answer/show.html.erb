@@ -1,0 +1,118 @@
+<% content_for(:title, 'Answer - Details') %>
+<div class="card">
+  <div class="card-header d-flex">
+    <span>From, <%= @answer.questionnaire.checkin.customer.name.blank? ? 'No name' : @answer.questionnaire.checkin.customer.name %></span>
+      <%= link_to @return,:class => "btn btn-primary ml-auto" do %>
+        <i class="fas fa-left"></i> Back </a>
+      <% end %>
+  </div>
+  <div class="card-body">
+    <div>
+      <b>Shop</b>
+      <p><%= @answer.questionnaire.checkin.shop.name %><%= @customer_id %></p>
+    </div>
+    <div>
+      <b>Rate</b>
+      <div class="star-<%= @answer.rate %> answer-raty"></div>
+    </div>
+    <div class='mt-3'>
+      <b>Review</b>
+      <% unless @choice_answers.nil? %>
+        <% Array(@choice_answers).each do |answer|  %>
+          <li><%= answer.choice %></li>
+        <% end %>
+      <% else %>
+        <p>No review</p>
+      <% end %>
+    </div>
+    <div class='mt-3'>
+      <b>Reason for Visit</b>
+      <% unless @answer.reasons.nil? %>
+        <% Array(@answer.reasons).each do |reason| %>
+          <li><%= reason %></li>
+        <% end %>
+      <% else %>
+        <p>None given</p>
+      <% end %>
+    </div>
+    <div class='mt-3'>
+      <b>Comment</b>
+      <% unless @answer.comment.blank? %>
+        <%= simple_format(@answer.comment) %>
+      <% else %>
+        <p>No comment</p>
+      <% end %>
+    </div>
+    <div class='mt-3'>
+      <b>Checkin</b>
+      <p><%= formatedDateTime(@answer.questionnaire.checkin.datetime, 'Jakarta') %></p>
+    </div>
+  </div>
+  <div class='card-footer'>
+    Answered on <%= formatedDateTime(@answer.answered_at, 'Jakarta') %>
+  </div>
+</div>
+
+<div class="card card-dark">
+  <div class="card-header">
+    <span>Bike</span>
+  </div>
+  <div class="card-body p-0"> 
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Maker</th>
+          <th>Model</th>
+          <th>No.</th>
+          <th>Color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @maintenance_log.maker %></td>
+          <td><%= @maintenance_log.model %></td>
+          <td><%= @maintenance_log.formated_number_plate if @maintenance_log.has_number_plate %></td>
+          <td><%= @maintenance_log.color %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card card-dark">
+  <div class="card-header">
+    <span> Maintenance Log Details</span>
+  </div>
+  <div class="card-body p-0">
+    <div>
+      <% unless @maintenance_log_details.empty? %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Mechanics</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Array(@maintenance_log_details).each do |maintenance_log_detail|  %>
+              <tr>
+                <td class="align-middle"><%= maintenance_log_detail.name %></td>
+                <td class="align-middle"><%= maintenance_log_detail.quantity %></td>
+                <td class="align-middle"><%= maintenance_log_detail.unit_price %></td>
+                <td class="align-middle">
+                  <% maintenance_log_detail.maintenance_mechanics.each do |mechanic| %>
+                    <li><%= mechanic.shop_staff.name %></li>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p class="p-3 m-0">No purchase</p>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+id:
+  change_phone_number_verification:
+    show:
+      success_verify: Verifikasi berhasil
+      success_info: Nomor telephone anda yang terdaftar sudah diganti ke nomor yang baru
+      failed_info: Link Verifikasi ini sudah pernah digunakan
+      failed_title: Nomor telp anda yang terdaftar sudah di ganti ke nomor baru.
+      note: Jika di SMC masih belum berubah, silahkan mencoba merefresh halamanya.

@@ -1,0 +1,7 @@
+<% content_for(:title, t('console.facility.new.title')) %>
+
+<div class="card">
+  <%= form_with(model: @facility, url:console_facilities_path, local: true) do |form| %>
+  <%= render 'form', {facility: @facility, f: form} %>
+  <% end %>
+</div>

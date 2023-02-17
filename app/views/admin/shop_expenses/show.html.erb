@@ -1,0 +1,69 @@
+<div class="content-header header-mtop">
+    <div class="row">
+        <div class="text-page-title font-weight-bold col-12">
+            <h1 class="text-page-title font-weight-bold"><%= t 'admin.expenses_report.expenses_create_new_title' %></h1>
+        </div>
+    </div>
+</div>
+<div class="card card-widget">
+    <div class="card-header color-text-table-header">
+        <div class="row row-invoice-header">
+            <h3 class="card-title col-12 font-weight-bold"><%= formatedAmount(@shop_expense.value) %></h3>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="products-box-admin invoice-list">
+            <div class="scroll-area">
+                <ul class="list mb-0">
+                    <li class="row list-item px-4">
+                        <div class="col-12">
+                            <div class="expense-report-title">
+                                <span class="text-small"><%= t 'admin.expenses_report.paid_to' %></span>
+                                <p class="text-small"><%= @shop_expense.supplier.name %></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="row list-item px-4">
+                        <div class="col-6">
+                            <div class="expense-report-title">
+                                <span class="text-small"><%= t 'admin.expenses_report.date' %></span>
+                                <p class="text-small"><%= formatedDateTz(@shop_expense.expense_date, 'Jakarta') %></p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="expense-report-title">
+                                <span class="text-small"><%= t 'admin.expenses_report.no_ref' %></span>
+                                <p class="text-small">
+                                <% if (@shop_expense.no_ref) %>
+                                    <%= @shop_expense.no_ref %>     
+                                <% else %>
+                                    <%= "---" %>
+                                <% end %>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="row list-item px-4">
+                        <div class="col-12">
+                            <div class="expense-report-title">
+                                <span class="text-small"><%= t 'admin.expenses_report.desc' %></span>
+                                <p class="text-small"><%= @shop_expense.description %></p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="expense-create-btn">
+    <button id="deleteExpenseBtn" name="button" type="button" class="btn button-secondary-active text-large btn-expenses-minwidth" data-target="#confirmDeleteExpense">
+        <span class="text-large">Hapus</span>
+    </button>
+
+    <%= link_to edit_admin_shop_expense_path(@shop_expense.id), :class => 'btn btn-primary text-large btn-expenses-minwidth' do %>
+        <span class="text-large">Ubah Data</span>
+    <% end %>
+</div>
+
+<%= render "admin/shop_expenses/modal_confirm_delete" %>

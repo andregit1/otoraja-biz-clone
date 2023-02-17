@@ -1,0 +1,5 @@
+default:
+  merchant_id: 1 
+  name: 'MidTrans'
+  version: 'ex/v1/'
+  is_active: 1

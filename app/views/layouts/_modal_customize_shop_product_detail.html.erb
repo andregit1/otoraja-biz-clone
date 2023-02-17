@@ -1,0 +1,88 @@
+<!-- Customize Shop Product Detail Modal -->
+<div id="customizeShopProductDetailModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#customizeShopProductDetailModal"></div>
+  <div class="modal_content -fullscreen">
+    <div class="modal-header -management">
+      <button class="close col-1 js-modal-close -management" data-target="#customizeShopProductDetailModal">
+        <i class="icon icon-Arrow-left"></i>
+      </button>
+      <div class="modal-title col-10 text-center"><%= t('customize_list.detail_title') %></div>
+      <div class="col-1"></div>
+    </div>
+    <div class="modal-body __body">
+      <div class="info-box">
+        <input type="hidden" name="customize_shop_list_id" class="customize_shop_list_id">
+        <div class="tool-box">
+          <div class="tool-box__content">
+            <div class="d-flex justify-content-start align-items-center">
+              <span class="list_name"></span>
+              <span class="mx-3">
+                <%= button_tag :type => "button",id: 'btn-edit-customize-list', class: "btn-circle-default" do %>
+                  <i class="icon icon-Pencil"></i>
+                <% end %>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="add-box my-3 d-flex justify-content-between align-items-center">
+          <%= button_tag :type => "button", id: "btn-list-detail-add-items", class: "btn js-modal-open", data: {"target" => "#selectAddProductModal"} do %>
+            <span class="btn-circle-primary"><i class="icon icon-Plus"></i></span> add items
+          <% end %>
+          <div class="list-count">
+            <span class="selected-items">0</span> / <span class="max-items"><%= current_user&.shops&.first&.shop_config&.num_of_products_in_custom_list || 0 %></span>
+          </div>
+        </div>
+      </div>
+      <div class="lists-box">
+        <ul class="list-sotable">
+        </ul>
+      </div>
+    </div>
+    <div class="modal-footer __footer">
+      <div class="d-flex justify-content-between align-items-center">
+        <input type="checkbox" id="can_add_all" data-on="<%= t('customize_list.can_add_all.enable') %>" data-off="<%= t('customize_list.can_add_all.disable') %>" data-onstyle="basic">
+        <%= button_tag :type => "button", id: "btn-update-customize-list", class: "btn-base -basic -primary mx-3" do %>
+          <%= t('customize_list.update_list') %>
+        <% end %>
+        <%= button_tag :type => "button", class: "btn-circle-default btn-delete" do %>
+          <i class="icon icon-Delete"></i>
+        <% end %>
+      </div>
+    </div>
+    <div id="customize-detail-clone-box" class="hide">
+      <li class="list-record">
+        <input type="hidden" name="customize_shop_detail_id" class="customize_shop_detail_id">
+        <input type="hidden" name="customize_shop_detail_destroy" class="customize_shop_detail_destroy">
+        <input type="hidden" name="customize_shop_detail_shop_product_id" class="customize_shop_detail_shop_product_id">
+        <div class="row d-flex justify-content-between align-items-center">
+          <div class="col">
+            <i class="icon icon-Sidebar handle"></i> 
+          </div>
+          <div class="col-8">
+            <span class="list-name"></span>
+            <ul class="inclusion-products">
+            </ul>
+          </div>
+          <div class="col">
+            <%= button_tag :type => "button", class: "btn-circle-default list-detail" do %>
+              <i class="fa fa-times"></i>
+            <% end %>
+          </div>
+        </div>
+      </li>
+      <li class="inclusion-product-record">
+        <div class="row d-flex justify-content-start align-items-center">
+          <div class="col">
+            <span class="inclusion-item-name"></span>
+          </div>
+        </div>
+      </li>
+    </div>
+  </div>
+<%= render 'layouts/dialog_input_edit_customize_list_name' %>
+<input type="hidden" id="dialog_delete_confirm_title" value="<%=  t('slip.footer.delete_confirm') %>">
+<input type="hidden" id="dialog_delete_confirm_message" value="<%= t('slip.footer.delete_question') %>">
+<input type="hidden" id="dialog_delete_confirm_ok" value="<%= t('delete') %>">
+<input type="hidden" id="dialog_delete_confirm_cancel" value="<%= t('cancel') %>">
+</div>
+<!-- Customize Shop Product Detail Modal -->

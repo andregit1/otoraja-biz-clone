@@ -1,0 +1,447 @@
+$('#total-sales').html('Rp. <%== formatedRupiah(@total_sales) %>')
+$('#total-checkins').html('<%== @total_checkins %>')
+$('#revenue-breakdown').html('Rp. <%== formatedRupiah(@total_revenue) %>')
+$('#total-profit').html('Rp. <%== formatedRupiah(@total_profit) %>')
+$('#total-sales').html('Rp. <%== formatedRupiah(@total_sales) %>')
+$('#average-sale').html('Rp. <%== formatedRupiah((@total_checkins.zero? ? 0 : @total_sales/@total_checkins)) %>')
+
+var toLocalCurrency = function(value){
+	
+  return value.toLocaleString("id-ID", {style: 'currency', currency:'IDN'});
+
+}
+
+//----------------------
+//- Revenue BAR CHART -
+//----------------------
+
+var revenueBarChartData = {
+  labels: <%== @gross_sales_chart_data.keys %>,
+    datasets:[
+    {
+      label               : 'COGS',
+      backgroundColor     : 'rgba(186,252,164,0.9)',
+      borderColor         : 'rgba(186,252,164,0.8)',
+      data                : <%== @gross_sales_chart_data.values %>,
+      pointStyle          : 'circle'
+    },
+    {
+      label               : 'Profits',
+      backgroundColor     : 'rgba(60,141,188,0.9)',
+      borderColor         : 'rgba(60,141,188,0.8)',
+      data                : <%== @gross_profit_chart_data.values %>,
+      pointStyle          : 'circle'
+    },
+    {
+      label               : 'Discount',
+      backgroundColor     : 'rgba(153,153,153,0.9)',
+      borderColor         : 'rgba(153,153,153,0.9)',
+      data                : <%== @gross_discount_chart_data.values %>,
+      pointStyle          : 'circle'
+    }
+  ]
+} 
+
+var revenueBarChartCanvas = $('#revenueBarChart').get(0).getContext('2d')
+
+var revenueBarChartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  legend :{
+    display: false,
+    labels:{
+      usePointStyle: true,
+      fontSize: 18
+    }
+  },
+  legendCallback: function(chart) {
+          var text = []; 
+          text.push('<ul class="' + chart.id + '-legend">'); 
+          for (var i = 0; i < chart.data.datasets.length; i++) { 
+            text.push('<li class="badge badge-pill badge-secondary" style="background-color:' + chart.data.datasets[i].backgroundColor + '"><span></span>'); 
+            if (chart.data.datasets[i].label) { 
+              text.push(chart.data.datasets[i].label); 
+            } 
+            text.push('</li>'); 
+          } 
+          text.push('</ul>'); 
+          return text.join('');
+  },
+  scales:{
+    xAxes:[{
+      stacked: true,
+      barPercentage: 0.5,
+      categoryPercentage: 0.5,
+      ticks: {
+        autoSkip: true,
+        maxTicksLimit: 12
+      }
+    }],
+    yAxes: [{
+      stacked: true,
+      ticks: {
+        beginAtZero: true,
+        userCallback: function(label, index, labels) {
+          if (Math.floor(label) === label) {
+            return formatedNumber(label);
+          }
+        }
+      }
+    }],
+  },
+  tooltips: {
+    callbacks: {
+      label: function(tooltipItem, data) {
+        var label = data.datasets[tooltipItem.datasetIndex].label
+        var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+        return [label + ' : ' + formatedNumber(value)]
+      }
+    }
+  },
+  plugins: {
+    labels: {
+      render: function (args) {
+        return ''
+      },
+    }
+  }
+}
+
+if(revenueBarChart){
+  revenueBarChart.destroy();
+}
+
+var revenueBarChart = new Chart(revenueBarChartCanvas, {
+  type: 'bar', 
+  data: revenueBarChartData,
+  options: revenueBarChartOptions,
+})
+
+var legend = document.getElementById("revenueLegend");
+
+legend.innerHTML = revenueBarChart.generateLegend();
+
+var legendItems = legend.getElementsByTagName('li');
+for (var i = 0; i < legendItems.length; i += 1) {
+  legendItems[i].addEventListener("click", legendClickCallback, false);
+}
+
+
+function legendClickCallback(event) {
+  event = event || window.event;
+
+  var target = event.target || event.srcElement;
+  while (target.nodeName !== 'LI') {
+      target = target.parentElement;
+  }
+  var parent = target.parentElement;
+  var chartId = parseInt(parent.classList[0].split("-")[0], 10);
+  var chart = Chart.instances[chartId];
+  var index = Array.prototype.slice.call(parent.children).indexOf(target);
+  var meta = chart.getDatasetMeta(index);
+
+  if (meta.hidden === null) {
+    meta.hidden = !chart.data.datasets[index].hidden;
+    target.classList.add('hidden');
+  } else {
+    target.classList.remove('hidden');
+    meta.hidden = null;
+  }
+  chart.update();
+}
+
+//----------------------
+//- CHECKINS BAR CHART -
+//----------------------
+var checkinsBarChartData = {
+  labels  : <%== @checkins_chart_data.keys %>,
+  datasets: [
+    {
+      label               : 'Checkins',
+      backgroundColor     : 'rgba(60,141,188,0.9)',
+      borderColor         : 'rgba(60,141,188,0.8)',
+      pointRadius          : false,
+      pointColor          : '#3b8bba',
+      pointStrokeColor    : 'rgba(60,141,188,1)',
+      pointHighlightFill  : '#fff',
+      pointHighlightStroke: 'rgba(60,141,188,1)',
+      data                : <%== @checkins_chart_data.values %>
+    }
+  ]
+}
+var checkinsBarChartCanvas = $('#checkinsBarChart').get(0).getContext('2d')
+
+var checkinsBarChartOptions = {
+  responsive              : true,
+  maintainAspectRatio     : false,
+  <%# title: {
+    display: true,
+    fontSize: 18,
+    padding: 30,
+    fontStyle: 'normal',
+    text: 'CHECKINS AMOUNT'
+  }, %>
+  legend: {
+    display: false
+  },
+  scales: {
+    yAxes: [{
+      ticks: {
+        beginAtZero: true,
+        userCallback: function(label, index, labels) {
+          if (Math.floor(label) === label) {
+            return formatedNumber(label);
+          }
+        }
+      }
+    }],
+    xAxes: [{
+      barPercentage: 0.5,
+      categoryPercentage: 0.5,
+      ticks: {
+        autoSkip: true,
+        maxTicksLimit: 12
+      }
+    }],
+  },
+  tooltips: {
+    callbacks: {
+      label: function(tooltipItem, data) {
+        var label = data.datasets[tooltipItem.datasetIndex].label
+        var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+        return [label + ' : ' + formatedNumber(value)]
+      }
+    }
+  },
+  plugins: {
+    labels: {
+      render: function (args) {
+        return ''
+      },
+    }
+  }
+}
+
+if(checkinsBarChart){
+  checkinsBarChart.destroy();
+}
+
+var checkinsBarChart = new Chart(checkinsBarChartCanvas, {
+  type: 'bar', 
+  data: checkinsBarChartData,
+  options: checkinsBarChartOptions,
+})
+
+//-------------------
+//- SALES BAR CHART -
+//-------------------
+var salesBarChartData = {
+  labels  : <%== @sales_chart_data.keys %>,
+  datasets: [
+    {
+      label               : 'Sales',
+      backgroundColor     : 'rgba(60,141,188,0.9)',
+      borderColor         : 'rgba(60,141,188,0.8)',
+      pointRadius          : false,
+      pointColor          : '#3b8bba',
+      pointStrokeColor    : 'rgba(60,141,188,1)',
+      pointHighlightFill  : '#fff',
+      pointHighlightStroke: 'rgba(60,141,188,1)',
+      data                : <%== @sales_chart_data.values %>
+    }
+  ]
+}
+var salesBarChartCanvas = $('#salesBarChart').get(0).getContext('2d')
+
+var salesBarChartOptions = {
+    responsive              : true,
+    maintainAspectRatio     : false,
+    <%# title: {
+      display: true,
+      fontSize: 18,
+      padding: 30,
+      fontStyle: 'normal',
+      text: 'SALES AMOUNT'
+    }, %>
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          userCallback: function(label, index, labels) {
+            if (Math.floor(label) === label) {
+              return formatedNumber(label);
+            }
+          }
+        }
+      }],
+      xAxes: [{
+        barPercentage: 0.5,
+        categoryPercentage: 0.5,
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 12
+        }
+      }],
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.datasets[tooltipItem.datasetIndex].label
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+          return [label + ' : ' + formatedNumber(value)]
+        }
+      }
+    },
+    plugins: {
+      labels: {
+        render: function (args) {
+          return ''
+        },
+      }
+    }
+  }
+
+if(salesBarChart){
+  salesBarChart.destroy();
+}
+
+var salesBarChart = new Chart(salesBarChartCanvas, {
+  type: 'bar', 
+  data: salesBarChartData,
+  options: salesBarChartOptions,
+})
+
+
+//----------------------
+//- PRODUCT SUMMARY -
+//----------------------
+<% unless @sales_details.empty? %>
+  <%# $('#pieChart').show(); %>
+  $('#details-tbody').empty();
+  <% @sales_details.each do |detail| %>
+    $('#details-tbody').append("<tr><td><%= detail[:name] %></td><td class='text-right'><%= formatedDecimalPoint(detail[:sold]) %></td><td><span style='float: left;'>Rp.</span><span style='float: right;'><%= formatedRupiah(detail[:sales]) %></span></td></tr>");
+  <% end %>
+
+  <% total = @sales_details.sum { |hash| hash[:sales].to_f} %>
+
+  var salesPieChartData = {
+    labels: <%== @sales_details.map{|detail| detail[:name] }.compact %>,
+    datasets: [{
+      backgroundColor: [
+        "#aaecfc",
+        "#6bd5f3",
+        "#37a6e1",
+        "#509458",
+        "#80c686",
+        "#b1f9b6",
+        "#ff9e4b",
+        "#ffd771",
+        "#ffff97",
+      ],
+      data: <%== @sales_details.map{|detail| detail[:sales] }.compact %>
+    }]
+  }
+  var salesPieChartCanvas = $('#salesPieChart').get(0).getContext('2d')
+
+  var salesPieChartOptions = {
+    maintainAspectRatio: false,
+    legend: {
+      display: true,
+      position: 'right'
+    },
+    <%# title: {
+      display: true,
+      fontSize: 18,
+      padding: 40,
+      fontStyle: 'normal',
+      text: 'PERCENTAGE OF SALES'
+    }, %>
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index]
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+          return [label + ' : ' + formatedNumber(value)]
+        }
+      }
+    },
+    plugins: {
+      labels: {
+        render: function (args) {
+          var percentage = args.percentage >= 10 ? args.percentage + '%' : ''
+          return percentage
+        },
+        fontColor: 'black',
+        fontSize: 14,
+      }
+    }
+  }
+
+  if(salesPieChart){
+    salesPieChart.destroy();
+  }
+
+  var salesPieChart = new Chart(salesPieChartCanvas, {
+    type: 'pie', 
+    data: salesPieChartData,
+    options: salesPieChartOptions,
+  })
+
+  $('#chart-legends').html(salesPieChart.generateLegend());
+
+<% else %>
+  <%# $('#pieChart').hide(); %>
+<% end %>
+
+
+// ウィンドウリサイズに対応
+$('#salesBarChart').css('width', '100%')
+$('#checkinsBarChart').css('width', '100%')
+$('#salesPieChart').css('width', '100%')
+
+// 紐付く店舗が複数ある場合はセレクトボックス活性化
+<% if current_user.managed_shops.length >= 2 %>
+  $('#dashboard_shop_id').removeClass('unavailable-btn')
+<% end %>
+
+// 使用不可状態を解除
+$('#daterange-btn').removeClass('unavailable-btn')
+<%# $('#dashboard_unit_type').removeClass('unavailable-btn') %>
+$('#sales_aggregation_unit_type').removeClass('unavailable-btn')
+$('#checkins_aggregation_unit_type').removeClass('unavailable-btn')
+
+// ピリオドで数値3桁区切り
+function formatedNumber(num) {
+  return num.toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')
+}
+
+//----------------------
+//- SUMMARY BY MECHANIC -
+//----------------------
+$('#mechanic-details-tbody').empty();
+<% @sales_by_mechanic.each do |detail| %>
+  $('#mechanic-details-tbody').append("<tr><td><%= detail[:mechanic][:name]%></td><td><span style='float: right;'><%= formatedRupiah(detail[:total])%></span></td></tr>");
+<% end %>
+
+//------------------------
+//- ATTENDENCE BY MECHANIC -
+//------------------------
+$('#mechanic-attendence-tbody').empty();
+<% @mechanic_attendence.each do |detail| %>
+  $('#mechanic-attendence-tbody').append("<tr><td><%= detail[:mechanic][:name]%></td><td><span style='float: right;'><%= detail[:daysWorked]%></span></td></tr>");
+<% end %>
+
+//------------------------
+//- SALES BY PAYMENT TYPE -
+//------------------------
+$('#sales-by-type-tbody').empty();
+<% @sales_by_payment_type.each do |detail| %>
+  $('#sales-by-type-tbody').append("<tr><td><%= detail[:name]%></td><td><span style='float: right;'><%= formatedRupiah(detail[:amount])%></span></td></tr>");
+<% end %>
+
+setTimeout(function(){
+  window.app.dashboard.hideLoading();
+}, 1);

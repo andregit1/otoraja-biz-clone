@@ -1,0 +1,2 @@
+class ShopProductPolicy < ApplicationPolicy
+end

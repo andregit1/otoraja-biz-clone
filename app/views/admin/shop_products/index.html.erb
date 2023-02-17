@@ -1,0 +1,155 @@
+<% content_for(:title, t('admin.shop_product.shop_product')) %>
+<% content_for(:shop_product, true) %>
+<div class="list-view-wrapper">
+  <section id="list-search-section">
+    <div class="card card-widget">
+      <div class="card-header color-text-table-header" data-card-widget="collapse">
+        <h3 class="card-title">
+          <i class="fas fa-chevron-down"></i>
+          <i class="fas fa-chevron-up"></i>
+          <span class="text-normal">
+            <%= t 'admin.common.filter' %>
+          </span>
+        </h3>
+      </div>
+      <div class="card-body">
+        <input type="hidden" id="shop_product_search_current_page" value="1">
+        <input type="hidden" id="shop_product_search_no_more_result" value="true">
+        <%= hidden_field_tag 'default-filter', @filter %>
+        <%= hidden_field_tag 'select_shop', session[:default_user_shop] %>
+
+        <div class="d-flex justify-content-between">
+          <div class="form-group search-field col-6 p-0">
+            <label class="text-label"><%= t 'admin.common.keyword' %> <i class="fas fa-info-circle" data-html="true" data-toggle="tooltip" title="<%= t 'admin.common.name_of_product' %>"></i></label>
+            <%= text_field_tag 'shop-product-search', '', class:'form-control w-100 text-normal', autocomplete: 'off'  %>
+            <i id="shop-product-search-clear-btn" class="icon icon-Cross search-with-clear clear"></i>
+            <i id="shop-product-search-btn" class="icon icon-Search search-with-clear"></i>
+          </div>
+
+          <div class="form-group col-6 pr-0">
+            <%= label_tag :select_category, t('admin.common.category'), class: 'text-label' %>
+            <div>
+              <%= select_tag 'select_category', options_from_collection_for_select(ProductCategory.all.order(id: :asc), :id, :name), prompt: t('admin.shop_product.default_sort') ,class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-start align-items-end">
+          <div class="form-group col-4 col-md-3 pl-0">
+            <%= label_tag :select_use, t('admin.shop_product.is_use'), class: 'text-label' %>
+            <%= select_tag 'select_use', options_for_select(ShopProduct.uses_i18n.invert), class: 'form-control' %>
+          </div>
+          <div class="form-group col-5 col-md-3 px-0">
+            <%= label_tag :select_sort, t('admin.shop_product.sort'), class: 'text-label' %>
+            <%= select_tag 'select_sort', options_for_select(ShopProduct.sorts_i18n.invert), class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <p class="text-small text-color-highlight m-0"><%= t "admin.shop_product.change_filter_disclaimer" %></p>
+      </div>
+    </div>
+  </section>
+  <section id="list-search-body-section">
+    <div class="no_search_result hide color-text-table-header p-3 text-center">
+      <p class="font-italic text-normal"><%= t "select_product.list_empty" %></p>
+    </div>
+    <div class="products-box-admin card card-widget">
+      <div class=" px-4 py-3 color-text-table-header d-flex align-items-center">
+        <div class="d-flex w-100">
+          <div>
+            <input type="checkbox" id="select-all-product" class="checkbox-md" >
+          </div>
+          <div class="col-11 pl-3">
+            <div class="text-normal">
+              <span id="count-selected-delete">0</span> <%= t "admin.shop_product.multiple_delete_info" %>
+              <a href='#' class="text-color-highlight font-weight-bold m-0" id="select-all-remaining-product">
+                <u>
+                  <%= t "admin.shop_product.remaining-product-label_html" %>
+                </u> 
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="flex-shrink-1 px-2">
+          <a id="multiple-delete-button" class="btn-circle-inactive">
+            <i class="icon icon-Delete"></i>
+          </a>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <ul id="product_list" class="list mb-0">
+          <%# inject items here %>
+        </ul>
+        <div class="loading p-3 hide">
+          <div class="text-center">
+            <i class="fas fa-spinner fa-spin"></i>
+          </div>
+        </div>
+        <div id="add-product-item-clone" class="hide">
+          <li class="d-flex list-item p-4">
+            <div class="d-flex w-100">
+              <div>
+                <input type="checkbox" class="select-product checkbox-md mt-1">
+              </div>
+              <div class="col-11 pl-3">
+                <div class="item__title">
+                  <p class="item__name text-normal font-weight-bold">
+                  </p>
+                </div>
+                <div class="item__title">
+                  <p class="item__description description_product text-small text-dark mb-0">
+                  </p>
+                </div>
+                <div class="d-inline-flex font-weight-bold ">
+                  <span class="text-small "> Rp.</span>
+                  <p class="text-small item__price font-weight-bold text-dark m-0"></p>
+                </div>
+                <p class="text-small mb-1">
+                  <span class="item__attribute mb-0 text-small"><%= t 'admin.shop_product.stock' %>: </span>
+                  <span class="mb-0 item__quantity text-label text-dark">
+                  <span class="item__current__quantity"></span>
+                  <span class="stock_minimum_value hide">
+                    / <span class="item__min__quantity"></span>
+                  </span>
+                  <span class="not_count hide">
+                    <%= image_tag  'LS-icon-count.svg', class: 'img-responsive ml-1' %>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div class="flex-shrink-1">
+              <button name="button" type="button" class="btn item__edit btn-primary float-right btn-edit-product js-modal-open ml-2" data-target="#editProductModal">
+                <i class="fas fa-edit text-large js-modal-open" data-target="#editProductModal"></i>
+              </button>
+            </div>
+          </li>
+        </div>
+      </div>
+    </div>
+  </section>
+  <input id="label-admin_product_id" type="hidden" value="">
+  <input id="label-shop_alias_name" type="hidden" value="">
+  <input id="label-item_detail" type="hidden" value="">
+  <input id="label-stock_minimum" type="hidden" value="">
+  <input id="label-stock" type="hidden" value="">
+  <input id="label-sales_unit_price" type="hidden" value="">
+  <input id="label-remind_interval_day" type="hidden" value="">
+  <input id="label-is_stock_control" type="hidden" value="">
+  <input id="label-is_use" type="hidden" value="">
+  <input id="label-admin_product-no" type="hidden" value="">
+  <input id="label-shop_product-no" type="hidden" value="">
+  <input id="label-product-category-id" type="hidden" value="">
+  <input id="label-gross-profit" type="hidden" value="">
+  <input id="label-average-price" type="hidden" value="">
+  <button id="btn-product-edit" type="button" class="btn-base -basic -primary js-modal-open hide"
+    data-target="#editProductModal">editProductModal</button>
+  <input id="label-id" type="hidden" value="">
+
+  <input id="new-activity-item-id" type="hidden" value="">
+  <div id="paginator" class="d-flex justify-content-center text-small"></div>
+</div>
+
+<%= render "modal_add_product" %>
+<%= render "modal_edit_product" %>
+<%= render "modal_confirmation_multiple_delete_product" %>
+<%= render "modal_confirmation_need_more_time" %>

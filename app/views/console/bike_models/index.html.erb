@@ -1,0 +1,45 @@
+<% content_for(:title, 'Model') %>
+
+<%= render 'search' %>
+
+<div class="card content-datatable">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover table-sticky">
+        <thead>
+          <tr>
+            <th><%= sort_link(@q, :name, t('console.common.name'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th><%= sort_link(@q, :maker_name, t('console.common.maker'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @bike_models.each do |bike_model| %>
+          <tr data-maker-id="<%= bike_model.maker_id %>">
+            <td>
+              <%= bike_model.name %>
+            </td>
+            <td>
+              <%= bike_model&.maker&.name %>
+            </td>
+            <td class="text-right">
+              <%= link_to edit_console_bike_model_path(bike_model),:class => 'btn btn-primary mb-0' do %>
+                <i class="fas fa-edit"></i>&nbsp;<%= t 'console.common.edit'  %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex justify-content-start">
+      <div>
+        <%= link_to new_console_bike_model_path,:class => 'btn footer-btn' do %>
+          <i class="fas fa-plus"></i>&nbsp;<%= t 'console.bike_model.add_model' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

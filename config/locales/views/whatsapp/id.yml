@@ -1,0 +1,8 @@
+id:
+  whatsapp:
+    text:
+      short_product: |
+        Halo %{shop_name}, 
+        berikut laporan stok yang hampir habis di bengkel Anda dari layanan OTORAJA Biz
+         %{line_break}
+         

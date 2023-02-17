@@ -1,0 +1,15 @@
+<div id="releaseNoteModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#releaseNoteModal"></div>
+  <div class="modal_content -fullscreen">
+    <div class="modal-header">
+      <button class="close col js-modal-close" data-target="#releaseNoteModal">
+        <i class="icon icon-Arrow-left"></i>
+      </button>
+      <div class="modal-title col-10 text-center"><%= t 'navigation.releas_note' %></div>
+      <div class="col"></div>
+    </div>
+    <div class="modal-body">
+      <iframe src="<%= release_note_path %>" id="release_note_frame"></iframe>
+    </div>
+  </div>
+</div>

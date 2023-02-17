@@ -1,0 +1,104 @@
+<div class="card-body">
+
+  <% if shop_group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(shop_group.errors.count, "error") %> prohibited this shop_group from being saved:</h2>
+      <ul>
+      <% shop_group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h5><%= t 'console.shop_group.shop_group_information'%></h5>
+      <div class="form-group">
+        <%= f.label :name, t('console.shop_group.form.name') %>
+        <%= f.text_field :name, class: 'form-control', autocomplete: 'off' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :shop_ids, t('console.shop_group.form.shops') %>
+        <div class="row">
+          <div class="col-12">
+            <%= f.collection_select :shop_ids, @selectable_shops, :id, :id_name, {prompt: "Please Select a Sector"}, {class: 'shop_select form-control', multiple: true} %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :founding_year, ShopGroup.human_attribute_name(:founding_year) %>
+        <div class="row">
+          <div class="col-12">
+            <%= f.select :founding_year, options_for_select((2000..2020).to_a), {include_blank: true}, {class: 'form-control', autocomplete: 'off'} %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :is_chain_shop, ShopGroup.human_attribute_name(:is_chain_shop) %>
+        <p>
+          <%= f.check_box :is_chain_shop, data: {toggle: 'toggle', on: t('console.shop_product.yes'), off: t('console.shop_product.no')} %>
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h5><%= t 'console.shop_group.owner_information'%></h5>
+
+      <div class="form-group">
+        <%= f.label :owner_name, t('console.shop_group.form.owner_name') %>
+        <%= f.text_field :owner_name, class: 'form-control', autocomplete: 'off' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :owner_email, t('console.shop_group.form.owner_email') %>
+        <%= f.email_field :owner_email, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :owner_gender, ShopGroup.human_attribute_name(:owner_gender) %>
+        <div class="row">
+          <div class="col-12">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-outline-primary">
+                <%= f.radio_button :owner_gender, :man, id: 'gender_male', class: '', autocomplete: 'off' %> <%= t 'console.shop_group.form.male' %>
+              </label>
+              <label class="btn btn-outline-primary">
+                <%= f.radio_button :owner_gender, :woman, id: 'gender_female', class: '', autocomplete: 'off' %> <%= t 'console.shop_group.form.female' %>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :owner_tel, t('console.shop_group.form.tel') %>
+        <%= f.telephone_field :owner_tel, class: 'form-control', autocomplete: 'off' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :owner_tel2, t('console.shop_group.form.tel2') %>
+        <%= f.telephone_field :owner_tel2, class: 'form-control', autocomplete: 'off' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :owner_wa_tel, t('console.shop_group.form.owner_wa_tel') %>
+        <%= f.telephone_field :owner_wa_tel, class: 'form-control', autocomplete: 'off' %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="card-footer">
+  <div class="row">
+    <div class="col text-right">
+      <%= link_to t('console.common.back'), console_shop_groups_path, class: 'btn btn-default' %>
+      <% if controller.action_name.in?(['new', 'create']) %>
+        <%= f.submit t('console.common.regist'), class: 'btn btn-primary' %>
+      <% else %>
+        <%= f.submit t('console.common.update'), class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

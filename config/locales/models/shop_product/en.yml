@@ -1,0 +1,21 @@
+en:
+  enums:
+    shop_product:
+      sort:
+        latest: 'Latest'
+        oldest: 'Oldest'
+        alphabet: 'A-Z'
+        back_alphabet: 'Z-A'
+        stock_high: 'High Stock'
+        stock_low: 'Low Stock'
+        price_high: 'High Price'
+        price_low: 'Low Price'
+        stock_ratio_high: 'High Stock'
+        stock_ratio_low: 'Low Stock'
+      use:
+        'yes': 'Yes'
+        'no': 'No'
+        'all': 'All'
+  activerecord:
+    models:
+      shop_product: 'ShopProduct'

@@ -1,0 +1,7 @@
+<% content_for(:title, t('console.common.whatsapp.add')) %>
+
+<div class="card">
+  <%= form_with(model: @whats_app_template, url:console_whats_app_templates_path, local: true) do |form| %>
+  <%= render 'form', {template: @whats_app_template, f: form} %>
+  <% end %>
+</div>

@@ -1,0 +1,8 @@
+id:
+  tech_spec:
+    errors:
+      messages:
+        similar_tech_spec_name: " dianggap sama dengan spesifikasi teknis yang sudah ada:  %{tech_spec_name} "
+    notice:
+      successful_tech_spec_saved: 'Spesifikasi teknis  berhasil disimpan.'
+      successful_tech_spec_updated: 'Spesifikasi teknis  berhasil diubah.'

@@ -1,0 +1,321 @@
+<% if @is_invoice %>
+  <% content_for(:title, t('admin.purchase.purchases')) %>
+<% end %>
+<% if @is_inventory %>
+  <% content_for(:title, t('admin.purchase.inventory')) %>
+<% end %>
+<div class="list-view-wrapper">
+  <div class="card card-widget">
+    <div class="card-body pb-0">
+      <section id="purchase-section">
+        <form id="add-invoice-form">
+          <div id="invoice-input-area" class="border-btm">
+            <%= hidden_field_tag 'mode', @mode ? 1 : 0 %>
+            <%= hidden_field_tag 'is_status', @shop_invoice.status %>
+            <%= hidden_field_tag 'invoice_id', @shop_invoice.id %>
+            <%= hidden_field_tag 'is_invoice', @is_invoice %>
+            <%= hidden_field_tag 'is_inventory', @is_inventory %>
+            <%= hidden_field_tag 'select_shop', session[:default_user_shop] %>
+            
+            <div class="form-row">
+              <label class="text-small text-color-highlight ml-1 set-mandatory-lebel"><%= t('admin.purchase.mandatory_label')%></label>
+              <% if @is_invoice %>
+              <div class="form-group col-6 col-md-4"> 
+              <% end %>
+              <% if @is_inventory %>
+                <div class="form-group col-6 col-md-6"> 
+              <% end %>
+                <% if @is_invoice %>
+                  <label class="text-label font-weight-bold"><%= t('admin.invoice.invoice_no')%>*</label>
+                <% end %>
+                <% if @is_inventory %>
+                  <label class="text-label font-weight-bold"><%= t('admin.invoice.inventory_no')%>*</label>
+                <% end %>
+                <input id="invoice_no" name="invoice_no" class="form-field ml-auto form-control" type="text" value="<%= @shop_invoice.invoice_no %>">
+              </div>
+              <% if @is_invoice %>
+              <div class="form-group col-6 col-md-4">
+                <label class="text-label font-weight-bold"><%= t('admin.invoice.supplier')%>*</label>
+                <% if @supplier.present? %>
+                  <%= select_tag 'supplier_id', options_from_collection_for_select(@suppliers, :id, :name, @supplier.id), class: 'form-control form-control-sm drawer_modal_input_border' %>
+                <% else %>
+                  <%= select_tag 'supplier_id', options_from_collection_for_select(@suppliers, :id, :name), class: 'form-control form-control-sm drawer_modal_input_border' %>
+                <% end %>
+              </div>
+              <% end %>
+              <% if @is_invoice %>
+              <div class="form-group col-6 col-md-4">
+                <label class="text-label font-weight-bold"><%= t('admin.invoice.payment_method')%>*</label>
+                <%= select_tag 'payment_method', options_for_select(StockControl.pay_types_i18n.invert, @shop_invoice.payment_method), class: 'form-control form-control-sm drawer_modal_input_border' %>
+              </div>
+              <% end %>
+              <div class="form-group col-6 col-md-6">
+                <label class="text-label font-weight-bold"><%= t('admin.invoice.arrival_date')%>*</label>
+                <input type="datetime-local" id="arrival_date" name="arrival_date" class="form-field form-control form-control-sm drawer_modal_input_border" value="<%= formattedDatelocal(@shop_invoice.arrival_date, 'Jakarta') %>"/>
+              </div>
+              <div class="form-group col-12 col-md-6">
+                <label class="text-label font-weight-bold"><%= t('admin.invoice.status')%></label>
+                  <div class="d-flex">
+                    <div class="form-check pl-0">
+                      <span><input id="status" name="status" type="checkbox" <%= "checked" if @shop_invoice.status == "closed" %> ></span>
+                      <span class="text-normal"><%= t('admin.invoice.invoice_checkbox_label')%></span>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div id="stock-control-item-buttons"> 
+            <label class="text-label font-weight-bold"><%= t('admin.invoice.label_find_product')%></label>
+            <div class="d-flex">
+              <%= button_tag :type => "button", id: "btn-find-product", class: "js-modal-open btn button-secondary-active mr-3 p-6 ", disabled: @is_inventory, data: {"target" => "#findProductModal"} do %>
+                <span>
+                  <i class="fas fa-search mr-2"></i>
+                  <%= t 'admin.invoice.find_product' %>
+                </span>
+              <% end %>
+              <% if @is_invoice %>
+                <%= button_tag :type => "button", id: "btn-add-product", class: "js-modal-open btn button-secondary-active p-6", data: {"target" => "#addProductModal"} do %>
+                  <span>
+                    <i class="fas fa-edit mr-2"></i>
+                    <%= t 'admin.invoice.add_product' %>
+                  </span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="row" id="stock-control-list-section">
+            <div class="p-2 w-100">
+              <ul id="stock-control-list" class="product-info-body p-0">
+                <% if @stock_controls %>
+                  <% @stock_controls.each do |stock_control| %>
+                    <li class="list-item list-bg style-none">
+                      <input type="hidden" class="item__stock__control__id" name="id" value="<%= stock_control.id %>">
+                      <input type="hidden" class="item__shop__product__id" name="shop_product_id" value="<%= stock_control.shop_product_id %>">
+                      <input type="checkbox" class="item__is_stock_control hide" name="check_box_value" data-id="<%= stock_control.shop_product_id %>" <%= "checked" if stock_control.shop_product.is_stock_control == true %>>
+                      <div class="row">
+                        <div class="col-md-9 col-9 set-purchase-padding">
+                          <div class="item__name font-weight-bold text-normal ml-2"><%= stock_control.shop_product.shop_alias_name %></div>
+                          <div class="item__description text-label ml-2"><%= stock_control.shop_product.item_detail %></div>
+                        </div>
+                        <div class="col-md-3 col-3">
+                          <div class="btn-wrap">
+                            <button name="button" type="button" class="btn item__destroy">
+                              <a class="btn-circle-default btn-remove-maintenance_log">
+                                <i class="icon icon-Delete"></i>
+                              </a>
+                            </button>
+                          </div> 
+                        </div>
+                      </div>
+                      <% if stock_control.shop_product.is_stock_control == false && @shop_invoice.status == 'closed' %>
+                        <div class="is_stock_notif_final mt-2 set-purchase-padding text-small"> <%= t 'admin.purchase.is_stock_notif_final' %> </div>
+                      <% end %>
+                      <% if stock_control.shop_product.is_stock_control == false && @shop_invoice.status == 'open'%>
+                        <div class="is_stock_confirm p-top-1rem text-small set-purchase-padding" data-id="<%= stock_control.shop_product_id %>">
+                          <div class="row">
+                            <div class="col-md-5 col-8">
+                              <p><%= t 'admin.purchase.is_stock_confirm_lbl' %></p>
+                            </div>
+                            <div class="col-md-4 col-4">
+                              <span class="set-confirm click_confirm_stock"> <%= t 'admin.purchase.is_stock_confirm' %> </span>
+                              <span class="click_later_stock"> <%= t 'admin.purchase.is_stock_cancel' %> </span>
+                            </div>
+                          </div>
+                        </div>
+                      <% end %>
+                      <div class="is_stock_back p-top-1rem text-small set-purchase-padding hide-controller" data-id="<%= stock_control.shop_product_id %>">
+                        <div class="row">
+                          <div class="col-md-5 col-9">
+                            <p class="mr-2"><%= t 'admin.purchase.is_stock_active_lbl' %></p>
+                          </div>
+                          <div class="col-md-4 col-3">
+                            <span class="ml-2 click_cancel_stock"> <%= image_tag  'ls-undo.svg', class: 'img-responsive custome-icon', alt: 'icon-undo' %> </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="is_stock_cancel p-top-1rem text-small set-purchase-padding hide-controller" data-id="<%= stock_control.shop_product_id %>">
+                        <div class="row">
+                          <div class="col-md-5 col-8">
+                            <p class="mr-2"><%= t 'admin.purchase.is_stock_cancel_lbl' %></p>
+                          </div>
+                          <div class="col-md-4 col-4">
+                            <span class="ml-2 click_reset_stock"> <%= image_tag  'ls-undo.svg', class: 'img-responsive custome-icon', alt: 'icon-undo' %> </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row set-purchase-padding mt-8">
+                        <% if @is_invoice %>
+                          <div class="col-md-3 col-4 mr-2">
+                            <label class="text-label font-weight-bold text-left"><%= t('admin.invoice.quantity')%></label>
+                          </div>
+                          <div class="col-md-4 col-7">
+                            <label class="text-label font-weight-bold text-left"><%= t('admin.invoice.invoice_unit_price')%></label>                              
+                          </div>
+                          <div class="col-md-12 col-12"></div>
+                          <div class="col-md-3 col-4 mr-2">
+                            <input class="form-field item__incoming__stock formated_input_number" name="quantity" type="text" data-raw-data="<%= "#{stock_control.quantity.to_i}" %>" value="<%= "#{stock_control.quantity.to_i}" %>" required />
+                          </div>
+                          <div class="col-md-4 col-7">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text price_addon">Rp.</div>
+                                </div>
+                                <input name="purchase_unit_price" type="text" class="form-field product_unit_price_edit item__purchase__unit__price formated_input_number" value="<%= "#{formatedRupiah(stock_control.purchase_unit_price) if stock_control.purchase_unit_price.present? }" %>" data-raw-data="<%= "#{stock_control.purchase_unit_price}" %>" required>
+                                <p class="invoice-total text-small mt-1 mr-2 item-total"><%= t('admin.invoice.invoice_total')%></p>
+                                <span class="text-small item-total mt-1" id="item__total">&nbsp;<%= formatedRupiah(stock_control.purchase_price) %></span>
+                            </div>
+                          </div>
+                        <% elsif @is_inventory %>
+                          <div class="col-md-3 col-4">
+                            <label class="text-label font-weight-bold text-left"><%= t('admin.invoice.stock')%></label>
+                          </div>
+                          <div class="col-md-3 col-4">
+                              <label class="text-label font-weight-bold text-left"><%= t('admin.invoice.inventory_actual')%></label>
+                          </div>                       
+                          <div class="col-md-3 col-4">
+                            <label class="text-label font-weight-bold text-left"><%= t('admin.invoice.difference')%></label>
+                          </div>
+                          <div class="col-md-12 col-12"></div>
+                          <div class="col-md-3 col-4">
+                            <div class="item__stock"><%= @shop_invoice.status == 'closed' ? "#{stock_control.stock_at_close.to_i}" : "#{(stock_control.quantity - stock_control.difference).to_i}"%></div>
+                          </div>
+                          <div class="col-md-3 col-4">
+                            <input class="form-field item__incoming__stock formated_input_number custome-width" name="quantity" type="text" required data-raw-data="<%= "#{stock_control.quantity.to_i}" %>" value="<%= "#{stock_control.quantity.to_i}" %>" />
+                          </div>
+                          <div class="col-md-3 col-4">
+                            <% @shop_invoice.status == 'closed' ? (stock_difference_at_close = stock_control.quantity.to_i - stock_control.stock_at_close.to_i) : (stock_difference_at_close = stock_control.difference.to_i) %>
+                            <div class="input-group">
+                              <% if stock_difference_at_close > 0 %>
+                                <div class="item__stock_difference d-flex align-items-center stock_plus" data-raw-data="<%= "#{stock_difference_at_close}" %>"><span><%= "#{stock_difference_at_close}" %></span></div>
+                              <% elsif stock_difference_at_close < 0 %>
+                                <div class="item__stock_difference d-flex align-items-center stock_minus" data-raw-data="<%= "#{stock_difference_at_close}" %>"><span><%= "#{stock_difference_at_close}" %></span></div>
+                              <% else %>
+                                <div class="item__stock_difference d-flex align-items-center" data-raw-data="<%= "#{stock_difference_at_close}" %>"><span><%= "#{stock_difference_at_close}" %></span></div>
+                              <% end %>
+                            </div>
+                          </div>
+                        <% end %>
+                      </div>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>
+<% if @is_inventory %>
+  <div class="stock-opname-subinfo">
+    <span class="text-label" id="total_stock_opname_item">Total <span id="item_count"></span> <%= t('admin.purchase.inventory_subinfo')%></span>
+  </div>
+<% end %>
+<div id="stock-control-item-clone" class="hide product-info-body p-0">
+  <li class="list-item list-bg style-none">
+    <input type="hidden" class="item__stock__control__id" name="id">
+    <input type="hidden" class="item__shop__product__id" name="shop_product_id">
+    <input type="checkbox" class="item__is_stock_control hide" name="check_box_value">
+    <div class="row">
+      <div class="col-md-9 col-9 set-purchase-padding">
+        <div class="item__name font-weight-bold text-normal m-bottom ml-2"></div>
+        <div class="item__description text-label m-bottom ml-2"></div>
+      </div>
+      <div class="col-md-3 col-3">
+        <div class="btn-wrap">
+          <button name="button" type="button" class="btn item__destroy">
+            <a class="btn-circle-default btn-remove-maintenance_log">
+              <i class="icon icon-Delete"></i>
+            </a>
+          </button>
+        </div> 
+      </div>
+    </div>
+    <div class="is_stock_confirm p-top-1rem text-small set-purchase-padding">
+      <div class="row">
+        <div class="col-md-5 col-8">
+          <p><%= t 'admin.purchase.is_stock_confirm_lbl' %></p>
+        </div>
+        <div class="col-md-4 col-4">
+          <span class="set-confirm click_confirm_stock"> <%= t 'admin.purchase.is_stock_confirm' %> </span>
+          <span class="click_later_stock"> <%= t 'admin.purchase.is_stock_cancel' %> </span>
+        </div>
+      </div>
+    </div>
+    <div class="is_stock_back p-top-1rem text-small set-purchase-padding">
+      <div class="row">
+        <div class="col-md-5 col-9">
+          <p class="mr-2"><%= t 'admin.purchase.is_stock_active_lbl' %></p>
+        </div>
+        <div class="col-md-4 col-3">
+          <span class="ml-2 click_cancel_stock"> <%= image_tag  'ls-undo.svg', class: 'img-responsive custome-icon', alt: 'icon-undo' %> </span>
+        </div>
+      </div>
+    </div>
+    <div class="is_stock_cancel p-top-1rem text-small set-purchase-padding">
+      <div class="row">
+        <div class="col-md-5 col-8">
+          <p class="mr-2"><%= t 'admin.purchase.is_stock_cancel_lbl' %></p>
+        </div>
+        <div class="col-md-4 col-4">
+          <span class="ml-2 click_reset_stock"> <%= image_tag  'ls-undo.svg', class: 'img-responsive custome-icon', alt: 'icon-undo' %> </span>
+        </div>
+      </div>
+    </div>
+    <div class="row set-purchase-padding mt-8">
+      <% if @is_invoice %>
+        <div class="col-md-3 col-4 mr-2">
+          <label class="text-label font-weight-bold text-left"><%= t('admin.invoice.quantity')%></label>
+        </div>
+        <div class="col-md-4 col-7">
+          <label class="text-label font-weight-bold text-left"><%= t('admin.invoice.invoice_unit_price')%></label>
+        </div>
+        <div class="col-md-12 col-12"></div>
+        <div class="col-md-3 col-4 mr-2">
+          <input class="form-field item__incoming__stock formated_input_number" name="quantity" type="text" required />
+        </div>
+        <div class="col-md-4 col-7">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text price_addon">Rp.</div>
+              </div>
+              <input name="purchase_unit_price" type="text" class="form-field product_unit_price_edit item__purchase__unit__price formated_input_number" required>
+              <p class="invoice-total text-small mt-1 mr-2 item-total"><%= t('admin.invoice.invoice_total')%></p>
+              <span class="text-small item-total mt-1" id="item__total"></span>
+          </div>
+        </div>
+      <% elsif @is_inventory %>
+        <div class="col-md-3 col-4">
+          <label class="text-label font-weight-bold text-left"><%= t('admin.invoice.stock')%></label>
+        </div>
+        <div class="col-md-3 col-4">
+          <label class="text-label font-weight-bold text-left"><%= t('admin.invoice.inventory_actual')%></label>
+        </div>
+        <div class="col-md-3 col-4">
+          <label class="text-label font-weight-bold text-left"><%= t('admin.invoice.difference')%></label>
+        </div>
+        <div class="col-md-12 col-12"></div>
+        <div class="col-md-3 col-4">
+          <div class="item__stock"></div>
+        </div>
+        <div class="col-md-3 col-4">
+          <input class="form-field item__incoming__stock formated_input_number custome-width" name="quantity" type="text" required />
+        </div>
+        <div class="col-md-3 col-4">
+          <div class="input-group">
+            <div class="item__stock_difference d-flex align-items-center"><span></span></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </li>
+</div>
+
+<%= link_to "", admin_shop_invoices_path(mode: @shop_invoice.is_inventory ? 1 : 0), class: 'hide', id: 'invoice_list_link' %>
+<input type="hidden" id="dialog__confirm_title" value="<%= t('admin.purchase.delete_confirm') %>">
+<input type="hidden" id="dialog_delete_confirm_message" value="<%= t('admin.purchase.delete_question') %>">
+<input type="hidden" id="dialog_delete_confirm_ok" value="<%= t('delete') %>">
+<input type="hidden" id="dialog_delete_confirm_cancel" value="<%= t('cancel') %>">
+<%= render "modal_add_product" %>
+<%= render "modal_find_product" %>

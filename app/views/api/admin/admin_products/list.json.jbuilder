@@ -1,0 +1,16 @@
+json.array!(@products) do |product|
+     json.id(product.id)
+     json.exist_shop_product(product.shop_product_id.present?)
+     json.product_category_id(product.product_category_id)
+     json.product_no(product.product_no)
+     json.name(product.name)
+     json.item_detail(product.item_detail)
+     json.brand_id(product.brand_id)
+     json.variant_id(product.variant_id)
+     json.tech_spec_id(product.tech_spec_id)
+     json.default_remind_interval_day(product.default_remind_interval_day)
+     json.campaign_code(product.campaign_code)
+     json.created_at(formatedDateTz(product.created_at, 'Jakarta'))
+     json.updated_at(formatedDateTz(product.created_at, 'Jakarta'))
+     json.selected(false)
+end

@@ -1,0 +1,56 @@
+<% content_for(:title, t('admin.customer.edit_customer_basic')) %>
+<%= form_with(model: @customer, url: admin_customer_update_basic_info_path, local: true, id: "customer_form") do |f| %>
+<div class="card">
+  <div class="text-normal card-header color-text-table-header">
+    <%= t 'admin.customer.basic_information' %>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tbody class="text-label">
+          <tr>
+            <th class="w-25"><%= t 'admin.common.customer_id' %></th>
+            <td><%= @customer.id %></td>
+          </tr>
+          <tr>
+            <th><%= t 'admin.common.name' %></th>
+            <td>
+            <%= f.text_field :name, class: 'form-control w-75', autofocus: true, autocomplete: 'off' %>
+            </td>
+          </tr>
+          <tr>
+            <th><%= t 'admin.common.tel' %></th>
+            <td id="tel"><%= formatedPhoneNumber(@customer.tel) %></td>
+          </tr>
+           <tr>
+            <th><%= t 'admin.common.tel_baru' %></th>
+            <td class="d-flex">
+              <%= f.text_field :tmp_tel, class: 'form-control w-75', autofocus: true, autocomplete: 'off', placeholder: "+62-xxxx-xxxx-xxxx", id: "tmp_tel"  %>
+              <%= f.text_field :id, type: "hidden", value: @customer.id%>
+              <div class="ml-3 d-flex align-items-center">
+                <i class="fa fa-exclamation-triangle text-danger d-none error ml-3"></i>
+                <span class="d-none text-danger error ml-3" id="error-message"></span>
+                <i class="fa fa-spinner fa-spin ml-3 d-none"></i>
+              </div>
+            </td>
+          </tr>
+          <tr>
+          <tr id="registered_phone_alert" class="d-none">
+            <td colspan=2>
+            <div class="alert alert-danger fade show" role="alert">
+                <%=t("admin.customer.phone_number_is_used")%> 
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div>
+<div class="d-flex justify-content-end w-100">
+  <%= link_to t('admin.common.back'), admin_customer_show_path(@customer), class: 'btn button-secondary-active text-large mr-3' %>
+  <%= f.submit t('admin.customer.save'), :class=>'btn btn-primary text-large', id: :save %>
+</div>
+</div>
+<% end %>

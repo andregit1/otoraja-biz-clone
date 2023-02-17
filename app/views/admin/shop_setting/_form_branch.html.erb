@@ -1,0 +1,307 @@
+<div class="card card-widget">
+
+  <div class="card-header color-text-table-header py-4">
+      <div class="">
+        <h3 class="card-title text-large text-uppercase">
+          <%= t 'admin.shop_setting.shop_info' %> 
+          <span class="text-small pl-2 align-self-center"><%= t 'admin.shop_setting.require_info' %></span>
+        </h3>
+      </div>
+  </div>
+  <div class="card-body p-0">
+
+    <% if shop.errors.any? %>
+      <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+        <ul>
+          <%  shop.errors.full_messages.each do |message| %>
+          <li class="text-normal"><%= message %></li>
+          <% end %>
+        </ul>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+
+    <div class="form-group row px-3 pt-3 m-0">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.shop_id' %></label>
+      <div class="col-7 col-md-7 align-self-center">
+        <% if shop.bengkel_id.present? %>
+          <p class="text-normal m-0"><%= shop.bengkel_id %></p> 
+        <% else %>
+          <p class="text-normal m-0">(<%= t 'admin.shop_setting.bengkel_id_info' %>)</p> 
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group row px-3 pb-3 m-0 border-bottom-enable">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.shop_group' %></label>
+      <div class="col-7 col-md-7 align-self-center">
+        <p class="text-normal m-0"><%= shop.shop_group.name %></p>
+        <%= f.hidden_field :shop_group_id, value: shop.shop_group.id %>
+      </div>
+    </div>
+
+    <div class="form-group row p-3 m-0 border-bottom-enable">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.shop_name' %>*</label>
+      <div class="col-8 col-md-8">
+        <%= f.text_field :name, :class=>'form-control', :required => true %>
+      </div>
+    </div>
+    
+    <div class="form-group row p-3 m-0">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.primary_Tel' %>*</label>
+      <div class="col-8 col-md-8">
+        <%= f.text_field :tel, :class=>'form-control', :required => true %>
+      </div>
+    </div>
+
+    <div class="form-group row p-3 m-0">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.other_Tel' %></label>
+      <div class="col-8 col-md-8">
+        <%= f.text_field :tel2, :class=>'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group row p-3 m-0 border-bottom-enable">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.tel_in_receipt' %>*</label>
+      <div class="col-8 col-md-8">
+        <%= f.text_field :tel3, :class=>'form-control', :required => true %>
+      </div>
+    </div>
+    <div class="form-group row p-3 m-0 border-bottom-enable">
+      <label class="text-normal col-4 col-md-4 col-form-label">Logo (opsional)</label>
+      <div class="col-8 col-md-8">
+        <%= f.file_field :shop_logo, accept: 'image/png, image/jpeg', :class=>'form-control pl-0' %>        
+      </div>
+      <div class="col-12 col-md-12 mt-3 p-0">
+        <% if @shop&.shop_logo.attached? %>
+          <div style="border: 2.39474px solid #CCCCCC;">
+            <center>
+              <%= image_tag(@shop&.shop_logo, :size => '200x200', :class => 'mt-2 mb-2 grayscale-img') %>
+            </center>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-12 col-md-12 mt-2">
+        <% if @shop&.shop_logo.attached? %>
+          <span class="text-label"><%= @shop&.shop_logo.filename %></span>
+          <%= link_to 'Hapus logo?', admin_shop_setting_delete_logo_path(id: @shop.id), method: :delete, style: "float: right; text-decoration: underline; color: #0C78EB;"%>
+        <% end %>
+        <p class="text-label mt-2" style="color: #888888;">File logo hanya dalam format JPG atau PNG. Ukuran file di bawah 1 MB. Kualitas logo tercetak tergantung dari kemampuan printer dan kertas Anda.</p>
+      </div>
+    </div>
+    <div class="form-group row p-3 m-0">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.area' %>*</label>
+      <div class="col-8 col-md-8 ">
+        <%= f.collection_select :region_id, Region.all, :id, :name, {include_blank: ''}, {class: 'form-control select2'} %>
+      </div>
+    </div>
+
+    <div class="form-group row p-3 m-0">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.province' %>*</label>
+      <div class="col-8 col-md-8" >
+        <%= f.grouped_collection_select :province_id, Region.all, :provinces, :name, :id, :name, {include_blank: ''}, {class: 'form-control select2', required: true}%>
+      </div>
+    </div>
+
+    <div class="form-group row p-3 m-0 border-bottom-enable">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.city' %>*</label>
+      <div class="col-8 col-md-8">
+        <%= f.grouped_collection_select :regency_id, Province.all, :regencies, :name, :id, :name, {include_blank: ''}, {class: 'form-control select2', required: true} %>
+      </div>
+    </div>
+
+    <div class="form-group row p-3 m-0">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.address' %>*</label>
+      <div class="col-8 col-md-8">
+        <%= f.text_area :address, :class=>'form-control text-area-custom', :required => true %>
+      </div>
+    </div>
+
+    <div class="form-group row p-3 m-0">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.status' %></label>
+      <div class="col-8 col-md-8">
+        
+        <% unless shop.subscriber_type.present? %>
+          <span class="p-2 text-normal badge badge-orange">
+            <%= t 'admin.subscription.subscription_status.free_trial' %>
+          </span>
+        <% end %>
+
+        <% if shop.non_subscriber? %>
+          <span class="p-2 text-normal badge badge-danger">
+            <%= t 'admin.subscription.subscription_status.suspend' %>
+          </span>
+        <% end %>
+
+        <% if shop.subscriber? %>
+          <% if shop.status_processing? %>
+            <span class="p-2 text-normal badge badge-warning">
+              <%= t 'admin.subscription.subscription_status.process' %>
+            </span>
+          <% else %>
+            <span class="p-2 text-normal badge badge-orange">
+              <%= t 'admin.subscription.subscription_status.free_trial' %>
+            </span>
+          <% end %>
+        <% end %>
+
+        <% if shop.paid_subscriber? %>
+          <span class="p-2 text-normal badge badge-success">
+            <%= t 'admin.subscription.subscription_status.paid' %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-widget">
+  <div class="card-header color-text-table-header py-4">
+    <h3 class="card-title text-large text-uppercase">
+      PENGINGAT STOK
+    </h3>
+  </div>
+  <div class="card-body">
+   <%= f.fields_for :shop_config, @shop.shop_config do |config| %>
+    <div class="form-row pb-3 mb-3 border-bottom align-items-center">
+      <label class="text-normal col-4 col-form-label">Ingatkan stok</label>
+      <div id="payment_toggle" class="col-4 col-md-2">
+        <%= config.check_box :use_stock_notification, data: {is_active: @shop.shop_config.use_stock_notification, toggle: 'toggle', on: "<span class='text-normal text-color-active'>#{t('console.shop_product.active')}</span>", off: "<span class='text-normal'>#{t('console.shop_product.inactive')}</span>"}, :class=>'color-primary' %>
+      </div>
+    </div>
+    <div class="form-row pb-3 mb-3 border-bottom align-items-center">
+      <label class="text-normal col-4 col-form-label">Waktu kirim</label>
+      <div class="col-7">  
+        <div class="form-group form-inline">
+          <%= config.select :close_stock_time_hour, hoursArray(), {:selected => formatedTimeHour(shop.shop_config.close_stock_time, 'Jakarta')}, {:class=>'form-control select2'} %> 
+          <span class="mx-2">:</span>
+          <%= config.select :close_stock_time_min, minsArray(15), {:selected => shop.shop_config.close_stock_time.min}, {:class=>'form-control select2'} %>
+        </div>
+      </div>
+    </div>
+    <div class="form-row mb-3 align-items-center">
+      <label class="text-normal col-4 col-form-label">No. tujuan (WA)</label>
+      <div class="col-8">  
+        <%= config.text_field :stock_notification_destination, class: "form-control text-normal" %>
+      </div>
+    </div>
+    <% end %>
+
+  </div>
+</div>
+
+<div class="card card-widget">
+  <div class="card-header color-text-table-header py-4">
+    <h3 class="card-title text-large text-uppercase">
+      <%= t 'admin.shop_setting.schedule_and_facility' %> 
+    </h3>
+  </div>
+  <div class="card-body p-0">
+    <div class="form-group row p-3 m-0">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.opening_hours' %></label>
+      <div class="col-7 col-md-7 row align-self-center">  
+        <select class="form-control select2 col-12 col-md-3" id="open-time">
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row p-3 m-0">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.closing_hours' %></label>
+      <div class="col-7 col-md-7 row align-self-center">  
+        <select class="form-control select2 col-12 col-md-3" id="close-time">
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row p-3 m-0 border-bottom">
+      <label class="text-normal col-4 col-md-4 col-form-label"><%= t 'admin.shop_setting.open_day' %></label>
+      <div class="col-8 col-md-8 pl-0 row align-self-center"> 
+        <%= f.fields_for :shop_business_hours, @shop.shop_business_hours.sort_by(&:id) do |business_hour| %>
+          <div class="col-6 col-md-5 col-lg-4 mb-3 p-2 checkbox-md text-normal">
+            <%= business_hour.check_box :is_holiday, {class: 'checkbox-md', checked: !business_hour.object.is_holiday}, false, true %>
+            <label class="text-normal font-weight-normal"><%= t "console.shop.show.business_hours.#{business_hour.object.day_of_week}" %></label>
+            
+            <%= business_hour.hidden_field :day_of_week, class: "day_of_week" %>
+            <%= business_hour.hidden_field :open_time_hour, class: "open-time-hour" %>
+            <%= business_hour.hidden_field :open_time_minute, class: "open-time-minute" %>
+            <%= business_hour.hidden_field :close_time_hour, class: "close-time-hour"%>
+            <%= business_hour.hidden_field :close_time_minute, class: "close-time-minute"%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group row p-3 m-0">
+      <label class="text-normal col-4 col-md-4 pt-0 col-form-label"><%= t 'admin.shop_setting.facility' %></label>
+      <div class="col-8 col-md-8 pl-0 row align-self-center">  
+        <% if Facility.count > 0 %>
+          <%= collection_check_boxes(:shop, :facility_ids, Facility.all, :id, :name) do |b| %>
+            <div class="col-12 col-md-12 col-lg-4 mb-3 checkbox-md text-normal">
+              <%= b.check_box({:class=> 'checkbox-md'}) %>
+              <%= b.label(class: 'font-weight-normal') {b.text} %>
+            </div>
+          <% end %>
+        <% else %>
+            <%= t 'admin.shop_setting.empty_facility' %> 
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="card card-widget">
+  <div class="card-header color-text-table-header py-4">
+    <h3 class="card-title text-large text-uppercase">
+      <%= t 'admin.shop_setting.service' %> 
+    </h3>
+  </div>
+  <div class="form-group row p-3 m-0 border-bottom-enable">
+    <div class="col-12 col-md-12 pl-0 row align-self-center">  
+      <% if Service.count > 0 %>
+        <%= collection_check_boxes(:shop, :service_ids, Service.all, :id, :name) do |b| %>
+          <div class="col-6 col-lg-4 mb-3 checkbox-md text-normal">
+            <%= b.check_box({:class=> 'checkbox-md'}) %>
+            <%= b.label(class: 'text-weight-normal') {b.text} %>
+          </div>
+        <% end %>
+      <% else %>
+          <%= t 'admin.shop_setting.empty_service' %> 
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="card card-widget">
+  <div class="card-header color-text-table-header py-4">
+    <h3 class="card-title text-large text-uppercase">
+      <%= t 'admin.shop_setting.keyword_search' %>  
+    </h3> 
+    <i class="fa fa-question-circle text-large ml-1 text-success" aria-hidden="true" data-toggle="modal" data-target="#search_tag_guide"></i>
+  </div>
+  <div class="form-group tag_list row p-3 m-0 border-bottom-enable">
+    <%= f.fields_for :shop_search_tags, @shop.shop_search_tags.sort_by(&:order) do |search_tag| %>
+      <div class="d-flex col-12 pb-3 tag-content">
+        <div class="col-2 col-md-1 align-self-center text-normal"><%= search_tag.options[:child_index]+1 %></div>
+        <div class="col-6 col-md-8">
+          <%= search_tag.text_field :name, class: "form-control tag-name text-normal" %>
+          <%= search_tag.hidden_field :order %>
+          <%= search_tag.hidden_field :is_using, value: true %>
+        </div>
+        <div class="col-5 col-md-3">
+          <button type="button" class="btn btn-default btn-arrow p-0 btn-up"><i class="text-normal fas fa-arrow-up"></i></button>
+          <button type="button" class="btn btn-default btn-arrow p-0 btn-down"><i class="text-normal fas fa-arrow-down"></i></button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="pb-5">
+  <%= link_to admin_shop_setting_path, :class => 'text-large btn button-secondary-active' do %><%= t 'admin.shop_setting.cancle' %><% end %>
+  <button class="text-large btn button-active ml-2" type="submit"><%= t 'admin.shop_setting.save' %></button>
+</div>
+
+<%= render "modal_search_tag_guide" %>

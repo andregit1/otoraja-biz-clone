@@ -1,0 +1,32 @@
+<div id="side-bar">
+  <nav>
+    <% if current_user.manager? || current_user.shop_manager? %>
+    <ul class="menu-list">
+      <li class="menu-list-item">
+        <%= link_to t('navigation.customize_list'),'#', id: 'customize_shop_product_list_open', class:'js-modal-open', role: 'button', :data => {target: '#customizeShopProductListModal'} %>
+      </li>
+    </ul>
+    <hr>
+    <ul class="menu-list">
+      <li class="menu-list-item"> 
+        <%= link_to t('navigation.management'), admin_dashboard_index_path %>
+      </li>
+    </ul>
+    <% end %>
+    <hr>
+    <ul class="menu-list">
+      <li class="menu-list-item"><%= link_to t('navigation.update_password'), user_password_change_path %></li>
+    </ul>
+    <hr>
+    <ul class="menu-list">
+      <li class="menu-list-item"><%= link_to t('navigation.releas_note'),'#', id: 'release_note_open', class:'js-modal-open', role: 'button', :data => {target: '#releaseNoteModal'} %></li>
+    </ul>
+    <hr>
+    <ul class="menu-list">
+      <li class="menu-list-item">
+        <%= link_to t('navigation.logout'), destroy_user_session_path, method: :delete %>
+      </li>
+    </ul>
+    <p class="version">Ver. <%= render 'layouts/current_version' %></p>
+  </nav>
+</div>

@@ -1,0 +1,53 @@
+<% content_for(:title, t('console.customer.customers')) %>
+
+
+<%= render 'search' %>
+
+<div class="d-flex justify-content-end">
+  <% filter = params[:filter].nil? ? {} : {filter: {customer: params[:filter]['customer']}, commit: params[:commit]} %>
+  <%= paginate @customers, params: filter, window: 1 %>
+</div>
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover table-sticky">
+        <thead>
+          <tr>
+            <th><%= sort_link(@q, :id, t('console.customer.customer_id'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th class="customer-name"><%= sort_link(@q, :name, t('console.common.name'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th class="customer-tel"><%= sort_link(@q, :tel, t('console.customer.phone_number'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th class="customer-plat"><%= t('console.customer.number_plat') %></th>
+            <th class="customer-shop"><%= t('console.customer.customer_shop_name') %></th>
+            <th><%= t('console.customer.last_visit_date') %></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @customers.each do |customer| %>
+          <tr>
+            <td><%= customer.id %></td>
+            <td class="customer-name"><%= customer.name %></td>
+            <td class="customer-tel"><%= formatedPhoneNumber(customer.tel) %></td>
+            <td class="customer-plat">
+              <% customer.owned_bikes.map do |owned_bike| %>
+                <p class="m-0"><%= owned_bike.formated_number_plate %></p>
+              <% end %>
+            </td>
+            <td class="customer-shop">
+              <% customer.shops.uniq.map do |shop| %>
+                <p class="m-0"><%= shop.name %></p>
+              <% end %>
+            </td>
+            <td class="customer-last-visit"><%= formatedDateTime(customer.last_visit_datetime, 'Jakarta')  %> (<%= customer.last_checkin.shop.name%>)</td>
+            <td>
+              <%= link_to console_customer_show_path(customer),:class => "btn btn-primary" do %>
+                <i class="fas fa-eye"></i> <%= t 'console.common.show' %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

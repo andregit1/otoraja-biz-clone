@@ -1,0 +1,130 @@
+<% readonly = false unless readonly.present? %>
+<li class="order-list-item nested-fields">
+  <%= f.hidden_field :shop_product_id, :class => 'hidden_shop_product_id' %>
+  <%= f.hidden_field :name, :class => 'hidden_name' %>
+  <%= f.hidden_field :product_no, :class => 'hidden_product_no' %>
+  <%= f.hidden_field :description, :class => 'hidden_description' %>
+  <%= f.hidden_field :quantity, :class => 'hidden_quantity' %>
+  <%= f.hidden_field :unit_price, :class => 'hidden_unit_price'%>
+  <%= f.hidden_field :sub_total_price, :class => 'hidden_sub_total_price' %>
+  <%= f.hidden_field :discount_type, :class => 'hidden_discount_type' %>
+  <%= f.hidden_field :discount_rate, :class => 'hidden_discount_rate' %>
+  <%= f.hidden_field :discount_amount, :class => 'hidden_discount_amount' %>
+  <%= hidden_field_tag 'purchase_unit_price[]','',{id: '', class: 'hidden_purchase_unit_price'} %>
+ 
+  <div class="product">
+    <div class="d-flex justify-content-between product__header">
+      <div class="product__title">
+        <p class="product__name">
+          <%= f.object.name unless f.object.name.nil? %>
+          <%= sprintf('[%s]',f.object.product_no) if f.object.product_no.present? %>
+        </p>
+        <p class="product__attribute"><%= f.object.description unless f.object.description.nil? %></p>
+      </div>
+      <a href="#" class="btn-product-detail-toggle" data-toggle="collapse" data-target="#maintenance_log_collapse-<%= f.object.id unless f.object.id.nil? %>" aria-expanded="false"><i class="icon icon-Arrow-down"></i></a>
+    </div>
+    <div id="maintenance_log_collapse-<%= f.object.id unless f.object.id.nil? %>" class="product__detail collapse">
+      <div class="related-products">
+        <%= f.fields :maintenance_log_detail_related_products do |rp| %>
+          <%= render 'maintenance_log_detail_related_product_fields', f:rp %>
+        <% end %>
+        <%= link_to_add_association 'add', f, :maintenance_log_detail_related_products, data: {"association-insertion-node" => "#maintenance_log_collapse-#{f.object.id} .related-products", "association-insertion-method" => "append"}, class: 'add-related-product hide' %>
+      </div>
+      <div class="d-flex justify-content-between mb-3">
+        <div class="form-group-quantity">
+          <%= label :quantity, t('select_product.quantity') %>
+          <div class="spinner-box">
+            <% if readonly %>
+            <input type="text" name="quantity" class="quantity" readonly value="<%= f.object.quantity unless f.object.quantity.nil? %>">
+            <% else %>
+            <a href="#" class="countdown spinner" data-step="-1"><i class="icon icon-Arrow-left"></i></a>
+            <input type="text" name="quantity" class="quantity js-modal-open" data-target="#numberPadQuantityModal" readonly value="<%= f.object.quantity unless f.object.quantity.nil? %>">
+            <a href="#" class="countup spinner" data-step="1"><i class="icon icon-Arrow-right"></i></a>
+            <% end %>
+          </div>
+        </div>
+        <div class="ml-2 blank">
+          <%= label :unit_price, t('select_product.unit_price') %>
+          <div class="input-group input-group-unit-price">
+            <div class="input-group-prepend">
+              <span class="input-group-text input-group-text2">Rp.</span>
+            </div>
+            <%= text_field_tag 'display_unit_price[]',formatedRupiah(f.object.unit_price.to_i), { data: {'target'=>'#numberPadPriceModal'}, class:'form-control form-control2 text-right form-input-unit-price js-modal-open', readonly: true} %>
+          </div>
+        </div>
+        <div class="ml-2 blank">
+          <%= label :discount_type, t('discount') %>
+          <div class="input-group input-group-discount">
+            <% if f.object.discount_type == 'value' %>
+              <div class="input-group-prepend">
+                <span class="input-group-text input-group-text2">Rp.</span>
+              </div>
+              <%= text_field_tag 'discount_amount[]',formatedRupiah(f.object.discount_amount.to_i), { data: {'target'=>'#numberPadDiscountModal'}, class:'form-control form-control2 text-right form-input-discount-amount js-modal-open', readonly: true} %>
+            <% else %>
+              <div class="input-group-prepend">
+                <span class="input-group-text input-group-text2">%</span>
+              </div>
+              <%= text_field_tag 'discount_amount[]',f.object.discount_rate, { data: {'target'=>'#numberPadDiscountModal'}, class:'form-control form-control2 text-right form-input-discount-amount js-modal-open', readonly: true} %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group-mechanics row mb-3">
+        <div class="col-12">
+          <div class="select-mechanics">
+             <% unless readonly %>
+            <%= button_tag :type => "button", class: "btn btn-select-mechanics js-modal-open", data: {"target" => "#selectItemMechanicModal"} do %>
+              <span class="btn-circle-primary"><i class="icon icon-Plus"></i></span> <%= t 'add' %>&nbsp;<%= t 'slip.mechanic' %>
+            <% end %>
+            <%= link_to_add_association 'add', f, :maintenance_mechanics, data: {"association-insertion-node" => "#maintenance_log_collapse-#{f.object.id} .selected-mechanics-list", "association-insertion-method" => "append"}, class: 'add-mechanics hide' %>
+            <% end %>
+            <div id="selectedMechanicsList" class="selected-mechanics-list">
+                <%= f.fields :maintenance_mechanics do |mm| %>
+                  <%= render 'maintenance_mechanic_fields', f: mm, readonly:readonly %>
+                <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between mb-5">
+        <div class="form-group-remarks blank">
+          <%= label :remarks, t('slip.note') %>
+          <%= f.text_field :remarks, class:'form-control form-control2 product__note js-modal-open', data:{"target"=>"#inputNoteModal"} , readonly:"readonly" %>
+        </div>
+        <div class="form-group-remove_btn">
+          <% if readonly %>
+          <div class="btn-circle-default btn-trash" style="visibility:hidden;"></div>
+          <% else %>
+          <label><%= t 'delete' %></label>
+          <%= link_to_remove_association f, class: 'btn-circle-default btn-trash', data:
+          {
+            confirm: 'Apakah Anda benar-benar ingin menghapus ini?',
+            cancel: 'Membatalkan',
+            commit: 'Hapus'
+          } do %>
+            <i class="icon icon-Delete"></i>
+          <% end %>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+    <div class="product__info d-flex justify-content-end">
+      <% if f.object.maintenance_mechanics.length > 0 %>
+      <p class="product__mechanic-icon badge-box"><i class="icon icon-Engineer"></i><span class="badge"><%= f.object.maintenance_mechanics.length %></span></p>
+      <% else %>
+      <p class="product__mechanic-icon badge-box hide"><i class="icon icon-Engineer"></i><span class="badge"></span></p>
+      <% end %>
+
+      <% if f.object.remarks.present? %>
+      <p class="product__note-icon badge-box mr-4"><i class="icon icon-Baloon"></i></p>
+      <% else %>
+      <p class="product__note-icon badge-box mr-4 hide"><i class="icon icon-Baloon"></i></p>
+      <% end %>
+      <p class="product__quantity"><span><%= f.object.quantity unless f.object.quantity.nil? %></span></p>
+      <p class="product__price"><span><%= formatedRupiah(f.object.sub_total_price) unless f.object.sub_total_price.nil? %></span></p>
+      <a href="#" class="btn-product-detail-toggle" data-toggle="collapse" data-target="#maintenance_log_collapse-<%= f.object.id unless f.object.id.nil? %>" aria-expanded="false"></a>
+    </div>
+  </div>
+</li>

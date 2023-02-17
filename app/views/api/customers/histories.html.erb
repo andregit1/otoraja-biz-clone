@@ -1,0 +1,41 @@
+<% if @histories.present? %>
+<div class="checkin-history-customer-info">
+  <p class="name"><%= @customer.name ||= '-----' %></p>
+  <p class="tel"><%= formatedPhoneNumber(@customer.tel, false) %></p>
+</div>
+<% end %>
+<% @histories.each do |h| %>
+<div class="checkin-history">
+  <div class="checkin-history__header d-flex justify-content-between">
+      <p class="checkin-date"><%= formatedCheckinDateTime(h.checkin.datetime, 'Jakarta') %></p>
+      <p class="vehicle-info"><%= formatedBikeInfo(h) %></p>
+  </div>
+  <div class="checkin-history__body">
+      <% h.maintenance_log_details.each do |d| %>
+        <% if d.shop_product.present? %>
+          <div class="checkin-history__product product-list-item" id="history-shop-product-<%= d.shop_product.id %>" class="product-list-item" data-id="<%= d.shop_product.id %>" data-product-name="<%= d.shop_product.product_name %>" data-product-category-name="<%= d.shop_product.product_category.name %>" data-stock="<%= d.shop_product.stock_quantity || '--' %>" data-sales-unit-price="<%= d.shop_product.sales_unit_price || 0 %>">
+            <p class="checkin-history__product-name"><%= d.name %></p>
+            <p class="checkin-history__product-description"><%= d.description %></p>
+            <div class="d-flex justify-content-end">
+                <p class="col-stock">Stock<br><span class="quantity">
+                  <% if d.shop_product.is_stock_control %>
+                    <%= d.shop_product.stock_quantity %></span>
+                  <% else %>
+                    --
+                  <% end %>
+                </p>
+                <p class="col-price">Price<br><span class="text-price-color">Rp. <%= formatedRupiah(d.shop_product.sales_unit_price.to_i) %></span></p>
+                <% unless @readonly == 'true' %>
+                
+                <%= button_tag :type => "button", class: "btn-circle-primary btn-add_product_history" do %>
+                  <i class="fa fa-plus"></i>
+                <% end %>
+               
+                <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+  </div>
+</div>
+<% end %>

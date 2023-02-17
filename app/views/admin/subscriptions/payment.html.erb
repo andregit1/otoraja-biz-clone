@@ -1,0 +1,84 @@
+<h1 class="text-page-title font-weight-bold"><%= t 'admin.subscription.payment' %></h1>
+
+<div class="card">
+  <div class="card-body p-0">
+    <p class="text-normal font-weight-bold px-3 pt-3"><%= t 'admin.subscription.payment_header' %></p>
+    <div class="row text-normal mb-4 px-3">
+      <div class="col-5 col-md-3 pb-2"><%= t 'admin.subscription.status' %></div>
+      <div class="col-7 col-md-9 font-weight-bold">
+        <% if @subscription.shop.non_subscriber? %>
+          <% if @subscription.shop.status_processing? %>
+            <%= t 'admin.subscription.subscription_status.process' %>
+          <% elsif @subscription.shop.payment_pending? && !@subscription.shop.payment_expired? %>
+            <%=  t 'admin.subscription.subscription_status.payment_pending' %>
+          <% else %>
+              <%= t 'admin.subscription.subscription_status.suspend' %>
+          <% end %>
+        <% end %>
+        <% if @subscription.shop.subscriber? %>
+          <% if @subscription.shop.status_processing? %>
+            <%= t 'admin.subscription.subscription_status.process' %>
+          <% elsif @subscription.shop.payment_pending? %>
+            <%=  t 'admin.subscription.subscription_status.payment_pending' %>
+          <% else %>
+            <%= t 'admin.subscription.subscription_status.active' %>
+          <% end %>
+        <% end %>
+        <% if @subscription.shop.paid_subscriber? %>
+          <% if @subscription.shop.status_processing? %>
+            <%= t 'admin.subscription.subscription_status.process' %>
+          <% elsif @subscription.shop.change_plan_time? %>
+            <%= t 'admin.subscription.subscription_status.date_left' %>
+          <% elsif @subscription.shop.payment_pending? %>
+            <%=  t 'admin.subscription.subscription_status.payment_pending' %>
+          <% else %>
+            <%= t 'admin.subscription.subscription_status.active' %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-5 col-md-3 pb-2"><%= t 'admin.subscription.subscription_date' %></div>
+      <div class="col-7 col-md-9 font-weight-bold"><%= formatedDateUseDash(@subscription.created_at) %></div>
+      <div class="col-5 col-md-3 pb-2"><%= t 'admin.common.shop' %></div>
+      <div class="col-7 col-md-9 font-weight-bold"><%= @subscription.shop.name %></div>
+      <div class="col-5 col-md-3 pb-2"><%= t 'admin.subscription.package_name' %></div>
+      <div class="col-7 col-md-9 font-weight-bold"><%= t 'admin.subscription.monthly_package', period: @subscription.subscription_period != "1" ? @subscription.subscription_period : "" %></div>
+      <div class="col-5 col-md-3 pb-2"><%= t 'admin.subscription.fee' %></div>
+      <div class="col-7 col-md-9 font-weight-bold">Rp <%= formatedRupiah(@subscription.fee) %></div>
+      <div class="col-5 col-md-3 pb-2"><%= t 'admin.subscription.payment_method' %></div>
+      <div class="col-7 col-md-9 font-weight-bold"><%= @subscription.payment_type.title %></div>
+    </div>
+    <div class="border-top border-bottom d-flex flex-column justify-content-center align-items-center pt-3 mb-3">
+      <% if @subscription.payment_gateway_va.present? %>
+        <button id="va-copy" type="button" class="btn btn-link text-label text-body pb-3" data-container="body" data-toggle="popover" data-placement="top" data-content="Nomor VA Tersalin">
+          <%= t 'admin.subscription.va_copy' %>
+        </button>
+        <p id="va-number" class="text-large font-weight-bold"><%= @subscription.payment_gateway_va %></p>
+      <% end %>
+
+      <% if @subscription.qr_path.present? %>
+        <span class="text-label">Pindai kode QR berikut ini untuk melakukan pembayaran</span>
+        <img src="<%= @subscription.qr_path %>" class="img-fluid w-50" alt="qr_path">
+        <%= link_to admin_subscription_plan_download_qrcode_path do %>
+          <u><%= t 'admin.common.download' %></u>
+        <% end %>
+      <% end %>
+      <p class="text-label"><%= t 'admin.subscription.payment_expired' %> <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span> </p>
+      <p id="countdown-expired" data-expired="<%= formattedDateTimePicker(@subscription.payment_gateway_expired) %>" ></p>
+    </div>
+    <p class="px-3 m-0 text-normal">Cara Pembayaran</p>
+    <%= t "admin.subscription.#{@subscription.payment_type.payment_instruction}" %>
+    <div class="border-top d-flex pt-3 mb-3 text-label">
+      <span class="font-weight-bold pl-3 mr-1"><%= t 'admin.subscription.already_paid' %></span>
+      <%= link_to admin_subscriptions_payment_proof_path(@subscription.shop.active_plan) do %>
+        <u><%= t 'admin.subscription.upload_receipt' %></u>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= link_to admin_subscription_path(@subscription), method: :delete, class: "btn button-secondary-active text-large mb-5 mr-3" do %>
+  <%= t 'admin.common.cancel' %>
+<% end %>
+<%= link_to admin_subscriptions_path, class: "btn button-active text-large mb-5" do %>
+  <%= t 'admin.common.close' %>
+<% end %>

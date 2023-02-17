@@ -1,0 +1,14 @@
+<div class="card-body">
+  <div class="form-group">
+    <label for="exampleInputFile">Shop file</label>
+    <div class="input-group">
+      <div class="custom-file">
+        <%= f.file_field :file, class: "custom-file-input", id: "productInputFile" %>
+        <label class="custom-file-label" for="productInputFile">Choose file(.csv or .xlsx)</label>
+      </div>
+      <div class="input-group-append">
+        <%= f.submit "import", class: "input-group-text" %>
+      </div>
+    </div>
+  </div>
+</div>

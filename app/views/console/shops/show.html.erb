@@ -1,0 +1,81 @@
+<% content_for(:title, t('console.shop.shop_information')) %>
+
+<!-- タブ部分 -->
+<ul id="shopTab" class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a href="#home" id="home-tab" class="nav-link active" role="tab" data-toggle="tab" aria-controls="home" aria-selected="true"><%= t 'console.shop.show.tab.home'%></a>
+  </li>
+  <li class="nav-item">
+    <a href="#accounts" id="accounts-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="account" aria-selected="false"><%= t 'console.shop.show.tab.accounts'%></a>
+  </li>
+  <li class="nav-item">
+    <a href="#staffs" id="staffs-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="staff" aria-selected="false"><%= t 'console.shop.show.tab.staffs'%></a>
+  </li>
+  <li class="nav-item">
+    <a href="#config" id="config-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="config" aria-selected="false"><%= t 'console.shop.show.tab.config'%></a>
+  </li>
+  <li class="nav-item">
+    <a href="#whatsapp" id="whatsapp-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="config" aria-selected="false"><%= t 'console.shop.show.tab.wa'%></a>
+  </li>
+  <li class="nav-item">
+    <%= link_to console_shop_products_path(shop_id: @shop.id), class: 'nav-link' do %>
+      <%= t 'console.shop.show.tab.products'%>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to console_checkins_path(shop_id: @shop.id, mode: "all"), class: 'nav-link' do %>
+      <%= t 'console.shop.show.tab.transactions'%>
+    <% end %>
+  </li>
+</ul>
+
+<!-- パネル部分 -->
+<div id="shopTabContent" class="tab-content mt-3">
+  <div id="home" class="tab-pane active" role="tabpanel" aria-labelledby="home-tab">
+    <%= render 'console/shops/show_home' %>
+  </div>
+  
+  <div id="accounts" class="tab-pane" role="tabpanel" aria-labelledby="accounts-tab">
+    <%= render 'console/shops/show_accounts' %>
+  </div>
+  <div id="staffs" class="tab-pane" role="tabpanel" aria-labelledby="staffs-tab">
+    <%= render 'console/shops/show_staffs' %>
+  </div>
+  <div id="config" class="tab-pane" role="tabpanel" aria-labelledby="config-tab">
+    <div class="row mb-2">
+      <div class="col-12 text-right">
+        <%= link_to edit_console_shop_config_path(@shop.shop_config), :class => 'btn btn-primary' do %>
+          <i class="fas fa-edit"></i> <%= t 'console.common.edit' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><%= t 'console.shop_config.shop_config' %></div>
+      </div>
+      <%= render 'console/shop_configs/list_body_from_shop', {config: @shop.shop_config} %>
+    </div>
+    <div class="card">
+      <div class="card-header"><%= t 'console.shop.tags' %></div>
+      <div class="card-body">
+        <% unless @tags.blank? %>
+        <ul class="tag-list">
+          <% @tags.each do |tag| %>
+          <li class="tag-list__item"><%= tag.name %>,</li>
+          <% end%>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div id="whatsapp" class="tab-pane" role="tabpanel" aria-labelledby="whatsapp-tab">
+    <%= render 'console/shops/show_whatsapp' %>
+  </div>
+</div>
+<div class="mt-5">
+  <%= link_to t('console.common.back'), console_shops_path, class: 'btn btn-default' %>
+</div>
+
+
+
+

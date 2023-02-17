@@ -1,0 +1,37 @@
+
+<!-- Number Pad Quantity Sheet Modal -->
+<div id="numberPadQuantityModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#numberPadQuantityModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-down js-modal-close" data-target="#numberPadQuantityModal">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+    <div id="quantity-select">
+      <div class="modal-caption">
+      </div>
+      <div id="" class="modal-body row">
+        <div class="col-7">
+          <section class="grid">
+            <div class="row no-pad">
+              <div class="col-4"><label class="grid-label"><%= t 'select_product.quantity' %></label></div>
+              <div class="col-8 -align-right">
+                <div class="grid-form">
+                  <input class="grid-input -align-right -text-red -text-bold" id="numberInputQuantity" type="text" readonly value=""/>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-5">
+          <div id="numberPadQuantity"></div>
+        </div>
+      </div>
+      <div id="number-pad-quantity-button" class="pl-5 pr-5 mt-6">
+        <%= button_tag :type => "button", class: "btn-base -basic -primary js-modal-close", data: {"target" => "#numberPadQuantityModal"} do %>
+          <%= t 'ok' %>
+        <% end %>
+      </div>
+    </div> 
+  </div>
+</div>
+<!-- Number Pad Quantity Sheet Modal -->

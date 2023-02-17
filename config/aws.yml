@@ -1,0 +1,21 @@
+default: &default
+  region: <%= ENV['AWS_DEFAULT_REGION'] %>
+  access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
+  secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+  cognito_setting:
+    region: "ap-southeast-1"
+    pool_data:
+      user_pool: <%= ENV['COGNITO_USER_POOL'] %>
+      client_id: <%= ENV['COGNITO_CLIENT_ID'] %>
+  dynamodb_setting:
+    region: "ap-southeast-1"
+development:
+  <<: *default
+test:
+  <<: *default
+design:
+  <<: *default
+staging:
+  <<: *default
+production:
+  <<: *default

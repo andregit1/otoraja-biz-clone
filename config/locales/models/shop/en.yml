@@ -1,0 +1,24 @@
+en:
+  activerecord:
+    models:
+      shop: 'Shop'
+    attributes:
+      shop:
+        id: "ID"
+        bengkel_id: "Bengkel ID"
+        shop_group: "Shop Group"
+        name: "Shop Name"
+        tel: "Tel"
+        tel2: "Tel2"
+        tel3: "Tel3"
+        address: "Address"
+        longitude: "Longitude"
+        latitude: "Latitude"
+        region_id: "Area"
+        province_id: "State"
+        regency_id: "City"
+      shop/subscriber_type:
+        non_subscriber: "Non Subscriber"
+        subscriber: "Subscriber"
+        paid_subscriber: "Paid Subscriber"
+

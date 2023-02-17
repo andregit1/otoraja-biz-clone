@@ -1,0 +1,11 @@
+id:
+  console:
+    versions:
+      index:
+        title: "Versi"
+        management_type: "Jenis Manajemen"
+        latest_version: "Versi terbaru"
+        require_version: "Versi yang diperlukan"
+        front_android: "Android depan"
+        button:
+          require_to_latest: "Diperlukan untuk Terbaru"

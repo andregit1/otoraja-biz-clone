@@ -1,0 +1,68 @@
+<% content_for(:title, 'Shop Users') %>
+<%= render 'search' %>
+
+<div class="d-flex justify-content-end">
+  <%= paginate @users %>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <% if policy(:user).new? %>
+        <div class="d-flex justify-content-end mb-3">
+          <%= link_to new_console_user_path(role: :owner), :class => 'btn btn-success mx-1' do %>
+            <i class="fas fa-user-plus"></i> Add Owner User
+          <% end %>
+          <%= link_to new_console_user_path(role: :admin_operator), :class => 'btn btn-success mx-1' do %>
+            <i class="fas fa-user-plus"></i> Add Admin Operator User
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>UserID</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @users.each do |user| %>
+        <tr class="<%= 'bg-secondary' unless user.is_enabled? %>">
+          <td><%= user.id %></td>
+          <td><%= user.user_id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.role %></td>
+          <td class="text-right">
+            <% if user.is_enabled? %>
+              <%= link_to console_disable_user_path(user), method: :post, :class => 'btn btn-danger' do %>
+                <i class="fas fa-ban"></i> Disabled
+              <% end %>
+            <% else %>
+              <%= link_to console_enable_user_path(user), method: :post, :class => 'btn btn-success' do %>
+                <i class="fas fa-history"></i> Enabled
+              <% end %>
+            <% end %>
+            <% if user.is_enabled? %>
+              <%= link_to edit_console_user_path(user), :class => 'btn btn-primary' do %>
+                <i class="fas fa-edit"></i> Edit
+              <% end %>
+
+              <% unless user.admin_roles? %>
+                <%= link_to console_password_path(user), :class => 'btn btn-primary' do %>
+                  <i class="fas fa-edit"></i> Edit Password
+                <% end %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

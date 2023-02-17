@@ -1,0 +1,12 @@
+en:
+  console:
+    requests:
+      button:
+        create_account: "Create an account"
+        search: "Search"
+      new_application:
+        title: "New Application"
+      renewal_application:
+        title: "Renewal Application"
+    
+    

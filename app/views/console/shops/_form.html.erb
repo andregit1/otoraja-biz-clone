@@ -1,0 +1,164 @@
+<div class="card-body">
+  <% if shop.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
+
+      <ul>
+      <% shop.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :bengkel_id, t('console.shop.bengkel_id') %>
+    <%= f.text_field :bengkel_id, :class=>'form-control', readonly: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :shop_group_id, t('console.shop.show.shop_group') %>
+    <div class="row">
+      <div class="col-4">
+        <%= f.collection_select :shop_group_id, ShopGroup.all, :id, :name, {prompt: ""}, {class: 'form-control select2'} %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name, t('console.common.name') %>
+    <%= f.text_field :name, :class=>'form-control', autocomplete: 'off', placeholder: "OTORAJA MOTOR" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :tel, t('console.common.tel') %>
+    <%= f.text_field :tel, :class=>'form-control mb-1', autocomplete: 'off', placeholder: "0800-0000-1111"%>
+    <%= f.text_field :tel2, :class=>'form-control mb-1', autocomplete: 'off', placeholder: "0800-0000-2222" %>
+    <%= f.text_field :tel3, :class=>'form-control', autocomplete: 'off', placeholder: "0800-0000-3333" %>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-4">
+        <%= f.label :region_id, Shop.human_attribute_name(:region_id) %>
+        <%= f.collection_select :region_id, Region.all, :id, :name, {prompt: ""}, {class: 'form-control select2'} %>
+      </div>
+      <div class="col-4">
+        <%= f.label :province_id, Shop.human_attribute_name(:province_id) %>
+        <%= f.collection_select :province_id, Province.all, :id, :name, {prompt: ""}, {class: 'form-control select2'} %>
+      </div>
+      <div class="col-4">
+        <%= f.label :regency_id, Shop.human_attribute_name(:regency_id) %>
+        <%= f.collection_select :regency_id, Regency.all, :id, :name, {prompt: ""}, {class: 'form-control select2'} %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address, t('console.common.address') %>
+    <%= f.text_field :address, :class=>'form-control', autocomplete: 'off', placeholder: "Jalan Ceger Raya No.94, Pondok Karya, Kota Tangerang Selatan, Banten 15225" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :virtual_bank_no, t('console.shop.form.virtual_bank_no') %>
+    <%= f.text_field :virtual_bank_no, class: 'form-control', autocomplete: 'off' %>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-6">
+        <%= f.label :latitude, Shop.human_attribute_name(:latitude) %>
+        <%= f.text_field :latitude, :class=>'form-control', placeholder: "-6.2178" %>
+      </div>
+      <div class="col-6">
+        <%= f.label :longitude, Shop.human_attribute_name(:longitude) %>
+        <%= f.text_field :longitude, :class=>'form-control', placeholder: "106.757" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag t ('console.shop.show.business_hours.name') %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= t('console.shop.show.business_hours.day_of_week') %></th>
+          <th><%= t('console.shop.show.business_hours.holiday') %></th>
+          <th><%= t('console.shop.show.business_hours.open') %></th>
+          <th><%= t('console.shop.show.business_hours.close') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.fields_for :shop_business_hours do |business_hour| %>
+          <tr>
+            <th>
+              <%= t("console.shop.show.business_hours.#{business_hour.object.day_of_week}") %>
+              <%= business_hour.hidden_field :day_of_week, value: business_hour.object.day_of_week %>
+            </th>
+            <td><%= business_hour.check_box :is_holiday %></td>
+            <td>
+              <div class="form-inline">
+                <%= business_hour.text_field :open_time_hour, class: 'form-control', oninput: 'if(value.length>2)value=value.slice(0,2)', placeholder: "9" %>
+                <span class="mx-1">:</span>
+                <%= business_hour.text_field :open_time_minute, class: 'form-control', oninput: 'if(value.length>2)value=value.slice(0,2)', placeholder: "00" %>
+              </div>
+            </td>
+            <td>
+              <div class="form-inline">
+                <%= business_hour.text_field :close_time_hour, class: 'form-control', oninput: 'if(value.length>2)value=value.slice(0,2)', placeholder: "18" %>
+                <span class="mx-1">:</span>
+                <%= business_hour.text_field :close_time_minute, class: 'form-control', oninput: 'if(value.length>2)value=value.slice(0,2)', placeholder: "00" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <% if Facility.count > 0 %>
+  <div class="form-group">
+    <%= f.label :facilities, t('console.shop.show.facility') %>
+    <div class="row">
+      <div class="col-12">
+        <%= collection_check_boxes(:shop, :facility_ids, Facility.all, :id, :name) do |b| %>
+          <div class="form-check form-check-inline">
+            <%= b.label { b.check_box + b.text } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  <% if Service.count > 0 %>
+  <div class="form-group">
+    <%= f.label :services, t('console.shop.show.service') %>
+    <div class="row">
+      <div class="col-12">
+        <%= collection_check_boxes(:shop, :service_ids, Service.all, :id, :name) do |b| %>
+          <div class="form-check form-check-inline">
+            <%= b.label { b.check_box + b.text } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+</div>
+
+<div class="card-footer">
+  <div class="row">
+    <div class="col text-right">
+      
+      <% if controller.action_name.in?(['new', 'create']) %>
+        <%= link_to t('console.common.back'), console_shops_path, class: 'btn btn-default' %>
+        <%= f.submit t('console.common.regist'), :class=>'btn btn-primary' %>
+      <% else %>
+        <%= link_to t('console.common.back'), console_shop_path(shop), class: 'btn btn-default' %>
+        <%= f.submit t('console.common.update'), :class=>'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

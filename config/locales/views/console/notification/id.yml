@@ -1,0 +1,14 @@
+id:
+  console:
+    notification:
+      button:
+        add: "Menambah pemberitahuan"
+        edit: "Edit pemberitahuan"
+      index:
+        title: "Pemberitahuan"
+      new:
+        title: "Menambah pemberitahuan"
+      edit:
+        title: "Edit pemberitahuan"
+      form:
+        display_shops: "Pilih Bengkel yang Mendapatkan Notifikasi"

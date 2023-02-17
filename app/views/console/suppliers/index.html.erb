@@ -1,0 +1,47 @@
+<% content_for(:title, t('console.supplier.supplier')) %>
+
+<%= render 'search' %>
+
+<div class="card content-datatable">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover table-sticky">
+        <thead>
+          <tr>
+            <th><%= sort_link(@q, :name, t('console.common.name'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <% if current_user.admin_roles? %>
+            <th><%= sort_link(@q, :shop_id, t('console.common.shop'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <% end %>
+            <th><%= sort_link(@q, :address, t('console.common.address'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th><%= sort_link(@q, :tel, t('console.common.tel'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @suppliers.each do |supplier| %>
+          <tr>
+            <td><%= supplier.name %></td>
+            <% if current_user.admin_roles? %>
+            <td><%= supplier.shop.name %></td>
+            <% end %>
+            <td><%= supplier.address %></td>
+            <td><%= supplier.tel %></td>
+            <td class="text-right">
+              <%= link_to edit_console_supplier_path(supplier), :class => 'btn btn-primary' do %>
+                <i class="fas fa-edit"></i> <%= t 'console.common.edit' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex justify-content-start">
+      <%= link_to new_console_supplier_path,:class => 'btn btn-outline-primary footer-btn' do %>
+        <i class="fas fa-plus"></i> <%= t 'console.supplier.add_supplier' %>
+      <% end %>
+    </div>
+  </div>
+</div>

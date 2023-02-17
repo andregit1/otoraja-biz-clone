@@ -1,0 +1,59 @@
+<% content_for(:title, 'Shop Users') %>
+
+<%= render 'search' %>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <% if policy(:user).new? %>
+        <div class="d-flex justify-content-end mb-3">
+          <%= link_to new_admin_user_path(role: :staff), :class => 'btn btn-success mx-1' do %>
+            <i class="fas fa-user-plus"></i> Add Staff User
+          <% end %>
+          <%= link_to new_admin_user_path(role: :shop_manager), :class => 'btn btn-success mx-1' do %>
+            <i class="fas fa-user-plus"></i> Add Shop Manager User
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>UserID</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @users.each do |user| %>
+        <tr class="<%= 'bg-secondary' unless user.is_enabled? %>">
+          <td><%= user.user_id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.role %></td>
+          <td class="text-right">
+            <% if user.is_enabled? %>
+              <%= link_to admin_disable_user_path(user), method: :post, :class => 'btn btn-danger' do %>
+                <i class="fas fa-ban"></i> Disabled
+              <% end %>
+            <% else %>
+              <%= link_to admin_enable_user_path(user), method: :post, :class => 'btn btn-success' do %>
+                <i class="fas fa-history"></i> Enabled
+              <% end %>
+            <% end %>
+
+            <%= link_to edit_admin_user_path(user), :class => 'btn btn-primary' do %>
+              <i class="fas fa-edit"></i> Edit
+            <% end %>
+
+            <%= link_to admin_password_path(user), :class => 'btn btn-primary' do %>
+              <i class="fas fa-edit"></i> Edit Password
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<% flash.each do |key, value| %>
+  <% if key == 'notice' %>
+  <div class="alert alert-info alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <%= content_tag(:span, value, class: "info") %>
+  </div>
+  <% elsif key == 'alert' %>
+    <% if flash[:alert] == t('admin.notification.notification_unidentified') %>
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close notif-dialog-close mr-0" data-dismiss="alert" aria-hidden="true">×</button>
+        <%= content_tag(:span, t('admin.notification.custom_failure_message'), class: "danger") %>
+      </div>
+    <% else %>
+      <div class="alert alert-warning alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <%= content_tag(:span, value, class: "warning") %>
+      </div>
+    <% end %>
+  <% else %>
+  <div class="alert alert-<%= key %> alert-dismissible">
+    <button type="button" class="close notif-dialog-close mr-0" data-dismiss="alert" aria-hidden="true">×</button>
+    <%= content_tag(:span, value, class: "#{key}") %>
+  </div>
+  <% end %>
+<% end %>

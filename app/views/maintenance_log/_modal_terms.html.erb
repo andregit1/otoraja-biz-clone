@@ -1,0 +1,34 @@
+<div id="termsModal" class="modal js-modal">
+  <div class="modal_bg"></div>
+  <div class="modal_content -terms">
+    <div class="modal-header">
+      <div class="modal-title col-10 offset-1 text-center"> <%= t 'customer.policy' %></div>
+      <div class="col-1">
+        <button id="terms-modal-close" class="close js-modal-close" data-target="#termsModal">
+          <i class="icon icon-Cross"></i>
+        </button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="terms-box">
+        <%= @terms.terms.html_safe %>
+      </div>
+      <div class="mt-5 d-flex justify-content-center">
+        <%= button_tag :type => "button", id: "terms-agree-button", :class =>"btn-base -basic -primary w-75", disabled: true, style: "display:none;" do %>
+          <%= t 'agree' %>
+        <% end %>
+        <%= button_tag :type => "button", id: "c-suggest-terms-agree-button", :class =>"btn-base -basic -primary w-75", disabled: true, style: "display:none;" do %>
+          <%= t 'agree' %>
+        <% end %>
+      </div>
+      <p class="d-flex justify-content-center text-caution">
+        <%= t 'caution_discription' %>
+      </p>
+      <div class="text-right">
+        <%= check_box_tag :send_dm, true, false, {class: 'align-middle', checked: 'checked'} %>
+        <%= label_tag :send_dm, t('send_sms') %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= button_tag :type => "button", id: "open-terms-modal", :class =>"js-modal-open", data: {"target" => "#termsModal"}, style: "display:none;" %>

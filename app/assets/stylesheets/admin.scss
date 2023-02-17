@@ -1,0 +1,17 @@
+/*
+ *= require_self
+ *= require_tree ./admin
+ *= require ./front/_components
+ *= require raty-js/lib/jquery.raty.css
+ *= require jquery-ui
+ */
+ @import 'bootstrap/dist/css/bootstrap.min';
+ @import 'bootstrap4-toggle/css/bootstrap4-toggle.min';
+ @import 'select2/dist/css/select2.min';
+ @import 'admin-lte/dist/css/adminlte.min';
+ @import 'font-awesome-sprockets';
+ @import 'font-awesome';
+ @import 'daterangepicker/daterangepicker';
+ @import 'handsontable/dist/handsontable.full.min';
+ @import 'icomoon/style';
+ 

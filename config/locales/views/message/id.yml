@@ -1,0 +1,56 @@
+id:
+  message:
+    register:
+      thanks:
+        subject: "Aktifkan akun Otoraja Biz Anda"
+        body: |
+          Terima kasih atas registrasi Anda di Otoraja Biz
+
+          Halo %{shop_name}, 
+          
+          Berikut adalah username dan password sementara Anda untuk mengakses Otoraja Biz.
+
+          Username: %{email}
+          Password: %{password}
+
+          Login di Panel Manajemen (SMC): %{url}
+          
+          Segera ganti password Anda dengan yang baru.
+          Selamat menggunakan Otoraja Biz!
+
+          Jika mengalami masalah dalam proses ini, silahkan hubungi tim Otoraja Biz.
+          Mohon abaikan email ini jika Anda tidak mendaftar layanan Otoraja Biz.
+    sms_purchase_reminder: |
+        Beep beep! Sudah tiba waktunya untuk memeriksa %{category_name} motor Anda. 
+        Mari mampir kembali ke %{shop}.
+
+        
+        Pesan dikirim oleh OTORAJA
+    sms_customer_reminder: |
+        Motor Anda sudah terasa berat? Waktunya servis di %{shop} supaya motor kembali ngaciiirrr…
+
+
+        Pesan dikirim oleh OTORAJA
+    sms_receipt_checkout: |
+        Terima kasih anda telah melakukan perawatan kendaraan hari ini. Berikut adalah bukti transaksi Anda di %{today} :
+        
+        %{transaction_id} 
+        
+        Total Biaya : %{total_price} 
+        Item : %{product};
+        
+        Selengkapnya Anda dapat mengunduh di : %{url} 
+        
+        Kami harap Anda dapat mengunjungi %{shop} lagi! 
+        
+        
+        Pesan dikirim oleh OTORAJA
+    sms_questionairre: | 
+        Punya saran atau komentar untuk %{shop} supaya bisa melayani lebih baik lagi?
+        Sampaikan melalui link ini: %{url} 
+        
+        
+        Pesan dikirim oleh OTORAJA
+    
+        
+

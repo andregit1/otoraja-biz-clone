@@ -1,0 +1,59 @@
+<div class="card-body">
+
+  <% if supplier.errors.any? %>
+  <div class="callout callout-danger">
+    <h2><%= pluralize(supplier.errors.count, "error") %> prohibited this User from being saved:</h2>
+    <ul>
+      <% supplier.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, t('console.supplier.supplier_name') %>
+    <%= f.text_field :name, :class=>'form-control', autocomplete: 'off' %>
+  </div>
+  <% if current_user.admin? %>
+  <div class="form-group">
+    <%= f.label :available_shops, t('console.common.shop') %>
+    <%= f.select :shop_id, Shop.all.pluck(:name, :id), {:include_blank => true}, {:class=>'form-control select2'} %>
+  </div>
+  <% elsif @shops.length > 1 %>
+  <div class="form-group">
+    <%= f.label :available_shops, t('console.common.available_name') %>
+    <%= f.select :shop_id, @shops.pluck(:name, :id), {:include_blank => true}, {:class=>'form-control select2'} %>
+  </div>
+  <% else %>
+    <%= f.hidden_field :shop_id, :value => @shops.first.id %>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :address, t('console.common.address') %>
+    <%= f.text_field :address, :class=>'form-control', autocomplete: 'off' %>
+  </div>
+  <label><%= t 'console.common.tel' %></label>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <%= f.select :phone_country_code, @country_code_list, {selected: @phone_country_code || 62}, {class: 'form-control select-country'} %>
+    </div>
+    <%= f.telephone_field :phone_national, class: 'form-control', autocomplete: 'off', value: @phone_national %>
+  </div>
+
+</div>
+<div class="card-footer">
+  <% if controller.action_name.in?(['new', 'create']) %>
+    <div class="text-right">
+      <%= link_to t('console.common.back'), console_suppliers_path, class: 'btn btn-default' %>
+      <%= f.submit t('console.common.regist'), :class=>'btn btn-primary' %>
+    </div>
+  <% else %>
+    <div class="d-flex justify-content-between">
+      <%= link_to t('console.supplier.delete'), console_supplier_path(supplier), :method => :delete, :class => 'btn btn-danger' %>
+      <div>
+        <%= link_to t('console.common.back'), console_suppliers_path, class: 'btn btn-default' %>
+        <%= f.submit t('console.common.update'), :class=>'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>

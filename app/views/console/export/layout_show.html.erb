@@ -1,0 +1,50 @@
+<% content_for(:title, 'Export Layout') %>
+
+<div>
+  <label>Type</label>
+  <%= @export_layout.export_type.name %>
+</div>
+
+<div>
+  <label>Name</label>
+  <%= @export_layout.name %>
+</div>
+
+<div class="mt-4">
+  <label>Example</label>
+  <% unless @export_layout_columns.empty? %>
+  <table class="table table-bordered table-sm bg-white">
+    <thead>
+      <tr>
+        <% @export_layout_columns.each do |layout_column| %>
+          <th>
+            <%= layout_column.export_column.name %>
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @export_layout_columns.each do |layout_column| %>
+          <td>
+            <% unless layout_column.export_masking_rule.nil? %>
+              <%= layout_column.export_masking_rule.masking(layout_column.export_column.name + ' example') %>
+            <% else %>
+              <%= layout_column.export_column.name + ' example' %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+  <% else %>
+    <div> No setting </div>
+  <% end %>
+</div>
+
+<div class="mt-3">
+  <%= link_to console_export_layout_edit_path(@export_layout),:class => "btn btn-primary" do %>
+    <i class="fas fa-edit"></i> Edit
+  <% end %>
+  <%= link_to 'Back', console_export_patterns_path, class: 'btn btn-default' %>
+</div>

@@ -1,0 +1,99 @@
+<div class="card-header">
+  <div class="d-flex justify-content-between">
+    <div>
+      <label>Target Bengkel:</label><span class="ml-2" id="shop_name"><%= @shop.name %></span>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between mt-3">
+    <div><%= link_to 'Back', console_shop_products_import_path, class: "btn btn-default mr-3" %></div>
+    <div><h3>Produk tidak bermasalah</h3></div>
+    <div>
+      <% if @shop_products.present? %>
+        <button id="import_button", class="btn btn-primary" <%=@shop_products.count > 3000? "disabled": ""%> title="Maximum 3000 products">
+          <i class="fa fa-spinner fa-spin mr-3 d-none"></i><%= "Import #{@shop_products.length} produk" %>
+        </button>
+      <% end%>
+    </div>
+  </div>
+</div>
+<div class="card-body p-0">
+  <div class="table-responsive">
+    <table class="table table-sticky">
+      <thead>
+        <tr>
+          <th>product_no</th>
+          <th>product_class_name</th>
+          <th>product_category</th>
+          <th>admin_product_id</th>
+          <th>shop_alias_name</th>
+          <th>item_detail</th>
+          <th>stock_minimum</th>
+          <th>sales_unit_price</th>
+          <th>remind_interval_day</th>
+          <th>stock</th>
+          <th>purchase_unit_price</th>
+          <th>in_store</th>
+        </tr>
+      </thead>
+      <tbody>
+         <% if @shop_products.blank? %>
+          <tr>
+            <td colspan="11" class="text-center"><div class="empty_message">There is no data to import.</div></td>
+          </tr>
+        <% end %>
+        <% @shop_products.each_with_index do |shop_product, index| %>
+          <tr class="table-primary">
+            <td>
+              <%= shop_product[:product_no] %>
+              <%= hidden_field_tag "shop_products[#{index}][product_no]", shop_product[:product_no] %>
+            </td>
+            <td><%= shop_product[:product_class_name] %></td>
+            <td>
+              <%= shop_product[:product_category_id] %>&nbsp;:&nbsp;<%= shop_product[:product_category_name] %>
+              <%= hidden_field_tag "shop_products[#{index}][product_category_id]", shop_product[:product_category_id] %>
+            </td>
+            <td>
+              <%= shop_product[:admin_product_id] %>
+              <%= hidden_field_tag "shop_products[#{index}][admin_product_id]", shop_product[:admin_product_id] %>
+            </td>
+            <td class="text-nowrap">
+              <%= shop_product[:shop_alias_name] %>
+              <%= hidden_field_tag "shop_products[#{index}][shop_alias_name]", shop_product[:shop_alias_name] %>
+            </td>
+            <td class="text-nowrap">
+              <%= shop_product[:item_detail] %>
+              <%= hidden_field_tag "shop_products[#{index}][item_detail]", shop_product[:item_detail] %>
+            </td>
+            <td class="text-right">
+              <%= shop_product[:stock_minimum] %>
+              <%= hidden_field_tag "shop_products[#{index}][stock_minimum]", shop_product[:stock_minimum] %>
+            </td>
+            <td class="text-right">
+              <%= formatedDecimalPoint(shop_product[:sales_unit_price].to_i) unless shop_product[:sales_unit_price].blank? %>
+              <%= hidden_field_tag "shop_products[#{index}][sales_unit_price]", shop_product[:sales_unit_price] %>
+            </td>
+            <td class="text-right">
+              <%= shop_product[:remind_interval_day] %>
+              <%= hidden_field_tag "shop_products[#{index}][remind_interval_day]", shop_product[:remind_interval_day] %>
+            </td>
+            <td class="text-right">
+              <%= shop_product[:stock] %>
+              <%= hidden_field_tag "shop_products[#{index}][stock_attributes][quantity]", shop_product[:stock] %>
+            </td>
+            <td class="text-right">
+              <%= shop_product[:purchase_unit_price] %>
+              <%= hidden_field_tag "shop_products[#{index}][stock_controls_attributes][0][purchase_unit_price]", shop_product[:purchase_unit_price] %>
+            </td>
+            <td>
+              <%= shop_product[:in_store] %>
+              <%= hidden_field_tag "shop_products[#{index}][is_use]", true %>
+              <%= hidden_field_tag "shop_products[#{index}][shop_id]", @shop.id %>
+              <% is_stock_control = shop_product[:stock] > 0 %>
+              <%= hidden_field_tag "shop_products[#{index}][is_stock_control]", is_stock_control %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

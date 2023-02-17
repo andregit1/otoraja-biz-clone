@@ -1,0 +1,21 @@
+en:
+  activerecord:
+    models:
+      new_contract_requests: 'Service'
+    attributes:
+      new_contract_requests:
+        id: "ID"
+        name: "Name"
+        email: "Email"
+        tel: "Tel"
+        shop_name: "Shop Name"
+        shop_address: "Shop Address"
+        business_form: "Business Form"
+        number_of_employees: "Number of employees"
+        desired_start_date: "Desired start date"
+        status: "Status"
+        created_at: "Created at"
+      new_contract_request/status:
+        todo: "Todo"
+        processing: "Processing"
+        processed: "Processed"

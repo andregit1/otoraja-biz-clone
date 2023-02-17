@@ -1,0 +1,13 @@
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item">
+    <%= link_to t('console.customer.basic'), console_customer_show_path, class: "nav-link #{controller.action_name == 'show' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to t('console.customer.checkins'), console_customer_checkins_path, class: "nav-link #{controller.action_name == 'checkins' ? 'active' : ''}" %>
+  </li>
+  <% if current_user.admin_roles? %>
+    <li class="nav-item">
+      <%= link_to t('console.customer.reviews'), console_customer_answers_path, class: "nav-link #{controller.action_name == 'answers' ? 'active' : ''}" %>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,29 @@
+<div>
+  <div id="search_checked_out">
+    <ul class="list-group checkin-user-list list">
+      <% unless @checkout_checkins.blank? %>
+        <% @checkout_checkins.each do |checkin| %>
+          <%= render 'checkin/record', {checkin: checkin} %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+  <div id="search_unchecked_out">
+    <ul class="list-group checkin-user-list list">
+      <% unless @uncheckout_checkins.blank? %>
+        <% @uncheckout_checkins.each do |checkin| %>
+          <%= render 'checkin/record', {checkin: checkin} %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+  <div id="search_all">
+    <ul class="list-group list">
+      <% unless @all_checkins.blank? %>
+        <% @all_checkins.each do |checkin| %>
+          <%= render 'checkin/record', {checkin: checkin} %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>

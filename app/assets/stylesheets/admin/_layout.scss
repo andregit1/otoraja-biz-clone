@@ -1,0 +1,80 @@
+/*
+ * Layout
+ */
+
+html {
+  overscroll-behavior-y: none;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+  background-color: #f4f6f9;
+}
+
+#front-header {
+  p {
+    font-size: 1rem;
+    margin: 0;
+  }
+}
+
+#front-sidebar {
+  top: 0 !important;
+  height: calc(100vh - 24px - 16px);
+  z-index: 1060;
+  .control-sidebar-content {
+    height: 100%;
+  }
+
+  h2 {
+    margin: 10px 0 15px;
+    padding: 10px;
+    border-top: 1px solid #c2c7d0;
+    border-bottom: 1px solid #c2c7d0;
+  }
+
+  .nav {
+    font-size: 20px;
+  }
+
+  .version {
+    font-size: 12px;
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+  }
+}
+
+.console-navbar {
+  .brand-text {
+    font-size: .9rem;
+    line-height: 1;
+    span {
+      font-size: .8rem;
+    }
+  }
+}
+
+.front-container {
+  height: calc(100vh - 24px - 16px);
+
+  .pagination {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.front-fotter {
+  position: fixed;
+  bottom: 15px;
+  width: 50vw;
+}
+
+.front-page {
+  background: #f4f6f9;
+}

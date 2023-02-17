@@ -1,0 +1,22 @@
+<!-- Calendar Sheet Modal -->
+<div id="calendarModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#calendarModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-down js-modal-close" data-target="#calendarModal">
+      <i class="icon icon-Arrow-down"></i>
+    </div>
+    <div id="calendar-select">
+      <div class="modal-caption">
+      </div>
+      <div id="" class="modal-body row">
+        <section class="col-12" id="calendar"></section>
+      </div>
+    </div>
+    <div id="calendar-button" class="pl-5 pr-5 mt-6">
+      <%= button_tag :type => "button", class: "btn-base -basic -primary js-modal-close", data: {"target" => "#calendarModal"} do %>
+        <%= t 'ok' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- Calendar Sheet Modal -->

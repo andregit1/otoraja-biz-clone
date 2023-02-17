@@ -1,0 +1,42 @@
+<div>
+  <div class="card card-otoraja">
+    <div class="card-header">
+      <h1>Syarat Pengunaan</h1>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col">
+          <%= render 'layouts/step_progress', items:['Masuk', 'Kententuan', 'Konfirmasi', 'Info'], active: 'Kententuan' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="terms-box">
+        <%= @terms.terms.html_safe %>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer py-3">
+      <%= form_with url: register_url, local: true do |f| %>
+      <%= f.hidden_field :customer_id, :value => @customer_id %>
+      <%= f.hidden_field :tel, :value => @tel %>
+      <%= f.hidden_field :number_plate_area, :value => @number_plate_area %>
+      <%= f.hidden_field :number_plate_number, :value => @number_plate_number %>
+      <%= f.hidden_field :number_plate_pref, :value => @number_plate_pref %>
+      <div class="row mb-3">
+        <div class="mx-auto">
+          <%= f.submit 'Saya Setuju dengan peryaratan', class: 'btn btn-lg btn-primary btn-block', name: 'agree' %>
+        </div>
+      </div>
+      <% unless @customer_id.present? %>
+      <div class="row">
+        <div class="mx-auto">
+          <div class="form-group form-check">
+            <%= f.check_box :send_dm, checked: true, :data => {toggle: 'toggle', on: 'Setuju DM', off: 'Tidak Setuju DM' } %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

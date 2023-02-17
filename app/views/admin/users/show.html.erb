@@ -1,0 +1,23 @@
+<% content_for(:title, @user.name) %>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-tools">
+      <%= link_to 'Update Password',admin_password_path(@user) %>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <th class="w-25"><%= t 'admin.user.user_id' %></th>
+          <td class="w-75"><%= @user.user_id %></td>
+        </tr>
+        <tr>
+          <th><%= t 'admin.user.role' %></th>
+          <td><%= @user.role %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

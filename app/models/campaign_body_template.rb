@@ -1,0 +1,2 @@
+class CampaignBodyTemplate < ApplicationRecord
+end

@@ -1,0 +1,47 @@
+<div class="card-body">
+  <div class="form-group text-label font-weight-bold">
+    <%= f.label :name, t('admin.supplier.supplier_name') %>
+    <%= f.text_field :name, :class=>'form-control', autocomplete: 'off' %>
+  </div>
+  <% if current_user.admin? %>
+  <div class="form-group text-label font-weight-bold">
+    <%= f.label :available_shops, t('admin.common.shop') %>
+    <%= f.select :shop_id, Shop.all.pluck(:name, :id), {:include_blank => true}, {:class=>'form-control select2'} %>
+  </div>
+  <% elsif current_user.managed_shops.length > 1 %>
+  <div class="form-group text-label font-weight-bold">
+    <%= f.label :available_shops, t('admin.common.available_name') %>
+    <%= f.select :shop_id, current_user.managed_shops.pluck(:name, :id), {:include_blank => true}, {:class=>'form-control select2'} %>
+  </div>
+  <% else %>
+    <%= f.hidden_field :shop_id, :value => current_user.managed_shops.first.id %>
+  <% end %>
+  <div class="form-group text-label font-weight-bold">
+    <%= f.label :address, t('admin.common.address') %>
+    <%= f.text_field :address, :class=>'form-control', autocomplete: 'off' %>
+  </div>
+  <label class="text-label font-weight-bold"><%= t 'admin.common.tel' %></label>
+  <div class="input-group text-label font-weight-bold">
+    <div class="input-group-prepend">
+      <%= f.select :phone_country_code, @country_code_list, {selected: @phone_country_code || 62}, {class: 'form-control select-country'} %>
+    </div>
+    <%= f.telephone_field :phone_national, class: 'form-control', autocomplete: 'off', value: @phone_national %>
+  </div>
+
+</div>
+<div class="card-footer">
+  <% if controller.action_name.in?(['new', 'create']) %>
+    <div class="text-right">
+      <%= link_to t('admin.common.back'), admin_suppliers_path, class: 'btn btn-default text-large' %>
+      <%= f.submit t('admin.common.regist'), :class=>'btn btn-primary text-large' %>
+    </div>
+  <% else %>
+    <div class="d-flex justify-content-between">
+      <%= link_to t('admin.supplier.delete'), admin_supplier_path(supplier), :method => :delete, :class => 'btn btn-danger text-large', data: { confirm: t('admin.common.are_you_sure') }%>
+      <div>
+        <%= link_to t('admin.common.back'), admin_suppliers_path, class: 'btn btn-default text-large' %>
+        <%= f.submit t('admin.common.update'), :class=>'btn btn-primary text-large' %>
+      </div>
+    </div>
+  <% end %>
+</div>

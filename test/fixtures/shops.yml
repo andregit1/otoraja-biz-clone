@@ -1,0 +1,27 @@
+one:
+  id: 1
+  bengkel_id: '100001'
+  shop_group: one
+  name: "Test"
+  tel: ""
+  tel2: ""
+  tel3: ""
+  address: "Jl. Kasuari Blok HB2 No.31, Pd. Aren, Kota Tangerang Selatan, Banten 15229"
+  longitude: 106.71
+  latitude: -6.27867
+  region_id: 2
+  province_id: 12
+  regency_id: 168
+  created_at: '2021-04-09T21:08:45.000Z'
+  updated_at: '2021-04-09T21:08:54.000Z'
+  active_plan: nil
+  expiration_date: '2021-05-09T21:08:45.000Z'
+  subscriber_type: 1
+  virtual_bank_no: ""
+  initial_setup: false
+  is_reactivated: 0
+  active_plan: 1
+two:
+  id: 2
+  bengkel_id: '100002'
+  name: "Bengkel Dua"

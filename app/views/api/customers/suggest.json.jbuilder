@@ -1,0 +1,18 @@
+json.array!(@customers) do |customer|
+  json.id(customer.id)
+  json.name(customer.name)
+  json.tel(customer.tel)
+  json.send_dm(customer.send_dm)
+  json.terms_agreed_at(customer.terms_agreed_at)
+  json.number_plate(customer.number_plate)
+  json.last_checkin_datetime(formatedDateTz(customer.last_checkin_datetime, 'Jakarta'))
+  json.terms_agreed_at(customer.terms_agreed_at)
+  json.bikes_info(customer.bikes_info)
+  json.tel_national(customer.tel_national)
+  json.tel_national_hyphen(customer.tel_national_hyphen)
+  json.tel_country_code(customer.tel_country_code)
+  json.last_maintenance_log(customer.last_maintenance_log)
+  json.send_type(customer.send_type)
+  json.receipt_type(customer.receipt_type)
+  json.wa_tel(customer.wa_tel)
+end

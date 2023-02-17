@@ -1,0 +1,38 @@
+
+<!-- Number Pad Sheet Modal -->
+<div id="numberPadManualModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#numberPadManualModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-down js-modal-close" data-target="#numberPadManualModal">
+      <i class="icon icon-Arrow-down"></i>
+    </div>
+    <div id="manual-price-select">
+      <div class="modal-caption">
+      </div>
+      <div id="" class="modal-body row">
+        <div class="col-7">
+          <section class="grid -discount-grid">
+          <div class="row no-pad">
+            <div class="col-4"><label class="grid-label"><%= t 'select_product.price' %></label></div
+              >
+            <div class="col-8 -align-right">
+              <div class="grid-form">
+                <span class="-text-red -text-bold">Rp.&nbsp;</span><input class="grid-input -align-right -text-red -text-bold" id="numberInputManual" type="text" readonly="readonly" value=""/>
+              </div>
+            </div>
+          </div>
+        </section>
+        </div>
+        <div class="col-5">
+          <div id="numberPadManual"></div>
+        </div>
+      </div>
+    </div>
+      <div id="number-pad--manual-button" class="pl-5 pr-5 mt-6">
+        <%= button_tag :type => "button", class: "btn-base -basic -primary js-modal-close", data: {"target" => "#numberPadManualModal"} do %>
+          <%= t 'ok' %>
+        <% end %>
+      </div>
+  </div> 
+</div>
+<!-- Number Pad Sheet Modal -->

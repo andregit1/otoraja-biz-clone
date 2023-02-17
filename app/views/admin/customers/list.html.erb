@@ -1,0 +1,64 @@
+<% content_for(:title, t('admin.customer.customers')) %>
+
+
+<%= render 'search' %>
+
+<div class="d-flex justify-content-end">
+  <%= paginate @customers, window: 1 %>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover table-sticky table-list-view mbuttom-0">
+        <thead>
+          <tr>
+            <th><%= sort_link(@q, :name, t('admin.common.name'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th><%= sort_link(@q, :tel, t('admin.customer.phone_number'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th><%= t('admin.customer.number_plat') %></th>
+            <th><%= sort_link(@q, :last_visit_datetime, t('admin.customer.last_visit_date'), {hide_indicator: true}, {class: 'sort-link'})%></th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @customers.each do |customer| %>
+          <tbody>
+            <tr>
+              <td class="hide-web-view set-padding" data-th="ID">
+                <%= customer.id %>
+                <%= link_to admin_customer_show_path(customer),:class => "btn btn-primary btn-view-list" do %>
+                  <i class="fas fa-eye"></i>
+                <% end %>
+              </td>
+              <td class="set-padding" data-th="<%= t('admin.common.name') %>">
+                <% if customer.name.blank?  %>
+                  <span class="name-blank"> --- </span>
+                <% else %>
+                  <%= customer.name %> 
+                <% end %>
+                <br class="hide-mobile-view"><span class="hide-mobile-view">(<%= t('admin.customer.customer_id')%>: <%= customer.id %>)</span>
+              </td>
+              <td data-th="<%= t('admin.customer.phone_number') %>">
+                <%= formatedPhoneNumber(customer.tel) %>
+              </td>
+              <td data-th="<%= t('admin.customer.number_plat') %>">
+                <div class="wrap-grid">
+                  <% customer.owned_bikes.map do |owned_bike| %>
+                    <p class="m-0"><%= owned_bike.formated_number_plate %></p>
+                  <% end %>
+                </div>
+              </td>
+              <td data-th="<%= t('admin.customer.last_visit_date') %>">
+                <%= formatedDateTime(customer.last_visit_datetime, 'Jakarta') %>
+              </td>
+              <td class="hide-mobile">
+                <%= link_to admin_customer_show_path(customer),:class => "btn btn-primary" do %>
+                  <i class="fas fa-eye"></i>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

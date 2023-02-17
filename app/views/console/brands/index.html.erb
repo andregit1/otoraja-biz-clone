@@ -1,0 +1,52 @@
+<% content_for(:title, t('console.brand.brand')) %>
+
+<%= render 'search' %>
+
+<%= form_with url: console_brands_edit_multiple_path, method: :post, local: :true do |f| %>
+  <div class="card content-datatable">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover table-sticky">
+          <thead>
+            <tr>
+              <th><%= sort_link(@q, :name, t('console.brand.brand_name'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+              <th><%= t('console.common.enabled') %></th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @brands.each do |brand| %>
+              <tr>
+                <td>
+                  <%= brand.name %>
+                </td>
+                <td>
+                <%= fields_for "brands[]", brand do |f| %>
+                  <%= f.check_box :active, data: {toggle: 'toggle', on: 'Ya', off: 'Tidak_'} %>
+                <% end %>
+                </td>
+                <td class="text-right">
+                  <%= link_to edit_console_brand_path(brand),:class => 'btn btn-primary mb-0' do %>
+                    <i class="fas fa-edit"></i>&nbsp;<%= t 'console.common.edit'  %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <%= link_to new_console_brand_path,:class => 'btn footer-btn' do %>
+            <i class="fas fa-plus"></i>&nbsp;<%= t 'console.brand.add_brand' %>
+          <% end %>
+        </div>
+        <div>
+          <%= f.submit t('console.common.update'), :class=>'btn footer-btn-update text-white' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

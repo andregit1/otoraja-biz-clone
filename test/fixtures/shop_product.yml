@@ -1,0 +1,31 @@
+one: 
+  shop_id: 1
+  product_category_id: 1
+  admin_product_id: 1
+  product_no: 'BN-123'
+  shop_alias_name: 'BAN BIASA'
+  item_detail: 'BAN ASPIRA'
+  stock_minimum: 3
+  sales_unit_price: 1
+  remind_interval_day: 10
+  is_stock_control: 1
+  is_use: 1
+  created_at: '2021-10-10T21:08:45.000Z'
+  updated_at: '2021-10-10T21:08:45.000Z'
+  deleted_at: 
+
+two: 
+  shop_id: 1
+  product_category_id: 1
+  admin_product_id: 1
+  product_no: 'BN-123'
+  shop_alias_name: 'BAN BIASA 2'
+  item_detail: 'BAN ASPIRA 2'
+  stock_minimum: 3
+  sales_unit_price: 1
+  remind_interval_day: 10
+  is_stock_control: 1
+  is_use: 1
+  created_at: '2021-10-10T21:08:45.000Z'
+  updated_at: '2021-10-10T21:08:45.000Z'
+  deleted_at: '2021-10-10T21:08:45.000Z'

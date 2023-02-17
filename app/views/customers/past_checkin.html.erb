@@ -1,0 +1,154 @@
+<div>
+  <%= form_with url: past_checkin_url, local: true, html:{novalidate: true} do |f| %>
+  <%= hidden_field_tag :today, value: @today %>
+  <div class="card card-otoraja">
+    <div class="card-header">
+      <h1>Past Check in</h1>
+    </div>
+    <div class="card-body">
+      <%= render 'layouts/flash_alert' %>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <%= f.label :checkin, 'Checkedin' %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group form-inline">
+              <div class="col-auto">
+                <span id="checkedin_day_disp" class="h3"><%= formatedDate(@checkin_day.to_date) %></span>
+                <a role="button" class="btn btn-default mx-2" id="checkedin_day_btn"><i class="fas fa-calendar-alt"></i><%= f.hidden_field :checkedin_day, value: formatedDate(@checkin_day.to_date) %></a>
+              </div>
+              <div class="col-auto">
+                <%= f.select :checkedin_hour, hoursArray(), {selected: @checkedin_hour}, {class: 'form-control'} %>
+              </div>
+              <div class="col-auto">
+                <%= f.select :checkedin_min, minsArray(15), {selected: @checkedin_min}, {class: 'form-control'} %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <%= f.label :checkout, 'Checkedout' %><%= f.check_box :checkedout, checked: @checkedout == '1', class: '', :data => {toggle: 'toggle', on: 'checked out', off: 'check out yet', style: 'form-control mx-3' } %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group form-inline">
+              <div class="col-auto">
+                <span id="checkedout_day_disp" class="h3"><%= formatedDate(@checkedout_day.to_date) %></span>
+                <a role="button" class="btn btn-default mx-2" id="checkedout_day_btn"><i class="fas fa-calendar-alt"></i><%= f.hidden_field :checkedout_day, value: formatedDate(@checkedout_day.to_date) %></a>
+              </div>
+              <div class="col-auto">
+                <%= f.select :checkedout_hour, hoursArray(), {selected: @checkedout_hour}, {class: 'form-control'} %>
+              </div>
+              <div class="col-auto">
+                <%= f.select :checkedout_min, minsArray(15), {selected: @checkedout_min}, {class: 'form-control'} %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <%= f.label :reason, 'Alasan berkunjung' %>
+              <div class="btn-group-toggle" data-toggle="buttons">
+                <% VisitingReason.displayable(current_user.shops.first.id).each do |reason| %>
+                <label class="btn btn-outline-secondary w-100 text-left <%= 'active' if reason.name == @reason %>"><%= f.radio_button :reason, reason.name, {:class => 'form-control rounded-0', :checked => (reason.name == @reason)} %> <%= reason.name %></label>
+                <% end %>
+                <label class="btn btn-outline-secondary w-100 text-left"><%= f.radio_button :reason, 'Tidak ada jawaban', {:class=>'form-control rounded-0'} %> Tidak ada jawaban</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <%= f.label :phone_checkin, 'No telpon (opsional)' %>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <%= f.select :phone_country_code, @country_code_list, {selected: @phone_country_code}, {class: 'form-control form-control-lg select-country'} %>
+                </div>
+              <%= f.telephone_field :phone_national, value: @phone_national, class: 'form-control form-control-lg', autocomplete: 'off' %>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <%= f.label :phone_checkin, 'No Polisi (opsional)' %>
+              <div class="row mb-3">
+                <div class="col-4">
+                  <%= f.select :number_plate_area, MaintenanceLog.number_plate_areas.keys.to_a, {include_blank: '', selected: @number_plate_area || 'B'}, {:class=>'form-control form-control-lg'} %>
+                </div>
+                <div class="col-4">
+                  <%= f.number_field :number_plate_number, value: @number_plate_number, :class=>'form-control form-control-lg', autocomplete: 'off', oninput: 'if(value.length>4)value=value.slice(0,4)' %>
+                </div>
+                <div class="col-4">
+                  <%= f.url_field :number_plate_pref, value:@number_plate_pref, :class=>'form-control form-control-lg', autocomplete: 'off',  oninput: 'value=value.toUpperCase();if(value.length>3)value=value.slice(0,3)' %>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="btn-group btn-group-toggle d-flex select-month" data-toggle="buttons">
+                    <% for i in 1..12 do %>
+                    <label class="btn btn-outline-secondary w-100 <%= 'active' if i == @expiration_month.to_i %>"><%= f.radio_button :expiration_month, i, {:class=>'form-control rounded-0', :checked => (i == @expiration_month.to_i)} %> <%= i %></label>
+                    <% end %>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="btn-group btn-group-toggle d-flex select-year" data-toggle="buttons">
+                    <% for i in DateTime.now.in_time_zone('Jakarta').year..DateTime.now.in_time_zone('Jakarta').year+5 do %>
+                    <label class="btn btn-outline-secondary w-100 <%= 'active' if i == @expiration_year.to_i %>"><%= f.radio_button :expiration_year, i, {:class=>'form-control rounded-0', :checked => (i == @expiration_year.to_i)} %> <%= i %></label>
+                    <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <div class="btn-group btn-group-toggle select-maker" role="group" data-toggle="buttons">
+                  <% Maker.all.order(order: :asc).first(4).each do |maker| %>
+                  <label class="btn btn-outline-secondary w-100 text-left"><%= f.radio_button :maker, maker.name, :checked => (maker.name == @maker) %> <%= maker.name %></label>
+                  <% end %>
+                  <div class="btn-group" role="group">
+                    <button id="btnGroupDropMaker" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Others
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDropMaker">
+                      <% Maker.all.order(order: :asc).offset(4).each do |maker| %>
+                      <label class="btn w-100 text-left"><%= f.radio_button :maker, maker.name, :checked => (maker.name == @maker) %> <%= maker.name %></label>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <%= f.text_field :model, :class=>'form-control', :placeholder => 'Model', :value => @model %>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-5">
+            <div class="col">
+              <div class="form-group">
+                <div class="btn-group-colors d-flex flex-wrap align-self-baseline" data-toggle="buttons">
+                  <% MaintenanceLog.colors.keys.to_a.each do |color| %>
+                  <div class="list-item">
+                    <label class="btn btn-color-picker btn-color-<%= color %>">
+                      <%= f.radio_button :color, color, {:class=>'form-control rounded-0', :checked => (color == @color)} %> <span><%= color %></span>
+                    </label>
+                  </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer card-sticky-footer d-flex justify-content-end">
+      <%= link_to 'back', front_index_path, class: 'btn btn-link' %>
+      <%= f.submit 'Daftar', class: 'btn btn-primary' %>
+    </div>
+  </div>
+  <% end %>
+</div>

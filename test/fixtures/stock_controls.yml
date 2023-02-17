@@ -1,0 +1,42 @@
+sc_01: 
+  id: 1
+  shop_product: one
+  shop_invoice: faktur_01
+  date: "2021-11-23"
+  supplier: yamaha
+  reason: "1"
+  quantity: 5
+  purchase_unit_price: 1000
+  purchase_price: 5000
+  average_price: 1000
+  payment_method: "1"
+  difference: 
+  stock_at_close: 5
+sc_02: 
+  id: 2
+  shop_product: one
+  shop_invoice: faktur_02
+  date: "2021-11-24"
+  supplier: yamaha
+  reason: "1"
+  quantity: 2
+  purchase_unit_price: 1500
+  purchase_price: 3000
+  average_price: 1250
+  payment_method: "1"
+  difference: 
+  stock_at_close: 7
+sc_03: 
+  id: 3
+  shop_product: two
+  shop_invoice: faktur_03
+  date: "2021-11-24"
+  supplier: yamaha
+  reason: "1"
+  quantity: 1
+  purchase_unit_price: 1000
+  purchase_price: 1000
+  average_price: 1000
+  payment_method: "1"
+  difference: 
+  stock_at_close: 1

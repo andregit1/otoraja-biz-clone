@@ -1,0 +1,26 @@
+<!-- Selected Products Modal -->
+<div id="selectAddProductModal" class="pull-tab">
+  <div class="tab_content">
+    <div class="mb-3 modal-down js-modal-toggle p-0 rounded-top" data-target="#selectAddProductModal">
+      <div id="selected-counter" class="p-3 text-small font-weight-bold"><span>0</span> <%= t('admin.purchase.items_selected')%> <i class="far"></i></div>
+      <div id="view-more" class="p-3 text-small font-weight-bold"><%= t('admin.purchase.view_more')%> <i class="fas fa-angle-up"></i></div>
+      <div id="close" class="hide p-3 text-small font-weight-bold"><%= t('admin.purchase.close')%> <i class="fas fa-angle-down"></i></div>
+    </div>
+    <div class="modal-body">
+      <div class="tab-content item-list mb-5">
+        <div id="customize_item_add_history" class="tab-pane active">
+          <div class="no_selected_item">
+            <p class="text-normal text-center "><%= t 'admin.purchase.empty_product_info'%></p>
+          </div>
+          <div class="list-wrapper">
+            <div class="scroll-area">
+              <ul class="list">
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Selected Products Modal -->

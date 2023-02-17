@@ -1,0 +1,105 @@
+<!-- Drawer Modal -->
+<div id="addProductModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#addProductModal"></div>
+  <div class="modal_content -drawer">
+    <div class="modal-header">
+      <div class="modal-title col-12 product_edit_modal_title"><%= t 'console.shop_product.add_new_product' %></div>
+      <div class="col-1"></div>
+    </div>
+    <div class="modal-body product-info-body">
+      <form id="add-product-form">
+        <input id="admin_product_id" name="admin_product_id" class="ml-auto product_item_id" type="hidden" >
+        <div class="form-group">
+          <div class="row">
+            <div class="col-12">
+              <label><%= t 'console.shop_product.store_product_no' %></label>
+              <input id="product_no" name="product_no" type="text" class="product_item_id" >
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-12">
+              <label><%= t 'console.shop_product.availability' %></label>
+              <label>
+                <input id="is_use" type="radio" name="availability" value="true" class="product_input_radio" checked ><span class="product_input_radio_text mr-3"><%= t 'console.shop_product.active' %></span>
+                <input id="is_use" type="radio" name="availability" value="false" class="product_input_radio ml-3" ><span class="product_input_radio_text"><%= t 'console.shop_product.inactive' %></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-12">
+              <label><%= t 'console.shop_product.product_name' %></label>
+              <select id="add-admin-product_id" name="admin_product_id" class="form-control form-control-sm drawer_modal_input_border" style="width:100%;">
+              
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-12">
+              <label><%= t 'console.shop_product.product_alias' %>*</label>
+              <input id="shop_alias_name" name="shop_alias_name" type="text" >
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-6">
+              <label><%= t 'console.shop_product.item_detatils' %></label>
+              <input id="item_detail" name="item_detail" type="text" >
+            </div>
+            <div class="col-6">
+              <label><%= t 'console.common.category' %></label>
+              <div>
+                <%= select_tag 'product_category_id', options_from_collection_for_select(@product_categories, :id, :name), class: 'form-control form-control-sm product_category_edit', style: "width:100%"  %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group pt-2">
+          <div class="row">
+            <div class="col-6 center_border">
+              <label><%= t 'console.shop_product.unit_price' %></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text price_addon">Rp.</div>
+                </div>
+                <input id="sales_unit_price" name="sales_unit_price" type="number" class="product_unit_price_edit" >
+              </div>
+            </div>
+            <div class="col-6">
+              <label class="ml-2"><%= t 'console.shop_product.min_stock' %></label>
+              <input id="stock_minimum" name="stock_minimum" type="number" class="product_stock_edit ml-2" >
+              <label class="ml-2 mt-2"><%= t 'console.shop_product.min_stock_alert_day' %></label>
+              <input id="remind_interval_day" name="remind_interval_day" type="number" class="product_stock_edit ml-2" >
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="admin-control-footer row">
+      <div class="col-6">
+        <%= button_tag :type => "button", id: "cancel-add-product-button", class: "btn-base -thin -normal js-modal-close", data: {"target" => "#addProductModal"} do %>
+          <%= t 'cancel' %>
+        <% end %>
+      </div>
+      <div class="col-6">
+        <%= button_tag :type => "button", id: "confirm-add-product-button", class: "btn-base -thin -primary js-modal-close", data: {"target" => "#addProductModal"}, disabled: true do %>
+          <%= t 'console.shop_product.save' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Drawer Modal -->

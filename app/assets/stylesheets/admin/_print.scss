@@ -1,0 +1,14 @@
+/*
+ * Print
+ */
+
+@media print {
+  #shop_products_print table {
+    th {
+      font-size: 12px;
+    }
+    td {
+      font-size: 10px;
+    }
+  }
+}

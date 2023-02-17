@@ -1,0 +1,20 @@
+{
+  "name": "otoraja-biz",
+  "private": true,
+  "dependencies": {
+    "admin-lte": "^3.0.1",
+    "bootstrap4-toggle": "^3.6.1",
+    "chart.js": "^2.9.3",
+    "chartjs-plugin-annotation": "^0.5.7",
+    "chartjs-plugin-labels": "^1.1.0",
+    "gasparesganga-jquery-loading-overlay": "^2.1.6",
+    "handsontable": "^6.2.2",
+    "raty-js": "^2.9.0",
+    "bootbox": "^5.4.0"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/otoraja-biz",
+  "author": "tomonori_sugawara <sugawara.tomonori@members.co.jp>",
+  "license": "MIT"
+}

@@ -1,0 +1,26 @@
+<div class="mx-lg-3 mb-lg-5 px-5 py-5">
+  <div class="login-logo mt-lg-3">
+    <h1><%= image_tag  "logo.svg", width: '200' %></h1>
+  </div>
+  <div class="card px-lg-5 px-md-2 pb-lg-5 mt-2 mb-4">
+    <div class="card-body w-100">
+      <%if @token %>
+      <div class="mb-lg-4">
+        <div class="d-flex align-items-center">
+          <i class="fa fa-check-circle text-green mr-3 icon-sucess"></i>
+          <span class="text-green change-phone-number-success"><%=t('change_phone_number_verification.show.success_verify')%></span>
+        </div>
+      </div>
+        <div class="text-normal mt-4 mb-5 ml-md-4">
+          <%=t('change_phone_number_verification.show.success_info')%>
+        </div>
+        <% else%>
+          <div class="px-lg-5">
+            <div class="d-none d-lg-block change-phone-number-success color_text_gray"><%=t('change_phone_number_verification.show.failed_title')%></div>
+            <div class="text-small mt-lg-3 ml-lg-4"><%=t('change_phone_number_verification.show.failed_info')%></div>
+            <div class="text-small color_text_gray mt-4 ml-lg-4"><%=t('change_phone_number_verification.show.note')%></div>
+          </div>
+        <% end%>  
+    </div>
+  </div>
+</div>

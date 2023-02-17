@@ -1,0 +1,56 @@
+<% content_for(:title, t('console.shop_staff.shop_staff')) %>
+
+<%= render 'search'%>
+
+<div class="card content-datatable">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover table-sticky">
+        <thead>
+          <tr>
+            <th><%= sort_link(@q, :shop_id, t('console.common.shop'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th><%= sort_link(@q, :name, t('console.common.name'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th><%= sort_link(@q, :is_front_staff, t('console.shop_staff.front_staff'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th><%= sort_link(@q, :mechanic_grade, t('console.common.mechanic'), {hide_indicator: true}, {class: 'sort-link'}) %></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @shop_staffs.each do |staff| %>
+          <tr class="<%= 'bg-secondary' unless staff.active? %>">
+            <td><%= staff.shop.name %></td>
+            <td><%= staff.name %></td>
+            <td class="staff-field-icon">
+              <% if staff.is_front_staff? %>
+              <span class="text-success"><i class="far fa-check-circle"></i></span>
+              <% else %>
+              <span class="text-danger"><i class="fas fa-ban"></i></span>
+              <% end %>
+            </td>
+            <td class="staff-field-icon">
+              <% if staff.is_mechanic? %>
+              <span class="badge badge-pill badge-primary"><%= staff.mechanic_grade %></span>
+              <% else %>
+              <span class="text-danger"><i class="fas fa-ban"></i></span>
+              <% end %>
+            </td>
+            <td class="staff-field-icon">
+              <%= link_to edit_console_shop_staff_path(staff), :class => 'btn btn-primary' do %>
+                <i class="fas fa-edit"></i> <%= t 'console.common.edit' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex justify-content-start">
+      <%= link_to new_console_shop_staff_path,:class => 'btn btn-outline-primary footer-btn' do %>
+        <i class="fas fa-plus"></i> <%= t 'console.shop_staff.add_staff' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,10 @@
+id:
+  console:
+    requests:
+      button:
+        create_account: "Buat Akun Baru"
+        search: "Cari"
+      new_application:
+        title: "Permohonan Bengkel Baru"
+      renewal_application:
+        title: "Renewal Application"

@@ -1,0 +1,18 @@
+<div id="select-staff" class="modal" tabindex="-1" role="dialog" aria-labelledby="selectFrontStaff" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= label_tag :staff, t('login_question') %></h5>
+      </div>
+      <div class="modal-body">
+        <div class="form-group select-staff-form-group">
+          <div class="btn-group-toggle" data-toggle="buttons">
+          <% @staff_list.each do |staff| %>
+          <label class="btn btn-success w-100 text-left mb-1"><%= radio_button_tag :staff, staff.id, {:class=>'form-control rounded-0'} %> <%= staff.name %></label>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

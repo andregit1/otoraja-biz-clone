@@ -1,0 +1,40 @@
+<div class="card card-widget">
+  <div class="card-header" data-card-widget="collapse">
+    <h3 class="card-title">
+      <i class="fas fa-chevron-down"></i>
+      <i class="fas fa-chevron-up"></i>
+      <%= t 'console.common.filter' %>
+    </h3>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <%= search_form_for @q, url:console_customer_list_path do |f| %>
+      <div class="d-flex align-items-end search-form">
+        <%= hidden_field_tag :sort, 'id desc' %>
+        <%= hidden_field_tag :page, 0 %>
+        <div class="form-group mr-3">
+          <label><%= t 'console.customer.search_title' %> <span class="search-tooltip-txt"><%= t 'console.customer.search_title_desc' %></span> <i class="fas fa-info-circle" data-html="true" data-toggle="tooltip" title="<%= t 'console.common.name' %><br><%= t 'console.customer.phone_number' %><br><%= t 'console.customer.number_plat' %>"></i></label>
+          <%= f.search_field :name_or_tel_or_owned_bikes_number_plate_number_cont, class: 'form-control', autocomplete: 'off' %>
+        </div>
+        <div class="form-group">
+          <%= f.submit t('console.shop_product.search') , class: 'btn btn-primary'%>
+        </div> 
+      </div>
+      <div class="customer-checkbox-wrapper">
+        <p>
+          <%= f.check_box :name, { name: "filter[customer][]", class: 'customer_checkbox' }, "customer_name", "" %>
+          <%= f.label :name, t('admin.customer.customer_checkbox_name') %>
+        </p>
+        <p>
+          <%= f.check_box :tel, { name: "filter[customer][]", class: 'customer_checkbox' }, "customer_tel", "" %>
+          <%= f.label :tel, t('admin.customer.customer_checkbox_tel') %>
+        </p>
+        <p>
+          <%= f.check_box :owned_bikes_number_plate_number, { name: "filter[customer][]", class: 'customer_checkbox' }, "customer_plat", "" %>
+          <%= f.label :owned_bikes_number_plate_number, t('admin.customer.customer_checkbox_plat') %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+  <!-- /.card-body -->
+</div>

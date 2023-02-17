@@ -1,0 +1,7 @@
+<% content_for(:title, t('console.tech_spec.add_tech_spec')) %>
+
+<div class="card">
+  <%= form_with(model: @tech_spec, url: console_tech_specs_path, local: true) do |form| %>
+    <%= render 'form', {tech_spec: @tech_spec, f: form} %>
+  <% end %>
+</div>

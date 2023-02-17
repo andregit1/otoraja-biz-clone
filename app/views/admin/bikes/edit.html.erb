@@ -1,0 +1,87 @@
+<% content_for(:title, t('admin.customer.edit_bike')) %>
+
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item">
+    <span class="text-large nav-link active"><%= t 'admin.customer.basic' %></span>
+  </li>
+</ul>
+
+<%= form_with(model: @owned_bike, url: admin_bike_update_path, local: true) do |f| %>
+  <div class="card">
+    <div class="text-normal card-header color-text-table-header"><%= t 'admin.bike.bike' %></div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="form-group col-10">
+          <%= f.label :maker, t('admin.bike.maker'), class: 'text-label' %>
+          <%= f.select :maker, Maker.all.pluck(:name, :name), {}, class: 'form-control use_select2' %>
+        </div>
+        <div class="form-group col-10">
+          <%= f.label :model, t('admin.bike.model'), class: 'text-label' %>
+          <%= f.text_field :model, class: 'form-control', autofocus: true, autocomplete: 'off' %>
+        </div>
+        <div class="form-group col-6">
+          <%= f.label :color, t('admin.bike.color'), class: 'text-label' %>
+          <%= f.select :color, Bike.bike_color_list, {:selected => @owned_bike.bike.color}, class: 'form-control use_select2' %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-12 mb-0">
+          <%= f.label :number_plate_area, t('admin.bike.number_plat'), class: 'text-label' %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-3 col-md-2">
+          <%= f.select :number_plate_area, Bike.number_plate_area, {:selected => @owned_bike.number_plate_area}, class: 'form-control use_select2', autofocus: true, autocomplete: 'off' %>
+        </div>
+        <div class="form-group col-3 align-self-end">
+          <%= f.text_field :number_plate_number, class: 'form-control', autofocus: true, autocomplete: 'off' %>
+        </div>
+        <div class="form-group col-3 col-md-2 align-self-end">
+          <%= f.text_field :number_plate_pref, class: 'form-control', autofocus: true, autocomplete: 'off' %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-12 mb-0">
+          <%= f.label :expiration_month, t('admin.bike.expiration'), class: 'text-label' %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-4 col-md-2">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><%= t 'admin.bike.month' %></div>
+            </div>
+              <%= f.number_field :expiration_month, class: 'form-control', autofocus: true, autocomplete: 'off' %>
+          </div>
+        </div>
+        <div class="form-group col-5 col-md-3 align-self-end">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><%= t 'admin.bike.year' %></div>
+            </div>
+              <%= f.number_field :expiration_year, class: 'form-control', autofocus: true, autocomplete: 'off' %>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-6 col-md-4 col-lg-2">
+          <%= f.label :odometer, t('admin.bike.odometer'), class: 'text-label' %>
+          <div class="d-flex align-items-center">
+            <%= f.number_field :odometer, class: 'form-control', autofocus: true, autocomplete: 'off' %>
+            <span class="pl-2"><%= t 'admin.bike.km' %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pb-5">
+    <%= link_to t('admin.common.back'), admin_customer_show_path(@owned_bike.customer), class: 'btn button-secondary-active text-large' %>
+    <%= f.submit t('admin.common.update'), class: 'btn btn-primary text-large' %>
+  </div>
+<% end %>
+
+<%= render "modal_confirmation" %>
+
+<% if @show_modal %>
+  <script>$('#confirmationModal').show()</script>
+<% end %>

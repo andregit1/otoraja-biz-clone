@@ -1,0 +1,71 @@
+<!-- Select Product Modal -->
+<div id="manualInputModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#manualInputModal"></div>
+  <div class="modal_content -fullscreen">
+    <div class="modal-header">
+      <button class="close col-1 js-modal-close" data-target="#manualInputModal">
+        <i class="icon icon-Arrow-left"></i>
+      </button>
+      <div class="modal-title col-10 text-center"><%= t 'product_registration.title' %></div>
+      <div class="col-1"></div>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label><%= t 'product_registration.label_item_detail' %></label>
+        <div class="input-text">
+          <%= text_field_tag 'shop_alias_name', nil, id:'product-regist-shop_alias_name', class: 'input-text-default input-check', placeholder: t('product_registration.placeholder_shop_alias_name') %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-6">
+            <label><%= t 'product_registration.label_category' %></label>
+            <div class="input-select blank">
+              <%= select_tag "product_category_id", grouped_options_for_select(
+                [
+                  ['PARTS',ProductCategory.joins(:product_class).where(product_classes: {name: 'PARTS'}).pluck(:name,:id)],
+                  ['SERVICE',ProductCategory.joins(:product_class).where(product_classes: {name: 'SERVICE'}).pluck(:name,:id)]
+                ]
+              ),prompt: t('product_registration.uncategorized'), id: "product-regist-product_category", class: 'input-select-default input-check' %>
+            </div>
+          </div>
+          <div class="col-6">
+            <label><%= t 'product_registration.label_price' %></label>
+            <div class="input-text blank">
+              <input name="price" id="product-regist-price" data-target="#numberPadManualModal" class="text-right input-text-default js-modal-open input-check" placeholder="0" readonly />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-right mb-2">
+        <a data-toggle="collapse" href="#collapseOption" class="optional-input-link input-check" role="button" aria-expanded="false" aria-controls="collapseOption"><%= t('product_registration.optional_input')%> <i class="fas fa-caret-down"></i></a>
+      </div>
+
+      <div class="collapse mb-5" id="collapseOption">
+        <div class="form-group">
+          <label><%= t 'product_registration.product_no' %></label>
+          <div class="input-text blank">
+            <%= text_field_tag 'product_no', nil, id:'product-regist-product_no', class: 'input-text-default input-check', placeholder: t('product_registration.placeholder_product_no') %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label><%= t 'product_registration.label_item_detail' %></label>
+          <div class="input-text blank">
+            <%= text_field_tag 'item_detail', nil, id:'product-regist-item_detail', class: 'input-text-default input-check', placeholder: t('product_registration.placeholder_item_detail') %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button id="btn-product-regist-confirm" name="button" type="button" class="btn-base -basic -primary">
+          <%= t 'product_registration.registration' %>
+        </button>
+      </div>
+      <p class="note"><%= t('product_registration.note') %></p>
+    </div>
+  </div>
+</div>
+<!-- Select Product Modal -->

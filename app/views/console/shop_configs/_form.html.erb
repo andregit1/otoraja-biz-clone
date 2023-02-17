@@ -1,0 +1,387 @@
+<div class="card-body">
+  <div class="form-group">
+  <% if config.errors.any? %>
+  <div class="callout callout-danger">
+    <h2><%= pluralize(config.errors.count, "error") %> prohibited this User from being saved:</h2>
+    <ul>
+      <% config.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <%= form_with(model: @shop, url:console_shop_config_path(@shop_config), local: true) do |f| %>
+    <%= f.label :subscriber_type, t('console.shop_group.form.status') %>
+    <div class="row">
+      <div class="col-12">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <% if @shop.paid_subscriber? %> 
+          <label class="btn btn-outline-primary" href="#" data-toggle="modal" data-target="#subscriptionRemark">
+            <%= f.radio_button :subscriber_type, :non_subscriber, id: 'non_subscriber', class: '', autocomplete: 'off' %> <%= Shop.human_attribute_name('subscriber_type.non_subscriber') %>
+          </label>
+          <label class="btn btn-outline-primary" href="#" data-toggle="modal" data-target="#subscriptionRemark">
+            <%= f.radio_button :subscriber_type, :subscriber, id: 'subscriber', class: '', autocomplete: 'off' %> <%= Shop.human_attribute_name('subscriber_type.subscriber') %>
+          </label>
+          <% else %>
+          <label class="btn btn-outline-primary">
+            <%= f.radio_button :subscriber_type, :non_subscriber, id: 'non_subscriber', class: '', autocomplete: 'off' %> <%= Shop.human_attribute_name('subscriber_type.non_subscriber') %>
+          </label>
+          <label class="btn btn-outline-primary">
+            <%= f.radio_button :subscriber_type, :subscriber, id: 'subscriber', class: '', autocomplete: 'off' %> <%= Shop.human_attribute_name('subscriber_type.subscriber') %>
+          </label>
+          <% end %>  
+          </label>
+          <label class="btn btn-outline-primary">
+            <%= f.radio_button :subscriber_type, :paid_subscriber, id: 'paid_subscriber', class: '', autocomplete: 'off' %> <%= Shop.human_attribute_name('subscriber_type.paid_subscriber') %>
+          </label>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="form-group form-inline">
+      <label><%= t 'console.shop.valid_thru' %></label>
+      <%= formatedDate(@shop.expiration_date) %>
+
+      <% if @grace_period %>
+          <label class="ml-3"><%= t 'console.shop_config.grace_period' %>:</label>
+          <%= formatedDate(@grace_period) %>    
+      <% end %>
+    </div>
+
+    <div class="form-group form-inline">
+      <td>
+        <%= f.check_box :enabled_extend, id: "id_check_box",  class:'m-1' %>
+        <label for="id_check_box"> <%= t 'console.shop.extend_expiration_date' %></label>
+      </td>
+      <td>
+        <label class='ml-4'><%= t 'console.shop.until' %></label>
+        <%= f.select :extension_days, options_for_select((1..10)), {include_blank: t('console.shop_config.days')}, {id:'extension_days', class: 'form-control col-3 col-md-2 col-lg-1', disabled:'true'} %>
+        <span id="extension_date" class="ml-2" data-grace-period="<%= @grace_period %>" data-expiration-date="<%= @shop.expiration_date %>"></span>
+      </td>
+    </div>
+    <br/>
+    <div class="form-group">
+      <%= f.label :virtual_bank_no, t('console.shop.form.virtual_bank_no') %>
+      <%= f.text_field :virtual_bank_no, class: 'form-control', autocomplete: 'off' %>
+    </div>
+    <div class="modal fade" id="subscriptionRemark" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="subscritionAgreement"><%= t 'console.shop.reason_for_cancellation' %></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="this.form.reset();">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <%= f.text_field :reason_for_cancellation, :class=>'form-control mb-1' %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="this.form.reset();"><%= t 'console.shop_config.button.close' %></button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal"><%= t 'console.shop_config.button.confirmation' %></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="row">
+    <p class="h3"><%= t 'console.shop_config.questionnaire' %></p>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group">
+        <%= f.label :questionnaire_expiration_days, t('console.shop_config.questionnaire_url') %>
+        <div class="input-group">
+          <%= f.number_field :questionnaire_expiration_days, :class=>'form-control text-right' %>
+          <div class="input-group-append">
+            <span class="input-group-text"><%= t 'console.shop_config.days' %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <%= f.label :message_send_time, t('console.shop_config.message_send_time') %>
+      <div class="form-group form-inline">
+        <%= t 'console.shop_config.everyday' %>
+        <%= f.select :hour, hoursArray(), {:selected => formatedTimeHour(config.message_send_time, 'Jakarta')}, {:class=>'form-control mx-2'} %> :
+        <%= f.select :min, minsArray(15), {:selected => config.message_send_time.min}, {:class=>'form-control mx-2'} %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <p class="h3"><%= t 'console.shop_config.front' %></p>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group">
+        <div>
+          <%= f.label :front_priority_display, t('console.shop_config.front_priority_display') %>
+        </div>
+        <div class="btn-group-toggle btn-group" data-toggle="buttons">
+          <% ShopConfig.front_priority_displays.each do |key, val| %>
+          <label class="btn btn-outline-secondary <%= 'active' if config.front_priority_display == key %>"><%= f.radio_button :front_priority_display, key, {:class=>'form-control'} %> <%= key %></label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <p class="h3"><%= t 'console.shop_config.custome_reminder' %></p>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group">
+        <%= f.label :customer_remind_interval_days, t('console.shop_config.remind_interval_days') %>
+        <div class="input-group">
+          <%= f.number_field :customer_remind_interval_days, :class=>'form-control text-right' %>
+          <div class="input-group-append">
+            <span class="input-group-text"><%= t 'console.shop_config.days' %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group form-check">
+        <%= f.check_box :use_customer_remind, :class=>'form-check-input' %>
+        <%= f.label :use_customer_remind, t('console.shop_config.use_customer_remind'), :class=>'form-check-label'  %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <p class="h3"><%= t 'console.common.receipt' %></p>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group form-check">
+        <%= f.check_box :use_receipt, :class=>'form-check-input' %>
+        <%= f.label :use_receipt, t('console.shop_config.use_recipt'), :class=>'form-check-label'  %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group">
+        <div>
+          <%= f.label :receipt_layout, t('console.shop_config.recipt_layout') %>
+        </div>
+        <div class="btn-group-toggle btn-group" data-toggle="buttons">
+          <% ShopConfig.receipt_layouts.each do |key, val| %>
+          <label class="btn btn-outline-secondary <%= 'active' if config.receipt_layout == key %>"><%= f.radio_button :receipt_layout, key, {:class=>'form-control'} %> <%= key %></label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group">
+        <%= f.label :receipt_open_expiration_days, t('console.shop_config.public_receipt_url') %>
+        <div class="input-group">
+          <%= f.number_field :receipt_open_expiration_days, :class=>'form-control text-right' %>
+          <div class="input-group-append">
+            <span class="input-group-text"><%= t 'console.shop_config.days' %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <p class="h3"><%= t 'console.shop_config.stock_management' %></p>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <%= f.label :close_stock_time, t('console.shop_config.close_stock_time') %>
+      <div class="form-group form-inline">
+        <%= t 'console.shop_config.everyday' %>
+        <%= f.select :close_stock_time_hour, hoursArray(), {:selected => formatedTimeHour(config.close_stock_time, 'Jakarta')}, {:class=>'form-control mx-2'} %> :
+        <%= f.select :close_stock_time_min, minsArray(15), {:selected => config.close_stock_time.min}, {:class=>'form-control mx-2'} %>
+      </div>
+    </div>
+  </div>
+  <div class="row pb-4">
+    <div class="col-auto">
+      <b><%= t 'console.shop_config.stock_notification_destination' %></b>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <%= f.select :phone_country_code, @country_code_list, {selected: @phone_country_code}, {class: 'form-control select-country'} %>
+        </div>
+        <%= f.telephone_field :phone_national, class: 'form-control', autocomplete: 'off', value: @phone_national %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group form-check">
+        <%= f.check_box :use_stock_notification, :class=>'form-check-input' %>
+        <%= f.label :use_stock_notification, t('console.shop_config.use_stock_notification'), :class=>'form-check-label'  %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group form-check">
+        <%= f.check_box :use_record_stock, :class=>'form-check-input' %>
+        <%= f.label :use_record_stock, t('console.shop_config.use_record_stock'), :class=>'form-check-label'  %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <p class="h3"><%= t 'console.shop_config.payment_method' %></p>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group">
+        <div>
+          <%= f.label :payment_method, t('console.shop_config.available_payment_methods') %>
+        </div>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <% PaymentMethod.all.each do |payment_method| %>
+            <label class="btn btn-outline-secondary <%= 'active' if config.shop.payment_methods.include?(payment_method) %>"><%= f.check_box :payment_methods, {multiple:true, checked: config.shop.payment_methods.include?(payment_method)}, payment_method.id, nil %> <%= payment_method.name %></label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+      <p class="h3"><%= t 'admin.shop_config.rounding' %></p>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group">
+        <div>
+          <%= f.label :rounding_direction, t('admin.shop_config.rounding_direction') %>
+        </div>
+        <div class="btn-group-toggle btn-group" data-toggle="buttons">
+          <% ShopConfig.rounding_directions.each do |key, val| %>
+            <label class="btn btn-outline-secondary <%= 'active' if config.rounding_direction == key %>"><%= f.radio_button :rounding_direction, key, {:class=>'form-control'} %> <%= key %></label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group">
+        <div>
+          <%= f.label :round_to, t('admin.shop_config.round_to') %>
+        </div>
+        <div class="btn-group-toggle btn-group" data-toggle="buttons">
+          <% ShopConfig.round_tos.each do |key, val| %>
+            <label class="btn btn-outline-secondary <%= 'active' if config.round_to == key %>"><%= f.radio_button :round_to, key, {:class=>'form-control'} %> <%= key %></label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group">
+        <%= f.label :num_of_custom_list, t('admin.shop_config.num_of_custom_list') %>
+        <div class="input-group">
+          <%= f.number_field :num_of_custom_list, :class=>'form-control text-right' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group">
+        <%= f.label :num_of_products_in_custom_list, t('admin.shop_config.num_of_products_in_custom_list') %>
+        <div class="input-group">
+          <%= f.number_field :num_of_products_in_custom_list, :class=>'form-control text-right' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :search_tags, t('console.shop.tags') %>
+    <div class="row">
+      <div class="col-5">
+        <p><%= t('console.shop.edit.available') %></p>
+        <select name="" id="shop_multiselect" class="form-control" size="22" multiple="multiple">
+          <% ShopSearchTag.own_shop(shop.id).each_with_index do |tag|%>
+            <% unless tag.is_using?%>
+            <option value="<%= tag.id %>" data-tag-order="<%= tag.order %>" data-is-using="<%= tag.is_using%>" data-shop="<%= tag.shop_id%>"><%= tag.name %></option>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+
+      <div class="col-2" id="shop_multiselect_controls">
+        <button type="button" id="shop_multiselect_rightAll" class="btn btn-block btn-default"><i class="fas fa-arrow-right"></i></button>
+        <button type="button" id="shop_multiselect_rightSelected" class="btn btn-block btn-default"><i class="fas fa-chevron-right"></i></button>
+        <button type="button" id="shop_multiselect_leftSelected" class="btn btn-block btn-default"><i class="fas fa-chevron-left"></i></button>
+        <button type="button" id="shop_multiselect_leftAll" class="btn btn-block btn-default"><i class="fas fa-arrow-left"></i></button>
+        <button type="button" id="shop_multiselect_edit" class="btn btn-block btn-primary"><i class="far fa-edit"></i></button>
+      </div>
+
+      <div class="col-5">
+        <p><%= t('console.shop.edit.using') %></p>
+        <select name="" id="shop_multiselect_to" class="form-control" size="22" multiple="multiple">
+          <% ShopSearchTag.own_shop(shop.id).each_with_index do |tag|%>
+            <% if tag.is_using? %>
+            <option value="<%= tag.id %>" data-tag-order="<%= tag.order %>" data-is-using="<%= tag.is_using%>" data-shop="<%= tag.shop_id%>"><%= tag.name %></option>
+            <% end %>
+          <% end %>
+        </select>
+        <div class="row pt-3 pb-3">
+            <div class="col-6">
+                <button type="button" id="shop_multiselect_move_up" class="btn btn-block btn-default"><i class="fas fa-chevron-up"></i></button>
+            </div>
+            <div class="col-6">
+                <button type="button" id="shop_multiselect_move_down" class="btn btn-block btn-default"><i class="fas fa-chevron-down"></i></button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-footer">
+  <div class="row">
+    <div class="col-12 text-right">
+      <%= link_to t('console.common.back'), console_shop_configs_path, class: 'btn btn-default btn-lg' %>
+      <%= f.submit t('console.common.save'), :class=>'btn btn-primary btn-lg', :id=>'shop-update-btn' %>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+    <div class="modal fade" id="editTagModal" tabindex="-1" role="dialog" aria-labelledby="editTagModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><%= t 'console.stock.stock_history' %></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="editTagModalBody" class="modal-body">
+            <div class="form-group">
+              <%= f.label :services, t('console.shop.show.service') %>
+              <div class="row">
+                <div class="col-12">
+                  <label>Tag</label>
+                  <input type="text" id="edit-tag-input" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
+                Done
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Modal -->
+

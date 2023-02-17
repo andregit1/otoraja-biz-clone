@@ -1,0 +1,9 @@
+<% content_for(:title, 'Bulk Update Expiration Shops') %>
+<div id="alert"></div>
+<div class="card">
+  <%= form_with model: @shop_expiration_upload, url: console_shops_import_expiration_execution_path, multipart: true, remote: true do |form| %>
+    <%= render 'form_upload', {shop_expiration_upload: @shop_expiration_upload, f: form} %>
+  <% end %>
+</div>
+
+<div class="card" id="resultImport"></div>

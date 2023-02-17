@@ -1,0 +1,22 @@
+<div id="smsConfirmModal" class="modal modal-center js-modal">
+  <div class="modal_bg js-modal-close" data-target="#smsConfirmModal"></div>
+  <div class="modal_content -center">
+    <div class="modal-caption">
+      <%= t "sms_confirm"%>
+    </div>
+    <div class="d-flex justify-content-center">
+      <%= button_tag :type => "button", id: "c-info-sms-confirm-btn",  :class =>"btn-base -basic -primary w-75" do %>
+        <%= t "confirm"%>
+      <% end %>
+    </div>
+    
+    <div class="mt-4 d-flex justify-content-center">
+      <%= button_tag :type => "button", id: "c-info-sms-resend-btn",  :class =>"btn-base -basic -normal w-75" do %>
+        <%= t "resend_sms"%>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= button_tag :type => "button", id: "open-sms-confirm-modal", class: "js-modal-open", data: {"target" => "#smsConfirmModal"}, style: "display:none;" %>
+<%= button_tag :type => "button", id: "close-sms-confirm-modal", class: "js-modal-close", data: {"target" => "#smsConfirmModal"}, style: "display:none;" %>

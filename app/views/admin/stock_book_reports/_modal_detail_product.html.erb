@@ -1,0 +1,121 @@
+<div id="detailProductModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#detailProductModal"></div>
+  <div class="modal_content -drawer">
+    <div class="modal-header">
+      <div class="modal-title text-large text-uppercase">Data Produk</div>
+    </div>
+    <div class="modal-body product-info-body">
+      <form id="detail-product-form">
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label class="text-label"><%= t 'admin.shop_product.product_alias' %></label>
+            <input id="shop_alias_name" name="shop_alias_name" type="text" class="text-normal form-control" disabled>
+          </div>
+            <div class="form-group col-6">
+            <label class="text-label"><%= t 'admin.common.category' %></label>
+            <div>
+              <input id="product_category" name="product_category" type="text" class="text-normal form-control" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-6 col-md-6">
+            <label class="text-label"><%= t 'admin.shop_product.store_product_no' %></label>
+            <input id="product_no" name="product_no" type="text" class="text-normal form-control" disabled>
+          </div>
+          <div class="form-group col-3 col-md-2">
+            <label class="text-label"><%= t 'admin.shop_product.availability' %></label>
+            <input id="is_use" type="checkbox" name="availability" data-on="<span class='text-normal text-color-active'><%= t 'admin.shop_product.active' %></span>" data-off="<span class='text-normal'><%= t 'admin.shop_product.inactive' %></span>" data-toggle="toggle">
+          </div>
+          <div class="form-group col-1 align-self-end pb-2 text-normal text-muted"><i class="fas fa-lock"></i></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-12">
+            <label class="text-label"><%= t 'admin.shop_product.product_name' %></label>
+            <input id="admin_product_name" name="admin_product_name" type="text" class="text-normal form-control" disabled>
+          </div>
+        </div>
+
+        <div class="form-row border-bottom mb-4 pb-2">
+          <div class="col-6">
+            <label class="text-label"><%= t 'admin.shop_product.unit_price' %></label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Rp</div>
+              </div>
+              <input id="sales_unit_price" name="sales_unit_price" type="number" class="form-control text-normal text-right" disabled>
+            </div>
+          </div>
+          <div class="form-group col-6">
+            <label class="text-label"><%= t 'admin.shop_product.item_details' %></label>
+            <input id="item_detail" name="item_detail" type="text" class="text-normal form-control" disabled>
+          </div>
+        </div>
+
+        <div class="text-large text-uppercase mb-3"><%= t 'admin.shop_product.stock_product' %></div>
+
+        <div class="form-group row">
+           <label class="font-weight-normal text-normal col-6 col-form-label"><%= t 'admin.shop_product.stock_count' %></label>
+           <div class="col-3 col-md-2">
+             <input id="is_stock_control" type="checkbox" name="is_stock_control" data-on="<span class='text-normal text-color-active'><%= t 'admin.shop_product.active' %></span>" data-off="<span class='text-normal'><%= t 'admin.shop_product.inactive' %></span>" data-toggle="toggle">
+           </div>
+           <div class="col-1 align-self-end pb-2 text-normal text-muted"><i class="fas fa-lock"></i></div>
+        </div>
+
+        <div class="form-group row">
+          <label class="font-weight-normal text-normal col-6 col-form-label"><%= t 'admin.shop_product.remind_min_stock' %></label>
+          <div class="col-3 col-md-2">
+              <input name="stock_minimum" id="stock_minimum_product" type="number" min="0" class="text-normal form-control text-right text-color-disabled" disabled>
+          </div>
+          <p class="font-weight-normal text-normal align-self-center mb-0 pr-2">pcs</p>
+          <p id="stock_minimum_status" class="text-small text-color-highlight font-weight-normal font-italic align-self-center mb-0">(aktif)</p>
+        </div>
+        
+        <div class="form-group row d-flex align-items-center">
+          <label class="text-normal col-md-6 col-6 font-weight-normal"><%= t 'admin.shop_product.stock_history' %></label>
+          <div class="form-group col-6 col-md-4">
+            <input type="hidden" id="start_date_history">
+            <input type="hidden" id="end_date_history">
+            <button type="button" class="pull-down-btn form-control text-normal" id="daterange-btn-history">
+              <div>
+                <i class="far fa-calendar-alt mr-1"></i>
+                <span>
+                 Hari ini
+                </span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </form>
+      <table class="table table-hover mt-3">
+        <thead>
+          <tr class="text-label">
+            <th class="border-top-0"><%= t 'admin.shop_product.date' %></th>
+            <th class="border-top-0 text-right"><%= t 'admin.shop_product.added' %></th>
+            <th class="border-top-0 text-right"><%= t 'admin.shop_product.stock' %></th>
+            <th class="border-top-0 text-center"><%= t 'admin.shop_product.notes' %></th>
+          </tr>
+        </thead>
+        <tbody id="purchase_history">
+        </tbody>
+      </table>
+      <div id="loading_purchase_history" class="loading p-3 hide">
+        <div class="text-center">
+          <i class="fas fa-spinner fa-spin"></i>
+        </div>
+      </div>
+      <div id="empty_data_info" class="hide">
+        <p class="text-color-disabled text-normal text-center">Belum ada data</p>
+      </div>
+    </div>
+    <div class="footer row fixed">
+      <div class="col-12">
+        <%= button_tag :type => "button", id: "cancel-update-product-button", class: "text-large btn button-secondary-active js-modal-close w-100", data: {"target" => "#detailProductModal"} do %>
+          <%= t 'cancel' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

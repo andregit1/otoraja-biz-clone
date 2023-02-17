@@ -1,0 +1,11 @@
+id:
+  admin:
+    notification:
+      index:
+        title: "Pemberitahuan"
+        date: "Tgl"
+        search: "Cari"
+        tag: "Tag"
+        subject: "Judul/Subyek"
+        loadingtxt: "Sedang mengambil data ..."
+        filterTag: "Jenis / Tag"

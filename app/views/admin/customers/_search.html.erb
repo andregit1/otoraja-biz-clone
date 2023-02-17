@@ -1,0 +1,21 @@
+<div class="card card-widget">
+  <div class="card-body">
+    <%= search_form_for @q, url: admin_customer_list_path, id: 'customer-search' do |f| %>
+      <div class="d-flex align-items-end search-form"> 
+        <%= hidden_field_tag :sort, 'last_visit_datetime desc' %>
+        <%= hidden_field_tag :page, 0 %>
+        <div class="form-group col-4 mb-0">
+          <%= select_tag 'select_search_field', options_for_select(@search_field, :selected => @select_search_field), {id: 'select-search-field', class: 'form-control form-control-sm col-xs-6'} %>
+        </div>
+        <div class="form-group col-8 search-field mb-0">
+          <%= f.text_field :name_cont, class: 'text-field form-control text-normal', placeholder: I18n.t('admin.common.keyword'), autocomplete: 'off' %>
+          <%= f.text_field :tel_cont, class: 'text-field form-control text-normal', placeholder: I18n.t('admin.common.keyword'), autocomplete: 'off' %>
+          <%= f.text_field :owned_bikes_full_plate_number_cont, class: 'text-field form-control text-normal', placeholder: I18n.t('admin.common.keyword'), autocomplete: 'off' %>
+          <i id="search-clear-btn" class="icon icon-Cross search-with-clear clear"></i>
+          <i id="search-btn" class="icon icon-Search search-with-clear"></i>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <!-- /.card-body -->
+</div>

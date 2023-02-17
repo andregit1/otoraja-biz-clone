@@ -1,0 +1,23 @@
+id:
+  activerecord:
+    models:
+      shop_group: 'Kontraktor'
+    attributes:
+      shop_group:
+        id: "ID"
+        name: "Nama"
+        group_no: "ID Account"
+        owner_name: "Nama Pemilik"
+        owner_gender: "Jenis kelamin"
+        owner_tel: "Telepon Pemilik"
+        owner_tel2: "Telepon Pemilik2"
+        owner_email: "Email Pemilik"
+        founding_year: "Tahun pendiri"
+        is_chain_shop: "Jaringan Toko"
+        subscriber_type: "Status"
+        owner_wa_tel: "Whats App Telepon"
+        virtual_bank_no: "Virtual Bank No."
+      shop_group/subscriber_type:
+        non_subscriber: "Suspend"
+        subscriber: "Demo"
+        paid_subscriber: "Berbayar"

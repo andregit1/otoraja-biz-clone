@@ -1,0 +1,89 @@
+<% content_for(:title, t('admin.notification.index.title')) %>
+
+<div class="card card-widget">
+  <div class="card-header" data-card-widget="collapse">
+    <h3 class="card-title">
+      <i class="fas fa-chevron-down"></i>
+      <i class="fas fa-chevron-up"></i>
+      <%= t 'admin.common.filter' %>
+    </h3>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body pl-16px">
+    <%= form_with url: admin_notifications_path, class: 'search-form', local: true, method: :get do |f| %>
+    <div class="form-row">
+      <div class="form-group col-5">
+        <div class="text-label font-weight-bold"><label><%= t('admin.notification.index.filterTag') %></label></div>
+        <%= f.select 'tag', NotificationTag.order(order: :asc).pluck(:name, :id), { include_blank: 'Semua', selected: params[:tag]}, { class: 'form-control' }%>
+      </div>
+      <div class="form-group col-5">
+        <div class="text-label font-weight-bold"><label><%= t 'admin.common.sort' %></label></div>
+        <%= f.select 'sort', options_for_select(Notification.sorts, @current_sort), {}, { class: 'form-control' } %>
+      </div>
+      <div class="form-group col-2">
+        <%= f.submit t('admin.notification.index.search'), class: 'btn btn-primary btn-search-notif' %>
+      </div> 
+    </div>
+    <% end %>
+  </div>
+  <!-- /.card-body -->
+</div>
+<div class="d-flex  align-items-center justify-content-end">
+  <%= paginate @notifications, window: 1 %>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-sm table-hover table-sticky notification-table">
+        <thead>
+          <tr>
+            <th width="20%"><%= t('admin.notification.index.date') %></th>
+            <th><%= t('admin.notification.index.tag') %></th>
+            <th><%= t('admin.notification.index.subject') %></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody class="text-label">
+        <% if @notifications.present? %>
+          <% @notifications.each do |notification| %>
+            <tr>
+              <td class="pl-16px" style="vertical-align: top;"><%= notification.published_from&.strftime("%d-%m-%Y") %></td>
+              <td style="vertical-align: top;">
+                <% notification.notification_tags.order(order: :asc).each do |tag| %>
+                  <span class="badge notif-tag-badge" style="color:#<%= tag.text_color %>;background-color:#<%= tag.body_color %>;"><%= tag.name%></span>
+                <% end %>
+              </td>
+              <td style="vertical-align: top;"><%= notification.subject %></td>
+              <td> 
+                <%= link_to admin_notifications_show_path(notification), :class => "btn btn-primary show-detail", :id => notification.id do %>
+                  <i class="fas fa-eye"></i>
+                <% end %> 
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="notification-modal">
+  <div class="modal modal-test px-2 fade" id="notif-detail-dialog" tabindex="-1" role="dialog" aria-labelledby="detailNotifDialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered" role="document">
+      <div class="modal-content notification-body">
+        <button type="button" class="close notif-dialog-close btn-close-notification-view" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="loading-wrapper loading-margin">
+          <div class="loading-txt"><%= t('admin.notification.index.loadingtxt') %> </div>
+        </div>
+        <div class="modal-body body-padding">
+          <div class="body-text"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

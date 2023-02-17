@@ -1,0 +1,51 @@
+<% content_for(:title, t('console.common.maker')) %>
+
+<div class="card content-datatable">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover table-sticky">
+        <thead>
+          <tr>
+            <th><%= t 'console.common.name' %></th>
+            <th class="text-center"><%= t 'console.maker.up_down' %></th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody id="maker_table">
+        <% @makers.each do |maker| %>
+          <tr data-maker-id='<%= maker.id %>' data-order='<%= maker&.order %>'>
+            <td><%= maker.name %></td>
+            <td class="text-center">
+              <%= button_tag type: "button", :class => "rowup btn btn-success mb-0 text-white" do %>
+                <i class="fas fa-arrow-up"></i>
+              <% end %>
+              <%= button_tag type: "button", :class => "rowdown btn btn-danger mb-0 text-white" do %>
+                <i class="fas fa-arrow-down"></i>
+              <% end %>
+            </td>
+            <td class="text-right">
+              <%= link_to edit_console_maker_path(maker),:class => 'btn btn-primary mb-0' do %>
+                <i class="fas fa-edit"></i>&nbsp;<%= t 'console.common.edit' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex justify-content-start">
+      <div>
+        <%= link_to new_console_maker_path,:class => 'btn footer-btn' do %>
+          <i class="fas fa-plus"></i>&nbsp;<%= t 'console.maker.add_maker' %>
+        <% end %>
+      </div>
+      <div class="ml-auto">
+        <%= button_tag type: "submit", :id => "order_change", :class => "btn footer-btn-update text-white", disabled: true do %>
+          <%= t 'console.common.save' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

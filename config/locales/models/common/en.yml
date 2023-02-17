@@ -1,0 +1,3 @@
+en:
+  reject_access: "You cannot access the data"
+  token_expired: "This link has been expired."

@@ -1,0 +1,299 @@
+en:
+  enums:
+    subscription:
+      plan:
+        no_plan: "No Plan"
+        lite: "Lite"
+        super: "Super"
+        ultimate: "Ultimate"
+      status:
+        processing: "Processing"
+        creating_bank_account: "Creating Bank Account"
+        payment_pending: "Payment Pending"
+        payment_confirmed: "Payment Confirmed"
+        finalized: "Finalized"
+        cancelled: "Cancelled"
+        expire: "Expired"
+      period:
+        one: "1 Month"
+        two: "2 Months"
+        three: "3 Months"
+        four: "4 Months"
+        five: "5 Months"
+        six: "6 Months"
+        seven: "7 Months"
+        eight: "8 Months"
+        nine: "9 Months"
+        ten: "10 Months"
+        eleven: "11 Months"
+        twelve: "1 Year"
+      payment_type_id:
+        sinarmas_va: "Sinarmar VA"
+        gopay: "GoPay"
+        qris_gopay: "QRIS"
+        qris_shopee: "QRIS"
+        bca_va: "BCA VA"
+        bri_va: "BRI VA"
+        bni_va: "BNI VA"
+        mandiri_bill: "Mandiri VA"
+  subscription:
+    error_subscription: 'Failed create subscription'
+    cancelled: "Your subscription was cancelled successfully"
+    cancell_error: "An error has occured. The subscription may not have been cancelled"
+    payment_method_nonactive: 'Payment with this method non active, please select another method'
+    payment_gateway_expired: 'The payment time has run out, please press the select payment button then select the payment method again'
+    email:
+      subject:
+        stg_ops_application_received: "[STAGING] New Subs %{id}"
+        ops_application_received: "New Subs %{id}"
+        ops_subscription_expiration: "Subscription Expirations"
+        subscription_expiration: "Your Subscription has Expired"
+        renewal_notification: "Your subscription will Expire Soon"
+        application_processing: "Langganan Otoraja Biz - %{id}"
+        bank_account_created: "Pembayaran Langganan Otoraja Biz - %{id}"
+        payment_received: "Pembayaran Langganan Diterima - %{id}"
+        processing_complete: "Your Account is Ready"
+        cancelled: "Langganan Otoraja Biz Dibatalkan - %{id}"
+        ops_payment_pending: "Re: New Subs %{id}"
+        payment_pending: "Re: Langganan Otoraja Biz - %{id}"
+        expired: "Langganan Otoraja Biz Telah Kadaluarsa - %{id}"
+      body:
+        ops_application_received: |
+          Hello!
+
+          We have a New Subscription request. Below are the details.
+          
+          Shop Name : %{shop_name}
+          Email : %{email}
+          Nama paket : %{plan} 
+          Subscription period : %{period} Bulan
+          Fee : %{pay_amount}
+          Address : %{shop_address}
+          Product ID : Otoraja BIz - 00
+          Area COde : %{area_name} - %{area_code}
+          Shop ID : %{shop_id}
+          Virtual Account : %{shop_virtual_account}
+          Referal Code : 
+          
+          Note: Virtual account structure :81620-[2 product code ]-[2 area code] -[6 Shop ID]
+
+          Please follow up the request by clicking the button below.
+          
+          %{link}
+        ops_pending_payment_received: |
+          Hello!
+
+          We have a PENDING PAYMENT for the following order.
+          
+          - Order ID
+            %{id}
+          
+          - Application Date
+            %{date}
+          
+          - Bengkel Name
+            %{shop_name}
+          
+          - Package Name
+            %{plan}
+          
+          
+          Please follow up with the owner in order for the bengkel to make the payment.
+        ops_subscription_expiration: "Account and date of expiration"
+        subscription_expiration: "Please renew your subscription"
+        renewal_notification: "Your subscription will expire in"
+        application_processing: | 
+          Yth. %{shop_name},
+
+          Terima kasih atas ketersediaannya untuk bergabung dengan layanan Otoraja Biz.
+
+          Permintaan langganan Otoraja Biz paket %{plan} yang Anda ajukan sedang kami proses. Berikut adalah detil pengajuan Anda:
+
+          - Order ID
+            %{id}
+
+          - Tanggal Pengajuan
+            %{date}
+
+          - Nama Bengkel
+            %{shop_name}
+
+          - Nama Paket Langganan
+            %{plan}
+
+          Kami akan menghubungi Anda kembali melalui email atau WhatsApp dengan informasi pembayaran.
+
+          Selamat bergabung dan semoga sukses!
+
+
+          Salam,
+          Tim Finance Otoraja
+        bank_account_created: |
+          Yth. %{shop_name},
+
+          Selamat! Satu langkah lagi menuju aktivasi paket layanan Otoraja Biz %{plan} Anda.
+
+          Kami mau mengingatkan untuk mentransfer biaya berlangganan Anda sebesar Rp %{fee}.
+
+          Pembayaran dapat Anda lakukan dengan cara transfer bank ke nomor rekening Virtual Account yang telah kami sediakan khusus bengkel Anda.
+
+          Nama Bank                         : PT. Bank Sinarmas TBK
+          Nomor Rekening                : %{bank_no}
+          Nama Akun                         : ONI QQ %{shop_name}
+
+          Silakan lakukan pembayaran sesuai dengan petunjuk terlampir,  meliputi pembayaran melalui:
+          1. ATM
+          2. M-Banking
+          3. OVO
+          4. GOPAY
+
+          Setelah melakukan pembayaran, harap lampirkan bukti transfer ke WA tim Otoraja dan email ke finance@otoraja.id
+
+          Selamat bergabung dan semoga sukses!
+
+          Salam,
+          Tim Finance Otoraja
+
+          # TATA CARA PEMBAYARAN BIAYA BERLANGGANAN OTORAJA BIZ
+
+          Pembayaran Melalui Virtual Account dengan ATM. Contoh pembayaran melalui ATM bank BCA :
+          1.	Masukkan kartu ATM kemudian masukkan nomor PIN Anda
+          2.	Pilih "Transaksi lainnya", kemudian pilih "Transfer Antar Bank". Masukan Kode Bank “153”
+          3.	Silahkan masukkan no. Virtual Account (contoh : 8162XXXXXXXXXXXX), lalu tekan "Benar"
+          4.	Periksa kembali data transaksi kemudian tekan "Benar"
+          5.	Simpan struk Anda sebagai bukti pembayaran. Penjual akan menerima notifikasi pembayaran.
+
+          Pembayaran Melalui Virtual Account dengan Mobile Banking. Contoh pembayaran melalui M-BCA :
+          1.	Login pada aplikasi M-BCA, masukkan PIN M-BCA
+          2.	Pilih "m-Transfer", pilih di bagian “Daftar Transfer” lalu klik "Antar Bank"
+          3.	Klik "No Rek Tujuan", lalu masukkan no. Virtual Account Anda (contoh : 8162XXXXXXXXX)
+          4.	Pilih bank “Sinarmas” Klik "Send"
+          5.	Kemudian kembali ke menu “m-Transfer” di bagian “Transfer klik “Antar Bank”
+          6.	Pilih Bank “153 Sinarmas”, Rekening Tujuan adalah Virtual Account Anda, masukan Jumlah Uang sesuai nominal pembayaran, kemudian klik “Send” dan masukkan PIN M-BCA Anda
+
+          Pembayaran dengan OVO :
+          1.	Pastikan OVO anda sudah berstatus OVO Premier
+          2.	Login pada applikasi OVO, pilih menu “transfer”
+          3.	Klik “ke rekening bank”
+          4.	Pilih bank “Bank SInarmas”
+          5.	Masukan no rekening virtual dan nominal tagihan
+          6.	Pilih “lanjutkan”, kemudian“transfer”
+
+          Pembayaran dengan GOPAY :
+          1.	Klik “bayar” pada menu GoPay
+          2.	Lalu pilih “Ke rekening bank” untuk transfer saldo GoPay
+          3.	Pilih “transfer instan ke rek baru”
+          4.	Pilih bank tujuan yang diinginkan
+          5.	Masukkan nomor rekening baru
+          6.	Pilih nama pemilik rekening dan klik “lanjut”
+          7.	Masukkan jumlah nominal uang yang akan dikirimkan
+          8.	Pastikan jumlah transfer atau pengiriman saldo sudah benar. Klik Konfirmasi untuk melanjutkan dan masukkan PIN Anda.
+          
+        reminder_renewal_subscription: |
+          Yth. %{shop_name},
+
+          Anda memiliki tagihan pembayaran untuk berlangganan Otoraja Biz %{plan}. Mohon untuk melakukan transfer pembayaran sebesar Rp %{fee} agar segera lunas.
+
+          Pembayaran dapat Anda lakukan dengan cara transfer bank ke nomor rekening Virtual Account yang telah kami sediakan khusus bengkel Anda.
+
+          Nama Bank                         : PT. Bank Sinarmas TBK
+          Nomor Rekening                : %{bank_no}
+          Nama Akun                         : ONI QQ %{shop_name}
+
+          Silakan lakukan pembayaran sesuai dengan petunjuk terlampir,  meliputi pembayaran melalui:
+          1. ATM
+          2. M-Banking
+          3. OVO
+          4. GOPAY
+
+          "Saya sudah melakukan transfer pembayaran"
+          Jangan lupa untuk mengirimkan bukti transfernya kepada kami atau kepada representatif kami yang menangani Anda.
+
+          "Saya mengalami kendala dalam pembayaran"
+          Mohon hubungi representatif kami yang menangani Anda
+
+          Salam,
+          Tim Finance Otoraja
+        payment_received: |
+          Yth. %{shop_name},
+
+          Terima kasih atas pembayaran Anda. Status langganan Otoraja Biz %{plan} Anda sudah aktif.
+
+          Silahkan unduh tanda bukti lunas pembayaran Anda disini: 
+          %{link_invoice}
+          
+          Link bukti lunas di atas dapat diakses selama 30 hari ke depan. 
+          Jika terlewat, Anda tetap bisa mengaksesnya melalui menu Langganan di Menu Manajemen disini 
+          %{link_subscription}
+          
+          Selamat menggunakan aplikasi Otoraja Biz dan semoga sukses!
+
+          Salam,
+          Tim Finance Otoraja
+        processing_complete: "Your Account is Ready"
+        cancelled: |
+          Yth. %{shop_name},
+
+          Status langganan Otoraja Biz $Plan Anda telah dibatalkan.
+          
+          Untuk kembali menggunakan layanan Otoraja Biz, silakan menghubungi representatif kami yang menangani Anda.
+          
+          
+          Salam,
+          Tim Finance Otoraja
+        expired: |
+          Yth. %{shop_name},
+
+          Status langganan Otoraja Biz %{plan} Anda telah kadarluarsa.
+          
+          Untuk kembali menggunakan layanan Otoraja Biz, silakan menghubungi representatif kami yang menangani Anda.
+          
+          Salam,
+          Tim Finance Otoraja
+        days: "Days"
+        ops_payment_pending: |
+          Hello!
+
+          We have a PENDING PAYMENT for the following order.
+          
+          
+          - Order ID
+            %{id}
+          
+          - Application Date
+            %{date}
+          
+          - Bengkel Name
+            %{shop_name}
+          
+          - Package Name
+            %{plan}
+          
+          
+          Please follow up with the owner in order for the bengkel to make the payment.
+        payment_pending: |
+          Yth. %{shop_name},
+
+          Anda memiliki tagihan pembayaran untuk berlangganan Otoraja Biz %{plan}. Mohon untuk melakukan transfer pembayaran sebesar Rp %{fee} agar segera lunas.
+
+          Pembayaran dapat Anda lakukan dengan cara transfer bank ke nomor rekening Virtual Account yang telah kami sediakan khusus bengkel Anda.
+
+          Nama Bank                              : PT. Bank Sinarmas TBK
+          Nomor Rekening                    : %{bank_no}
+          Nama Akun                              : ONI QQ %{shop_name}
+
+          Silakan lakukan pembayaran sesuai dengan petunjuk terlampir, meliputi pembayaran melalui:
+          1. ATM
+          2. M-Banking
+          3. OVO
+          4. GOPAY
+
+          "Saya sudah melakukan transfer pembayaran"
+          Jangan lupa untuk mengirimkan bukti transfernya kepada kami atau kepada representatif kami yang menangani Anda.
+
+          "Saya mengalami kendala dalam pembayaran"
+          Mohon hubungi representatif kami yang menangani Anda.
+
+          Salam,
+          Tim Finance Otoraja
+        

@@ -1,0 +1,61 @@
+/*
+ * Variables
+ */
+$color_brand: #E26529;
+$color_racing_blue: #3361D0;
+$color_light_blue: #007AFF;
+$color_disabled: #CAD1D8;
+$color_blank_text: #A0A9AF;
+$color_blank_bg: #EEF0F3;
+$color_blank_border: #DBE0E5;
+$color_graph_green: #96D97E;
+$color_graph_blue: #4F98C3;
+$color_graph_gray: #A3A3A3;
+$color_active: #0A2D81;
+$color_inactive: #DDDDDD;
+$color_text_dark: #222222;
+$color_text_secondary: #444444;
+$color_text_gray: #888888;
+$color_text_inactive_button: #BBBBBB;
+$color_text_table_header: #E7ECEF;
+$color_field_outline: #C4C4C4;
+$color_highlight: #0C78EB;
+$color_remove: #DC3547;
+$color_status_ok: #1DAB33;
+$color_status_ng: #DC3547;
+$color_status_warning: #FEC107;
+$color_status_dark_gray: #444444;
+$color_status_light_gray: #DDDDDD;
+$color_footer_light_gray : #c2c7d0;
+
+// Font size for large screen
+$font_size_text_page_title: 40px;
+$font_size_text_highlight: 32px;
+$font_size_text_large: 24px;
+$font_size_text_normal: 20px;
+$font_size_text_label: 16px;
+$font_size_text_small: 14px;
+// Font size for small screen
+$sp_font_size_text_page_title: 24px;
+$sp_font_size_text_highlight: 20px;
+$sp_font_size_text_large: 16px;
+$sp_font_size_text_normal: 14px;
+$sp_font_size_text_label: 12px;
+$sp_font_size_text_small: 11px;
+
+:root{
+    --bike-white: #FFFFFF;
+    --bike-black: #000033;
+    --bike-blue: #1147C9;
+    --bike-grey: #888888;
+    --bike-red: #E83B33;
+    --bike-green: #0A8254;
+    --bike-yellow: #E8BE33;
+    --bike-orange: #E88733;
+    --bike-pink: #E650CF;
+    --bike-purple: #A233E8;
+    --bike-brown: #6E3300;
+    --bike-silver: transparent linear-gradient(218deg, #ACACAC 0%, #565656 100%);
+    --bike-gold: transparent linear-gradient(218deg, #C9A71B 0%, #957800 100%);
+    --bike-other: transparent,
+}

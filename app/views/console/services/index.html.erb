@@ -1,0 +1,33 @@
+<% content_for(:title, t('console.service.index.title')) %>
+
+
+<div class="mb-3 text-right">
+  <%= link_to new_console_service_path,:class => 'btn btn-success mb-0' do %>
+    <i class="fas fa-plus"></i> <%= t('console.service.button.add') %>
+  <% end %>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= Service.human_attribute_name(:name) %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @services.each do |service| %>
+        <tr>
+          <td><%= service.name %></td>
+          <td class="text-right">
+            <%= link_to edit_console_service_path(service), :class => 'btn btn-primary' do %>
+              <i class="fas fa-edit"></i> <%= t('console.service.button.edit') %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

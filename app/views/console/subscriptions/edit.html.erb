@@ -1,0 +1,145 @@
+<h2><%= t 'console.subscription.subscription' %></h2>
+<div class="card">
+  <div class="card-body list p-4">
+    <ul>
+      <li>
+        <label><%= t 'console.shop_group.account_id' %></label>
+        <p><%= @subscription.shop.shop_group.group_no %><p>
+      </li>
+      <li>
+        <label><%= t 'console.shop.bengkel_id' %></label>
+        <p><%= @subscription.shop.bengkel_id %><p>
+      </li>
+      <li>
+        <label><%= t 'console.shop.address' %></label>
+        <p><%= @subscription.shop.address %><p>
+      </li>
+      <li>
+        <label><%= t 'console.shop_group.owner_name' %></label>
+        <p><%= @subscription.shop.shop_group.owner_name  %><p>
+      </li>
+      <li>
+        <label><%= t 'console.subscription.owner' %></label>
+        <p><%= @subscription.shop.name %><p>
+      </li>
+      <li>
+        <label><%= t 'console.subscription.plan' %></label>
+        <p><%= Subscription.plans_i18n[@subscription.plan] %><p>
+      </li>
+      <li>
+        <label><%= t 'console.subscription.status' %></label>
+        <p><%= Subscription.statuses_i18n[@subscription.status] %><p>
+      </li>
+      <li>
+        <label><%= t 'console.subscription.period' %></label>
+        <p><%=  Subscription.periods_i18n[@subscription.period] %><p>
+      </li>
+      <li>
+        <label><%= t 'console.subscription.fee' %></label>
+        <p>Rp. <%= formatedRupiah(@subscription.fee) %><p>
+      </li>
+      <li>
+        <label><%= t 'console.subscription.code_area' %></label>
+        <p><%= @subscription.va_code_area_id.present? ?  "#{@subscription.va_code_area.va_code} (#{@subscription.va_code_area.area_name})" : '--' %><p>
+      </li>
+      <li>
+        <label><%= t 'console.subscription.sales_name' %></label>
+        <p><%= @subscription.sales_name.present? ?  @subscription.sales_name : '--' %><p>
+      </li>
+      <li>
+        <label><%= t 'console.subscription.exp_date' %></label>
+        <p>
+          <% if @subscription.end_date.present?  %>
+            <% if @days_remaining >= 0 %>
+              <%= formatedDate(@subscription.end_date) + " (#{@days_remaining} Days)" %>
+            <% else %>
+              <%= formatedDate(@subscription.end_date) %> 
+            <% end %>
+          <% end %>
+        <p>
+      </li>
+    </ul>
+    <% unless @subscription.cancelled? || @subscription.finalized? || @buttond_date_cancel %>
+      <div>
+        <%= link_to (t 'console.subscription.cancel'), console_subscription_path(@subscription), :method => :delete, :class => 'btn btn-danger' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body list p-4">
+    <%= form_with(model: @subscription, url:console_subscription_path, local: true) do |form| %>
+      <% if @subscription.processing? %>
+        <div>
+          <%= form.hidden_field :new_status, :value => Subscription.statuses[:creating_bank_account] %>
+          <div class="form-group row">
+            <%= form.label :va_code_area_id, (t 'console.subscription.code_area'), :class=>'col-sm-2 col-form-label' %>
+            <div class="col-sm-4 col-lg-3">
+              <%= form.select :va_code_area_id, VaCodeArea.all.pluck('CONCAT(va_code, " - ",area_name)', :id), {:include_blank => true}, :class => "form-control use_select2", :required => true %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <%= form.label :sales_name, (t 'console.subscription.sales_name'), :class=>'col-sm-2 col-form-label' %>
+            <div class="col-sm-4 col-lg-3">
+              <%= form.text_field :sales_name, :class=>'form-control', :required => true %>
+            </div>
+          </div>
+          <p><%= t 'console.subscription.status_change_one' %></p>
+        </div>
+      <% end %>
+      <% if @subscription.creating_bank_account? %>
+        <div class="form-group"> 
+            <p><%= t 'console.subscription.status_change_two' %></p>
+          <%= form.hidden_field :new_status, :value=>Subscription.statuses[:payment_pending] %>
+          <%= form.label :virtual_bank_no, (t 'console.subscription.bank_account_no') %>
+          <%= form.text_field :virtual_bank_no, :class=>'form-control', :value=>@subscription.shop.virtual_bank_no, :required => true%>
+        </div>
+      <% end %>
+      <% if @subscription.payment_pending? %>
+        <div>
+          <p><%= t 'console.subscription.status_change_three' %></p>
+          <%= form.hidden_field :new_status, :value=>Subscription.statuses[:payment_confirmed] %>
+        </div>
+      <% end %>
+      <% if @subscription.payment_confirmed? %>
+        <p><%= t 'console.subscription.status_change_four' %></p>
+        <%= form.hidden_field :new_status, :value=>Subscription.statuses[:finalized] %>
+        <div class="form-group form-inline">
+          <%= form.label :payment_date, (t 'console.subscription.payment_date'), :class => "mr-3" %>
+          <div class="input-calendar-icon">
+            <i class="far fa-calendar-alt"></i>
+            <%= form.text_field :payment_date, :class=>"form-control single-date-picker-no-minDate", :value => @subscription.payment_date, :required => true %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= form.label :invoice_number, (t 'console.subscription.invoice_number') %>
+          <%= form.text_field :invoice_number, :class=>'form-control', :value=>@subscription.invoice_number, :required => true %>
+        </div>
+        <div class="form-group">
+          <%= form.label :form_number, (t 'console.subscription.form_number') %>
+          <%= form.text_field :form_number, :class=>'form-control', :value=>@subscription.form_number, :required => true %>
+        </div>
+      <% end %>
+      <% if @subscription.finalized? %>
+        <div>
+          <h5><%= t 'console.subscription.subscription' %> <%= t 'console.subscription.finalized' %></h5>
+        </div>
+      <% end %>
+      <% if @subscription.cancelled? %>
+        <div>
+          <h5><%= t 'console.subscription.subscription' %> <%= t 'console.subscription.cancelled' %></h5>
+          <p><%= @subscription.reason_for_cancellation %></p>
+        </div>
+      <% end %>
+        <div class="row">
+          <div class="form-group">
+            <%= link_to (t 'console.common.back'), console_subscriptions_path, :class => 'btn btn-outline-primary' %>
+            <% unless @subscription.cancelled? || @subscription.finalized? || @buttond_date_cancel ||@subscription.demo_period? %>
+              <%= form.submit t('console.common.update'), :class=>'btn btn-primary' %>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="nested-fields mb-1">
+  <div class="d-flex justify-contenct-between">
+    <%= f.collection_select :shop_id, current_user.shops, :id, :id_name, { :include_blank => false }, { :class=>'form-control mr-2' } %>
+    <%= link_to_remove_association f, class: 'btn btn-danger' do %><i class="icon icon-Cross-circle"></i><% end %>
+  </div>
+</div>

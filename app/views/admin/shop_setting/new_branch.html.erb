@@ -1,0 +1,12 @@
+<% content_for(:title, t('admin.shop_setting.shop_data')) %>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <%= t 'admin.shop_setting.shop_add_info' %>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<%= form_with(model: @shop, url:admin_shop_setting_create_branch_path, id: 'form-branch', local: true) do |form| %>
+<%= render 'form_branch', {shop: @shop, f: form} %>
+<% end %>

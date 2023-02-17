@@ -1,0 +1,16 @@
+id:
+  activerecord:
+    models:
+      users: 'Akun'
+    attributes:
+      users:
+        id: "ID"
+        user_id: "USER ID"
+  errors:
+    messages:
+      taken: "sudah digunakan."
+      blank: "tidak boleh kosong."
+      invalid: "tidak valid."
+      too_short: "terlalu pendek."
+      confirmation: "tidak benar."
+      not_a_number: "bukan angka."

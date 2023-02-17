@@ -1,0 +1,15 @@
+<% if checkin.deleted %>
+<li class="list-item list-item-deleted">
+<% else %>
+<li class="list-item">
+<% end %>
+<% if checkin.checkout? && current_user.staff? %>
+  <%= link_to show_maintenance_log_path(checkin), :class => "list-item-anchor" do %>
+  <%= render 'checkin/record_body', {checkin: checkin} %>
+  <% end %>
+<% else %>
+  <%= link_to edit_maintenance_log_path(checkin), :class => "list-item-anchor" do %>
+  <%= render 'checkin/record_body', {checkin: checkin} %>
+  <% end %>
+<% end %>
+</li>

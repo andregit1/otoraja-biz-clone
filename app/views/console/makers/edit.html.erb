@@ -1,0 +1,7 @@
+<% content_for(:title, t('console.maker.edit_maker')) %>
+
+<div class="card">
+  <%= form_with(model: @maker, url: console_maker_path, local: true) do |form| %>
+  <%= render 'form', {maker: @maker, f: form} %>
+  <% end %>
+</div>

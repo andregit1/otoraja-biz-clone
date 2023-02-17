@@ -1,0 +1,105 @@
+<div class="card-header">
+  <table>
+    <tr>
+      <th>Add Record:</th>
+      <td class="text-right"><%= @add_products %></td>
+    </tr>
+    <tr>
+      <th>Edit Record:</th>
+      <td class="text-right"><%= @edit_products %></td>
+    </tr>
+  </table>
+</div>
+<div class="card-body p-0">
+  <div class="table-responsive">
+    <table class="table table-sticky">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Product ID</th>
+          <th>Product Category</th>
+          <th>Product No</th>
+          <th>Name</th>
+          <th>Item Detail</th>
+          <th>Brand</th>
+          <th>Variant</th>
+          <th>Tech Spec</th>
+          <th>Default Remind Interval Day</th>
+          <th>Campaign Code</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @admin_products.each_with_index do |admin_product, index| %>
+          <% if @old_admin_products[index].present? %>
+          <tr class="table-success">
+          <% else %>
+          <tr class="table-primary">
+          <% end %>
+            <td>+</td>
+            <td>
+              <%= admin_product[:id] unless admin_product[:id].nil? %>
+              <%= hidden_field_tag "admin_products[#{index}][id]", admin_product[:id] %>
+              <%= hidden_field_tag "admin_products[#{index}][product_category_id]", admin_product[:product_category_id] %>
+              <%= hidden_field_tag "admin_products[#{index}][product_category_name]", admin_product[:product_category_name] %>
+              <%= hidden_field_tag "admin_products[#{index}][product_no]", admin_product[:product_no] %>
+              <%= hidden_field_tag "admin_products[#{index}][name]", admin_product[:name] %>
+              <%= hidden_field_tag "admin_products[#{index}][item_detail]", admin_product[:item_detail] %>
+              <%= hidden_field_tag "admin_products[#{index}][brand_id]", admin_product[:brand_id] %>
+              <%= hidden_field_tag "admin_products[#{index}][brand_name]", admin_product[:brand_name] %>
+              <%= hidden_field_tag "admin_products[#{index}][variant_id]", admin_product[:variant_id] %>
+              <%= hidden_field_tag "admin_products[#{index}][variant_name]", admin_product[:variant_name] %>
+              <%= hidden_field_tag "admin_products[#{index}][tech_spec_id]", admin_product[:tech_spec_id] %>
+              <%= hidden_field_tag "admin_products[#{index}][tech_spec_name]", admin_product[:tech_spec_name] %>
+              <%= hidden_field_tag "admin_products[#{index}][default_remind_interval_day]", admin_product[:default_remind_interval_day] %>
+              <%= hidden_field_tag "admin_products[#{index}][campaign_code]", admin_product[:campaign_code] %>
+            </td>
+            <td>
+              <s class="d-block"><%= @old_admin_products[index]&.product_category.name if @old_admin_products[index].present? %></s>
+              <%= admin_product[:product_category_name] unless admin_product[:product_category_name].nil? %>
+            </td>
+            <td>
+              <s class="d-block"><%= @old_admin_products[index]&.product_no if @old_admin_products[index].present? %></s>
+              <%= admin_product[:product_no] unless admin_product[:product_no].nil? %>
+            </td>
+            <td>
+              <s class="d-block"><%= @old_admin_products[index]&.name if @old_admin_products[index].present? %></s>
+              <%= admin_product[:name] unless admin_product[:name].nil? %>
+            </td>
+            <td>
+              <s class="d-block"><%= @old_admin_products[index]&.item_detail if @old_admin_products[index].present? %></s>
+              <%= admin_product[:item_detail] unless admin_product[:item_detail].nil? %>
+            </td>
+            <td>
+              <s class="d-block"><%= @old_admin_products[index].brand&.name if @old_admin_products[index].present? %></s>
+              <%= admin_product[:brand_name] unless admin_product[:brand_name].nil? %>
+            </td>
+            <td>
+              <s class="d-block"><%= @old_admin_products[index].variant&.name if @old_admin_products[index].present? %></s>
+              <%= admin_product[:variant_name] unless admin_product[:variant_name].nil? %>
+            </td>
+            <td>
+              <s class="d-block"><%= @old_admin_products[index].tech_spec&.name if @old_admin_products[index].present? %></s>
+              <%= admin_product[:tech_spec_name] unless admin_product[:tech_spec_name].nil? %>
+            </td>
+            <td>
+              <s class="d-block"><%= @old_admin_products[index]&.default_remind_interval_day if @old_admin_products[index].present? %></s>
+              <%= admin_product[:default_remind_interval_day] unless admin_product[:default_remind_interval_day].nil? %>
+            </td>
+            <td>
+              <s class="d-block"><%= @old_admin_products[index]&.campaign_code if @old_admin_products[index].present? %></s>
+              <%= admin_product[:campaign_code] unless admin_product[:campaign_code].nil? %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card-footer">
+  <div class="d-flex justify-content-between">
+    <%= link_to console_admin_products_import_path, class: "btn btn-default" do %>
+      Back
+    <% end %>
+    <%= f.submit "Import", class: "btn btn-primary" %>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<% content_for(:title, t('console.notification.new.title')) %>
+
+<div class="card">
+  <%= form_with(model: @notification, url: console_notifications_path, local: true) do |form| %>
+    <%= render 'form', {f: form} %>
+  <% end %>
+</div>

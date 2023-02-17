@@ -1,0 +1,28 @@
+<% content_for(:title, t('console.versions.index.title')) %>
+
+<div class="card">
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= t 'console.versions.index.management_type' %></th>
+          <th><%= t 'console.versions.index.latest_version' %></th>
+          <th><%= t 'console.versions.index.require_version' %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th><%= t 'console.versions.index.front_android' %></th>
+          <td><%= @version.android_latest_version %></td>
+          <td><%= @version.android_require_version %></td>
+          <td>
+            <%= link_to console_versions_require_to_latest_path(type: :android), class: "btn btn-primary #{ 'disabled' unless @version.canChangedAndroidRequiredVersion? }", method: :post do %>
+              <%= t 'console.versions.index.button.require_to_latest'%>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

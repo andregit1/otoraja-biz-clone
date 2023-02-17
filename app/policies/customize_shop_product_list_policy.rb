@@ -1,0 +1,2 @@
+class CustomizeShopProductListPolicy < ApplicationPolicy
+end

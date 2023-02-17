@@ -1,0 +1,60 @@
+<!-- Number Pad Sheet Modal -->
+<div id="numberPadDiscountModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#numberPadDiscountModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-down js-modal-close" data-target="#numberPadDiscountModal">
+      <i class="icon icon-Arrow-down"></i>
+    </div>
+    <div id="discount-select">
+      <div class="modal-caption"></div>
+      <div id="" class="modal-body row">
+        <div class="col-7">
+          <section class="grid">
+            <div class="row no-pad">
+              <div class="col-4"><label class="grid-label"><%= t 'select_product.list_price' %></label>
+              </div>
+              <div class="col-8 -align-right">
+                <span>Rp.&nbsp;</span>
+                <span id="discount-list-price">200.000,99</span>
+              </div>
+            </div>
+            <div class="row no-pad">
+              <div class="col-2">
+                <label class="grid-label"><%= t 'discount' %></label>
+              </div>
+              <div class="col-10 -align-right -text-disabled">
+                <div class="grid-form">
+                  <div id="discount-button-group" class="btn-group btn-group-toggle group-button" data-toggle="buttons">
+                    <label class="btn btn-light active -text-bold -text-14">
+                      <input type="radio" name="discount-options" id="percent" autocomplete="off" checked> %
+                    </label>
+                    <label class="btn btn-light -text-bold -text-14">
+                      <input type="radio" name="discount-options" id="cash" autocomplete="off"> Rp.
+                    </label>
+                  </div>
+                  <input class="grid-input -small -align-right" id="discountInput" type="text" readonly value="" />
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="row no-pad">
+              <div class="col-4"><label class="grid-label"><%= t 'select_product.selling_price' %></label></div>
+              <div class="col-8 -align-right"><span class="-text-red -text-bold">Rp.&nbsp;</span><span
+                  class="-text-red -text-bold" id="discount-selling-price"></span>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-5">
+          <div id="numberPadDiscount"></div>
+        </div>
+      </div>
+      <div id="number-pad-discount-button" class="pl-5 pr-5 mt-6">
+        <%= button_tag :type => "button", class: "btn-base -basic -primary js-modal-close", data: {"target" => "#numberPadDiscountModal"} do %>
+        <%= t 'ok' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Number Pad Sheet Modal -->

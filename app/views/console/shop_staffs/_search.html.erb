@@ -1,0 +1,41 @@
+<div class="card card-widget">
+  <div class="card-header" data-card-widget="collapse">
+    <h3 class="card-title">
+      <i class="fas fa-chevron-down"></i>
+      <i class="fas fa-chevron-up"></i>
+      <%= t 'console.common.filter' %>
+    </h3>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <%= search_form_for @q,url:console_shop_staffs_path,class: 'd-flex align-items-end' do |f| %>
+      <div class="form-group mr-3 w-25">
+        <%= label_tag 'select_shop', t('console.common.shop') %>
+        <div>
+          <%= f.collection_select :shop_id_eq, @shops, :id, :name, {}, {:class => 'form-control', :id => 'staff-select-shop'} %>
+        </div>
+      </div>
+      <div class="form-group mr-3">
+        <%= label_tag 'is_front_staff_eq', t('console.shop_staff.position') %>
+        <div class="d-flex">
+          <div class="form-check pl-0">
+            <%= f.check_box :is_front_staff_eq, {}, checked_value = true, unchecked_value = '' %>
+            <%= f.label :is_front_staff_eq, t('console.shop_staff.front_staff') %>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :is_mechanic_eq, {}, checked_value = true, unchecked_value = '' %>
+            <%= f.label :is_mechanic_eq, t('console.common.mechanic') %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group mr-3">
+        <label><%= t 'console.common.keyword' %> <i class="fas fa-info-circle" data-html="true" data-toggle="tooltip" title="<%= t 'console.common.name' %>"></i></label>
+        <%= f.search_field :name_cont, class: 'form-control', autocomplete: 'off' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit t('console.shop_product.search'), class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+  <!-- /.card-body -->
+</div>

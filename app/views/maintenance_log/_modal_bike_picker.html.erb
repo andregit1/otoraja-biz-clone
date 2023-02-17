@@ -1,0 +1,41 @@
+<!-- Type Picker Sheet Modal -->
+<div id="bikePickerModal" class="modal js-modal">
+  <div class="modal_bg js-modal-close" data-target="#bikePickerModal"></div>
+  <div class="modal_content -bottom-sheet">
+    <div class="modal-down js-modal-close" data-target="#bikePickerModal">
+      <i class="icon icon-Arrow-down"></i>
+    </div>
+    <div id="bike-select">
+      <div class="modal-caption">
+        <%= t 'vehicle.select_manufacturer' %>
+      </div>
+      <div id="bikePicker" class="modal-body">
+        <% Maker.all.order(order: :asc).first(4).each do |maker| %>
+          <span class="badge badge-pill"><%= maker.name %></span>
+        <% end %>
+        <hr>
+        <p>
+          <a id="typeCollapseToggleClose" class="" data-toggle="collapse" href="#typeCollapse" role="button" aria-expanded="false" aria-controls="typeCollapse", style="display: none"><%= t 'close' %> <i class="icon icon-Arrow-down"></i></a>
+          <a id="typeCollapseToggleMore" class="" data-toggle="collapse" href="#typeCollapse" role="button" aria-expanded="false" aria-controls="typeCollapse"><%= t 'show_more' %> <i class="icon icon-Arrow-up"></i></a>
+        </p>
+        <div class="row">
+          <div class="col">
+            <div class="collapse" id="typeCollapse">
+              <div class="other-maker-collapse">
+                <% Maker.all.order(order: :asc).offset(4).each do |maker| %>
+                  <span class="badge badge-pill"><%= maker.name %></span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pl-5 pr-5 mt-6">
+      <%= button_tag :type => "button", id: "confirm-maker-button", class: "btn-base -basic -primary js-modal-close", data: {"target" => "#bikePickerModal"}, disabled: true do %>
+        <%= t 'ok' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- Type Picker Sheet Modal -->

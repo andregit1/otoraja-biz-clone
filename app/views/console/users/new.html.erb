@@ -1,0 +1,6 @@
+<% content_for(:title, 'Add User') %>
+<div class="card">
+  <%= form_with(model: @user, url:console_users_path, local: true) do |form| %>
+  <%= render 'form', {user: @user, roles: @roles, f: form} %>
+  <% end %>
+</div>

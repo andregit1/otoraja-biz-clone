@@ -1,0 +1,14 @@
+<div id="confirmationModal" class="modal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-light">
+      <div class="modal-body pb-0">
+        <p class="text-center font-weight-bold text-large"><%= t 'admin.bike.number_plat_alert_html', vehicle_number: @vehicle_number %> </p>
+        <p class="text-center text-large"><%= t 'admin.bike.confirmation' %></p>
+      </div>
+      <div class="modal-footer border-0 justify-content-center flex-nowrap">
+        <%= link_to t('admin.common.no_label'), admin_customer_show_path(@owned_bike.customer), class: 'btn button-secondary-active text-large btn-block' %>
+        <%= link_to t('admin.common.yes_label'), admin_bike_update_confirm_path(@owned_bike, owned_bike: @all_params), method: 'patch' ,class: 'btn button-active text-large btn-block' %>
+      </div>
+    </div>
+  </div>
+</div>

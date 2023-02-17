@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title"><%= t 'console.shop.accounts' %></div>
+    <div class="card-tools">
+    <% if current_user.admin_roles? %>
+      <% unless @shop.has_staff_account? %>
+        <%= link_to new_console_user_path(role: :staff, shop_id: @shop.id),:class => 'btn btn-success' do %>
+          <i class="fas fa-user-plus"></i> <%= t 'console.shop.add_staff_user' %>
+        <% end %>
+      <% end %>
+      <% unless @shop.has_shop_manager_account? %>
+        <%= link_to new_console_user_path(role: :shop_manager, shop_id: @shop.id),:class => 'btn btn-success' do %>
+          <i class="fas fa-user-plus"></i> <%= t 'console.shop.add_shop_manager_user' %>
+        <% end %>
+      <% end %>
+      <% unless @shop.has_manager_account? %>
+        <%= link_to new_console_user_path(role: :manager, shop_id: @shop.id),:class => 'btn btn-success' do %>
+          <i class="fas fa-user-plus"></i> <%= t 'console.shop.add_manager_user' %>
+        <% end %>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t 'console.user.user_id' %></th>
+          <th><%= t 'console.common.name' %></th>
+          <th><%= t 'console.user.role' %></th>
+          <th><%= t 'console.shop.status' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @shop.users.each do |user| %>
+          <tr class="<%= 'bg-secondary' unless user.is_enabled? %>">
+            <td><%= user.user_id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.role %></td>
+            <td><%= user.status %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

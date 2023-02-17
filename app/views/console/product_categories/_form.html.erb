@@ -1,0 +1,56 @@
+<div class="card-body">
+
+  <% if product_category.errors.any? %>
+  <div class="callout callout-danger">
+    <h2><%= pluralize(product_category.errors.count, "error") %> prohibited this User from being saved:</h2>
+    <ul>
+      <% product_category.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, 'Name' %>
+    <%= f.text_field :name, :class=>'form-control', autofocus: true, autocomplete: 'off' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :campaign_code, 'Campaign Code' %>
+    <%= f.text_field :campaign_code, :class=>'form-control', autofocus: true, autocomplete: 'off' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :product_class_id, 'Product Class' %>
+    <%= f.collection_select :product_class_id, ProductClass.all, :id, :name, { :include_blank => false }, { :class=>'form-control mr-2' } %>
+  </div>
+
+  <div class="form-group">
+    <b>Use Reminder</b>
+    <div>
+      <%= f.check_box :use_reminder, data: {toggle: 'toggle'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <b>Remind by category</b>
+    <div>
+      <%= f.check_box :remind_grouping, data: {toggle: 'toggle'} %>
+    </div>
+  </div>
+
+</div>
+
+<div class="card-footer">
+  <div class="row">
+    <div class="col text-right">
+      <%= link_to 'Back', console_product_categories_path, class: 'btn btn-default btn-lg' %>
+      <% if controller.action_name.in?(['new', 'create']) %>
+        <%= f.submit 'Regist', :class=>'btn btn-primary btn-lg' %>
+      <% else %>
+        <%= f.submit 'Update', :class=>'btn btn-primary btn-lg' %>
+      <% end %>
+    </div>
+  </div>
+</div>

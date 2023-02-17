@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      users: 'Akun'
+    attributes:
+      users:
+        id: "ID"
+        user_id: "USER ID"
+  errors:
+    messages:
+      taken: "has already been taken."
+      blank: "cannot be blank."
+      invalid: "is invalid."
+      too_short: "is too short."
+      confirmation: "is not correct."
+      not_a_number: "is not a number."

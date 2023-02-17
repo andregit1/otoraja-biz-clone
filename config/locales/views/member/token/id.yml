@@ -1,0 +1,10 @@
+id:
+  member:
+    token:
+      sms_body: "Ini adalah URL untuk mengubah nomor telepon. Silakan ubah dalam 24 jam. "
+      change_mail:
+        mail_subject: "Pemberitahuan perubahan alamat email"
+        mail_body: "Mengakses URL akan mengarahkan Anda ke tampilan tempat Anda dapat memperbarui email Anda. URL ini berlaku selama 24 jam. Tolong jangan balas email ini. "
+      change_tel:
+        mail_subject: "Pemberitahuan prosedur perubahan nomor telepon"
+        mail_body: "Mengakses URL akan mengarahkan Anda ke tampilan tempat Anda dapat mengubah nomor telepon Anda. URL ini berlaku selama 24 jam. Tolong jangan balas email ini. "

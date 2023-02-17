@@ -1,0 +1,7 @@
+<% content_for(:title, t('console.service.new.title')) %>
+
+<div class="card">
+  <%= form_with(model: @service, url:console_services_path, local: true) do |form| %>
+  <%= render 'form', {service: @service, f: form} %>
+  <% end %>
+</div>

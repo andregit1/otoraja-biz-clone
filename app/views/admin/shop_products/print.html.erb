@@ -1,0 +1,34 @@
+<% content_for(:title, t('admin.shop_product.shop_products')) %>
+
+<table class="table table-bordered">
+  <thead>
+    <tr class="bg-gray">
+      <th><%= t 'admin.common.number' %></th>
+      <th><%= t 'admin.common.admin_product' %></th>
+      <th><%= t 'admin.common.shop_alias_name' %></th>
+      <th><%= t 'admin.common.item_detail' %></th>
+      <th><%= t 'admin.common.stock_minimum' %></th>
+      <th><%= t 'admin.common.stock' %></th>
+      <th><%= t 'admin.shop_product.sales_unit_price' %></th>
+      <th><%= t 'admin.common.remind_interval_day' %></th>
+      <th><%= t 'admin.shop_product.is_stock_control' %></th>
+      <th><%= t 'admin.shop_product.is_use' %></th>
+    <tr>
+  </thead>
+  <tbody>
+    <% @shop_products.each_with_index do |product,id| %>
+    <tr>
+      <td><%= id + 1 %></td>
+      <td><%= product.admin_product_name %></td>
+      <td><%= product.shop_alias_name %></td>
+      <td><%= product.item_detail %></td>
+      <td><%= product.stock_minimum %></td>
+      <td><%= formatedDecimalPoint(product.stock_quantity) %></td>
+      <td><%= formatedDecimalPoint(product.sales_unit_price) %></td>
+      <td><%= product.remind_interval_day %></td>
+      <td><%= product.is_stock_control ? t('admin.shop_product.yes') : t('admin.shop_product.no') %></td>
+      <td><%= product.is_use ? t('admin.shop_product.yes') : t('admin.shop_product.no') %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
